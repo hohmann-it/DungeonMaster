@@ -24,3 +24,15 @@ hs_err_pid*
 
 #target folder of maven project
 target/
+
+# Git
+*.orig
+
+# Maven
+target/
+.surefire-*
+.flattened-pom.xml
+
+# Node
+node_modules/
+test-results/
