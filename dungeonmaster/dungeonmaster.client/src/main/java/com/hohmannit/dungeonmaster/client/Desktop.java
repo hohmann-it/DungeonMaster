@@ -1,29 +1,21 @@
 package com.hohmannit.dungeonmaster.client;
 
-import java.beans.PropertyChangeEvent;
 import java.util.List;
+import java.util.Set;
 
-import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
-import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.notification.NativeNotificationDefaults;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
-import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
-import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
-import org.eclipse.scout.rt.platform.util.StringUtility;
-import org.eclipse.scout.rt.security.IAccessControlService;
 
-import com.hohmannit.dungeonmaster.client.Desktop.UserProfileMenu.ThemeMenu.DarkThemeMenu;
-import com.hohmannit.dungeonmaster.client.Desktop.UserProfileMenu.ThemeMenu.DefaultThemeMenu;
+import com.hohmannit.dungeonmaster.client.database.DatabaseOutline;
 import com.hohmannit.dungeonmaster.client.search.SearchOutline;
-import com.hohmannit.dungeonmaster.client.settings.SettingsOutline;
-import com.hohmannit.dungeonmaster.client.work.WorkOutline;
 import com.hohmannit.dungeonmaster.shared.Icons;
 
 /**
@@ -32,7 +24,6 @@ import com.hohmannit.dungeonmaster.shared.Icons;
 public class Desktop extends AbstractDesktop {
 
 	public Desktop() {
-		addPropertyChangeListener(PROP_THEME, this::onThemeChanged);
 	}
 
 	@Override
@@ -52,8 +43,7 @@ public class Desktop extends AbstractDesktop {
 
 	@Override
 	protected List<Class<? extends IOutline>> getConfiguredOutlines() {
-		return CollectionUtility.<Class<? extends IOutline>>arrayList(WorkOutline.class, SearchOutline.class,
-				SettingsOutline.class);
+		return CollectionUtility.<Class<? extends IOutline>>arrayList(DatabaseOutline.class, SearchOutline.class);
 	}
 
 	@Override
@@ -70,25 +60,72 @@ public class Desktop extends AbstractDesktop {
 		}
 	}
 
-	protected void onThemeChanged(PropertyChangeEvent evt) {
-		IMenu darkMenu = getMenuByClass(DarkThemeMenu.class);
-		IMenu defaultMenu = getMenuByClass(DefaultThemeMenu.class);
-		String newThemeName = (String) evt.getNewValue();
-		if (DarkThemeMenu.DARK_THEME.equalsIgnoreCase(newThemeName)) {
-			darkMenu.setIconId(Icons.CheckedBold);
-			defaultMenu.setIconId(null);
-		} else {
-			darkMenu.setIconId(null);
-			defaultMenu.setIconId(Icons.CheckedBold);
+	@Order(1000)
+	public class DatabaseOutlineViewButton extends AbstractOutlineViewButton {
+
+		public DatabaseOutlineViewButton() {
+			this(DatabaseOutline.class);
+		}
+
+		protected DatabaseOutlineViewButton(Class<? extends DatabaseOutline> outlineClass) {
+			super(Desktop.this, outlineClass);
+		}
+
+		@Override
+		protected String getConfiguredKeyStroke() {
+			return IKeyStroke.F2;
 		}
 	}
 
 	@Order(1000)
-	public class UserProfileMenu extends AbstractMenu {
+	public class QuickAccessMenu extends AbstractMenu {
+		@Override
+		protected String getConfiguredText() {
+			return TEXTS.get("QuickAccess");
+		}
 
 		@Override
-		protected String getConfiguredKeyStroke() {
-			return IKeyStroke.F10;
+		protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+			return CollectionUtility.hashSet();
+		}
+
+		@Override
+		protected void execAction() {
+		}
+	}
+
+	@Order(2000)
+	public class OptionsMenu extends AbstractMenu {
+		@Override
+		protected String getConfiguredText() {
+			return TEXTS.get("Options");
+		}
+
+		@Override
+		protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+			return CollectionUtility.hashSet();
+		}
+
+		@Override
+		protected String getConfiguredIconId() {
+			return Icons.Gear;
+		}
+
+		@Override
+		protected void execAction() {
+		}
+	}
+
+	@Order(3000)
+	public class UserMenu extends AbstractMenu {
+		@Override
+		protected String getConfiguredText() {
+			return TEXTS.get("UserMenu");
+		}
+
+		@Override
+		protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+			return CollectionUtility.hashSet();
 		}
 
 		@Override
@@ -97,96 +134,7 @@ public class Desktop extends AbstractDesktop {
 		}
 
 		@Override
-		protected String getConfiguredText() {
-			String userId = BEANS.get(IAccessControlService.class).getUserIdOfCurrentSubject();
-			return StringUtility.uppercaseFirst(userId);
-		}
-
-		@Order(1000)
-		public class AboutMenu extends AbstractMenu {
-
-			@Override
-			protected String getConfiguredText() {
-				return TEXTS.get("About");
-			}
-
-			@Override
-			protected void execAction() {
-				ScoutInfoForm form = new ScoutInfoForm();
-				form.startModify();
-			}
-		}
-
-		@Order(2000)
-		public class ThemeMenu extends AbstractMenu {
-
-			@Override
-			protected String getConfiguredText() {
-				return TEXTS.get("Theme");
-			}
-
-			@Order(1000)
-			public class DefaultThemeMenu extends AbstractMenu {
-
-				private static final String DEFAULT_THEME = "Default";
-
-				@Override
-				protected String getConfiguredText() {
-					return DEFAULT_THEME;
-				}
-
-				@Override
-				protected void execAction() {
-					setTheme(DEFAULT_THEME.toLowerCase());
-				}
-			}
-
-			@Order(2000)
-			public class DarkThemeMenu extends AbstractMenu {
-
-				private static final String DARK_THEME = "Dark";
-
-				@Override
-				protected String getConfiguredText() {
-					return DARK_THEME;
-				}
-
-				@Override
-				protected void execAction() {
-					setTheme(DARK_THEME.toLowerCase());
-				}
-			}
-		}
-
-		@Order(3000)
-		public class LogoutMenu extends AbstractMenu {
-
-			@Override
-			protected String getConfiguredText() {
-				return TEXTS.get("Logout");
-			}
-
-			@Override
-			protected void execAction() {
-				ClientSessionProvider.currentSession().stop();
-			}
-		}
-	}
-
-	@Order(1000)
-	public class WorkOutlineViewButton extends AbstractOutlineViewButton {
-
-		public WorkOutlineViewButton() {
-			this(WorkOutline.class);
-		}
-
-		protected WorkOutlineViewButton(Class<? extends WorkOutline> outlineClass) {
-			super(Desktop.this, outlineClass);
-		}
-
-		@Override
-		protected String getConfiguredKeyStroke() {
-			return IKeyStroke.F2;
+		protected void execAction() {
 		}
 	}
 
@@ -209,28 +157,6 @@ public class Desktop extends AbstractDesktop {
 		@Override
 		protected String getConfiguredKeyStroke() {
 			return IKeyStroke.F3;
-		}
-	}
-
-	@Order(3000)
-	public class SettingsOutlineViewButton extends AbstractOutlineViewButton {
-
-		public SettingsOutlineViewButton() {
-			this(SettingsOutline.class);
-		}
-
-		protected SettingsOutlineViewButton(Class<? extends SettingsOutline> outlineClass) {
-			super(Desktop.this, outlineClass);
-		}
-
-		@Override
-		protected DisplayStyle getConfiguredDisplayStyle() {
-			return DisplayStyle.TAB;
-		}
-
-		@Override
-		protected String getConfiguredKeyStroke() {
-			return IKeyStroke.F10;
 		}
 	}
 }
