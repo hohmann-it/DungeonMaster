@@ -33,3 +33,6 @@ target/
 # Node
 node_modules/
 test-results/
+
+.project
+.classpath

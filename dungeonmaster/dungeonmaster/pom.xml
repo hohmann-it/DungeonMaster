@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.hohmannit</groupId>
+    <artifactId>dungeonmaster-root</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>dungeonmaster</artifactId>
+  <packaging>pom</packaging>
+  <name>Dungeonmaster</name>
+
+  <properties>
+    <com.hohmannit.dungeonmaster.version>${project.version}</com.hohmannit.dungeonmaster.version>
+    <jdk.source.version>17</jdk.source.version>
+    <org.eclipse.scout.rt.version>22.0.41</org.eclipse.scout.rt.version>
+    <master_npm_release_dependency_mapping>--mapping.0.regex=@eclipse-scout --mapping.0.version=${org.eclipse.scout.rt.version}</master_npm_release_dependency_mapping>
+  </properties>
+
+  <modules>
+    <module>../dungeonmaster.shared</module>
+    <module>../dungeonmaster.server</module>
+    <module>../dungeonmaster.client</module>
+    <module>../dungeonmaster.server.app.war</module>
+    <module>../dungeonmaster.server.app.dev</module>
+    <module>../dungeonmaster.ui.html</module>
+    <module>../dungeonmaster.ui.html.app.war</module>
+    <module>../dungeonmaster.ui.html.app.dev</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Scout Dependencies -->
+      <dependency>
+        <groupId>org.eclipse.scout.rt</groupId>
+        <artifactId>org.eclipse.scout.rt</artifactId>
+        <version>${org.eclipse.scout.rt.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Application Dependencies -->
+      <dependency>
+        <groupId>com.hohmannit</groupId>
+        <artifactId>dungeonmaster.client</artifactId>
+        <version>${com.hohmannit.dungeonmaster.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hohmannit</groupId>
+        <artifactId>dungeonmaster.shared</artifactId>
+        <version>${com.hohmannit.dungeonmaster.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hohmannit</groupId>
+        <artifactId>dungeonmaster.server</artifactId>
+        <version>${com.hohmannit.dungeonmaster.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hohmannit</groupId>
+        <artifactId>dungeonmaster.ui.html</artifactId>
+        <version>${com.hohmannit.dungeonmaster.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>

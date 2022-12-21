@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.hohmannit</groupId>
+    <artifactId>dungeonmaster</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../dungeonmaster</relativePath>
+  </parent>
+
+  <artifactId>dungeonmaster.ui.html</artifactId>
+
+  <name>Dungeonmaster HTML UI</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.ui.html</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.hohmannit</groupId>
+      <artifactId>dungeonmaster.client</artifactId>
+    </dependency>
+  </dependencies>
+</project>
