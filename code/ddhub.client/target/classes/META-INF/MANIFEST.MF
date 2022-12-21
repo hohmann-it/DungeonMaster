@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 17
+Specification-Title: DD Hub Client
+Specification-Version: 1.0
+Implementation-Title: DD Hub Client
+Implementation-Version: 1.0.0-SNAPSHOT
+Created-By: Maven Integration for Eclipse
+
+Name: com.hohmannit:ddhub.client
+Project-ArtifactId: ddhub.client
+Project-Version: 1.0.0-SNAPSHOT
+Project-GroupId: com.hohmannit
+Build-Time: 20221221-101857
+Project-Name: DD Hub Client
+
