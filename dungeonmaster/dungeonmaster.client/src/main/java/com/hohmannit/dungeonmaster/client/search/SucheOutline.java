@@ -7,18 +7,14 @@ import org.slf4j.LoggerFactory;
 
 import com.hohmannit.dungeonmaster.shared.Icons;
 
-/**
- * @author phohm
- */
 @Order(2000)
-public class SearchOutline extends AbstractSearchOutline {
+public class SucheOutline extends AbstractSearchOutline {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SearchOutline.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SucheOutline.class);
 
 	@Override
 	protected void execSearch(final String query) {
 		LOG.info("Search started");
-		// TODO [phohm]: Implement search
 	}
 
 	@Override

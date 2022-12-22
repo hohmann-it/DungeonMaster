@@ -7,18 +7,18 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
-import com.hohmannit.dungeonmaster.client.character.CharacterTablePage;
-import com.hohmannit.dungeonmaster.client.spellbook.SpellbookTablePage;
+import com.hohmannit.dungeonmaster.client.charakter.CharakterTablePage;
+import com.hohmannit.dungeonmaster.client.spellbook.ZauberbuchTablePage;
 import com.hohmannit.dungeonmaster.shared.Icons;
 
 @Order(1000)
-public class DatabaseOutline extends AbstractOutline {
+public class DatenbankOutline extends AbstractOutline {
 
 	@Override
 	protected void execCreateChildPages(List<IPage<?>> pageList) {
 		super.execCreateChildPages(pageList);
-		pageList.add(new CharacterTablePage());
-		pageList.add(new SpellbookTablePage());
+		pageList.add(new CharakterTablePage());
+		pageList.add(new ZauberbuchTablePage());
 	}
 
 	@Override

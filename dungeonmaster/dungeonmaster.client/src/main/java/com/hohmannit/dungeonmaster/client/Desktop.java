@@ -14,8 +14,8 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 
-import com.hohmannit.dungeonmaster.client.database.DatabaseOutline;
-import com.hohmannit.dungeonmaster.client.search.SearchOutline;
+import com.hohmannit.dungeonmaster.client.database.DatenbankOutline;
+import com.hohmannit.dungeonmaster.client.search.SucheOutline;
 import com.hohmannit.dungeonmaster.shared.Icons;
 
 /**
@@ -43,7 +43,7 @@ public class Desktop extends AbstractDesktop {
 
 	@Override
 	protected List<Class<? extends IOutline>> getConfiguredOutlines() {
-		return CollectionUtility.<Class<? extends IOutline>>arrayList(DatabaseOutline.class, SearchOutline.class);
+		return CollectionUtility.<Class<? extends IOutline>>arrayList(DatenbankOutline.class, SucheOutline.class);
 	}
 
 	@Override
@@ -61,13 +61,13 @@ public class Desktop extends AbstractDesktop {
 	}
 
 	@Order(1000)
-	public class DatabaseOutlineViewButton extends AbstractOutlineViewButton {
+	public class DatenbankOutlineViewButton extends AbstractOutlineViewButton {
 
-		public DatabaseOutlineViewButton() {
-			this(DatabaseOutline.class);
+		public DatenbankOutlineViewButton() {
+			this(DatenbankOutline.class);
 		}
 
-		protected DatabaseOutlineViewButton(Class<? extends DatabaseOutline> outlineClass) {
+		protected DatenbankOutlineViewButton(Class<? extends DatenbankOutline> outlineClass) {
 			super(Desktop.this, outlineClass);
 		}
 
@@ -75,10 +75,33 @@ public class Desktop extends AbstractDesktop {
 		protected String getConfiguredKeyStroke() {
 			return IKeyStroke.F2;
 		}
+
+	}
+
+	@Order(2000)
+	public class SucheOutlineViewButton extends AbstractOutlineViewButton {
+
+		public SucheOutlineViewButton() {
+			this(SucheOutline.class);
+		}
+
+		protected SucheOutlineViewButton(Class<? extends SucheOutline> outlineClass) {
+			super(Desktop.this, outlineClass);
+		}
+
+		@Override
+		protected DisplayStyle getConfiguredDisplayStyle() {
+			return DisplayStyle.TAB;
+		}
+
+		@Override
+		protected String getConfiguredKeyStroke() {
+			return IKeyStroke.F3;
+		}
 	}
 
 	@Order(1000)
-	public class QuickAccessMenu extends AbstractMenu {
+	public class SchnellzugriffMenu extends AbstractMenu {
 		@Override
 		protected String getConfiguredText() {
 			return TEXTS.get("QuickAccess");
@@ -95,7 +118,7 @@ public class Desktop extends AbstractDesktop {
 	}
 
 	@Order(2000)
-	public class OptionsMenu extends AbstractMenu {
+	public class OptionenMenu extends AbstractMenu {
 		@Override
 		protected String getConfiguredText() {
 			return TEXTS.get("Options");
@@ -117,7 +140,7 @@ public class Desktop extends AbstractDesktop {
 	}
 
 	@Order(3000)
-	public class UserMenu extends AbstractMenu {
+	public class BenutzerMenu extends AbstractMenu {
 		@Override
 		protected String getConfiguredText() {
 			return TEXTS.get("UserMenu");
@@ -135,28 +158,6 @@ public class Desktop extends AbstractDesktop {
 
 		@Override
 		protected void execAction() {
-		}
-	}
-
-	@Order(2000)
-	public class SearchOutlineViewButton extends AbstractOutlineViewButton {
-
-		public SearchOutlineViewButton() {
-			this(SearchOutline.class);
-		}
-
-		protected SearchOutlineViewButton(Class<? extends SearchOutline> outlineClass) {
-			super(Desktop.this, outlineClass);
-		}
-
-		@Override
-		protected DisplayStyle getConfiguredDisplayStyle() {
-			return DisplayStyle.TAB;
-		}
-
-		@Override
-		protected String getConfiguredKeyStroke() {
-			return IKeyStroke.F3;
 		}
 	}
 }

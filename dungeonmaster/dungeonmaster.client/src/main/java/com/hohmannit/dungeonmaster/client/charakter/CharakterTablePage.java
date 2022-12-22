@@ -1,4 +1,4 @@
-package com.hohmannit.dungeonmaster.client.character;
+package com.hohmannit.dungeonmaster.client.charakter;
 
 import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
@@ -9,21 +9,21 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
-import com.hohmannit.dungeonmaster.client.character.CharacterTablePage.Table;
+import com.hohmannit.dungeonmaster.client.charakter.CharakterTablePage.Table;
 import com.hohmannit.dungeonmaster.shared.Icons;
-import com.hohmannit.dungeonmaster.shared.character.CharacterTablePageData;
-import com.hohmannit.dungeonmaster.shared.character.ICharacterService;
+import com.hohmannit.dungeonmaster.shared.character.CharakterTablePageData;
+import com.hohmannit.dungeonmaster.shared.character.ICharakterService;
 
-@Data(CharacterTablePageData.class)
-public class CharacterTablePage extends AbstractPageWithTable<Table> {
+@Data(CharakterTablePageData.class)
+public class CharakterTablePage extends AbstractPageWithTable<Table> {
 	@Override
 	protected boolean getConfiguredLeaf() {
-		return true;
+		return false;
 	}
 
 	@Override
 	protected void execLoadData(SearchFilter filter) {
-		importPageData(BEANS.get(ICharacterService.class).getCharacterTableData(filter));
+		importPageData(BEANS.get(ICharakterService.class).getCharakterTableData(filter));
 	}
 
 	@Override
@@ -42,19 +42,19 @@ public class CharacterTablePage extends AbstractPageWithTable<Table> {
 			return getColumnSet().getColumnByClass(NameColumn.class);
 		}
 
-		public ClassColumn getClassColumn() {
-			return getColumnSet().getColumnByClass(ClassColumn.class);
+		public KlasseColumn getKlasseColumn() {
+			return getColumnSet().getColumnByClass(KlasseColumn.class);
 		}
 
-		public CharacterIdColumn getCharacterIDColumn() {
-			return getColumnSet().getColumnByClass(CharacterIdColumn.class);
+		public CharakterIdColumn getCharakterIdColumn() {
+			return getColumnSet().getColumnByClass(CharakterIdColumn.class);
 		}
 
 		@Order(1000)
-		public class CharacterIdColumn extends AbstractStringColumn {
+		public class CharakterIdColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("MyNlsKey");
+				return TEXTS.get("CharakterID");
 			}
 
 			@Override
@@ -74,7 +74,7 @@ public class CharacterTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(2000)
-		public class ClassColumn extends AbstractStringColumn {
+		public class KlasseColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
 				return TEXTS.get("Class");

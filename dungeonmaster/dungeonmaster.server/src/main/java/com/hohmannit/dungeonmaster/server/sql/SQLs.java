@@ -10,11 +10,12 @@
  */
 package com.hohmannit.dungeonmaster.server.sql;
 
-//tag::createDB[]
-//tag::organizationListing[]
 public interface SQLs {
-	// end::organizationListing[]
-	String CHARACTERS_PAGE_SELECT = "SELECT character_id, name, class FROM Characters";
+	String CHARAKTERE_PAGE_SELECT = "SELECT charakter_id, name, klasse FROM charaktere";
+	String CHARAKTERE_PAGE_DATA_SELECT_INTO = " INTO :{page.charakterId}, :{page.name}, :{page.klasse}";
 
-	String CHARACTERS_PAGE_DATA_SELECT_INTO = " INTO :{page.characterId}, :{page.name}, :{page.class}";
+	String ZAUBERBUCH_PAGE_SELECT = "SELECT zauber_id, name, zeitaufwand, zeitaufwand_typ, "
+			+ "reichweite, reichweite_typ, wirkungsdauer, wirkungsdauer_typ, beschreibung, hoehere_grade FROM zauber;";
+
+	String ZAUBERBUCH_PAGE_DATA_SELECT_INTO = "INTO :{page.zauberId}, :{page.name}, :{page.zeitaufwand}";
 }

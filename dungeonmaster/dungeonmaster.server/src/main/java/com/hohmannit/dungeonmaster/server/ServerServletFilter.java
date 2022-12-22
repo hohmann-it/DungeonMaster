@@ -17,11 +17,6 @@ import org.eclipse.scout.rt.server.commons.authentication.ServiceTunnelAccessTok
 import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.TrivialAccessController.TrivialAuthConfig;
 
-/**
- * This is the main server side servlet filter.
- *
- * @author phohm
- */
 public class ServerServletFilter implements Filter {
 
 	private TrivialAccessController m_trivialAccessController;
