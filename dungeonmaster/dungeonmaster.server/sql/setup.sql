@@ -14,3 +14,20 @@ CREATE DATABASE dungeonmaster
 
 COMMENT ON DATABASE dungeonmaster
     IS 'The dungeonmaster database';
+    
+-- Table: public.characters
+
+DROP TABLE IF EXISTS public.characters;
+
+CREATE TABLE IF NOT EXISTS public.characters
+(
+    character_id integer NOT NULL,
+    class "char",
+    name "char" NOT NULL,
+    CONSTRAINT "Characters_pkey" PRIMARY KEY (character_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.characters
+    OWNER to dungeonmaster;
