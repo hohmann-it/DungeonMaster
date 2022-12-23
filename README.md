@@ -37,8 +37,6 @@ The application is based on [Eclipse Scout](https://www.eclipse.org/scout/) and 
 
 5. Run the setup script located here:
    
-   ```
-   [a relative link](dungeonmaster/dungeonmaster.server/sql/setup.sql)
-   ```
+   [setup.sql](dungeonmaster/dungeonmaster.server/sql/setup.sql)
 
 6. You're now ready to go
