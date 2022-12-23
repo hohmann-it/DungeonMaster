@@ -21,7 +21,6 @@ WHERE
        datname = 'dungeonmaster'
 ;
 
-
 -- Drop any existing database
 DROP DATABASE
 IF EXISTS dungeonmaster;
