@@ -201,16 +201,6 @@ IF EXISTS dungeonmaster;
                )
         ;
         
-        --
-        -- TOC entry 3341 (class 0 OID 16437)
-        -- Dependencies: 216
-        -- Data for Name: zauber; Type: TABLE DATA; Schema: public; Owner: dungeonmaster
-        --
-        --
-        -- TOC entry 3342 (class 0 OID 16464)
-        -- Dependencies: 217
-        -- Data for Name: zaubertyp; Type: TABLE DATA; Schema: public; Owner: dungeonmaster
-        --
         INSERT INTO public.zaubertyp
                (zaubertyp_id
                     , typ
@@ -307,11 +297,6 @@ IF EXISTS dungeonmaster;
                )
         ;
         
-        --
-        -- TOC entry 3343 (class 0 OID 16477)
-        -- Dependencies: 218
-        -- Data for Name: zeitaufwandtyp; Type: TABLE DATA; Schema: public; Owner: dungeonmaster
-        --
         INSERT INTO public.zeitaufwandtyp
                (zeitaufwandtyp_id
                     , typ
@@ -352,43 +337,17 @@ IF EXISTS dungeonmaster;
                )
         ;
         
-        --
-        -- TOC entry 3189 (class 2606 OID 16405)
-        -- Name: charaktere Characters_pkey; Type: CONSTRAINT; Schema: public; Owner: dungeonmaster
-        --
         ALTER TABLE ONLY public.charaktere ADD CONSTRAINT charaktere_pkey PRIMARY KEY (charakter_id)
         ;
         
-        --
-        -- TOC entry 3191 (class 2606 OID 16444)
-        -- Name: zauber zauber_pkey; Type: CONSTRAINT; Schema: public; Owner: dungeonmaster
-        --
         ALTER TABLE ONLY public.zauber ADD CONSTRAINT zauber_pkey PRIMARY KEY (zauber_id)
         ;
         
-        --
-        -- TOC entry 3193 (class 2606 OID 16468)
-        -- Name: zaubertyp zaubertyp_pkey; Type: CONSTRAINT; Schema: public; Owner: dungeonmaster
-        --
         ALTER TABLE ONLY public.zaubertyp ADD CONSTRAINT zaubertyp_pkey PRIMARY KEY (zaubertyp_id)
         ;
         
-        --
-        -- TOC entry 3195 (class 2606 OID 16481)
-        -- Name: zeitaufwandtyp zeitaufwandtyp_pkey; Type: CONSTRAINT; Schema: public; Owner: dungeonmaster
-        --
         ALTER TABLE ONLY public.zeitaufwandtyp ADD CONSTRAINT zeitaufwandtyp_pkey PRIMARY KEY (zeitaufwandtyp_id)
         ;
         
-        --
-        -- TOC entry 3196 (class 2606 OID 16472)
-        -- Name: zauber fk_zaubertyp; Type: FK CONSTRAINT; Schema: public; Owner: dungeonmaster
-        --
         ALTER TABLE ONLY public.zauber ADD CONSTRAINT fk_zaubertyp FOREIGN KEY (fk_typ) REFERENCES public.zaubertyp(zaubertyp_id) NOT VALID
         ;
-        
-        -- Completed on 2022-12-22 16:19:28
-        --
-        -- PostgreSQL database dump complete
-        --
-        
