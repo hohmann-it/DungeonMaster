@@ -146,194 +146,156 @@ IF EXISTS dungeonmaster;
         ALTER TABLE ONLY public.zeitaufwandtyp ALTER COLUMN zeitaufwandtyp_id SET DEFAULT nextval('public.zeitaufwandtyp_id_seq'::regclass)
         ;
         
-        -- Set auto increment for PK columns
-        --
-        -- TOC entry 3339 (class 0 OID 16401)
-        -- Dependencies: 214
-        -- Data for Name: charaktere; Type: TABLE DATA; Schema: public; Owner: dungeonmaster
-        --
         INSERT INTO public.charaktere
-               (charakter_id
-                    , klasse
+               ( klasse
                     , name
                )
                VALUES
-               (1
-                    , 'Krieger'
+               ( 'Krieger'
                     , 'Roland
 '
                )
         ;
         
         INSERT INTO public.charaktere
-               (charakter_id
-                    , klasse
+               ( klasse
                     , name
                )
                VALUES
-               (2
-                    , 'Magier'
+               ( 'Magier'
                     , 'Jens'
                )
         ;
         
         INSERT INTO public.charaktere
-               (charakter_id
-                    , klasse
+               ( klasse
                     , name
                )
                VALUES
-               (3
-                    , 'Barde'
+               ( 'Barde'
                     , 'Rittersporn'
                )
         ;
         
         INSERT INTO public.charaktere
-               (charakter_id
-                    , klasse
+               ( klasse
                     , name
                )
                VALUES
-               (4
-                    , 'Namenloser Held'
+               ( 'Namenloser Held'
                     , 'Namenlos'
                )
         ;
         
         INSERT INTO public.zaubertyp
-               (zaubertyp_id
-                    , typ
+               ( typ
                     , kategorie
                )
                VALUES
-               (2
-                    , 'Verzauberung'
+               ( 'Verzauberung'
                     , ''
                )
         ;
         
         INSERT INTO public.zaubertyp
-               (zaubertyp_id
-                    , typ
+               ( typ
                     , kategorie
                )
                VALUES
-               (3
-                    , 'Bannzauber'
+               ( 'Bannzauber'
                     , ''
                )
         ;
         
         INSERT INTO public.zaubertyp
-               (zaubertyp_id
-                    , typ
+               ( typ
                     , kategorie
                )
                VALUES
-               (4
-                    , 'Hervorrufung'
+               ( 'Hervorrufung'
                     , ''
                )
         ;
         
         INSERT INTO public.zaubertyp
-               (zaubertyp_id
-                    , typ
+               ( typ
                     , kategorie
                )
                VALUES
-               (5
-                    , 'Beschwörung'
+               ( 'Beschwörung'
                     , ''
                )
         ;
         
         INSERT INTO public.zaubertyp
-               (zaubertyp_id
-                    , typ
+               ( typ
                     , kategorie
                )
                VALUES
-               (6
-                    , 'Verwandlung'
+               ( 'Verwandlung'
                     , ''
                )
         ;
         
         INSERT INTO public.zaubertyp
-               (zaubertyp_id
-                    , typ
+               ( typ
                     , kategorie
                )
                VALUES
-               (7
-                    , 'Erkenntniszauberei'
+               ( 'Erkenntniszauberei'
                     , ''
                )
         ;
         
         INSERT INTO public.zaubertyp
-               (zaubertyp_id
-                    , typ
+               ( typ
                     , kategorie
                )
                VALUES
-               (8
-                    , 'Illusion'
+               ( 'Illusion'
                     , NULL
                )
         ;
         
         INSERT INTO public.zaubertyp
-               (zaubertyp_id
-                    , typ
+               ( typ
                     , kategorie
                )
                VALUES
-               (9
-                    , 'Nekromantie'
+               ( 'Nekromantie'
                     , NULL
                )
         ;
         
         INSERT INTO public.zeitaufwandtyp
-               (zeitaufwandtyp_id
-                    , typ
+               ( typ
                )
                VALUES
-               (10
-                    , 'Aktion'
+               ( 'Aktion'
                )
         ;
         
         INSERT INTO public.zeitaufwandtyp
-               (zeitaufwandtyp_id
-                    , typ
+               ( typ
                )
                VALUES
-               (11
-                    , 'Bonusaktion'
+               ( 'Bonusaktion'
                )
         ;
         
         INSERT INTO public.zeitaufwandtyp
-               (zeitaufwandtyp_id
-                    , typ
+               ( typ
                )
                VALUES
-               (12
-                    , 'Minuten'
+               ( 'Minuten'
                )
         ;
         
         INSERT INTO public.zeitaufwandtyp
-               (zeitaufwandtyp_id
-                    , typ
+               ( typ
                )
                VALUES
-               (13
-                    , 'Reaktion, die du ausführst, wenn du von einem Angriff getroffen oder Ziel des Zaubers "Magisches Geschoss" wirst'
+               ( 'Reaktion, die du ausführst, wenn du von einem Angriff getroffen oder Ziel des Zaubers "Magisches Geschoss" wirst'
                )
         ;
         
