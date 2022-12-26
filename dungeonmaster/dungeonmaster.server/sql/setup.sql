@@ -78,236 +78,6 @@ IF EXISTS dungeonmaster;
         ALTER TABLE ONLY public.charaktere ADD CONSTRAINT charaktere_pkey PRIMARY KEY (charakter_id)
         ;
         
-        -- Create Zauber Table
-        CREATE TABLE public.zauber
-                     (
-                                  zauber_id            bigint NOT NULL
-                                , name                 text NOT NULL
-                                , zeitaufwand          integer NOT NULL
-                                , fk_zeitaufwand_typ   bigint NOT NULL
-                                , reichweite           integer NOT NULL
-                                , fk_reichweite_typ    bigint NOT NULL
-                                , wirkungsdauer        integer NOT NULL
-                                , fk_wirkungsdauer_typ bigint NOT NULL
-                                , beschreibung         text NOT NULL
-                                , hoehere_grade        text
-                                , grad                 integer NOT NULL
-                                , fk_zauber_typ        bigint NOT NULL
-                     )
-        ;
-        
-        ALTER TABLE public.zauber OWNER TO dungeonmaster
-        ;
-        
-        CREATE SEQUENCE public.zauber_id_seq
-        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
-        ALTER TABLE public.zauber_id_seq OWNER TO dungeonmaster
-        ;
-        
-        ALTER SEQUENCE public.zauber_id_seq OWNED BY public.zauber.zauber_id;
-        ALTER TABLE ONLY public.zauber ALTER COLUMN zauber_id SET DEFAULT nextval('public.zauber_id_seq'::regclass)
-        ;
-        
-        ALTER TABLE ONLY public.zauber ADD CONSTRAINT zauber_pkey PRIMARY KEY (zauber_id)
-        ;
-        
-        --Create Zaubertyp Table
-        CREATE TABLE public.zaubertyp
-                     (
-                                  zaubertyp_id bigint NOT NULL
-                                , typ          text NOT NULL
-                                , kategorie    text
-                     )
-        ;
-        
-        ALTER TABLE public.zaubertyp OWNER TO dungeonmaster
-        ;
-        
-        CREATE SEQUENCE public.zaubertyp_id_seq
-        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
-        ALTER TABLE public.zaubertyp_id_seq OWNER TO dungeonmaster
-        ;
-        
-        ALTER SEQUENCE public.zaubertyp_id_seq OWNED BY public.zaubertyp.zaubertyp_id;
-        ALTER TABLE ONLY public.zaubertyp ALTER COLUMN zaubertyp_id SET DEFAULT nextval('public.zaubertyp_id_seq'::regclass)
-        ;
-        
-        ALTER TABLE ONLY public.zaubertyp ADD CONSTRAINT zaubertyp_pkey PRIMARY KEY (zaubertyp_id)
-        ;
-        
-        -- Create Zeitaufwandtyp Table
-        CREATE TABLE public.zeitaufwandtyp
-                     (
-                                  zeitaufwandtyp_id bigint NOT NULL
-                                , typ               text NOT NULL
-                     )
-        ;
-        
-        ALTER TABLE public.zeitaufwandtyp OWNER TO dungeonmaster
-        ;
-        
-        CREATE SEQUENCE public.zeitaufwandtyp_id_seq
-        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
-        ALTER TABLE public.zeitaufwandtyp_id_seq OWNER TO dungeonmaster
-        ;
-        
-        ALTER SEQUENCE public.zeitaufwandtyp_id_seq OWNED BY public.zeitaufwandtyp.zeitaufwandtyp_id;
-        ALTER TABLE ONLY public.zeitaufwandtyp ALTER COLUMN zeitaufwandtyp_id SET DEFAULT nextval('public.zeitaufwandtyp_id_seq'::regclass)
-        ;
-        
-        ALTER TABLE ONLY public.zeitaufwandtyp ADD CONSTRAINT zeitaufwandtyp_pkey PRIMARY KEY (zeitaufwandtyp_id)
-        ;
-        
-        -- Create Reichweitetyp Table
-        CREATE TABLE public.reichweitetyp
-                     (
-                                  reichweitetyp_id bigint NOT NULL
-                                , typ_lang         text NOT NULL
-                                , typ_kurz         text NOT NULL
-                     )
-        ;
-        
-        ALTER TABLE public.reichweitetyp OWNER TO dungeonmaster
-        ;
-        
-        CREATE SEQUENCE public.reichweitetyp_id_seq
-        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
-        ALTER TABLE public.reichweitetyp_id_seq OWNER TO dungeonmaster
-        ;
-        
-        ALTER SEQUENCE public.reichweitetyp_id_seq OWNED BY public.reichweitetyp.reichweitetyp_id;
-        ALTER TABLE ONLY public.reichweitetyp ALTER COLUMN reichweitetyp_id SET DEFAULT nextval('public.reichweitetyp_id_seq'::regclass)
-        ;
-        
-        ALTER TABLE ONLY public.reichweitetyp ADD CONSTRAINT reichweitetyp_pkey PRIMARY KEY (reichweitetyp_id)
-        ;
-        
-        -- Create Wirkungsdauertyp Table
-        CREATE TABLE public.wirkungsdauertyp
-                     (
-                                  wirkungsdauertyp_id bigint NOT NULL
-                                , typ                 text NOT NULL
-                     )
-        ;
-        
-        ALTER TABLE public.wirkungsdauertyp OWNER TO dungeonmaster
-        ;
-        
-        CREATE SEQUENCE public.wirkungsdauertyp_id
-        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
-        ALTER TABLE public.wirkungsdauertyp_id OWNER TO dungeonmaster
-        ;
-        
-        ALTER SEQUENCE public.wirkungsdauertyp_id OWNED BY public.wirkungsdauertyp.wirkungsdauertyp_id;
-        ALTER TABLE ONLY public.wirkungsdauertyp ALTER COLUMN wirkungsdauertyp_id SET DEFAULT nextval('public.wirkungsdauertyp_id'::regclass)
-        ;
-        
-        ALTER TABLE ONLY public.wirkungsdauertyp ADD CONSTRAINT wirkungsdauertyp_pkey PRIMARY KEY (wirkungsdauertyp_id)
-        ;
-        
-        -- Create zauberkomponentetyp Table
-        CREATE TABLE public.zauberkomponentetyp
-                     (
-                                  zauberkomponentetyp_id bigint NOT NULL
-                                , typ_kurz               text NOT NULL
-                                , typ_lang               text NOT NULL
-                     )
-        ;
-        
-        ALTER TABLE public.zauberkomponentetyp OWNER TO dungeonmaster
-        ;
-        
-        CREATE SEQUENCE public.zauberkomponentetyp_id
-        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
-        ALTER TABLE public.zauberkomponentetyp_id OWNER TO dungeonmaster
-        ;
-        
-        ALTER SEQUENCE public.zauberkomponentetyp_id OWNED BY public.zauberkomponentetyp.zauberkomponentetyp_id;
-        ALTER TABLE ONLY public.zauberkomponentetyp ALTER COLUMN zauberkomponentetyp_id SET DEFAULT nextval('public.zauberkomponentetyp_id'::regclass)
-        ;
-        
-        ALTER TABLE ONLY public.zauberkomponentetyp ADD CONSTRAINT zauberkomponentetyp_pkey PRIMARY KEY (zauberkomponentetyp_id)
-        ;
-        
-        -- Create zauberkomponente Table
-        CREATE TABLE public.zauberkomponente
-                     (
-                                  zauberkomponente_id     bigint NOT NULL
-                                , fk_zauber               bigint NOT NULL
-                                , fk_zauberkomponente_typ bigint NOT NULL
-                     )
-        ;
-        
-        ALTER TABLE public.zauberkomponente OWNER TO dungeonmaster
-        ;
-        
-        CREATE SEQUENCE public.zauberkomponente_id
-        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
-        ALTER TABLE public.zauberkomponente_id OWNER TO dungeonmaster
-        ;
-        
-        ALTER SEQUENCE public.zauberkomponente_id OWNED BY public.zauberkomponente.zauberkomponente_id;
-        ALTER TABLE ONLY public.zauberkomponente ALTER COLUMN zauberkomponente_id SET DEFAULT nextval('public.zauberkomponente_id'::regclass)
-        ;
-        
-        ALTER TABLE ONLY public.zauberkomponente ADD CONSTRAINT zauberkomponente_pkey PRIMARY KEY (zauberkomponente_id)
-        ;
-        
-        -- Create Material Table
-        CREATE TABLE public.material
-                     (
-                                  material_id bigint NOT NULL
-                                , name        text NOT NULL
-                     )
-        ;
-        
-        ALTER TABLE public.material OWNER TO dungeonmaster
-        ;
-        
-        CREATE SEQUENCE public.material_id
-        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
-        ALTER TABLE public.material_id OWNER TO dungeonmaster
-        ;
-        
-        ALTER SEQUENCE public.material_id OWNED BY public.material.material_id;
-        ALTER TABLE ONLY public.material ALTER COLUMN material_id SET DEFAULT nextval('public.material_id'::regclass)
-        ;
-        
-        ALTER TABLE ONLY public.material ADD CONSTRAINT material_pkey PRIMARY KEY (material_id)
-        ;
-        
-        -- Create Zauberzaubermaterial Table
-        CREATE TABLE public.zaubermaterial
-                     (
-                                  zaubermaterial_id   bigint NOT NULL
-                                , fk_zauberkomponente bigint NOT NULL
-                                , ersatz              bigint NOT NULL
-                                , fk_material         bigint NOT NULL
-                                , anzahl              int NOT NULL
-                     )
-        ;
-        
-        ALTER TABLE public.zaubermaterial OWNER TO dungeonmaster
-        ;
-        
-        CREATE SEQUENCE public.zaubermaterial_id
-        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
-        ALTER TABLE public.zaubermaterial_id OWNER TO dungeonmaster
-        ;
-        
-        ALTER SEQUENCE public.zaubermaterial_id OWNED BY public.zaubermaterial.zaubermaterial_id;
-        ALTER TABLE ONLY public.zaubermaterial ALTER COLUMN zaubermaterial_id SET DEFAULT nextval('public.zaubermaterial_id'::regclass)
-        ;
-        
-        ALTER TABLE ONLY public.zaubermaterial ADD CONSTRAINT zaubermaterial_pkey PRIMARY KEY (zaubermaterial_id)
-        ;
-        
-        ALTER TABLE ONLY public.zaubermaterial ADD CONSTRAINT fk_zauberkomponente FOREIGN KEY (fk_zauberkomponente) REFERENCES public.zauberkomponente(zauberkomponente_id) NOT VALID
-        ;
-        
-        ALTER TABLE ONLY public.zaubermaterial ADD CONSTRAINT fk_material FOREIGN KEY (fk_material) REFERENCES public.material(material_id) NOT VALID
-        ;
-        
         INSERT INTO public.charaktere
                ( klasse
                     , name
@@ -347,6 +117,30 @@ IF EXISTS dungeonmaster;
                ( 'Namenloser Held'
                     , 'Namenlos'
                )
+        ;
+        
+        --Create Zaubertyp Table
+        CREATE TABLE public.zaubertyp
+                     (
+                                  zaubertyp_id bigint NOT NULL
+                                , typ          text NOT NULL
+                                , kategorie    text
+                     )
+        ;
+        
+        ALTER TABLE public.zaubertyp OWNER TO dungeonmaster
+        ;
+        
+        CREATE SEQUENCE public.zaubertyp_id_seq
+        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+        ALTER TABLE public.zaubertyp_id_seq OWNER TO dungeonmaster
+        ;
+        
+        ALTER SEQUENCE public.zaubertyp_id_seq OWNED BY public.zaubertyp.zaubertyp_id;
+        ALTER TABLE ONLY public.zaubertyp ALTER COLUMN zaubertyp_id SET DEFAULT nextval('public.zaubertyp_id_seq'::regclass)
+        ;
+        
+        ALTER TABLE ONLY public.zaubertyp ADD CONSTRAINT zaubertyp_pkey PRIMARY KEY (zaubertyp_id)
         ;
         
         INSERT INTO public.zaubertyp
@@ -429,6 +223,29 @@ IF EXISTS dungeonmaster;
                )
         ;
         
+        -- Create Zeitaufwandtyp Table
+        CREATE TABLE public.zeitaufwandtyp
+                     (
+                                  zeitaufwandtyp_id bigint NOT NULL
+                                , typ               text NOT NULL
+                     )
+        ;
+        
+        ALTER TABLE public.zeitaufwandtyp OWNER TO dungeonmaster
+        ;
+        
+        CREATE SEQUENCE public.zeitaufwandtyp_id_seq
+        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+        ALTER TABLE public.zeitaufwandtyp_id_seq OWNER TO dungeonmaster
+        ;
+        
+        ALTER SEQUENCE public.zeitaufwandtyp_id_seq OWNED BY public.zeitaufwandtyp.zeitaufwandtyp_id;
+        ALTER TABLE ONLY public.zeitaufwandtyp ALTER COLUMN zeitaufwandtyp_id SET DEFAULT nextval('public.zeitaufwandtyp_id_seq'::regclass)
+        ;
+        
+        ALTER TABLE ONLY public.zeitaufwandtyp ADD CONSTRAINT zeitaufwandtyp_pkey PRIMARY KEY (zeitaufwandtyp_id)
+        ;
+        
         INSERT INTO public.zeitaufwandtyp
                ( typ
                )
@@ -459,6 +276,30 @@ IF EXISTS dungeonmaster;
                VALUES
                ( 'Reaktion, die du ausführst, wenn du von einem Angriff getroffen oder Ziel des Zaubers "Magisches Geschoss" wirst'
                )
+        ;
+        
+        -- Create Reichweitetyp Table
+        CREATE TABLE public.reichweitetyp
+                     (
+                                  reichweitetyp_id bigint NOT NULL
+                                , typ_lang         text NOT NULL
+                                , typ_kurz         text NOT NULL
+                     )
+        ;
+        
+        ALTER TABLE public.reichweitetyp OWNER TO dungeonmaster
+        ;
+        
+        CREATE SEQUENCE public.reichweitetyp_id_seq
+        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+        ALTER TABLE public.reichweitetyp_id_seq OWNER TO dungeonmaster
+        ;
+        
+        ALTER SEQUENCE public.reichweitetyp_id_seq OWNED BY public.reichweitetyp.reichweitetyp_id;
+        ALTER TABLE ONLY public.reichweitetyp ALTER COLUMN reichweitetyp_id SET DEFAULT nextval('public.reichweitetyp_id_seq'::regclass)
+        ;
+        
+        ALTER TABLE ONLY public.reichweitetyp ADD CONSTRAINT reichweitetyp_pkey PRIMARY KEY (reichweitetyp_id)
         ;
         
         INSERT INTO public.reichweitetyp
@@ -511,6 +352,29 @@ IF EXISTS dungeonmaster;
                )
         ;
         
+        -- Create Wirkungsdauertyp Table
+        CREATE TABLE public.wirkungsdauertyp
+                     (
+                                  wirkungsdauertyp_id bigint NOT NULL
+                                , typ                 text NOT NULL
+                     )
+        ;
+        
+        ALTER TABLE public.wirkungsdauertyp OWNER TO dungeonmaster
+        ;
+        
+        CREATE SEQUENCE public.wirkungsdauertyp_id
+        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+        ALTER TABLE public.wirkungsdauertyp_id OWNER TO dungeonmaster
+        ;
+        
+        ALTER SEQUENCE public.wirkungsdauertyp_id OWNED BY public.wirkungsdauertyp.wirkungsdauertyp_id;
+        ALTER TABLE ONLY public.wirkungsdauertyp ALTER COLUMN wirkungsdauertyp_id SET DEFAULT nextval('public.wirkungsdauertyp_id'::regclass)
+        ;
+        
+        ALTER TABLE ONLY public.wirkungsdauertyp ADD CONSTRAINT wirkungsdauertyp_pkey PRIMARY KEY (wirkungsdauertyp_id)
+        ;
+        
         INSERT INTO public.wirkungsdauertyp
                ( typ
                )
@@ -559,6 +423,93 @@ IF EXISTS dungeonmaster;
                )
         ;
         
+        -- Create zauberkomponentetyp Table
+        CREATE TABLE public.zauberkomponentetyp
+                     (
+                                  zauberkomponentetyp_id bigint NOT NULL
+                                , typ_kurz               text NOT NULL
+                                , typ_lang               text NOT NULL
+                     )
+        ;
+        
+        ALTER TABLE public.zauberkomponentetyp OWNER TO dungeonmaster
+        ;
+        
+        CREATE SEQUENCE public.zauberkomponentetyp_id
+        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+        ALTER TABLE public.zauberkomponentetyp_id OWNER TO dungeonmaster
+        ;
+        
+        ALTER SEQUENCE public.zauberkomponentetyp_id OWNED BY public.zauberkomponentetyp.zauberkomponentetyp_id;
+        ALTER TABLE ONLY public.zauberkomponentetyp ALTER COLUMN zauberkomponentetyp_id SET DEFAULT nextval('public.zauberkomponentetyp_id'::regclass)
+        ;
+        
+        ALTER TABLE ONLY public.zauberkomponentetyp ADD CONSTRAINT zauberkomponentetyp_pkey PRIMARY KEY (zauberkomponentetyp_id)
+        ;
+        
+        INSERT INTO public.zauberkomponentetyp
+               ( typ_kurz
+                    , typ_lang
+               )
+               VALUES
+               ( 'V'
+                    , 'Verbalkomponente'
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponentetyp
+               ( typ_kurz
+                    , typ_lang
+               )
+               VALUES
+               ( 'G'
+                    , 'Gestenkomponente'
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponentetyp
+               ( typ_kurz
+                    , typ_lang
+               )
+               VALUES
+               ( 'M'
+                    , 'Materialkomponente'
+               )
+        ;
+        
+        -- Create Zauber Table
+        CREATE TABLE public.zauber
+                     (
+                                  zauber_id            bigint NOT NULL
+                                , name                 text NOT NULL
+                                , zeitaufwand          integer NOT NULL
+                                , fk_zeitaufwand_typ   bigint NOT NULL
+                                , reichweite           integer NOT NULL
+                                , fk_reichweite_typ    bigint NOT NULL
+                                , wirkungsdauer        integer NOT NULL
+                                , fk_wirkungsdauer_typ bigint NOT NULL
+                                , beschreibung         text NOT NULL
+                                , hoehere_grade        text
+                                , grad                 integer NOT NULL
+                                , fk_zauber_typ        bigint NOT NULL
+                     )
+        ;
+        
+        ALTER TABLE public.zauber OWNER TO dungeonmaster
+        ;
+        
+        CREATE SEQUENCE public.zauber_id_seq
+        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+        ALTER TABLE public.zauber_id_seq OWNER TO dungeonmaster
+        ;
+        
+        ALTER SEQUENCE public.zauber_id_seq OWNED BY public.zauber.zauber_id;
+        ALTER TABLE ONLY public.zauber ALTER COLUMN zauber_id SET DEFAULT nextval('public.zauber_id_seq'::regclass)
+        ;
+        
+        ALTER TABLE ONLY public.zauber ADD CONSTRAINT zauber_pkey PRIMARY KEY (zauber_id)
+        ;
+        
         ALTER TABLE ONLY public.zauber ADD CONSTRAINT fk_zauber_typ FOREIGN KEY (fk_zauber_typ) REFERENCES public.zaubertyp(zaubertyp_id) NOT VALID
         ;
         
@@ -571,8 +522,521 @@ IF EXISTS dungeonmaster;
         ALTER TABLE ONLY public.zauber ADD CONSTRAINT fk_zeitaufwand_typ FOREIGN KEY (fk_zeitaufwand_typ) REFERENCES public.zeitaufwandtyp(zeitaufwandtyp_id) NOT VALID
         ;
         
+        INSERT INTO public.zauber
+               ( name
+                    , zeitaufwand
+                    , fk_zeitaufwand_typ
+                    , reichweite
+                    , fk_reichweite_typ
+                    , wirkungsdauer
+                    , fk_wirkungsdauer_typ
+                    , beschreibung
+                    , hoehere_grade
+                    , grad
+                    , fk_zauber_typ
+               )
+        SELECT
+               'Befehl'
+             , 1
+             , (
+                      SELECT
+                             zeitaufwandtyp_id
+                      FROM
+                             public.zeitaufwandtyp
+                      WHERE
+                             typ = 'Aktion'
+               )
+             , 18
+             , (
+                      SELECT
+                             reichweitetyp_id
+                      FROM
+                             public.reichweitetyp
+                      WHERE
+                             typ_kurz = 'm'
+               )
+             , 1
+             , (
+                      SELECT
+                             wirkungsdauertyp_id
+                      FROM
+                             public.wirkungsdauertyp
+                      WHERE
+                             typ = 'Runden'
+               )
+             , 'Du gibst einer Kreatur in Reichweite, die du sehen kannst, einen
+Befehl von einem Wort. Das Ziel muss einen Weisheitsrettungs-
+wurf ablegen, sonst befolgt es den Befehl in seinem nächsten
+Zug. Der Zauber hat keine Auswirkungen, wenn das Ziel untot
+ist, wenn es deine Sprache nicht versteht oder wenn dein Befehl
+ihm unmittelbar schaden würde.
+Es folgen einige typische Befehle und ihre Auswirkungen. Du
+kannst andere Befehle als die geben, die hier beschrieben sind.
+Wenn du dies tust, entscheidet der SL, wie sich das Ziel verhält.
+Wenn das Ziel deinem Befehl nicht folgen kann, endet der Zauber.
+Komm. Das Ziel bewegt sich auf dem kürzesten und direktes-
+ten Weg auf dich zu und beendet seinen Zug wenn es sich dir auf
+1,5 Meter angenähert hat.
+Fallenlassen. Das Ziel lässt fallen, was es in den Händen hält
+und beendet dann seinen Zug.
+Flieh. Das Ziel verbringt seinen Zug damit, sich auf die
+schnellste verfügbare Weise von dir weg zu bewegen.
+Krieche. Das Ziel erhält den Zustand liegend und beendet
+seinen Zug.
+Stopp. Das Ziel bewegt sich nicht und führt keine Aktionen
+aus. Eine fliegende Kreatur bleibt in der Luft, wenn sie dazu
+imstande ist. Wenn sie sich bewegen muss, um in der Luft zu blei-
+ben, dann bewegt sie sich die Mindestentfernung, die notwendig
+ist, um nicht abzustürzen.'
+             , 'Wenn du diesen Zauber mit einem Zauber-
+platz des 2. Grades oder höher wirkst, dann kannst du den Zauber
+für jeden Zauberplatz-Grad über dem ersten auf eine zusätzliche
+Kreatur wirken. Die Kreaturen dürfen nicht weiter als 9 Meter von-
+einander entfernt sein, wenn du den Zauber auf sie wirkst.'
+             , 1
+             , (
+                      SELECT
+                             zaubertyp_id
+                      FROM
+                             public.zaubertyp
+                      WHERE
+                             typ = 'Verzauberung'
+               )
+        ;
+        
+        -- Create zauberkomponente Table
+        CREATE TABLE public.zauberkomponente
+                     (
+                                  zauberkomponente_id     bigint NOT NULL
+                                , fk_zauber               bigint NOT NULL
+                                , fk_zauberkomponente_typ bigint NOT NULL
+                     )
+        ;
+        
+        ALTER TABLE public.zauberkomponente OWNER TO dungeonmaster
+        ;
+        
+        CREATE SEQUENCE public.zauberkomponente_id
+        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+        ALTER TABLE public.zauberkomponente_id OWNER TO dungeonmaster
+        ;
+        
+        ALTER SEQUENCE public.zauberkomponente_id OWNED BY public.zauberkomponente.zauberkomponente_id;
+        ALTER TABLE ONLY public.zauberkomponente ALTER COLUMN zauberkomponente_id SET DEFAULT nextval('public.zauberkomponente_id'::regclass)
+        ;
+        
+        ALTER TABLE ONLY public.zauberkomponente ADD CONSTRAINT zauberkomponente_pkey PRIMARY KEY (zauberkomponente_id)
+        ;
+        
         ALTER TABLE ONLY public.zauberkomponente ADD CONSTRAINT fk_zauberkomponente_typ FOREIGN KEY (fk_zauberkomponente_typ) REFERENCES public.zauberkomponentetyp(zauberkomponentetyp_id) NOT VALID
         ;
         
         ALTER TABLE ONLY public.zauberkomponente ADD CONSTRAINT fk_zauber FOREIGN KEY (fk_zauber) REFERENCES public.zauber(zauber_id) NOT VALID
+        ;
+        
+        -- Create Material Table
+        CREATE TABLE public.material
+                     (
+                                  material_id bigint NOT NULL
+                                , name        text NOT NULL
+                     )
+        ;
+        
+        ALTER TABLE public.material OWNER TO dungeonmaster
+        ;
+        
+        CREATE SEQUENCE public.material_id
+        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+        ALTER TABLE public.material_id OWNER TO dungeonmaster
+        ;
+        
+        ALTER SEQUENCE public.material_id OWNED BY public.material.material_id;
+        ALTER TABLE ONLY public.material ALTER COLUMN material_id SET DEFAULT nextval('public.material_id'::regclass)
+        ;
+        
+        ALTER TABLE ONLY public.material ADD CONSTRAINT material_pkey PRIMARY KEY (material_id)
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'winziger weißer Stoffstreifen'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Stück Fell'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Stab aus Bernstein'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Kristall'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Glas'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'winziger weißer Stoffstreifen'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Fledermausfell'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Tropfen Pech'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Stück Kohle'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Schlangenzunge'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Honigwabe'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Tropfen Speiseöl'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'winzige Kugel aus Fledermauskot'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Schwefel'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Talg'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Schwungfeder eines beliebigen Vogels'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'kleiner Silberspiegel'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Perle im Wert von mindestens 100 GM'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Eulenfeder'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Glühwürmchen'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Leuchtmoos'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Stück gehärtetes Leder'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'kleines, gerades Stück Eisen'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Miniaturumhang'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'kleines Pergament mit heiligem Text'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Prise Sand'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Rosenblüten'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Grille'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Paar Platinringe im Wert von jeweils 50 GM'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'heiliges Symbol'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Tropfen Weihwasser'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Tropfen Bitumen'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Spinne'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Spinnweben'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Prise Ruß'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Salz'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Stück Phosphor'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Bergulmenholz'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Glühwürmchen'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Wimper, die von Gummiarabikum umschlossen ist'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'speziell gekennzeichnetes Stöckchen'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Knochen'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Symbole im Wert von 25 GM'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Diamanten im Wert von mindestens 300 GM'
+               )
+        ;
+        
+        -- Create Zauberzaubermaterial Table
+        CREATE TABLE public.zaubermaterial
+                     (
+                                  zaubermaterial_id   bigint NOT NULL
+                                , fk_zauberkomponente bigint NOT NULL
+                                , ersatz              bigint NOT NULL
+                                , fk_material         bigint NOT NULL
+                                , anzahl              int NOT NULL
+                     )
+        ;
+        
+        ALTER TABLE public.zaubermaterial OWNER TO dungeonmaster
+        ;
+        
+        CREATE SEQUENCE public.zaubermaterial_id
+        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+        ALTER TABLE public.zaubermaterial_id OWNER TO dungeonmaster
+        ;
+        
+        ALTER SEQUENCE public.zaubermaterial_id OWNED BY public.zaubermaterial.zaubermaterial_id;
+        ALTER TABLE ONLY public.zaubermaterial ALTER COLUMN zaubermaterial_id SET DEFAULT nextval('public.zaubermaterial_id'::regclass)
+        ;
+        
+        ALTER TABLE ONLY public.zaubermaterial ADD CONSTRAINT zaubermaterial_pkey PRIMARY KEY (zaubermaterial_id)
+        ;
+        
+        ALTER TABLE ONLY public.zaubermaterial ADD CONSTRAINT fk_zauberkomponente FOREIGN KEY (fk_zauberkomponente) REFERENCES public.zauberkomponente(zauberkomponente_id) NOT VALID
+        ;
+        
+        ALTER TABLE ONLY public.zaubermaterial ADD CONSTRAINT fk_material FOREIGN KEY (fk_material) REFERENCES public.material(material_id) NOT VALID
         ;
