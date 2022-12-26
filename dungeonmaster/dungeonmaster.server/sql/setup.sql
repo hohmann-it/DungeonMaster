@@ -209,8 +209,8 @@ IF EXISTS dungeonmaster;
         CREATE TABLE public.zauberkomponentetyp
                      (
                                   zauberkomponentetyp_id bigint NOT NULL
-                                , typ_kurz                text NOT NULL
-                                , typ_lang                text NOT NULL
+                                , typ_kurz               text NOT NULL
+                                , typ_lang               text NOT NULL
                      )
         ;
         
@@ -233,10 +233,8 @@ IF EXISTS dungeonmaster;
         CREATE TABLE public.zauberkomponente
                      (
                                   zauberkomponente_id     bigint NOT NULL
-                                , fk_zauber                bigint NOT NULL
+                                , fk_zauber               bigint NOT NULL
                                 , fk_zauberkomponente_typ bigint NOT NULL
-                                , material_und             text
-                                , material_oder            text
                      )
         ;
         
@@ -254,34 +252,62 @@ IF EXISTS dungeonmaster;
         
         ALTER TABLE ONLY public.zauberkomponente ADD CONSTRAINT zauberkomponente_pkey PRIMARY KEY (zauberkomponente_id)
         ;
-		
-		-- Create Material Table
-                CREATE TABLE public.material
+        
+        -- Create Material Table
+        CREATE TABLE public.material
                      (
-                                  material_id     bigint NOT NULL
-                                , fk_zauberkomponente     bigint NOT NULL
-                                , fk_zauberkomponente_typ bigint NOT NULL
-                                , material_und             text
-                                , material_oder            text
+                                  material_id bigint NOT NULL
+                                , name        text NOT NULL
                      )
         ;
         
-        ALTER TABLE public.zauberkomponente OWNER TO dungeonmaster
+        ALTER TABLE public.material OWNER TO dungeonmaster
         ;
         
-        CREATE SEQUENCE public.zauberkomponente_id
+        CREATE SEQUENCE public.material_id
         START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
-        ALTER TABLE public.zauberkomponente_id OWNER TO dungeonmaster
+        ALTER TABLE public.material_id OWNER TO dungeonmaster
         ;
         
-        ALTER SEQUENCE public.zauberkomponente_id OWNED BY public.zauberkomponente.zauberkomponente_id;
-        ALTER TABLE ONLY public.zauberkomponente ALTER COLUMN zauberkomponente_id SET DEFAULT nextval('public.zauberkomponente_id'::regclass)
+        ALTER SEQUENCE public.material_id OWNED BY public.material.material_id;
+        ALTER TABLE ONLY public.material ALTER COLUMN material_id SET DEFAULT nextval('public.material_id'::regclass)
         ;
         
-        ALTER TABLE ONLY public.zauberkomponente ADD CONSTRAINT zauberkomponente_pkey PRIMARY KEY (zauberkomponente_id)
+        ALTER TABLE ONLY public.material ADD CONSTRAINT material_pkey PRIMARY KEY (material_id)
         ;
-		
-		
+        
+        -- Create Zauberzaubermaterial Table
+        CREATE TABLE public.zaubermaterial
+                     (
+                                  zaubermaterial_id   bigint NOT NULL
+                                , fk_zauberkomponente bigint NOT NULL
+                                , ersatz              bigint NOT NULL
+                                , fk_material         bigint NOT NULL
+                                , anzahl              int NOT NULL
+                     )
+        ;
+        
+        ALTER TABLE public.zaubermaterial OWNER TO dungeonmaster
+        ;
+        
+        CREATE SEQUENCE public.zaubermaterial_id
+        START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+        ALTER TABLE public.zaubermaterial_id OWNER TO dungeonmaster
+        ;
+        
+        ALTER SEQUENCE public.zaubermaterial_id OWNED BY public.zaubermaterial.zaubermaterial_id;
+        ALTER TABLE ONLY public.zaubermaterial ALTER COLUMN zaubermaterial_id SET DEFAULT nextval('public.zaubermaterial_id'::regclass)
+        ;
+        
+        ALTER TABLE ONLY public.zaubermaterial ADD CONSTRAINT zaubermaterial_pkey PRIMARY KEY (zaubermaterial_id)
+        ;
+        
+        ALTER TABLE ONLY public.zaubermaterial ADD CONSTRAINT fk_zauberkomponente FOREIGN KEY (fk_zauberkomponente) REFERENCES public.zauberkomponente(zauberkomponente_id) NOT VALID
+        ;
+        
+        ALTER TABLE ONLY public.zaubermaterial ADD CONSTRAINT fk_material FOREIGN KEY (fk_material) REFERENCES public.material(material_id) NOT VALID
+        ;
+        
         INSERT INTO public.charaktere
                ( klasse
                     , name
