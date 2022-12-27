@@ -4,7 +4,6 @@ import javax.annotation.Generated;
 
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
-import org.eclipse.scout.rt.shared.data.form.properties.AbstractPropertyData;
 
 /**
  * <b>NOTE:</b><br>
@@ -19,29 +18,23 @@ public class ZauberFormData extends AbstractFormData {
 		return getFieldByClass(Name.class);
 	}
 
-	/**
-	 * access method for property SpellId.
-	 */
-	public Long getSpellId() {
-		return getSpellIdProperty().getValue();
+	public Zeitaufwand getZeitaufwand() {
+		return getFieldByClass(Zeitaufwand.class);
 	}
 
-	/**
-	 * access method for property SpellId.
-	 */
-	public void setSpellId(Long spellId) {
-		getSpellIdProperty().setValue(spellId);
-	}
-
-	public SpellIdProperty getSpellIdProperty() {
-		return getPropertyByClass(SpellIdProperty.class);
+	public Zeitaufwandtyp getZeitaufwandtyp() {
+		return getFieldByClass(Zeitaufwandtyp.class);
 	}
 
 	public static class Name extends AbstractValueFieldData<String> {
 		private static final long serialVersionUID = 1L;
 	}
 
-	public static class SpellIdProperty extends AbstractPropertyData<Long> {
+	public static class Zeitaufwand extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Zeitaufwandtyp extends AbstractValueFieldData<Long> {
 		private static final long serialVersionUID = 1L;
 	}
 }

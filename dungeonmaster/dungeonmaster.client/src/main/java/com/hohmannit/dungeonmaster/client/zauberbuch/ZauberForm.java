@@ -8,39 +8,47 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
+import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.CancelButton;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.NameField;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.SpellImageField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.ZauberImageField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.ZauberdatenBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.ZauberdatenBox.NameField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.ZauberdatenBox.ZeitaufwandBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.ZauberdatenBox.ZeitaufwandBox.ZeitaufwandField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.ZauberdatenBox.ZeitaufwandBox.ZeitaufwandtypField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.OkButton;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.CreateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberService;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.UpdateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.ZauberFormData;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.zeitaufwand.ZeitaufwandLookupCall;
 
 @FormData(value = ZauberFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class ZauberForm extends AbstractForm {
 
-	private Long spellId;
+	private Long zauberId;
 
 	@FormData
-	public Long getSpellId() {
-		return spellId;
+	public Long getZauberId() {
+		return zauberId;
 	}
 
 	@FormData
-	public void setSpellId(Long spellId) {
-		this.spellId = spellId;
+	public void setSpellId(Long zauberId) {
+		this.zauberId = zauberId;
 	}
 
 	@Override
 	public Object computeExclusiveKey() {
-		return getSpellId();
+		return getZauberId();
 	}
 
 	@Override
@@ -61,8 +69,24 @@ public class ZauberForm extends AbstractForm {
 		return getFieldByClass(GroupBox.class);
 	}
 
-	public SpellImageField getSpellImageField() {
-		return getFieldByClass(SpellImageField.class);
+	public ZauberImageField getZauberImageField() {
+		return getFieldByClass(ZauberImageField.class);
+	}
+
+	public ZeitaufwandField getZeitaufwandField() {
+		return getFieldByClass(ZeitaufwandField.class);
+	}
+
+	public ZeitaufwandBox getMySequenceBox() {
+		return getFieldByClass(ZeitaufwandBox.class);
+	}
+
+	public ZeitaufwandtypField getZeitaufwandtypField() {
+		return getFieldByClass(ZeitaufwandtypField.class);
+	}
+
+	public ZauberdatenBox getZauberdatenBox() {
+		return getFieldByClass(ZauberdatenBox.class);
 	}
 
 	public NameField getNameField() {
@@ -83,7 +107,7 @@ public class ZauberForm extends AbstractForm {
 		public class GroupBox extends AbstractGroupBox {
 
 			@Order(1000)
-			public class SpellImageField extends AbstractImageField {
+			public class ZauberImageField extends AbstractImageField {
 				@Override
 				protected String getConfiguredLabel() {
 					return TEXTS.get("ZauberBild");
@@ -96,7 +120,7 @@ public class ZauberForm extends AbstractForm {
 
 				@Override
 				protected int getConfiguredGridH() {
-					return 4;
+					return 3;
 				}
 
 				@Override
@@ -105,17 +129,80 @@ public class ZauberForm extends AbstractForm {
 				}
 
 				@Override
-				protected String getConfiguredImageUrl() {
-					return "/icons/spells/";
+				protected String getConfiguredImageId() {
+					return "zauber/feuerball.png";
 				}
 			}
 
-			@Order(2000)
-			public class NameField extends AbstractStringField {
+			@Order(1500)
+			public class ZauberdatenBox extends AbstractGroupBox {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Name");
+					return TEXTS.get("Zauberdaten");
 				}
+
+				@Override
+				protected int getConfiguredGridW() {
+					return 2;
+				}
+
+				@Order(2000)
+				public class NameField extends AbstractStringField {
+					@Override
+					protected String getConfiguredLabel() {
+						return TEXTS.get("Name");
+					}
+				}
+
+				@Order(2500)
+				public class ZeitaufwandBox extends AbstractSequenceBox {
+					@Override
+					protected String getConfiguredLabel() {
+						return TEXTS.get("Zeitaufwand");
+					}
+
+					@Override
+					protected boolean getConfiguredAutoCheckFromTo() {
+						return false;
+					}
+
+					@Override
+					protected boolean getConfiguredLabelVisible() {
+						return false;
+					}
+
+					@Order(3000)
+					public class ZeitaufwandField extends AbstractStringField {
+						@Override
+						protected String getConfiguredLabel() {
+							return TEXTS.get("Zeitaufwand");
+						}
+
+						@Override
+						protected int getConfiguredMaxLength() {
+							return 128;
+						}
+					}
+
+					@Order(4000)
+					public class ZeitaufwandtypField extends AbstractSmartField<Long> {
+						@Override
+						protected String getConfiguredLabel() {
+							return TEXTS.get("ZeitaufwandTyp");
+						}
+
+						@Override
+						protected boolean getConfiguredLabelVisible() {
+							return false;
+						}
+
+						@Override // <2>
+						protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+							return ZeitaufwandLookupCall.class;
+						}
+					}
+				}
+
 			}
 
 		}

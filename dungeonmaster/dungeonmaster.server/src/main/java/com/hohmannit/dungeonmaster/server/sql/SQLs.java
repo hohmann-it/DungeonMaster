@@ -52,6 +52,32 @@ public interface SQLs {
 			+ "grad, " //
 			+ "fk_zauber_typ) " //
 			+ "VALUES (" //
-			+ ":name,1,1,1,1,1,1,'A','B',1,1)";
+			+ ":name,:zeitaufwand,:zeitaufwandtyp,:reichweite,:reichweitetyp,:wirkungsdauer,:wirkungsdauertyp,:beschreibung,:hoeheregrade,:grad,:zaubertyp)";
+
+	String PERSON_SELECT = ""//
+			+ "SELECT   name, "//
+			+ "zeitaufwand, " //
+			+ "fk_zeitaufwand_typ, " //
+			+ "reichweite, " //
+			+ "fk_reichweite_typ, " //
+			+ "wirkungsdauer, " //
+			+ "fk_wirkungsdauer_typ, " //
+			+ "beschreibung, " //
+			+ "hoehere_grade, " //
+			+ "grad, " //
+			+ "fk_zauber_typ) " //
+			+ "FROM     public.zauber "//
+			+ "WHERE    zauber_id = :personId "//
+			+ "INTO     :name, "//
+			+ "         :zeitaufwand, "//
+			+ "         :zeitaufwandtyp, "//
+			+ "         :reichweite, "//
+			+ "         :reichweitetyp, "//
+			+ "         :wirkungsdauer, "//
+			+ "         :wirkungsdauertyp, "//
+			+ "         :beschreibung, "//
+			+ "         :hoeheregrade, "//
+			+ "         :grad, "//
+			+ "         :zaubertyp";
 
 }
