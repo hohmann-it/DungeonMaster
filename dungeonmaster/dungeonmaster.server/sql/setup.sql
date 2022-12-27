@@ -1,4 +1,6 @@
 -- Do initialization
+\echo '=========Initializing DB settings=========';
+\echo '...';
 SET statement_timeout                   = 0;
 SET lock_timeout                        = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -13,6 +15,8 @@ SET xmloption             = content;
 SET client_min_messages   = warning;
 SET row_security          = off;
 -- Forcibly disconnect all users
+\echo '=========Disconnecting user dungeonmaster=========';
+\echo '...';
 SELECT
        pg_terminate_backend(pid)
 FROM
@@ -22,18 +26,32 @@ WHERE
 ;
 
 -- Drop any existing database
+\echo '=========Drop database dungeonmaster if exists=========';
+\echo '...';
 DROP DATABASE
 IF EXISTS dungeonmaster;
+    \echo '=========Drop user dungeonmaster if exists=========';
+    \echo '...';
     DROP USER
     IF EXISTS dungeonmaster;
+        \echo '=========Create dungeonmaster user=========';
+        \echo '...';
         CREATE USER dungeonmaster;
         -- Create the new database
+        \echo '=========Create dungeonmaster user=========';
+        \echo '...';
         CREATE DATABASE dungeonmaster WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'German_Germany.1252';
+        \echo '=========Change owner of dungeonmaster database to dungeonmaster user=========';
+        \echo '...';
         -- Change owner to dungeonmaster
         ALTER DATABASE dungeonmaster OWNER TO dungeonmaster;
         -- Connect to database
+        \echo '=========Connect to dungeonmaster database=========';
+        \echo '...';
         \connect dungeonmaster
         -- Do initialization
+        \echo '=========Initializing db settings=========';
+        \echo '...';
         SET statement_timeout                   = 0;
         SET lock_timeout                        = 0;
         SET idle_in_transaction_session_timeout = 0;
@@ -55,6 +73,8 @@ IF EXISTS dungeonmaster;
         SET default_tablespace          = '';
         SET default_table_access_method = heap;
         -- Create Charaktere Table
+        \echo '=========Create table charaktere=========';
+        \echo '...';
         CREATE TABLE public.charaktere
                      (
                                   charakter_id bigint NOT NULL
@@ -78,6 +98,8 @@ IF EXISTS dungeonmaster;
         ALTER TABLE ONLY public.charaktere ADD CONSTRAINT charaktere_pkey PRIMARY KEY (charakter_id)
         ;
         
+        \echo '=========Insert into table charaktere=========';
+        \echo '...';
         INSERT INTO public.charaktere
                ( klasse
                     , name
@@ -120,6 +142,8 @@ IF EXISTS dungeonmaster;
         ;
         
         --Create Zaubertyp Table
+        \echo '=========Create table zaubertyp=========';
+        \echo '...';
         CREATE TABLE public.zaubertyp
                      (
                                   zaubertyp_id bigint NOT NULL
@@ -143,6 +167,8 @@ IF EXISTS dungeonmaster;
         ALTER TABLE ONLY public.zaubertyp ADD CONSTRAINT zaubertyp_pkey PRIMARY KEY (zaubertyp_id)
         ;
         
+        \echo '=========Insert into table zaubertyp=========';
+        \echo '...';
         INSERT INTO public.zaubertyp
                ( typ
                     , kategorie
@@ -224,6 +250,8 @@ IF EXISTS dungeonmaster;
         ;
         
         -- Create Zeitaufwandtyp Table
+        \echo '=========Create table zeitaufwandtyp=========';
+        \echo '...';
         CREATE TABLE public.zeitaufwandtyp
                      (
                                   zeitaufwandtyp_id bigint NOT NULL
@@ -246,6 +274,8 @@ IF EXISTS dungeonmaster;
         ALTER TABLE ONLY public.zeitaufwandtyp ADD CONSTRAINT zeitaufwandtyp_pkey PRIMARY KEY (zeitaufwandtyp_id)
         ;
         
+        \echo '=========Insert into table zeitaufwandtyp=========';
+        \echo '...';
         INSERT INTO public.zeitaufwandtyp
                ( typ
                )
@@ -279,6 +309,8 @@ IF EXISTS dungeonmaster;
         ;
         
         -- Create Reichweitetyp Table
+        \echo '=========Create table reichweitetyp=========';
+        \echo '...';
         CREATE TABLE public.reichweitetyp
                      (
                                   reichweitetyp_id bigint NOT NULL
@@ -302,6 +334,8 @@ IF EXISTS dungeonmaster;
         ALTER TABLE ONLY public.reichweitetyp ADD CONSTRAINT reichweitetyp_pkey PRIMARY KEY (reichweitetyp_id)
         ;
         
+        \echo '=========Insert into table reichweitetyp=========';
+        \echo '...';
         INSERT INTO public.reichweitetyp
                ( typ_lang
                     , typ_kurz
@@ -363,6 +397,8 @@ IF EXISTS dungeonmaster;
         ;
         
         -- Create Wirkungsdauertyp Table
+        \echo '=========Create table wirkungsdauertyp=========';
+        \echo '...';
         CREATE TABLE public.wirkungsdauertyp
                      (
                                   wirkungsdauertyp_id bigint NOT NULL
@@ -385,6 +421,8 @@ IF EXISTS dungeonmaster;
         ALTER TABLE ONLY public.wirkungsdauertyp ADD CONSTRAINT wirkungsdauertyp_pkey PRIMARY KEY (wirkungsdauertyp_id)
         ;
         
+        \echo '=========Insert into table wirkungsdauertyp=========';
+        \echo '...';
         INSERT INTO public.wirkungsdauertyp
                ( typ
                )
@@ -434,6 +472,8 @@ IF EXISTS dungeonmaster;
         ;
         
         -- Create zauberkomponentetyp Table
+        \echo '=========Create table zauberkomponentetyp=========';
+        \echo '...';
         CREATE TABLE public.zauberkomponentetyp
                      (
                                   zauberkomponentetyp_id bigint NOT NULL
@@ -457,6 +497,8 @@ IF EXISTS dungeonmaster;
         ALTER TABLE ONLY public.zauberkomponentetyp ADD CONSTRAINT zauberkomponentetyp_pkey PRIMARY KEY (zauberkomponentetyp_id)
         ;
         
+        \echo '=========Insert into table zauberkomponentetyp=========';
+        \echo '...';
         INSERT INTO public.zauberkomponentetyp
                ( typ_kurz
                     , typ_lang
@@ -488,6 +530,8 @@ IF EXISTS dungeonmaster;
         ;
         
         -- Create Zauber Table
+        \echo '=========Create table zauber=========';
+        \echo '...';
         CREATE TABLE public.zauber
                      (
                                   zauber_id            bigint NOT NULL
@@ -532,6 +576,8 @@ IF EXISTS dungeonmaster;
         ALTER TABLE ONLY public.zauber ADD CONSTRAINT fk_zeitaufwand_typ FOREIGN KEY (fk_zeitaufwand_typ) REFERENCES public.zeitaufwandtyp(zeitaufwandtyp_id) NOT VALID
         ;
         
+        \echo '=========Insert into table zauber=========';
+        \echo '...';
         INSERT INTO public.zauber
                ( name
                     , zeitaufwand
@@ -3503,6 +3549,8 @@ IF EXISTS dungeonmaster;
         ;
         
         -- Create zauberkomponente Table
+        \echo '=========Create table zauberkomponente=========';
+        \echo '...';
         CREATE TABLE public.zauberkomponente
                      (
                                   zauberkomponente_id     bigint NOT NULL
@@ -3532,6 +3580,8 @@ IF EXISTS dungeonmaster;
         ALTER TABLE ONLY public.zauberkomponente ADD CONSTRAINT fk_zauber FOREIGN KEY (fk_zauber) REFERENCES public.zauber(zauber_id) NOT VALID
         ;
         
+        \echo '=========Insert into table zauberkomponente=========';
+        \echo '...';
         INSERT INTO public.zauberkomponente
                ( fk_zauber
                     , fk_zauberkomponente_typ
@@ -4807,7 +4857,1784 @@ IF EXISTS dungeonmaster;
                )
         ;
         
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Magierrüstung'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Magierrüstung'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Magierrüstung'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Magisches Geschoss'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Magisches Geschoss'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Massen-Heilendes Wort'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Nebelschritt'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Person bezaubern'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Person bezaubern'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Person festhalten'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Person festhalten'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Person festhalten'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Resistenz'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Resistenz'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Resistenz'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schild'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schild'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schild des Glaubens'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schild des Glaubens'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schild des Glaubens'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schlaf'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schlaf'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schlaf'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schockgriff'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schockgriff'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schützendes Band'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schützendes Band'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schützendes Band'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schutzgeister'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schutzgeister'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schutzgeister'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schutz vor Energie'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schutz vor Energie'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schwache Genesung'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Schwache Genesung'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Segnen'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Segnen'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Segnen'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Spinnenklettern'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Spinnenklettern'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Spinnenklettern'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Spinnennetz'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Spinnennetz'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Spinnennetz'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Sprachen verstehen'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Sprachen verstehen'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Sprachen verstehen'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Stille'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Sprachen verstehen'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Tanzende Lichter'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Tanzende Lichter'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Tanzende Lichter'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Taschenspielerei'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Taschenspielerei'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Thaumaturgie'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Unsichtbarkeit'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Unsichtbarkeit'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Unsichtbarkeit'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Verschwimmen'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Vorahnung'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Vorahnung'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Vorahnung'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Waffe des Glaubens'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Waffe des Glaubens'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Wiederbeleben'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Wiederbeleben'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Wiederbeleben'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'M'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Wunden heilen'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Wunden heilen'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Wunden verursachen'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'V'
+               )
+               )
+        ;
+        
+        INSERT INTO public.zauberkomponente
+               ( fk_zauber
+                    , fk_zauberkomponente_typ
+               )
+               VALUES
+               (
+               (
+                      SELECT
+                             zauber_id
+                      FROM
+                             public.zauber
+                      WHERE
+                             name = 'Wunden verursachen'
+               )
+             , (
+                      SELECT
+                             zauberkomponentetyp_id
+                      FROM
+                             public.zauberkomponentetyp
+                      WHERE
+                             typ_kurz = 'G'
+               )
+               )
+        ;
+        
         -- Create Material Table
+        \echo '=========Create table material=========';
+        \echo '...';
         CREATE TABLE public.material
                      (
                                   material_id bigint NOT NULL
@@ -4830,6 +6657,8 @@ IF EXISTS dungeonmaster;
         ALTER TABLE ONLY public.material ADD CONSTRAINT material_pkey PRIMARY KEY (material_id)
         ;
         
+        \echo '=========Insert into table material=========';
+        \echo '...';
         INSERT INTO public.material
                ( name
                )
@@ -5183,6 +7012,10 @@ IF EXISTS dungeonmaster;
         ;
         
         -- Create Zaubermaterial Table
+        \echo '=========Create table zaubermaterial=========';
+        ;
+        \echo '...';
+        ;
         CREATE TABLE public.zaubermaterial
                      (
                                   zaubermaterial_id   bigint NOT NULL
@@ -5213,3 +7046,6 @@ IF EXISTS dungeonmaster;
         
         ALTER TABLE ONLY public.zaubermaterial ADD CONSTRAINT fk_material FOREIGN KEY (fk_material) REFERENCES public.material(material_id) NOT VALID
         ;
+        
+        \echo '=========Insert into table zaubermaterial=========';
+        \echo '...';
