@@ -1,18 +1,23 @@
-package com.hohmannit.dungeonmaster.client.spellbook;
+package com.hohmannit.dungeonmaster.client.zauberbuch;
 
 import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBigIntegerColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIntegerColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
-import com.hohmannit.dungeonmaster.client.spellbook.ZauberbuchTablePage.Table;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberbuchTablePage.Table;
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.spellbook.ZauberbuchTablePageData;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberbuchService;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.typ.ZaubertypLookupCall;
 
 @Data(ZauberbuchTablePageData.class)
 public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
@@ -42,28 +47,36 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 			return getColumnSet().getColumnByClass(ZeitaufwandColumn.class);
 		}
 
-		public ZeitaufwandTypColumn getZeitaufwandTypColumn() {
-			return getColumnSet().getColumnByClass(ZeitaufwandTypColumn.class);
+		public ZeitaufwandtypColumn getZeitaufwandTypColumn() {
+			return getColumnSet().getColumnByClass(ZeitaufwandtypColumn.class);
 		}
 
 		public ReichweiteColumn getReichweiteColumn() {
 			return getColumnSet().getColumnByClass(ReichweiteColumn.class);
 		}
 
-		public ReichweiteTypColumn getReichweiteTypColumn() {
-			return getColumnSet().getColumnByClass(ReichweiteTypColumn.class);
+		public ReichweitetypColumn getReichweiteTypColumn() {
+			return getColumnSet().getColumnByClass(ReichweitetypColumn.class);
 		}
 
 		public WirkungsdauerColumn getWirkungsdauerColumn() {
 			return getColumnSet().getColumnByClass(WirkungsdauerColumn.class);
 		}
 
-		public WirkungsdauerTypColumn getWirkungsdauerTypColumn() {
-			return getColumnSet().getColumnByClass(WirkungsdauerTypColumn.class);
+		public WirkungsdauertypColumn getWirkungsdauerTypColumn() {
+			return getColumnSet().getColumnByClass(WirkungsdauertypColumn.class);
 		}
 
 		public BeschreibungColumn getBeschreibungColumn() {
 			return getColumnSet().getColumnByClass(BeschreibungColumn.class);
+		}
+
+		public GradColumn getGradColumn() {
+			return getColumnSet().getColumnByClass(GradColumn.class);
+		}
+
+		public ZaubertypColumn getZaubertypColumn() {
+			return getColumnSet().getColumnByClass(ZaubertypColumn.class);
 		}
 
 		public HoehereGradeColumn getHoehereGradeColumn() {
@@ -79,10 +92,10 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(1000)
-		public class ZauberIdColumn extends AbstractStringColumn {
+		public class ZauberIdColumn extends AbstractBigIntegerColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("MyNlsKey");
+				return TEXTS.get("ZauberID");
 			}
 
 			@Override
@@ -110,8 +123,40 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected int getConfiguredWidth() {
+				return 200;
+			}
+		}
+
+		@Order(2500)
+		public class GradColumn extends AbstractIntegerColumn {
+			@Override
+			protected String getConfiguredHeaderText() {
+				return TEXTS.get("Zaubergrad");
+			}
+
+			@Override
+			protected int getConfiguredWidth() {
 				return 100;
 			}
+		}
+
+		@Order(2750)
+		public class ZaubertypColumn extends AbstractSmartColumn<Long> {
+			@Override
+			protected String getConfiguredHeaderText() {
+				return TEXTS.get("Zaubertyp");
+			}
+
+			@Override
+			protected int getConfiguredWidth() {
+				return 100;
+			}
+
+			@Override
+			protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+				return ZaubertypLookupCall.class;
+			}
+
 		}
 
 		@Order(3000)
@@ -128,7 +173,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(4000)
-		public class ZeitaufwandTypColumn extends AbstractStringColumn {
+		public class ZeitaufwandtypColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
 				return TEXTS.get("ZeitaufwandTyp");
@@ -154,7 +199,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(6000)
-		public class ReichweiteTypColumn extends AbstractStringColumn {
+		public class ReichweitetypColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
 				return TEXTS.get("ReichweiteTyp");
@@ -180,7 +225,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(8000)
-		public class WirkungsdauerTypColumn extends AbstractStringColumn {
+		public class WirkungsdauertypColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
 				return TEXTS.get("WirkungsdauerTyp");
@@ -209,7 +254,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class HoehereGradeColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("HhereGrade");
+				return TEXTS.get("HoehereGrade");
 			}
 
 			@Override

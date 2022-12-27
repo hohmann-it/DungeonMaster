@@ -8,7 +8,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
 import com.hohmannit.dungeonmaster.client.charakter.CharakterTablePage;
-import com.hohmannit.dungeonmaster.client.spellbook.ZauberbuchTablePage;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberbuchTablePage;
 import com.hohmannit.dungeonmaster.shared.Icons;
 
 @Order(1000)

@@ -11,12 +11,16 @@
 package com.hohmannit.dungeonmaster.server.sql;
 
 public interface SQLs {
-	String CHARAKTERE_PAGE_SELECT = "SELECT charakter_id, klasse, name"
-			+ "	FROM public.charaktere;";
+	String CHARAKTERE_PAGE_SELECT = "SELECT charakter_id, klasse, name" + "	FROM public.charaktere;";
 	String CHARAKTERE_PAGE_DATA_SELECT_INTO = " INTO :{page.charakterId}, :{page.klasse}, :{page.name}";
 
 	String ZAUBERBUCH_PAGE_SELECT = "SELECT zauber_id, name, zeitaufwand, fk_zeitaufwand_typ, reichweite, fk_reichweite_typ, wirkungsdauer, fk_wirkungsdauer_typ, beschreibung, hoehere_grade, grad, fk_zauber_typ"
 			+ "	FROM public.zauber;";
 
-	String ZAUBERBUCH_PAGE_DATA_SELECT_INTO = "INTO :{page.zauberId}, :{page.name}, :{page.zeitaufwand}";
+	String ZAUBERBUCH_PAGE_DATA_SELECT_INTO = " INTO :{page.zauberId}, :{page.name}, :{page.zeitaufwand}, :{page.zeitaufwandtyp}, :{page.reichweite}, :{page.reichweitetyp}, :{page.wirkungsdauer}, :{page.wirkungsdauertyp}, :{page.beschreibung}, :{page.hoehereGrade}, :{page.grad}, :{page.zaubertyp}";
+
+	String ZAUBERTYP_LOOKUP = "SELECT zaubertyp_id, typ FROM public.zaubertyp WHERE 1 = 1 "
+			+ "<key>    AND zaubertyp_id = :key </key> " //
+			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
+			+ "<all></all>";
 }
