@@ -33,4 +33,9 @@ public interface SQLs {
 			+ "<key>    AND reichweitetyp_id = :key </key> " //
 			+ "<text>   AND UPPER(typ_lang) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
+
+	String WIRKUNGSDAUER_LOOKUP = "SELECT wirkungsdauertyp_id, typ FROM public.wirkungsdauertyp WHERE 1 = 1 "
+			+ "<key>    AND wirkungsdauertyp_id = :key </key> " //
+			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
+			+ "<all></all>";
 }

@@ -73,7 +73,7 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 		private String m_reichweite;
 		private Long m_reichweitetyp;
 		private String m_wirkungsdauer;
-		private String m_wirkungsdauertyp;
+		private Long m_wirkungsdauertyp;
 		private String m_beschreibung;
 		private String m_hoehereGrade;
 
@@ -149,11 +149,11 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 			m_wirkungsdauer = newWirkungsdauer;
 		}
 
-		public String getWirkungsdauertyp() {
+		public Long getWirkungsdauertyp() {
 			return m_wirkungsdauertyp;
 		}
 
-		public void setWirkungsdauertyp(String newWirkungsdauertyp) {
+		public void setWirkungsdauertyp(Long newWirkungsdauertyp) {
 			m_wirkungsdauertyp = newWirkungsdauertyp;
 		}
 

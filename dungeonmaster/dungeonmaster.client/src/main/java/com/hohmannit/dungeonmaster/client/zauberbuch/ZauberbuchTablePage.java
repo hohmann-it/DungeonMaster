@@ -19,6 +19,7 @@ import com.hohmannit.dungeonmaster.shared.spellbook.ZauberbuchTablePageData;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberbuchService;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.reichweite.ReichweiteLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.typ.ZaubertypLookupCall;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.wirkungsdauer.WirkungsdauerLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.zeitaufwand.ZeitaufwandLookupCall;
 
 @Data(ZauberbuchTablePageData.class)
@@ -237,7 +238,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(8000)
-		public class WirkungsdauertypColumn extends AbstractStringColumn {
+		public class WirkungsdauertypColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
 				return TEXTS.get("WirkungsdauerTyp");
@@ -246,6 +247,11 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 			@Override
 			protected int getConfiguredWidth() {
 				return 100;
+			}
+
+			@Override
+			protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+				return WirkungsdauerLookupCall.class;
 			}
 		}
 
