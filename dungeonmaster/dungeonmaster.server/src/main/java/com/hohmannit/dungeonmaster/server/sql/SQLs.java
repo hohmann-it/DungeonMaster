@@ -23,4 +23,9 @@ public interface SQLs {
 			+ "<key>    AND zaubertyp_id = :key </key> " //
 			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
+
+	String ZEITAUFWAND_LOOKUP = "SELECT zeitaufwandtyp_id, typ FROM public.zeitaufwandtyp WHERE 1 = 1 "
+			+ "<key>    AND zeitaufwandtyp_id = :key </key> " //
+			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
+			+ "<all></all>";
 }

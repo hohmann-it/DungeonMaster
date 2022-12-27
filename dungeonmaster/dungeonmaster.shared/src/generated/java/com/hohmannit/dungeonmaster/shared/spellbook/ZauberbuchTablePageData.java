@@ -69,7 +69,7 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 		private Integer m_grad;
 		private Long m_zaubertyp;
 		private String m_zeitaufwand;
-		private String m_zeitaufwandtyp;
+		private Long m_zeitaufwandtyp;
 		private String m_reichweite;
 		private String m_reichweitetyp;
 		private String m_wirkungsdauer;
@@ -117,11 +117,11 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 			m_zeitaufwand = newZeitaufwand;
 		}
 
-		public String getZeitaufwandtyp() {
+		public Long getZeitaufwandtyp() {
 			return m_zeitaufwandtyp;
 		}
 
-		public void setZeitaufwandtyp(String newZeitaufwandtyp) {
+		public void setZeitaufwandtyp(Long newZeitaufwandtyp) {
 			m_zeitaufwandtyp = newZeitaufwandtyp;
 		}
 

@@ -18,6 +18,7 @@ import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.spellbook.ZauberbuchTablePageData;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberbuchService;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.typ.ZaubertypLookupCall;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.zeitaufwand.ZeitaufwandLookupCall;
 
 @Data(ZauberbuchTablePageData.class)
 public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
@@ -173,7 +174,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(4000)
-		public class ZeitaufwandtypColumn extends AbstractStringColumn {
+		public class ZeitaufwandtypColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
 				return TEXTS.get("ZeitaufwandTyp");
@@ -182,6 +183,11 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 			@Override
 			protected int getConfiguredWidth() {
 				return 100;
+			}
+
+			@Override
+			protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+				return ZeitaufwandLookupCall.class;
 			}
 		}
 
