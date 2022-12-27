@@ -175,7 +175,7 @@ IF EXISTS dungeonmaster;
                )
                VALUES
                ( 'Verzauberung'
-                    , ''
+                    , NULL
                )
         ;
         
@@ -185,7 +185,7 @@ IF EXISTS dungeonmaster;
                )
                VALUES
                ( 'Bannzauber'
-                    , ''
+                    , NULL
                )
         ;
         
@@ -195,7 +195,7 @@ IF EXISTS dungeonmaster;
                )
                VALUES
                ( 'Hervorrufung'
-                    , ''
+                    , NULL
                )
         ;
         
@@ -205,7 +205,7 @@ IF EXISTS dungeonmaster;
                )
                VALUES
                ( 'Beschwörung'
-                    , ''
+                    , NULL
                )
         ;
         
@@ -215,7 +215,7 @@ IF EXISTS dungeonmaster;
                )
                VALUES
                ( 'Verwandlung'
-                    , ''
+                    , NULL
                )
         ;
         
@@ -225,7 +225,7 @@ IF EXISTS dungeonmaster;
                )
                VALUES
                ( 'Erkenntniszauberei'
-                    , ''
+                    , NULL
                )
         ;
         
