@@ -1,7 +1,5 @@
 package com.hohmannit.dungeonmaster.shared.spellbook;
 
-import java.math.BigInteger;
-
 import javax.annotation.Generated;
 
 import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
@@ -64,7 +62,7 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 		public static final String wirkungsdauertyp = "wirkungsdauertyp";
 		public static final String beschreibung = "beschreibung";
 		public static final String hoehereGrade = "hoehereGrade";
-		private BigInteger m_zauberId;
+		private Long m_zauberId;
 		private String m_name;
 		private Integer m_grad;
 		private Long m_zaubertyp;
@@ -77,11 +75,11 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 		private String m_beschreibung;
 		private String m_hoehereGrade;
 
-		public BigInteger getZauberId() {
+		public Long getZauberId() {
 			return m_zauberId;
 		}
 
-		public void setZauberId(BigInteger newZauberId) {
+		public void setZauberId(Long newZauberId) {
 			m_zauberId = newZauberId;
 		}
 

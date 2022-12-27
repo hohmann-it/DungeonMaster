@@ -11,11 +11,13 @@ import org.eclipse.scout.rt.client.ui.desktop.notification.NativeNotificationDef
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 
 import com.hohmannit.dungeonmaster.client.database.DatenbankOutline;
 import com.hohmannit.dungeonmaster.client.search.SucheOutline;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm;
 import com.hohmannit.dungeonmaster.shared.Icons;
 
 /**
@@ -108,12 +110,23 @@ public class Desktop extends AbstractDesktop {
 		}
 
 		@Override
-		protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-			return CollectionUtility.hashSet();
+		protected String getConfiguredIconId() {
+			return Icons.Star;
 		}
 
-		@Override
-		protected void execAction() {
+		@Order(10)
+		@ClassId("effb3b69-f488-4aed-8923-d430a5f1fd97")
+		public class NewZauberMenu extends AbstractMenu {
+
+			@Override
+			protected String getConfiguredText() {
+				return TEXTS.get("NeuerZauber");
+			}
+
+			@Override
+			protected void execAction() {
+				new ZauberForm().startNew();
+			}
 		}
 	}
 
