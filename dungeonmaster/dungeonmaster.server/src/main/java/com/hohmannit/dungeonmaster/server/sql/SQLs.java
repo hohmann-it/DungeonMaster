@@ -38,4 +38,20 @@ public interface SQLs {
 			+ "<key>    AND wirkungsdauertyp_id = :key </key> " //
 			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
+
+	String ZAUBER_INSERT = "INSERT INTO public.zauber ("//
+			+ "name, " //
+			+ "zeitaufwand, " //
+			+ "fk_zeitaufwand_typ, " //
+			+ "reichweite, " //
+			+ "fk_reichweite_typ, " //
+			+ "wirkungsdauer, " //
+			+ "fk_wirkungsdauer_typ, " //
+			+ "beschreibung, " //
+			+ "hoehere_grade, " //
+			+ "grad, " //
+			+ "fk_zauber_typ) " //
+			+ "VALUES (" //
+			+ ":name,1,1,1,1,1,1,'A','B',1,1)";
+
 }

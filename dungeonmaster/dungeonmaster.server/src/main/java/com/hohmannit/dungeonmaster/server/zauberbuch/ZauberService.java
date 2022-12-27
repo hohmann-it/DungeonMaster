@@ -3,7 +3,9 @@ package com.hohmannit.dungeonmaster.server.zauberbuch;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.security.ACCESS;
+import org.eclipse.scout.rt.server.jdbc.SQL;
 
+import com.hohmannit.dungeonmaster.server.sql.SQLs;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.CreateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberService;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.ReadZauberPermission;
@@ -24,6 +26,7 @@ public class ZauberService implements IZauberService {
 		if (!ACCESS.check(new CreateZauberPermission())) {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
+		SQL.insert(SQLs.ZAUBER_INSERT, formData);
 		return formData;
 	}
 

@@ -7,12 +7,16 @@ import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
+import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.CancelButton;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.NameField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.SpellImageField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.OkButton;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.CreateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberService;
@@ -57,6 +61,14 @@ public class ZauberForm extends AbstractForm {
 		return getFieldByClass(GroupBox.class);
 	}
 
+	public SpellImageField getSpellImageField() {
+		return getFieldByClass(SpellImageField.class);
+	}
+
+	public NameField getNameField() {
+		return getFieldByClass(NameField.class);
+	}
+
 	public OkButton getOkButton() {
 		return getFieldByClass(OkButton.class);
 	}
@@ -69,6 +81,42 @@ public class ZauberForm extends AbstractForm {
 	public class MainBox extends AbstractGroupBox {
 		@Order(1000)
 		public class GroupBox extends AbstractGroupBox {
+
+			@Order(1000)
+			public class SpellImageField extends AbstractImageField {
+				@Override
+				protected String getConfiguredLabel() {
+					return TEXTS.get("ZauberBild");
+				}
+
+				@Override
+				protected boolean getConfiguredAutoFit() {
+					return false;
+				}
+
+				@Override
+				protected int getConfiguredGridH() {
+					return 4;
+				}
+
+				@Override
+				protected boolean getConfiguredLabelVisible() {
+					return false;
+				}
+
+				@Override
+				protected String getConfiguredImageUrl() {
+					return "/icons/spells/";
+				}
+			}
+
+			@Order(2000)
+			public class NameField extends AbstractStringField {
+				@Override
+				protected String getConfiguredLabel() {
+					return TEXTS.get("Name");
+				}
+			}
 
 		}
 
