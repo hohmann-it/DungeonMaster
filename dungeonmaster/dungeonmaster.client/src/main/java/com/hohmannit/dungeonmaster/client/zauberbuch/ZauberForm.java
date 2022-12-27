@@ -17,13 +17,12 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.CancelButton;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.ZauberImageField;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.ZauberdatenBox;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.ZauberdatenBox.NameField;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.ZauberdatenBox.ZeitaufwandBox;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.ZauberdatenBox.ZeitaufwandBox.ZeitaufwandField;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GroupBox.ZauberdatenBox.ZeitaufwandBox.ZeitaufwandtypField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.NameField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZauberImageField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandBox.ZeitaufwandField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandBox.ZeitaufwandtypField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.OkButton;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.CreateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberService;
@@ -65,10 +64,6 @@ public class ZauberForm extends AbstractForm {
 		return getFieldByClass(MainBox.class);
 	}
 
-	public GroupBox getGroupBox() {
-		return getFieldByClass(GroupBox.class);
-	}
-
 	public ZauberImageField getZauberImageField() {
 		return getFieldByClass(ZauberImageField.class);
 	}
@@ -85,8 +80,8 @@ public class ZauberForm extends AbstractForm {
 		return getFieldByClass(ZeitaufwandtypField.class);
 	}
 
-	public ZauberdatenBox getZauberdatenBox() {
-		return getFieldByClass(ZauberdatenBox.class);
+	public GeneralBox getGeneralBox() {
+		return getFieldByClass(GeneralBox.class);
 	}
 
 	public NameField getNameField() {
@@ -103,8 +98,24 @@ public class ZauberForm extends AbstractForm {
 
 	@Order(1000)
 	public class MainBox extends AbstractGroupBox {
-		@Order(1000)
-		public class GroupBox extends AbstractGroupBox {
+
+		@Order(0)
+		public class GeneralBox extends AbstractGroupBox {
+			@Override
+			protected int getConfiguredGridColumnCount() {
+				return 3;
+			}
+
+			@Override
+			protected double getConfiguredGridWeightY() {
+				// do not allow the general box to grow or shrink vertically.
+				return 0;
+			}
+
+			@Override
+			protected boolean getConfiguredLabelVisible() {
+				return false;
+			}
 
 			@Order(1000)
 			public class ZauberImageField extends AbstractImageField {
@@ -115,12 +126,7 @@ public class ZauberForm extends AbstractForm {
 
 				@Override
 				protected boolean getConfiguredAutoFit() {
-					return false;
-				}
-
-				@Override
-				protected int getConfiguredGridH() {
-					return 3;
+					return true;
 				}
 
 				@Override
@@ -129,16 +135,26 @@ public class ZauberForm extends AbstractForm {
 				}
 
 				@Override
+				protected int getConfiguredGridH() {
+					return 1;
+				}
+
+				@Override
+				protected int getConfiguredGridW() {
+					return 1;
+				}
+
+				@Override
 				protected String getConfiguredImageId() {
 					return "zauber/feuerball.png";
 				}
 			}
 
-			@Order(1500)
-			public class ZauberdatenBox extends AbstractGroupBox {
+			@Order(2000)
+			public class NameField extends AbstractStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Zauberdaten");
+					return TEXTS.get("Name");
 				}
 
 				@Override
@@ -146,24 +162,47 @@ public class ZauberForm extends AbstractForm {
 					return 2;
 				}
 
-				@Order(2000)
-				public class NameField extends AbstractStringField {
-					@Override
-					protected String getConfiguredLabel() {
-						return TEXTS.get("Name");
-					}
+				@Override
+				protected int getConfiguredGridH() {
+					return 1;
+				}
+			}
+
+			@Order(2500)
+			public class ZeitaufwandBox extends AbstractSequenceBox {
+				@Override
+				protected String getConfiguredLabel() {
+					return TEXTS.get("Zeitaufwand");
 				}
 
-				@Order(2500)
-				public class ZeitaufwandBox extends AbstractSequenceBox {
+				@Override
+				protected boolean getConfiguredAutoCheckFromTo() {
+					return false;
+				}
+
+				@Override
+				protected boolean getConfiguredLabelVisible() {
+					return false;
+				}
+
+				@Order(3000)
+				public class ZeitaufwandField extends AbstractStringField {
 					@Override
 					protected String getConfiguredLabel() {
 						return TEXTS.get("Zeitaufwand");
 					}
 
 					@Override
-					protected boolean getConfiguredAutoCheckFromTo() {
-						return false;
+					protected int getConfiguredMaxLength() {
+						return 128;
+					}
+				}
+
+				@Order(4000)
+				public class ZeitaufwandtypField extends AbstractSmartField<Long> {
+					@Override
+					protected String getConfiguredLabel() {
+						return TEXTS.get("ZeitaufwandTyp");
 					}
 
 					@Override
@@ -171,35 +210,9 @@ public class ZauberForm extends AbstractForm {
 						return false;
 					}
 
-					@Order(3000)
-					public class ZeitaufwandField extends AbstractStringField {
-						@Override
-						protected String getConfiguredLabel() {
-							return TEXTS.get("Zeitaufwand");
-						}
-
-						@Override
-						protected int getConfiguredMaxLength() {
-							return 128;
-						}
-					}
-
-					@Order(4000)
-					public class ZeitaufwandtypField extends AbstractSmartField<Long> {
-						@Override
-						protected String getConfiguredLabel() {
-							return TEXTS.get("ZeitaufwandTyp");
-						}
-
-						@Override
-						protected boolean getConfiguredLabelVisible() {
-							return false;
-						}
-
-						@Override // <2>
-						protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
-							return ZeitaufwandLookupCall.class;
-						}
+					@Override // <2>
+					protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+						return ZeitaufwandLookupCall.class;
 					}
 				}
 
@@ -216,6 +229,7 @@ public class ZauberForm extends AbstractForm {
 		public class CancelButton extends AbstractCancelButton {
 
 		}
+
 	}
 
 	public void startModify() {

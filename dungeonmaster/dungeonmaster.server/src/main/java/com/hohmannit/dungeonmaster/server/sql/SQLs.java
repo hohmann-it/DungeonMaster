@@ -67,7 +67,7 @@ public interface SQLs {
 			+ "grad, " //
 			+ "fk_zauber_typ) " //
 			+ "FROM     public.zauber "//
-			+ "WHERE    zauber_id = :personId "//
+			+ "WHERE    zauber_id = :zauberId "//
 			+ "INTO     :name, "//
 			+ "         :zeitaufwand, "//
 			+ "         :zeitaufwandtyp, "//
