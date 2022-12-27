@@ -71,7 +71,7 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 		private String m_zeitaufwand;
 		private Long m_zeitaufwandtyp;
 		private String m_reichweite;
-		private String m_reichweitetyp;
+		private Long m_reichweitetyp;
 		private String m_wirkungsdauer;
 		private String m_wirkungsdauertyp;
 		private String m_beschreibung;
@@ -133,11 +133,11 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 			m_reichweite = newReichweite;
 		}
 
-		public String getReichweitetyp() {
+		public Long getReichweitetyp() {
 			return m_reichweitetyp;
 		}
 
-		public void setReichweitetyp(String newReichweitetyp) {
+		public void setReichweitetyp(Long newReichweitetyp) {
 			m_reichweitetyp = newReichweitetyp;
 		}
 

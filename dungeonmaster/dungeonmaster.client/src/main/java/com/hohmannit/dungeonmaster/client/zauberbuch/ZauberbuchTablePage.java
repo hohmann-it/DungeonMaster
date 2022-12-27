@@ -17,6 +17,7 @@ import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberbuchTablePage.Table;
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.spellbook.ZauberbuchTablePageData;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberbuchService;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.reichweite.ReichweiteLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.typ.ZaubertypLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.zeitaufwand.ZeitaufwandLookupCall;
 
@@ -205,7 +206,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(6000)
-		public class ReichweitetypColumn extends AbstractStringColumn {
+		public class ReichweitetypColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
 				return TEXTS.get("ReichweiteTyp");
@@ -214,6 +215,11 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 			@Override
 			protected int getConfiguredWidth() {
 				return 100;
+			}
+
+			@Override
+			protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+				return ReichweiteLookupCall.class;
 			}
 		}
 

@@ -28,4 +28,9 @@ public interface SQLs {
 			+ "<key>    AND zeitaufwandtyp_id = :key </key> " //
 			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
+
+	String REICHWEITE_LOOKUP = "SELECT reichweitetyp_id, typ_lang FROM public.reichweitetyp WHERE 1 = 1 "
+			+ "<key>    AND reichweitetyp_id = :key </key> " //
+			+ "<text>   AND UPPER(typ_lang) LIKE UPPER(:text||'%') </text> " //
+			+ "<all></all>";
 }
