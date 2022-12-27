@@ -36,7 +36,7 @@ IF EXISTS dungeonmaster;
     IF EXISTS dungeonmaster;
         \echo '=========Create dungeonmaster user=========';
         \echo '...';
-        CREATE USER dungeonmaster;
+        CREATE USER dungeonmaster WITH PASSWORD :'password';
         -- Create the new database
         \echo '=========Create dungeonmaster user=========';
         \echo '...';
