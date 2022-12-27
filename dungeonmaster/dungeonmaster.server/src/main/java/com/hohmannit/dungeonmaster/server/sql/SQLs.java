@@ -11,11 +11,12 @@
 package com.hohmannit.dungeonmaster.server.sql;
 
 public interface SQLs {
-	String CHARAKTERE_PAGE_SELECT = "SELECT charakter_id, name, klasse FROM charaktere";
-	String CHARAKTERE_PAGE_DATA_SELECT_INTO = " INTO :{page.charakterId}, :{page.name}, :{page.klasse}";
+	String CHARAKTERE_PAGE_SELECT = "SELECT charakter_id, klasse, name"
+			+ "	FROM public.charaktere;";
+	String CHARAKTERE_PAGE_DATA_SELECT_INTO = " INTO :{page.charakterId}, :{page.klasse}, :{page.name}";
 
-	String ZAUBERBUCH_PAGE_SELECT = "SELECT zauber_id, name, zeitaufwand, zeitaufwand_typ, "
-			+ "reichweite, reichweite_typ, wirkungsdauer, wirkungsdauer_typ, beschreibung, hoehere_grade FROM zauber;";
+	String ZAUBERBUCH_PAGE_SELECT = "SELECT zauber_id, name, zeitaufwand, fk_zeitaufwand_typ, reichweite, fk_reichweite_typ, wirkungsdauer, fk_wirkungsdauer_typ, beschreibung, hoehere_grade, grad, fk_zauber_typ"
+			+ "	FROM public.zauber;";
 
 	String ZAUBERBUCH_PAGE_DATA_SELECT_INTO = "INTO :{page.zauberId}, :{page.name}, :{page.zeitaufwand}";
 }

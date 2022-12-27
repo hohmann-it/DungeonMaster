@@ -32,7 +32,7 @@ public class PostgresSqlService extends AbstractPostgreSqlService {
 
 	@Override
 	protected String getConfiguredPassword() {
-		return "Ra9tai6fa";
+		return System.getenv("PGPASSWORD");
 	}
 }
 // end::service[]
