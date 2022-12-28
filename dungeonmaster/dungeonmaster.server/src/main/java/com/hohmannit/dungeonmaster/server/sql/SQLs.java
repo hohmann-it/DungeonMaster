@@ -54,7 +54,7 @@ public interface SQLs {
 			+ "VALUES (" //
 			+ ":name,:zeitaufwand,:zeitaufwandtyp,:reichweite,:reichweitetyp,:wirkungsdauer,:wirkungsdauertyp,:beschreibung,:hoeheregrade,:grad,:zaubertyp)";
 
-	String PERSON_SELECT = ""//
+	String ZAUBER_SELECT = ""//
 			+ "SELECT   name, "//
 			+ "zeitaufwand, " //
 			+ "fk_zeitaufwand_typ, " //

@@ -35,6 +35,7 @@ public class ZauberService implements IZauberService {
 		if (!ACCESS.check(new ReadZauberPermission())) {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
+		SQL.select(SQLs.ZAUBER_SELECT, formData);
 		return formData;
 	}
 
