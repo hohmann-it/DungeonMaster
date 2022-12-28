@@ -8,26 +8,45 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
+import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.CancelButton;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.DetailsBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.DetailsBox.BeschreibungField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.NameField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ReichweiteSequenceBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ReichweiteSequenceBox.ReichweiteField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ReichweiteSequenceBox.ReichweitetypField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.WirkungsdauerSequenceBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.WirkungsdauerSequenceBox.WirkungsdauerField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.WirkungsdauerSequenceBox.WirkungsdauertypField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZauberImageField;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandBox;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandBox.ZeitaufwandField;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandBox.ZeitaufwandtypField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZaubergradSequenceBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZaubergradSequenceBox.GradField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZaubergradSequenceBox.ZaubertypField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandSequenceBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandSequenceBox.ZeitaufwandField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandSequenceBox.ZeitaufwandtypField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.OkButton;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.TabBox;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.CreateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberService;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.UpdateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.ZauberFormData;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.grad.ZaubergradCodeType;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.reichweite.ReichweiteLookupCall;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.typ.ZaubertypLookupCall;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.wirkungsdauer.WirkungsdauerLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.zeitaufwand.ZeitaufwandLookupCall;
 
 @FormData(value = ZauberFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
@@ -72,16 +91,64 @@ public class ZauberForm extends AbstractForm {
 		return getFieldByClass(ZeitaufwandField.class);
 	}
 
-	public ZeitaufwandBox getMySequenceBox() {
-		return getFieldByClass(ZeitaufwandBox.class);
-	}
-
 	public ZeitaufwandtypField getZeitaufwandtypField() {
 		return getFieldByClass(ZeitaufwandtypField.class);
 	}
 
 	public GeneralBox getGeneralBox() {
 		return getFieldByClass(GeneralBox.class);
+	}
+
+	public GradField getGradField() {
+		return getFieldByClass(GradField.class);
+	}
+
+	public ZaubertypField getZaubertypField() {
+		return getFieldByClass(ZaubertypField.class);
+	}
+
+	public ReichweiteField getReichweiteField() {
+		return getFieldByClass(ReichweiteField.class);
+	}
+
+	public ReichweitetypField getReichweitetypField() {
+		return getFieldByClass(ReichweitetypField.class);
+	}
+
+	public WirkungsdauerField getWirkungsdauerField() {
+		return getFieldByClass(WirkungsdauerField.class);
+	}
+
+	public WirkungsdauertypField getWirkungsdauertypField() {
+		return getFieldByClass(WirkungsdauertypField.class);
+	}
+
+	public ZeitaufwandSequenceBox getMySequenceBox() {
+		return getFieldByClass(ZeitaufwandSequenceBox.class);
+	}
+
+	public ReichweiteSequenceBox getReichweiteSequenceBox() {
+		return getFieldByClass(ReichweiteSequenceBox.class);
+	}
+
+	public WirkungsdauerSequenceBox getWirkungsdauerSequenceBox() {
+		return getFieldByClass(WirkungsdauerSequenceBox.class);
+	}
+
+	public ZaubergradSequenceBox getZaubergradBox() {
+		return getFieldByClass(ZaubergradSequenceBox.class);
+	}
+
+	public DetailsBox getMyGroupBox() {
+		return getFieldByClass(DetailsBox.class);
+	}
+
+	public BeschreibungField getMyStringField() {
+		return getFieldByClass(BeschreibungField.class);
+	}
+
+	public TabBox getMyTabBox() {
+		return getFieldByClass(TabBox.class);
 	}
 
 	public NameField getNameField() {
@@ -102,19 +169,13 @@ public class ZauberForm extends AbstractForm {
 		@Order(0)
 		public class GeneralBox extends AbstractGroupBox {
 			@Override
+			protected String getConfiguredLabel() {
+				return TEXTS.get("Grundinformationen");
+			}
+
+			@Override
 			protected int getConfiguredGridColumnCount() {
 				return 3;
-			}
-
-			@Override
-			protected double getConfiguredGridWeightY() {
-				// do not allow the general box to grow or shrink vertically.
-				return 0;
-			}
-
-			@Override
-			protected boolean getConfiguredLabelVisible() {
-				return false;
 			}
 
 			@Order(1000)
@@ -136,12 +197,7 @@ public class ZauberForm extends AbstractForm {
 
 				@Override
 				protected int getConfiguredGridH() {
-					return 1;
-				}
-
-				@Override
-				protected int getConfiguredGridW() {
-					return 1;
+					return 3;
 				}
 
 				@Override
@@ -161,15 +217,55 @@ public class ZauberForm extends AbstractForm {
 				protected int getConfiguredGridW() {
 					return 2;
 				}
-
-				@Override
-				protected int getConfiguredGridH() {
-					return 1;
-				}
 			}
 
 			@Order(2500)
-			public class ZeitaufwandBox extends AbstractSequenceBox {
+			public class ZaubergradSequenceBox extends AbstractSequenceBox {
+				@Override
+				protected String getConfiguredLabel() {
+					return TEXTS.get("ZaubergradTyp");
+				}
+
+				@Order(3000)
+				public class GradField extends AbstractSmartField<Integer> {
+					@Override
+					protected String getConfiguredLabel() {
+						return TEXTS.get("Zaubergrad");
+					}
+
+					@Override
+					protected Class<? extends ICodeType<?, Integer>> getConfiguredCodeType() {
+						return ZaubergradCodeType.class;
+					}
+
+					@Override
+					protected boolean getConfiguredLabelVisible() {
+						return false;
+					}
+
+				}
+
+				@Order(4000)
+				public class ZaubertypField extends AbstractSmartField<Long> {
+					@Override
+					protected String getConfiguredLabel() {
+						return TEXTS.get("Zaubertyp");
+					}
+
+					@Override
+					protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+						return ZaubertypLookupCall.class;
+					}
+
+					@Override
+					protected boolean getConfiguredLabelVisible() {
+						return false;
+					}
+				}
+			}
+
+			@Order(5000)
+			public class ZeitaufwandSequenceBox extends AbstractSequenceBox {
 				@Override
 				protected String getConfiguredLabel() {
 					return TEXTS.get("Zeitaufwand");
@@ -180,30 +276,17 @@ public class ZauberForm extends AbstractForm {
 					return false;
 				}
 
-				@Override
-				protected boolean getConfiguredLabelVisible() {
-					return false;
-				}
-
-				@Order(3000)
-				public class ZeitaufwandField extends AbstractStringField {
+				@Order(1000)
+				public class ZeitaufwandField extends AbstractIntegerField {
 					@Override
-					protected String getConfiguredLabel() {
-						return TEXTS.get("Zeitaufwand");
+					protected boolean getConfiguredLabelVisible() {
+						return false;
 					}
 
-					@Override
-					protected int getConfiguredMaxLength() {
-						return 128;
-					}
 				}
 
-				@Order(4000)
+				@Order(2000)
 				public class ZeitaufwandtypField extends AbstractSmartField<Long> {
-					@Override
-					protected String getConfiguredLabel() {
-						return TEXTS.get("ZeitaufwandTyp");
-					}
 
 					@Override
 					protected boolean getConfiguredLabelVisible() {
@@ -215,9 +298,116 @@ public class ZauberForm extends AbstractForm {
 						return ZeitaufwandLookupCall.class;
 					}
 				}
-
 			}
 
+			@Order(8000)
+			public class ReichweiteSequenceBox extends AbstractSequenceBox {
+				@Override
+				protected String getConfiguredLabel() {
+					return TEXTS.get("Reichweite");
+				}
+
+				@Override
+				protected boolean getConfiguredAutoCheckFromTo() {
+					return false;
+				}
+
+				@Order(1000)
+				public class ReichweiteField extends AbstractIntegerField {
+					@Override
+					protected boolean getConfiguredLabelVisible() {
+						return false;
+					}
+				}
+
+				@Order(2000)
+				public class ReichweitetypField extends AbstractSmartField<Long> {
+					@Override
+					protected boolean getConfiguredLabelVisible() {
+						return false;
+					}
+
+					@Override
+					protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+						return ReichweiteLookupCall.class;
+					}
+				}
+			}
+
+			@Order(9000)
+			public class WirkungsdauerSequenceBox extends AbstractSequenceBox {
+				@Override
+				protected String getConfiguredLabel() {
+					return TEXTS.get("Wirkungsdauer");
+				}
+
+				@Override
+				protected boolean getConfiguredAutoCheckFromTo() {
+					return false;
+				}
+
+				@Order(1000)
+				public class WirkungsdauerField extends AbstractIntegerField {
+					@Override
+					protected boolean getConfiguredLabelVisible() {
+						return false;
+					}
+				}
+
+				@Order(2000)
+				public class WirkungsdauertypField extends AbstractSmartField<Long> {
+					@Override
+					protected boolean getConfiguredLabelVisible() {
+						return false;
+					}
+
+					@Override
+					protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+						return WirkungsdauerLookupCall.class;
+					}
+				}
+			}
+
+		}
+
+		@Order(1000)
+		public class DetailsBox extends AbstractGroupBox {
+			@Override
+			protected String getConfiguredLabel() {
+				return TEXTS.get("Beschreibung");
+			}
+
+			@Override
+			protected int getConfiguredGridH() {
+				return 5;
+			}
+
+			@Override
+			protected boolean getConfiguredFillVertical() {
+				return true;
+			}
+
+			@Order(1000)
+			public class BeschreibungField extends AbstractStringField {
+				@Override
+				protected boolean getConfiguredLabelVisible() {
+					return false;
+				}
+
+				@Override
+				protected int getConfiguredGridW() {
+					return 2;
+				}
+			}
+
+		}
+
+		@Order(1500)
+		public class TabBox extends AbstractTabBox {
+			@Override
+			protected String getConfiguredLabel() {
+				return TEXTS.get("KomponentenCharaktere");
+			}
 		}
 
 		@Order(2000)

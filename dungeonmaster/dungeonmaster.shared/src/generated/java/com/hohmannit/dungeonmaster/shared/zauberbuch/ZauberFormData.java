@@ -14,8 +14,36 @@ import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
 public class ZauberFormData extends AbstractFormData {
 	private static final long serialVersionUID = 1L;
 
+	public Beschreibung getBeschreibung() {
+		return getFieldByClass(Beschreibung.class);
+	}
+
+	public Grad getGrad() {
+		return getFieldByClass(Grad.class);
+	}
+
 	public Name getName() {
 		return getFieldByClass(Name.class);
+	}
+
+	public Reichweite getReichweite() {
+		return getFieldByClass(Reichweite.class);
+	}
+
+	public Reichweitetyp getReichweitetyp() {
+		return getFieldByClass(Reichweitetyp.class);
+	}
+
+	public Wirkungsdauer getWirkungsdauer() {
+		return getFieldByClass(Wirkungsdauer.class);
+	}
+
+	public Wirkungsdauertyp getWirkungsdauertyp() {
+		return getFieldByClass(Wirkungsdauertyp.class);
+	}
+
+	public Zaubertyp getZaubertyp() {
+		return getFieldByClass(Zaubertyp.class);
 	}
 
 	public Zeitaufwand getZeitaufwand() {
@@ -26,11 +54,39 @@ public class ZauberFormData extends AbstractFormData {
 		return getFieldByClass(Zeitaufwandtyp.class);
 	}
 
+	public static class Beschreibung extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Grad extends AbstractValueFieldData<Integer> {
+		private static final long serialVersionUID = 1L;
+	}
+
 	public static class Name extends AbstractValueFieldData<String> {
 		private static final long serialVersionUID = 1L;
 	}
 
-	public static class Zeitaufwand extends AbstractValueFieldData<String> {
+	public static class Reichweite extends AbstractValueFieldData<Integer> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Reichweitetyp extends AbstractValueFieldData<Long> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Wirkungsdauer extends AbstractValueFieldData<Integer> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Wirkungsdauertyp extends AbstractValueFieldData<Long> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Zaubertyp extends AbstractValueFieldData<Long> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Zeitaufwand extends AbstractValueFieldData<Integer> {
 		private static final long serialVersionUID = 1L;
 	}
 
