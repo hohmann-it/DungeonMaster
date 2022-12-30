@@ -40,7 +40,6 @@ IF EXISTS dungeonmaster;
         -- Create the new database
         \echo '=========Create dungeonmaster user=========';
         \echo '...';
-        
         CREATE DATABASE dungeonmaster WITH TEMPLATE = template0 ENCODING = 'UTF8';
         \echo '=========Change owner of dungeonmaster database to dungeonmaster user=========';
         \echo '...';
