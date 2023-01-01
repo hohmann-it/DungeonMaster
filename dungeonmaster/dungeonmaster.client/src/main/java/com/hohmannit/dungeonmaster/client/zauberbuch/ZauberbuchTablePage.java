@@ -72,7 +72,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 			@Override
 			protected void execAction() {
 				ZauberForm form = new ZauberForm();
-				form.setSpellId(getZauberIdColumn().getSelectedValue());
+				form.setZauberId(getZauberIdColumn().getSelectedValue());
 				form.addFormListener(new ZauberFormListener());
 				// start the form using its modify handler
 				form.startModify();

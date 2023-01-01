@@ -22,6 +22,7 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.CancelButton;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.DetailsBox;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.DetailsBox.BeschreibungField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.DetailsBox.HoeheregradeField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.NameField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ReichweiteSequenceBox;
@@ -60,7 +61,7 @@ public class ZauberForm extends AbstractForm {
 	}
 
 	@FormData
-	public void setSpellId(Long zauberId) {
+	public void setZauberId(Long zauberId) {
 		this.zauberId = zauberId;
 	}
 
@@ -143,12 +144,16 @@ public class ZauberForm extends AbstractForm {
 		return getFieldByClass(DetailsBox.class);
 	}
 
-	public BeschreibungField getMyStringField() {
+	public BeschreibungField getBeschreibungField() {
 		return getFieldByClass(BeschreibungField.class);
 	}
 
 	public TabBox getMyTabBox() {
 		return getFieldByClass(TabBox.class);
+	}
+
+	public HoeheregradeField getHoeheregradeField() {
+		return getFieldByClass(HoeheregradeField.class);
 	}
 
 	public NameField getNameField() {
@@ -397,6 +402,19 @@ public class ZauberForm extends AbstractForm {
 				@Override
 				protected int getConfiguredGridW() {
 					return 2;
+				}
+			}
+
+			@Order(2000)
+			public class HoeheregradeField extends AbstractStringField {
+				@Override
+				protected String getConfiguredLabel() {
+					return TEXTS.get("HoehereGrade");
+				}
+
+				@Override
+				protected int getConfiguredMaxLength() {
+					return 128;
 				}
 			}
 

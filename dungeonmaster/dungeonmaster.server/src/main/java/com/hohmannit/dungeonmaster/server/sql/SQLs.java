@@ -65,7 +65,7 @@ public interface SQLs {
 			+ "beschreibung, " //
 			+ "hoehere_grade, " //
 			+ "grad, " //
-			+ "fk_zauber_typ) " //
+			+ "fk_zauber_typ " //
 			+ "FROM     public.zauber "//
 			+ "WHERE    zauber_id = :zauberId "//
 			+ "INTO     :name, "//

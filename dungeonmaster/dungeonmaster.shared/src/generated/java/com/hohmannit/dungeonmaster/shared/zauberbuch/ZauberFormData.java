@@ -4,6 +4,7 @@ import javax.annotation.Generated;
 
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
+import org.eclipse.scout.rt.shared.data.form.properties.AbstractPropertyData;
 
 /**
  * <b>NOTE:</b><br>
@@ -20,6 +21,10 @@ public class ZauberFormData extends AbstractFormData {
 
 	public Grad getGrad() {
 		return getFieldByClass(Grad.class);
+	}
+
+	public Hoeheregrade getHoeheregrade() {
+		return getFieldByClass(Hoeheregrade.class);
 	}
 
 	public Name getName() {
@@ -42,6 +47,24 @@ public class ZauberFormData extends AbstractFormData {
 		return getFieldByClass(Wirkungsdauertyp.class);
 	}
 
+	/**
+	 * access method for property ZauberId.
+	 */
+	public Long getZauberId() {
+		return getZauberIdProperty().getValue();
+	}
+
+	/**
+	 * access method for property ZauberId.
+	 */
+	public void setZauberId(Long zauberId) {
+		getZauberIdProperty().setValue(zauberId);
+	}
+
+	public ZauberIdProperty getZauberIdProperty() {
+		return getPropertyByClass(ZauberIdProperty.class);
+	}
+
 	public Zaubertyp getZaubertyp() {
 		return getFieldByClass(Zaubertyp.class);
 	}
@@ -62,6 +85,10 @@ public class ZauberFormData extends AbstractFormData {
 		private static final long serialVersionUID = 1L;
 	}
 
+	public static class Hoeheregrade extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
 	public static class Name extends AbstractValueFieldData<String> {
 		private static final long serialVersionUID = 1L;
 	}
@@ -79,6 +106,10 @@ public class ZauberFormData extends AbstractFormData {
 	}
 
 	public static class Wirkungsdauertyp extends AbstractValueFieldData<Long> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class ZauberIdProperty extends AbstractPropertyData<Long> {
 		private static final long serialVersionUID = 1L;
 	}
 
