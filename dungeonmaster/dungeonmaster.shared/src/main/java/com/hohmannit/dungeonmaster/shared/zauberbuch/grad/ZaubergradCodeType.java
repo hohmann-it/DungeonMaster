@@ -1,7 +1,6 @@
 package com.hohmannit.dungeonmaster.shared.zauberbuch.grad;
 
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
@@ -16,7 +15,6 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 	}
 
 	@Order(1000)
-	@ClassId("8893e1e4-7b6c-46c2-8c84-42c914ec29d5")
 	public static class ZeroCode extends AbstractCode<String> {
 
 		private static final long serialVersionUID = 1L;
@@ -34,7 +32,6 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 	}
 
 	@Order(2000)
-	@ClassId("23e1540e-2914-401f-9f42-e409ac2fb605")
 	public static class OneCode extends AbstractCode<String> {
 
 		private static final long serialVersionUID = 1L;
@@ -52,7 +49,6 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 	}
 
 	@Order(3000)
-	@ClassId("23e1540e-2914-401f-9f42-e409ac2fb605")
 	public static class TwoCode extends AbstractCode<String> {
 
 		private static final long serialVersionUID = 1L;
@@ -70,7 +66,6 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 	}
 
 	@Order(4000)
-	@ClassId("23e1540e-2914-401f-9f42-e409ac2fb605")
 	public static class ThreeCode extends AbstractCode<String> {
 
 		private static final long serialVersionUID = 1L;
@@ -88,7 +83,6 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 	}
 
 	@Order(5000)
-	@ClassId("23e1540e-2914-401f-9f42-e409ac2fb605")
 	public static class FourCode extends AbstractCode<String> {
 
 		private static final long serialVersionUID = 1L;
@@ -106,7 +100,6 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 	}
 
 	@Order(6000)
-	@ClassId("23e1540e-2914-401f-9f42-e409ac2fb605")
 	public static class FiveCode extends AbstractCode<String> {
 
 		private static final long serialVersionUID = 1L;
@@ -124,7 +117,6 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 	}
 
 	@Order(7000)
-	@ClassId("23e1540e-2914-401f-9f42-e409ac2fb605")
 	public static class SixCode extends AbstractCode<String> {
 
 		private static final long serialVersionUID = 1L;
@@ -142,7 +134,6 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 	}
 
 	@Order(8000)
-	@ClassId("23e1540e-2914-401f-9f42-e409ac2fb605")
 	public static class SevenCode extends AbstractCode<String> {
 
 		private static final long serialVersionUID = 1L;
@@ -160,7 +151,6 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 	}
 
 	@Order(9000)
-	@ClassId("23e1540e-2914-401f-9f42-e409ac2fb605")
 	public static class EightCode extends AbstractCode<String> {
 
 		private static final long serialVersionUID = 1L;

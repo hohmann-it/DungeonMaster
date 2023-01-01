@@ -38,8 +38,8 @@ import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralB
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandSequenceBox;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandSequenceBox.ZeitaufwandField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandSequenceBox.ZeitaufwandtypField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.OkButton;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.TabBox;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.CreateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberService;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.UpdateZauberPermission;
@@ -124,7 +124,7 @@ public class ZauberForm extends AbstractForm {
 		return getFieldByClass(WirkungsdauertypField.class);
 	}
 
-	public ZeitaufwandSequenceBox getMySequenceBox() {
+	public ZeitaufwandSequenceBox getZeitaufwandSequenceBox() {
 		return getFieldByClass(ZeitaufwandSequenceBox.class);
 	}
 
@@ -148,8 +148,8 @@ public class ZauberForm extends AbstractForm {
 		return getFieldByClass(BeschreibungField.class);
 	}
 
-	public TabBox getMyTabBox() {
-		return getFieldByClass(TabBox.class);
+	public KomponentenBox getKomponentenBox() {
+		return getFieldByClass(KomponentenBox.class);
 	}
 
 	public HoeheregradeField getHoeheregradeField() {
@@ -395,14 +395,30 @@ public class ZauberForm extends AbstractForm {
 			@Order(1000)
 			public class BeschreibungField extends AbstractStringField {
 				@Override
-				protected boolean getConfiguredLabelVisible() {
-					return false;
+				protected String getConfiguredLabel() {
+					return TEXTS.get("Zauberbeschreibung");
 				}
 
 				@Override
 				protected int getConfiguredGridW() {
 					return 2;
 				}
+
+				@Override
+				protected int getConfiguredGridH() {
+					return 5;
+				}
+
+				@Override
+				protected boolean getConfiguredMultilineText() {
+					return true;
+				}
+
+				@Override
+				protected boolean getConfiguredWrapText() {
+					return true;
+				}
+
 			}
 
 			@Order(2000)
@@ -413,15 +429,30 @@ public class ZauberForm extends AbstractForm {
 				}
 
 				@Override
-				protected int getConfiguredMaxLength() {
-					return 128;
+				protected int getConfiguredGridW() {
+					return 2;
+				}
+
+				@Override
+				protected int getConfiguredGridH() {
+					return 5;
+				}
+
+				@Override
+				protected boolean getConfiguredMultilineText() {
+					return true;
+				}
+
+				@Override
+				protected boolean getConfiguredWrapText() {
+					return true;
 				}
 			}
 
 		}
 
 		@Order(1500)
-		public class TabBox extends AbstractTabBox {
+		public class KomponentenBox extends AbstractTabBox {
 			@Override
 			protected String getConfiguredLabel() {
 				return TEXTS.get("KomponentenCharaktere");
