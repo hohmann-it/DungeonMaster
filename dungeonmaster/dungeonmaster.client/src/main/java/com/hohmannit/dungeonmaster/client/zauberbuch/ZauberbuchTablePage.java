@@ -257,7 +257,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected int getConfiguredWidth() {
-				return 100;
+				return 118;
 			}
 
 			@Override
@@ -288,7 +288,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected int getConfiguredWidth() {
-				return 100;
+				return 248;
 			}
 
 			@Override
@@ -306,7 +306,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected int getConfiguredWidth() {
-				return 100;
+				return 117;
 			}
 		}
 
@@ -319,7 +319,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected int getConfiguredWidth() {
-				return 100;
+				return 165;
 			}
 
 			@Override
@@ -337,7 +337,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected int getConfiguredWidth() {
-				return 100;
+				return 212;
 			}
 		}
 
@@ -350,7 +350,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected int getConfiguredWidth() {
-				return 100;
+				return 112;
 			}
 		}
 
