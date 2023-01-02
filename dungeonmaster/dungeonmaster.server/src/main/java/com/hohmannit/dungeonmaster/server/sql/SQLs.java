@@ -39,11 +39,6 @@ public interface SQLs {
 			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
 
-	String KOMPONENTE_LOOKUP = "SELECT zauberkomponentetyp_id, typ_lang FROM public.zauberkomponentetyp WHERE 1 = 1 "
-			+ "<key>    AND zauberkomponentetyp_id IN ((SELECT fk_zauberkomponente_typ FROM public.zauberkomponente WHERE fk_zauber = :key)) </key> " //
-			+ "<text>   AND UPPER(typ_lang) LIKE UPPER(:text||'%') </text> " //
-			+ "<all></all>";
-
 	String ZAUBER_INSERT = "INSERT INTO public.zauber ("//
 			+ "name, " //
 			+ "zeitaufwand, " //
@@ -70,7 +65,9 @@ public interface SQLs {
 			+ "beschreibung, " //
 			+ "hoehere_grade, " //
 			+ "grad, " //
-			+ "zauber_id, " //
+			+ "(SELECT EXISTS(SELECT zauberkomponente_id FROM public.zauberkomponente where fk_zauberkomponente_typ = (SELECT zauberkomponentetyp_id FROM public.zauberkomponentetyp WHERE typ_kurz = 'V') AND fk_zauber = :zauberId)), " //
+			+ "(SELECT EXISTS(SELECT zauberkomponente_id FROM public.zauberkomponente where fk_zauberkomponente_typ = (SELECT zauberkomponentetyp_id FROM public.zauberkomponentetyp WHERE typ_kurz = 'G') AND fk_zauber = :zauberId)), " //
+			+ "(SELECT EXISTS(SELECT zauberkomponente_id FROM public.zauberkomponente where fk_zauberkomponente_typ = (SELECT zauberkomponentetyp_id FROM public.zauberkomponentetyp WHERE typ_kurz = 'M') AND fk_zauber = :zauberId)), " //
 			+ "fk_zauber_typ " //
 			+ "FROM     public.zauber "//
 			+ "WHERE    zauber_id = :zauberId "//
@@ -84,7 +81,20 @@ public interface SQLs {
 			+ "         :beschreibung, "//
 			+ "         :hoeheregrade, "//
 			+ "         :grad, "//
-			+ "         :zauberkomponenten, "//
+			+ "         :verbal, "//
+			+ "         :gestik, "//
+			+ "         :material, "//
 			+ "         :zaubertyp";
+
+	String ZAUBERMATERIAL_SELECT = "" //
+			+ "SELECT" //
+			+ "				material_id, " //
+			+ "				name " //
+			+ "FROM         public.material" //
+//			+ "LEFT JOIN    public.zaubermaterial zm " //
+//			+ "ON 		  	zm.fk_material = m.material_id " //
+//			+ "WHERE        m.material_id IN ((SELECT )) "//
+			+ "INTO         :{ZaubkomponentenTable.id}," //
+			+ "				:{ZaubkomponentenTable.name}";
 
 }

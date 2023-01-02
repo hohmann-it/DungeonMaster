@@ -1,7 +1,5 @@
 package com.hohmannit.dungeonmaster.shared.zauberbuch;
 
-import java.util.Set;
-
 import javax.annotation.Generated;
 
 import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
@@ -23,12 +21,20 @@ public class ZauberFormData extends AbstractFormData {
 		return getFieldByClass(Beschreibung.class);
 	}
 
+	public Gestik getGestik() {
+		return getFieldByClass(Gestik.class);
+	}
+
 	public Grad getGrad() {
 		return getFieldByClass(Grad.class);
 	}
 
 	public Hoeheregrade getHoeheregrade() {
 		return getFieldByClass(Hoeheregrade.class);
+	}
+
+	public Material getMaterial() {
+		return getFieldByClass(Material.class);
 	}
 
 	public Name getName() {
@@ -41,6 +47,10 @@ public class ZauberFormData extends AbstractFormData {
 
 	public Reichweitetyp getReichweitetyp() {
 		return getFieldByClass(Reichweitetyp.class);
+	}
+
+	public Verbal getVerbal() {
+		return getFieldByClass(Verbal.class);
 	}
 
 	public Wirkungsdauer getWirkungsdauer() {
@@ -69,10 +79,6 @@ public class ZauberFormData extends AbstractFormData {
 		return getPropertyByClass(ZauberIdProperty.class);
 	}
 
-	public Zauberkomponenten getZauberkomponenten() {
-		return getFieldByClass(Zauberkomponenten.class);
-	}
-
 	public Zaubertyp getZaubertyp() {
 		return getFieldByClass(Zaubertyp.class);
 	}
@@ -93,11 +99,19 @@ public class ZauberFormData extends AbstractFormData {
 		private static final long serialVersionUID = 1L;
 	}
 
+	public static class Gestik extends AbstractValueFieldData<Boolean> {
+		private static final long serialVersionUID = 1L;
+	}
+
 	public static class Grad extends AbstractValueFieldData<Integer> {
 		private static final long serialVersionUID = 1L;
 	}
 
 	public static class Hoeheregrade extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Material extends AbstractValueFieldData<Boolean> {
 		private static final long serialVersionUID = 1L;
 	}
 
@@ -113,6 +127,10 @@ public class ZauberFormData extends AbstractFormData {
 		private static final long serialVersionUID = 1L;
 	}
 
+	public static class Verbal extends AbstractValueFieldData<Boolean> {
+		private static final long serialVersionUID = 1L;
+	}
+
 	public static class Wirkungsdauer extends AbstractValueFieldData<Integer> {
 		private static final long serialVersionUID = 1L;
 	}
@@ -122,10 +140,6 @@ public class ZauberFormData extends AbstractFormData {
 	}
 
 	public static class ZauberIdProperty extends AbstractPropertyData<Long> {
-		private static final long serialVersionUID = 1L;
-	}
-
-	public static class Zauberkomponenten extends AbstractValueFieldData<Set<Long>> {
 		private static final long serialVersionUID = 1L;
 	}
 
@@ -172,6 +186,26 @@ public class ZauberFormData extends AbstractFormData {
 
 		public static class ZaubkomponentenTableRowData extends AbstractTableRowData {
 			private static final long serialVersionUID = 1L;
+			public static final String id = "id";
+			public static final String name = "name";
+			private String m_id;
+			private String m_name;
+
+			public String getId() {
+				return m_id;
+			}
+
+			public void setId(String newId) {
+				m_id = newId;
+			}
+
+			public String getName() {
+				return m_name;
+			}
+
+			public void setName(String newName) {
+				m_name = newName;
+			}
 		}
 	}
 

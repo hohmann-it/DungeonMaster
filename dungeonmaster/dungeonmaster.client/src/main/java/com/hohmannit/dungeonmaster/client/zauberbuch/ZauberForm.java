@@ -2,15 +2,16 @@ package com.hohmannit.dungeonmaster.client.zauberbuch;
 
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.IForm;
+import org.eclipse.scout.rt.client.ui.form.fields.booleanfield.AbstractBooleanField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
-import org.eclipse.scout.rt.client.ui.form.fields.listbox.AbstractListBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -44,7 +45,10 @@ import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralB
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.CharaktereBox;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.ZauberkomponentenField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox.GestikField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox.MaterialField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox.VerbalField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.ZaubkomponentenTableField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.OkButton;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.CreateZauberPermission;
@@ -52,7 +56,6 @@ import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberService;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.UpdateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.ZauberFormData;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.grad.ZaubergradCodeType;
-import com.hohmannit.dungeonmaster.shared.zauberbuch.komponente.ZauberkomponenteLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.reichweite.ReichweiteLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.typ.ZaubertypLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.wirkungsdauer.WirkungsdauerLookupCall;
@@ -176,8 +179,20 @@ public class ZauberForm extends AbstractForm {
 		return getFieldByClass(ZaubkomponentenTableField.class);
 	}
 
-	public ZauberkomponentenField getZauberkomponentenField() {
-		return getFieldByClass(ZauberkomponentenField.class);
+	public KomponentenSequenceBox getKomponentenSequenceBox() {
+		return getFieldByClass(KomponentenSequenceBox.class);
+	}
+
+	public VerbalField getVerbalField() {
+		return getFieldByClass(VerbalField.class);
+	}
+
+	public GestikField getGestikField() {
+		return getFieldByClass(GestikField.class);
+	}
+
+	public MaterialField getMaterialField() {
+		return getFieldByClass(MaterialField.class);
 	}
 
 	public NameField getNameField() {
@@ -505,27 +520,47 @@ public class ZauberForm extends AbstractForm {
 					return TEXTS.get("Zauberkomponenten");
 				}
 
-				@Order(0)
-				public class ZauberkomponentenField extends AbstractListBox<Long> {
+				@Override
+				protected int getConfiguredGridColumnCount() {
+					return 3;
+				}
+
+				@Order(-1000)
+				public class KomponentenSequenceBox extends AbstractSequenceBox {
 					@Override
-					protected String getConfiguredLabel() {
-						return TEXTS.get("Komponenten");
+					protected boolean getConfiguredLabelVisible() {
+						return false;
 					}
 
 					@Override
-					protected int getConfiguredGridW() {
-						return 2;
+					protected boolean getConfiguredAutoCheckFromTo() {
+						return false;
 					}
 
-					@Override
-					protected int getConfiguredGridH() {
-						return 3;
+					@Order(1000)
+					public class VerbalField extends AbstractBooleanField {
+						@Override
+						protected String getConfiguredLabel() {
+							return TEXTS.get("Verbal");
+						}
 					}
 
-					@Override
-					protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
-						return ZauberkomponenteLookupCall.class;
+					@Order(2000)
+					public class GestikField extends AbstractBooleanField {
+						@Override
+						protected String getConfiguredLabel() {
+							return TEXTS.get("Gestik");
+						}
 					}
+
+					@Order(3000)
+					public class MaterialField extends AbstractBooleanField {
+						@Override
+						protected String getConfiguredLabel() {
+							return TEXTS.get("Material");
+						}
+					}
+
 				}
 
 				@Order(1000)
@@ -533,7 +568,7 @@ public class ZauberForm extends AbstractForm {
 
 					@Override
 					protected int getConfiguredGridW() {
-						return 2;
+						return 3;
 					}
 
 					@Override
@@ -546,7 +581,56 @@ public class ZauberForm extends AbstractForm {
 						return 6;
 					}
 
+					@Override // <2>
+					protected Class<MaterialField> getConfiguredMasterField() {
+						return MaterialField.class;
+					}
+
+					@Override // <3>
+					protected void execChangedMasterValue(Object newMasterValue) {
+						setEnabled((Boolean) newMasterValue);
+					}
+
+					@Override
+					protected boolean getConfiguredEnabled() {
+						return false;
+					}
+
 					public class Table extends AbstractTable {
+
+						public NameColumn getNameColumn() {
+							return getColumnSet().getColumnByClass(NameColumn.class);
+						}
+
+						public idColumn getidColumn() {
+							return getColumnSet().getColumnByClass(idColumn.class);
+						}
+
+						@Order(1000)
+						public class idColumn extends AbstractStringColumn {
+							@Override
+							protected String getConfiguredHeaderText() {
+								return TEXTS.get("ID");
+							}
+
+							@Override
+							protected int getConfiguredWidth() {
+								return 100;
+							}
+						}
+
+						@Order(2000)
+						public class NameColumn extends AbstractStringColumn {
+							@Override
+							protected String getConfiguredHeaderText() {
+								return TEXTS.get("Name");
+							}
+
+							@Override
+							protected int getConfiguredWidth() {
+								return 100;
+							}
+						}
 
 					}
 
