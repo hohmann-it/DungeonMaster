@@ -213,6 +213,16 @@ public class ZauberForm extends AbstractForm {
 					return TEXTS.get("ZauberBild");
 				}
 
+				@Override // <2>
+				protected Class<NameField> getConfiguredMasterField() {
+					return NameField.class;
+				}
+
+				@Override // <3>
+				protected void execChangedMasterValue(Object newMasterValue) {
+					setImageId("zauber/" + ((String) newMasterValue) + ".png");
+				}
+
 				@Override
 				protected boolean getConfiguredAutoFit() {
 					return true;
@@ -230,8 +240,13 @@ public class ZauberForm extends AbstractForm {
 
 				@Override
 				protected String getConfiguredImageId() {
-					return "zauber/feuerball.png";
+					String imageId = super.getConfiguredImageId();
+					if (imageId == null) {
+						return "zauber/Standard.png";
+					}
+					return "zauber/" + imageId + ".png";
 				}
+
 			}
 
 			@Order(2000)

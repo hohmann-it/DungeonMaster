@@ -10,6 +10,7 @@ import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.notification.NativeNotificationDefaults;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractOutlineViewButton;
 import org.eclipse.scout.rt.client.ui.desktop.outline.IOutline;
+import org.eclipse.scout.rt.client.ui.form.AbstractFormMenu;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -26,6 +27,11 @@ import com.hohmannit.dungeonmaster.shared.Icons;
 public class Desktop extends AbstractDesktop {
 
 	public Desktop() {
+	}
+
+	@Override
+	protected boolean getConfiguredDense() {
+		return true;
 	}
 
 	@Override
@@ -131,15 +137,10 @@ public class Desktop extends AbstractDesktop {
 	}
 
 	@Order(2000)
-	public class OptionenMenu extends AbstractMenu {
+	public class OptionenMenu extends AbstractFormMenu<OptionsForm> {
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Options");
-		}
-
-		@Override
-		protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-			return CollectionUtility.hashSet();
+			return TEXTS.get("Optionen");
 		}
 
 		@Override
@@ -147,8 +148,18 @@ public class Desktop extends AbstractDesktop {
 			return Icons.Gear;
 		}
 
+		// end::DesktopInit[]
+		// end::OptionsMenu[]
 		@Override
-		protected void execAction() {
+		protected String getConfiguredKeyStroke() {
+			return IKeyStroke.F10;
+		}
+		// tag::OptionsMenu[]
+
+		// tag::DesktopInit[]
+		@Override
+		protected Class<OptionsForm> getConfiguredForm() {
+			return OptionsForm.class;
 		}
 	}
 
