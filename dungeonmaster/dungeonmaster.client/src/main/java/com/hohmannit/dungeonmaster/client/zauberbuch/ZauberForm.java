@@ -1,6 +1,7 @@
 package com.hohmannit.dungeonmaster.client.zauberbuch;
 
 import org.eclipse.scout.rt.client.dto.FormData;
+import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.IForm;
@@ -9,10 +10,12 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
+import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
+import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -39,6 +42,10 @@ import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralB
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandSequenceBox.ZeitaufwandField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.GeneralBox.ZeitaufwandSequenceBox.ZeitaufwandtypField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.CharaktereBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.ZauberkomponentenField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.ZaubkomponentenTableField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.OkButton;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.CreateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberService;
@@ -140,7 +147,7 @@ public class ZauberForm extends AbstractForm {
 		return getFieldByClass(ZaubergradSequenceBox.class);
 	}
 
-	public DetailsBox getMyGroupBox() {
+	public DetailsBox getDetailsBox() {
 		return getFieldByClass(DetailsBox.class);
 	}
 
@@ -154,6 +161,22 @@ public class ZauberForm extends AbstractForm {
 
 	public HoeheregradeField getHoeheregradeField() {
 		return getFieldByClass(HoeheregradeField.class);
+	}
+
+	public ZauberkomponentenBox getZauberkomponentenBox() {
+		return getFieldByClass(ZauberkomponentenBox.class);
+	}
+
+	public CharaktereBox getCharaktereBox() {
+		return getFieldByClass(CharaktereBox.class);
+	}
+
+	public ZaubkomponentenTableField getZaubkomponentenTableField() {
+		return getFieldByClass(ZaubkomponentenTableField.class);
+	}
+
+	public ZauberkomponentenField getZauberkomponentenField() {
+		return getFieldByClass(ZauberkomponentenField.class);
 	}
 
 	public NameField getNameField() {
@@ -384,7 +407,7 @@ public class ZauberForm extends AbstractForm {
 
 			@Override
 			protected int getConfiguredGridH() {
-				return 5;
+				return 2;
 			}
 
 			@Override
@@ -406,7 +429,7 @@ public class ZauberForm extends AbstractForm {
 
 				@Override
 				protected int getConfiguredGridH() {
-					return 5;
+					return 2;
 				}
 
 				@Override
@@ -435,7 +458,7 @@ public class ZauberForm extends AbstractForm {
 
 				@Override
 				protected int getConfiguredGridH() {
-					return 5;
+					return 2;
 				}
 
 				@Override
@@ -447,6 +470,7 @@ public class ZauberForm extends AbstractForm {
 				protected boolean getConfiguredWrapText() {
 					return true;
 				}
+
 			}
 
 		}
@@ -457,6 +481,62 @@ public class ZauberForm extends AbstractForm {
 			protected String getConfiguredLabel() {
 				return TEXTS.get("KomponentenCharaktere");
 			}
+
+			@Order(1000)
+			public class ZauberkomponentenBox extends AbstractGroupBox {
+				@Override
+				protected String getConfiguredLabel() {
+					return TEXTS.get("Zauberkomponenten");
+				}
+
+				@Order(0)
+				@FormData(sdkCommand = FormData.SdkCommand.IGNORE)
+				public class ZauberkomponentenField extends AbstractLabelField {
+					@Override
+					protected String getConfiguredLabel() {
+						return TEXTS.get("Komponenten");
+					}
+
+					@Override
+					protected int getConfiguredGridW() {
+						return 2;
+					}
+				}
+
+				@Order(1000)
+				public class ZaubkomponentenTableField extends AbstractTableField<ZaubkomponentenTableField.Table> {
+
+					@Override
+					protected int getConfiguredGridW() {
+						return 2;
+					}
+
+					@Override
+					protected String getConfiguredLabel() {
+						return TEXTS.get("Material");
+					}
+
+					@Override
+					protected int getConfiguredGridH() {
+						return 6;
+					}
+
+					public class Table extends AbstractTable {
+
+					}
+
+				}
+
+			}
+
+			@Order(2000)
+			public class CharaktereBox extends AbstractGroupBox {
+				@Override
+				protected String getConfiguredLabel() {
+					return TEXTS.get("Charaktere");
+				}
+			}
+
 		}
 
 		@Order(2000)

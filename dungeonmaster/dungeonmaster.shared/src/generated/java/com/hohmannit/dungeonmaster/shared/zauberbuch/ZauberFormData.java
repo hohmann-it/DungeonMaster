@@ -2,8 +2,10 @@ package com.hohmannit.dungeonmaster.shared.zauberbuch;
 
 import javax.annotation.Generated;
 
+import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
 import org.eclipse.scout.rt.shared.data.form.AbstractFormData;
 import org.eclipse.scout.rt.shared.data.form.fields.AbstractValueFieldData;
+import org.eclipse.scout.rt.shared.data.form.fields.tablefield.AbstractTableFieldBeanData;
 import org.eclipse.scout.rt.shared.data.form.properties.AbstractPropertyData;
 
 /**
@@ -69,6 +71,10 @@ public class ZauberFormData extends AbstractFormData {
 		return getFieldByClass(Zaubertyp.class);
 	}
 
+	public ZaubkomponentenTable getZaubkomponentenTable() {
+		return getFieldByClass(ZaubkomponentenTable.class);
+	}
+
 	public Zeitaufwand getZeitaufwand() {
 		return getFieldByClass(Zeitaufwand.class);
 	}
@@ -115,6 +121,48 @@ public class ZauberFormData extends AbstractFormData {
 
 	public static class Zaubertyp extends AbstractValueFieldData<Long> {
 		private static final long serialVersionUID = 1L;
+	}
+
+	public static class ZaubkomponentenTable extends AbstractTableFieldBeanData {
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public ZaubkomponentenTableRowData addRow() {
+			return (ZaubkomponentenTableRowData) super.addRow();
+		}
+
+		@Override
+		public ZaubkomponentenTableRowData addRow(int rowState) {
+			return (ZaubkomponentenTableRowData) super.addRow(rowState);
+		}
+
+		@Override
+		public ZaubkomponentenTableRowData createRow() {
+			return new ZaubkomponentenTableRowData();
+		}
+
+		@Override
+		public Class<? extends AbstractTableRowData> getRowType() {
+			return ZaubkomponentenTableRowData.class;
+		}
+
+		@Override
+		public ZaubkomponentenTableRowData[] getRows() {
+			return (ZaubkomponentenTableRowData[]) super.getRows();
+		}
+
+		@Override
+		public ZaubkomponentenTableRowData rowAt(int index) {
+			return (ZaubkomponentenTableRowData) super.rowAt(index);
+		}
+
+		public void setRows(ZaubkomponentenTableRowData[] rows) {
+			super.setRows(rows);
+		}
+
+		public static class ZaubkomponentenTableRowData extends AbstractTableRowData {
+			private static final long serialVersionUID = 1L;
+		}
 	}
 
 	public static class Zeitaufwand extends AbstractValueFieldData<Integer> {

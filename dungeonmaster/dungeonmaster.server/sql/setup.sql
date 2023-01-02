@@ -40,7 +40,6 @@ IF EXISTS dungeonmaster;
         -- Create the new database
         \echo '=========Create dungeonmaster user=========';
         \echo '...';
-        
         CREATE DATABASE dungeonmaster WITH TEMPLATE = template0 ENCODING = 'UTF8';
         \echo '=========Change owner of dungeonmaster database to dungeonmaster user=========';
         \echo '...';
@@ -6704,14 +6703,6 @@ IF EXISTS dungeonmaster;
                ( name
                )
                VALUES
-               ( 'winziger weißer Stoffstreifen'
-               )
-        ;
-        
-        INSERT INTO public.material
-               ( name
-               )
-               VALUES
                ( 'Fledermausfell'
                )
         ;
@@ -6752,7 +6743,7 @@ IF EXISTS dungeonmaster;
                ( name
                )
                VALUES
-               ( 'Tropfen Speiseöl'
+               ( 'Tropfen süßes Öl'
                )
         ;
         
@@ -6777,6 +6768,14 @@ IF EXISTS dungeonmaster;
                )
                VALUES
                ( 'Talg'
+               )
+        ;
+        
+        INSERT INTO public.material
+               ( name
+               )
+               VALUES
+               ( 'Eisenpulver'
                )
         ;
         
@@ -6968,14 +6967,6 @@ IF EXISTS dungeonmaster;
                ( name
                )
                VALUES
-               ( 'Glühwürmchen'
-               )
-        ;
-        
-        INSERT INTO public.material
-               ( name
-               )
-               VALUES
                ( 'Wimper, die von Gummiarabikum umschlossen ist'
                )
         ;
@@ -7021,7 +7012,8 @@ IF EXISTS dungeonmaster;
                      (
                                   zaubermaterial_id   bigint NOT NULL
                                 , fk_zauberkomponente bigint NOT NULL
-                                , ersatz              bigint NOT NULL
+                                , ersatz              bigint
+                                , ersatz2             bigint
                                 , fk_material         bigint NOT NULL
                                 , anzahl              int NOT NULL
                      )
@@ -7050,3 +7042,1338 @@ IF EXISTS dungeonmaster;
         
         \echo '=========Insert into table zaubermaterial=========';
         \echo '...';
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Beistand')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Stoffstreifen%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Dunkelheit')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Fledermausfell%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Dunkelheit')
+                                     and zkt.typ_kurz ='M'
+               )
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Stück Kohle%'
+               )
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Tropfen Pech%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Dunkelheit')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Schlangenzunge%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Einflüsterung')
+                                     and zkt.typ_kurz ='M'
+               )
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Honigwabe%'
+               )
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Tropfen süßes Öl%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Feuerball')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%winzige Kugel aus Fledermauskot%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Flammenkugel')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Talg%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Flammenkugel')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Schwefel%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Flammenkugel')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Eisenpulver%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Fliegen')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Schwungfeder%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Heiligtum')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%kleiner Silberspiegel%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Identifizieren')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Perle im Wert von mindestens 100 GM%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Identifizieren')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Eulenfeder%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Licht')
+                                     and zkt.typ_kurz ='M'
+               )
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Leuchtmoos%'
+               )
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Glühwürmchen%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Magierrüstung')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%gehärtetes Leder%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Person festhalten')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%kleines, gerades Stück Eisen%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Resistenz')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Miniaturumhang%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Schild des Glaubens')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%kleines Pergament mit heiligem Text%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Schlaf')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Prise Sand%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Schlaf')
+                                     and zkt.typ_kurz ='M'
+               )
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Grille%'
+               )
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Rosenblüten%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Schützendes Band')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Paar Platinringe im Wert von jeweils 50 GM%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Schutzgeister')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%heiliges Symbol%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Segnen')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Tropfen Weihwasser%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Spinnenklettern')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Tropfen Bitumen%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Spinnenklettern')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Spinne%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Spinnennetz')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Spinnweben%'
+               )
+             , 3
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Sprachen verstehen')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Prise Ruß%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Sprachen verstehen')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Salz%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Tanzende Lichter')
+                                     and zkt.typ_kurz ='M'
+               )
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Glühwürmchen%'
+               )
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Bergulmenholz%'
+               )
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Phosphor%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Unsichtbarkeit')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Wimper, die von Gummiarabikum umschlossen ist%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Vorahnung')
+                                     and zkt.typ_kurz ='M'
+               )
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Knochen%'
+               )
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Symbole im Wert von 25 GM%'
+               )
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%speziell gekennzeichnetes Stöckchen%'
+               )
+             , 1
+               )
+        ;
+        
+        INSERT INTO public.zaubermaterial
+               ( fk_zauberkomponente
+                    , ersatz
+                    , ersatz2
+                    , fk_material
+                    , anzahl
+               )
+               VALUES
+               (
+               (
+                          SELECT
+                                     zauberkomponente_id
+                          FROM
+                                     public.zauberkomponente zk
+                                     INNER JOIN
+                                                public.zauber zb
+                                                ON
+                                                           zb.zauber_id = zk.fk_zauber
+                                     INNER JOIN
+                                                public.zauberkomponentetyp zkt
+                                                ON
+                                                           zk.fk_zauberkomponente_typ = zkt.zauberkomponentetyp_id
+                          WHERE
+                                     zb.name       LIKE ('Wiederbeleben')
+                                     and zkt.typ_kurz ='M'
+               )
+             , NULL
+             , NULL
+             , (
+                      SELECT
+                             material_id
+                      FROM
+                             public.material
+                      WHERE
+                             name LIKE '%Diamanten im Wert von mindestens 300 GM%'
+               )
+             , 1
+               )
+        ;

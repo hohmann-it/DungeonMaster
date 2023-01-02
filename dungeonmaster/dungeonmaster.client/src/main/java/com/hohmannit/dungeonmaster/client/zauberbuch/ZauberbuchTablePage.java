@@ -8,7 +8,6 @@ import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIntegerColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
@@ -20,6 +19,7 @@ import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
+import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
@@ -27,6 +27,7 @@ import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberbuchTablePage.Table;
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.spellbook.ZauberbuchTablePageData;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberbuchService;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.grad.ZaubergradCodeType;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.reichweite.ReichweiteLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.typ.ZaubertypLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.wirkungsdauer.WirkungsdauerLookupCall;
@@ -198,7 +199,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(2500)
-		public class GradColumn extends AbstractIntegerColumn {
+		public class GradColumn extends AbstractSmartColumn<Integer> {
 			@Override
 			protected String getConfiguredHeaderText() {
 				return TEXTS.get("Zaubergrad");
@@ -207,6 +208,11 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 			@Override
 			protected int getConfiguredWidth() {
 				return 100;
+			}
+
+			@Override
+			protected Class<? extends ICodeType<?, Integer>> getConfiguredCodeType() {
+				return ZaubergradCodeType.class;
 			}
 		}
 

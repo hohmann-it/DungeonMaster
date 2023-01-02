@@ -5,20 +5,20 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 
-public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
+public class ZaubergradCodeType extends AbstractCodeType<Integer, Integer> {
 	private static final long serialVersionUID = 1L;
-	public static final String ID = null;
+	public static final Integer ID = 0;
 
 	@Override
-	public String getId() {
+	public Integer getId() {
 		return ID;
 	}
 
 	@Order(1000)
-	public static class ZeroCode extends AbstractCode<String> {
+	public static class ZeroCode extends AbstractCode<Integer> {
 
 		private static final long serialVersionUID = 1L;
-		public static final String ID = "0";
+		public static final Integer ID = 0;
 
 		@Override
 		protected String getConfiguredText() {
@@ -26,16 +26,16 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 		}
 
 		@Override
-		public String getId() {
+		public Integer getId() {
 			return ID;
 		}
 	}
 
 	@Order(2000)
-	public static class OneCode extends AbstractCode<String> {
+	public static class OneCode extends AbstractCode<Integer> {
 
 		private static final long serialVersionUID = 1L;
-		public static final String ID = "1";
+		public static final Integer ID = 1;
 
 		@Override
 		protected String getConfiguredText() {
@@ -43,16 +43,16 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 		}
 
 		@Override
-		public String getId() {
+		public Integer getId() {
 			return ID;
 		}
 	}
 
 	@Order(3000)
-	public static class TwoCode extends AbstractCode<String> {
+	public static class TwoCode extends AbstractCode<Integer> {
 
 		private static final long serialVersionUID = 1L;
-		public static final String ID = "2";
+		public static final Integer ID = 2;
 
 		@Override
 		protected String getConfiguredText() {
@@ -60,16 +60,16 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 		}
 
 		@Override
-		public String getId() {
+		public Integer getId() {
 			return ID;
 		}
 	}
 
 	@Order(4000)
-	public static class ThreeCode extends AbstractCode<String> {
+	public static class ThreeCode extends AbstractCode<Integer> {
 
 		private static final long serialVersionUID = 1L;
-		public static final String ID = "3";
+		public static final Integer ID = 3;
 
 		@Override
 		protected String getConfiguredText() {
@@ -77,16 +77,16 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 		}
 
 		@Override
-		public String getId() {
+		public Integer getId() {
 			return ID;
 		}
 	}
 
 	@Order(5000)
-	public static class FourCode extends AbstractCode<String> {
+	public static class FourCode extends AbstractCode<Integer> {
 
 		private static final long serialVersionUID = 1L;
-		public static final String ID = "4";
+		public static final Integer ID = 4;
 
 		@Override
 		protected String getConfiguredText() {
@@ -94,7 +94,7 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 		}
 
 		@Override
-		public String getId() {
+		public Integer getId() {
 			return ID;
 		}
 	}
@@ -117,10 +117,10 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 	}
 
 	@Order(7000)
-	public static class SixCode extends AbstractCode<String> {
+	public static class SixCode extends AbstractCode<Integer> {
 
 		private static final long serialVersionUID = 1L;
-		public static final String ID = "6";
+		public static final Integer ID = 6;
 
 		@Override
 		protected String getConfiguredText() {
@@ -128,16 +128,16 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 		}
 
 		@Override
-		public String getId() {
+		public Integer getId() {
 			return ID;
 		}
 	}
 
 	@Order(8000)
-	public static class SevenCode extends AbstractCode<String> {
+	public static class SevenCode extends AbstractCode<Integer> {
 
 		private static final long serialVersionUID = 1L;
-		public static final String ID = "7";
+		public static final Integer ID = 7;
 
 		@Override
 		protected String getConfiguredText() {
@@ -145,16 +145,16 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 		}
 
 		@Override
-		public String getId() {
+		public Integer getId() {
 			return ID;
 		}
 	}
 
 	@Order(9000)
-	public static class EightCode extends AbstractCode<String> {
+	public static class EightCode extends AbstractCode<Integer> {
 
 		private static final long serialVersionUID = 1L;
-		public static final String ID = "8";
+		public static final Integer ID = 8;
 
 		@Override
 		protected String getConfiguredText() {
@@ -162,7 +162,7 @@ public class ZaubergradCodeType extends AbstractCodeType<String, Integer> {
 		}
 
 		@Override
-		public String getId() {
+		public Integer getId() {
 			return ID;
 		}
 	}
