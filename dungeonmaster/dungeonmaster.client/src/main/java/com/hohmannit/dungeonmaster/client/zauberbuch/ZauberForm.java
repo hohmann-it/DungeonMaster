@@ -10,7 +10,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagefield.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
-import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
+import org.eclipse.scout.rt.client.ui.form.fields.listbox.AbstractListBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -52,6 +52,7 @@ import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberService;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.UpdateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.ZauberFormData;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.grad.ZaubergradCodeType;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.komponente.ZauberkomponenteLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.reichweite.ReichweiteLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.typ.ZaubertypLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.wirkungsdauer.WirkungsdauerLookupCall;
@@ -505,8 +506,7 @@ public class ZauberForm extends AbstractForm {
 				}
 
 				@Order(0)
-				@FormData(sdkCommand = FormData.SdkCommand.IGNORE)
-				public class ZauberkomponentenField extends AbstractLabelField {
+				public class ZauberkomponentenField extends AbstractListBox<Long> {
 					@Override
 					protected String getConfiguredLabel() {
 						return TEXTS.get("Komponenten");
@@ -515,6 +515,16 @@ public class ZauberForm extends AbstractForm {
 					@Override
 					protected int getConfiguredGridW() {
 						return 2;
+					}
+
+					@Override
+					protected int getConfiguredGridH() {
+						return 3;
+					}
+
+					@Override
+					protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+						return ZauberkomponenteLookupCall.class;
 					}
 				}
 

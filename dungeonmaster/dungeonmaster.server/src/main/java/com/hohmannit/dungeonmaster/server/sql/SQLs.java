@@ -39,6 +39,11 @@ public interface SQLs {
 			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
 
+	String KOMPONENTE_LOOKUP = "SELECT zauberkomponentetyp_id, typ_lang FROM public.zauberkomponentetyp WHERE 1 = 1 "
+			+ "<key>    AND zauberkomponentetyp_id IN ((SELECT fk_zauberkomponente_typ FROM public.zauberkomponente WHERE fk_zauber = :key)) </key> " //
+			+ "<text>   AND UPPER(typ_lang) LIKE UPPER(:text||'%') </text> " //
+			+ "<all></all>";
+
 	String ZAUBER_INSERT = "INSERT INTO public.zauber ("//
 			+ "name, " //
 			+ "zeitaufwand, " //
@@ -65,6 +70,7 @@ public interface SQLs {
 			+ "beschreibung, " //
 			+ "hoehere_grade, " //
 			+ "grad, " //
+			+ "zauber_id, " //
 			+ "fk_zauber_typ " //
 			+ "FROM     public.zauber "//
 			+ "WHERE    zauber_id = :zauberId "//
@@ -78,6 +84,7 @@ public interface SQLs {
 			+ "         :beschreibung, "//
 			+ "         :hoeheregrade, "//
 			+ "         :grad, "//
+			+ "         :zauberkomponenten, "//
 			+ "         :zaubertyp";
 
 }

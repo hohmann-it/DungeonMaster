@@ -1,5 +1,7 @@
 package com.hohmannit.dungeonmaster.shared.zauberbuch;
 
+import java.util.Set;
+
 import javax.annotation.Generated;
 
 import org.eclipse.scout.rt.shared.data.basic.table.AbstractTableRowData;
@@ -67,6 +69,10 @@ public class ZauberFormData extends AbstractFormData {
 		return getPropertyByClass(ZauberIdProperty.class);
 	}
 
+	public Zauberkomponenten getZauberkomponenten() {
+		return getFieldByClass(Zauberkomponenten.class);
+	}
+
 	public Zaubertyp getZaubertyp() {
 		return getFieldByClass(Zaubertyp.class);
 	}
@@ -116,6 +122,10 @@ public class ZauberFormData extends AbstractFormData {
 	}
 
 	public static class ZauberIdProperty extends AbstractPropertyData<Long> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Zauberkomponenten extends AbstractValueFieldData<Set<Long>> {
 		private static final long serialVersionUID = 1L;
 	}
 
