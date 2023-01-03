@@ -196,8 +196,10 @@ public class ZauberFormData extends AbstractFormData {
 			private static final long serialVersionUID = 1L;
 			public static final String id = "id";
 			public static final String name = "name";
+			public static final String ersatz = "ersatz";
 			private String m_id;
 			private Long m_name;
+			private Long m_ersatz;
 
 			public String getId() {
 				return m_id;
@@ -213,6 +215,14 @@ public class ZauberFormData extends AbstractFormData {
 
 			public void setName(Long newName) {
 				m_name = newName;
+			}
+
+			public Long getErsatz() {
+				return m_ersatz;
+			}
+
+			public void setErsatz(Long newErsatz) {
+				m_ersatz = newErsatz;
 			}
 		}
 	}

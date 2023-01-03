@@ -59,6 +59,7 @@ import com.hohmannit.dungeonmaster.shared.zauberbuch.UpdateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.ZauberFormData;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.grad.ZaubergradCodeType;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.material.MaterialLookupCall;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.material.ZaubermaterialErsatzLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.reichweite.ReichweiteLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.typ.ZaubertypLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.wirkungsdauer.WirkungsdauerLookupCall;
@@ -544,7 +545,20 @@ public class ZauberForm extends AbstractForm {
 						return false;
 					}
 
+					@Override
+					protected int getConfiguredGridW() {
+						return 4;
+					}
+
 					@Order(1000)
+					public class MaterialField extends AbstractBooleanField {
+						@Override
+						protected String getConfiguredLabel() {
+							return TEXTS.get("Material");
+						}
+					}
+
+					@Order(2000)
 					public class VerbalField extends AbstractBooleanField {
 						@Override
 						protected String getConfiguredLabel() {
@@ -552,19 +566,11 @@ public class ZauberForm extends AbstractForm {
 						}
 					}
 
-					@Order(2000)
+					@Order(3000)
 					public class GestikField extends AbstractBooleanField {
 						@Override
 						protected String getConfiguredLabel() {
 							return TEXTS.get("Gestik");
-						}
-					}
-
-					@Order(3000)
-					public class MaterialField extends AbstractBooleanField {
-						@Override
-						protected String getConfiguredLabel() {
-							return TEXTS.get("Material");
 						}
 					}
 
@@ -613,6 +619,10 @@ public class ZauberForm extends AbstractForm {
 
 					public class Table extends AbstractTable {
 
+						public ErsatzColumn getErsatzColumn() {
+							return getColumnSet().getColumnByClass(ErsatzColumn.class);
+						}
+
 						public NameColumn getNameColumn() {
 							return getColumnSet().getColumnByClass(NameColumn.class);
 						}
@@ -629,8 +639,13 @@ public class ZauberForm extends AbstractForm {
 							}
 
 							@Override
-							protected int getConfiguredWidth() {
-								return 100;
+							protected boolean getConfiguredPrimaryKey() {
+								return true;
+							}
+
+							@Override
+							protected boolean getConfiguredDisplayable() {
+								return false;
 							}
 						}
 
@@ -649,6 +664,24 @@ public class ZauberForm extends AbstractForm {
 							@Override
 							protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
 								return MaterialLookupCall.class;
+							}
+						}
+
+						@Order(3000)
+						public class ErsatzColumn extends AbstractSmartColumn<Long> {
+							@Override
+							protected String getConfiguredHeaderText() {
+								return TEXTS.get("Ersatzmaterial");
+							}
+
+							@Override
+							protected int getConfiguredWidth() {
+								return 100;
+							}
+
+							@Override
+							protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+								return ZaubermaterialErsatzLookupCall.class;
 							}
 						}
 

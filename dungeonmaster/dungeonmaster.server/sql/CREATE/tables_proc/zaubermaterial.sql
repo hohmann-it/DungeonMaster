@@ -87,3 +87,50 @@ PROCEDURE insert_zaubermaterial
 (
 text, text,numeric, numeric, boolean
 ) OWNER TO dungeonmaster;
+CREATE PROCEDURE dd.update_zaubermaterial_ersatz(IN in_zaubername text, IN in_gegenstand text, IN in_ersatz_gegenstand text)
+LANGUAGE 'sql'
+AS $BODY$
+UPDATE
+    dd.zaubermaterial
+SET fk_ersatz=
+    (
+        SELECT
+            zaubermaterial_id
+        FROM
+            dd.zaubermaterial
+        WHERE
+            fk_gegenstand =
+            (
+                SELECT
+                    gegenstand_id
+                from
+                    dd.gegenstand
+                WHERE
+                    name =in_ersatz_gegenstand
+            )
+    )
+WHERE
+    fk_gegenstand =
+    (
+        SELECT
+            gegenstand_id
+        from
+            dd.gegenstand
+        WHERE
+            name =in_gegenstand
+    )
+    AND fk_zauber=
+    (
+        SELECT
+            zauber_id
+        FROM
+            dd.zauber
+        WHERE
+            name = in_zaubername
+    )
+	AND fk_ersatz IS NULL
+;
+
+$BODY$;
+ALTER PROCEDURE dd.update_zaubermaterial_ersatz(text, text, text)
+OWNER TO dungeonmaster;
