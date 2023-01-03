@@ -627,6 +627,14 @@ public class ZauberForm extends AbstractForm {
 							return getColumnSet().getColumnByClass(WertColumn.class);
 						}
 
+						public AnzahlColumn getAnzahlColumn() {
+							return getColumnSet().getColumnByClass(AnzahlColumn.class);
+						}
+
+						public GewichtColumn getGewichtColumn() {
+							return getColumnSet().getColumnByClass(GewichtColumn.class);
+						}
+
 						public NameColumn getNameColumn() {
 							return getColumnSet().getColumnByClass(NameColumn.class);
 						}
@@ -653,6 +661,19 @@ public class ZauberForm extends AbstractForm {
 							}
 						}
 
+						@Order(1500)
+						public class AnzahlColumn extends AbstractStringColumn {
+							@Override
+							protected String getConfiguredHeaderText() {
+								return TEXTS.get("Anzahl");
+							}
+
+							@Override
+							protected int getConfiguredWidth() {
+								return 100;
+							}
+						}
+
 						@Order(2000)
 						public class NameColumn extends AbstractSmartColumn<Long> {
 							@Override
@@ -676,6 +697,19 @@ public class ZauberForm extends AbstractForm {
 							@Override
 							protected String getConfiguredHeaderText() {
 								return TEXTS.get("Wert");
+							}
+
+							@Override
+							protected int getConfiguredWidth() {
+								return 100;
+							}
+						}
+
+						@Order(3500)
+						public class GewichtColumn extends AbstractStringColumn {
+							@Override
+							protected String getConfiguredHeaderText() {
+								return TEXTS.get("Gewicht");
 							}
 
 							@Override
@@ -767,6 +801,7 @@ public class ZauberForm extends AbstractForm {
 			importFormData(formData);
 
 			setEnabledPermission(new UpdateZauberPermission());
+			getForm().setSubTitle(calculateSubTitle()); // <5>
 		}
 
 		@Override
@@ -776,5 +811,9 @@ public class ZauberForm extends AbstractForm {
 			formData = BEANS.get(IZauberService.class).store(formData);
 			importFormData(formData);
 		}
+	}
+
+	protected String calculateSubTitle() {
+		return getNameField().getValue();
 	}
 }

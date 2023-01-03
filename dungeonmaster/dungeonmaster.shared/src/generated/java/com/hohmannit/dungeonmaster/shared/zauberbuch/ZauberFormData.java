@@ -195,12 +195,16 @@ public class ZauberFormData extends AbstractFormData {
 		public static class ZaubkomponentenTableRowData extends AbstractTableRowData {
 			private static final long serialVersionUID = 1L;
 			public static final String id = "id";
+			public static final String anzahl = "anzahl";
 			public static final String name = "name";
 			public static final String wert = "wert";
+			public static final String gewicht = "gewicht";
 			public static final String ersatz = "ersatz";
 			private String m_id;
+			private String m_anzahl;
 			private Long m_name;
 			private String m_wert;
+			private String m_gewicht;
 			private Long m_ersatz;
 
 			public String getId() {
@@ -209,6 +213,14 @@ public class ZauberFormData extends AbstractFormData {
 
 			public void setId(String newId) {
 				m_id = newId;
+			}
+
+			public String getAnzahl() {
+				return m_anzahl;
+			}
+
+			public void setAnzahl(String newAnzahl) {
+				m_anzahl = newAnzahl;
 			}
 
 			public Long getName() {
@@ -225,6 +237,14 @@ public class ZauberFormData extends AbstractFormData {
 
 			public void setWert(String newWert) {
 				m_wert = newWert;
+			}
+
+			public String getGewicht() {
+				return m_gewicht;
+			}
+
+			public void setGewicht(String newGewicht) {
+				m_gewicht = newGewicht;
 			}
 
 			public Long getErsatz() {
