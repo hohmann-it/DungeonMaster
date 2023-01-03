@@ -98,7 +98,7 @@ CALL dd.insert_zauber('Fliegen',1,'Aktion',0,'Berührung',10,'Minuten, Konzentra
 'Hervorrufungszauber', TRUE
 , TRUE
 , TRUE, 3 );
-CALL dd.insert_zauber('Gebet der Heilung',10,'Aktion',9,'m',0,'Unmittelbar',
+CALL dd.insert_zauber('Gebet der Heilung',10,'Minuten',9,'m',0,'Unmittelbar',
 'Bis zu sechs Kreaturen deiner Wahl in Reichweite, die du sehen kannst, erhalten jeweils 2W8 + deinen Zaubermodifikator Trefferpunkte zurück. Der Zauber hat keine Auswirkungen auf Untote oder Konstrukte.',
 'Wenn du diesen Zauber mit einem Zau- berplatz des 3. Grades oder höher wirkst, dann steigt die Heilung für jeden Zauberplatz-Grad über dem zweiten um 1W8.',
 'Hervorrufungszauber', TRUE

@@ -623,6 +623,10 @@ public class ZauberForm extends AbstractForm {
 							return getColumnSet().getColumnByClass(ErsatzColumn.class);
 						}
 
+						public WertColumn getWertColumn() {
+							return getColumnSet().getColumnByClass(WertColumn.class);
+						}
+
 						public NameColumn getNameColumn() {
 							return getColumnSet().getColumnByClass(NameColumn.class);
 						}
@@ -668,6 +672,19 @@ public class ZauberForm extends AbstractForm {
 						}
 
 						@Order(3000)
+						public class WertColumn extends AbstractStringColumn {
+							@Override
+							protected String getConfiguredHeaderText() {
+								return TEXTS.get("Wert");
+							}
+
+							@Override
+							protected int getConfiguredWidth() {
+								return 100;
+							}
+						}
+
+						@Order(4000)
 						public class ErsatzColumn extends AbstractSmartColumn<Long> {
 							@Override
 							protected String getConfiguredHeaderText() {

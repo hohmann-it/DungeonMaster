@@ -18,7 +18,7 @@ import com.hohmannit.dungeonmaster.shared.character.ICharakterService;
 public class CharakterTablePage extends AbstractPageWithTable<Table> {
 	@Override
 	protected boolean getConfiguredLeaf() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -28,7 +28,12 @@ public class CharakterTablePage extends AbstractPageWithTable<Table> {
 
 	@Override
 	protected String getConfiguredIconId() {
-		return Icons.PersonSolid;
+		return Icons.DwarfHelmet;
+	}
+
+	@Override
+	protected String getConfiguredOverviewIconId() {
+		return Icons.DwarfHelmet;
 	}
 
 	@Override

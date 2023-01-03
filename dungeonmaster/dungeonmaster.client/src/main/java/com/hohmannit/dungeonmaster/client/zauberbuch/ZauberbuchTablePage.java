@@ -51,6 +51,11 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 	}
 
 	@Override
+	protected String getConfiguredOverviewIconId() {
+		return Icons.Spellbook;
+	}
+
+	@Override
 	protected String getConfiguredTitle() {
 		return TEXTS.get("Spellbook");
 	}

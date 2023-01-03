@@ -11,3 +11,17 @@
 .font-awesomeIcons {
   font-family: awesomeIcons, @font-default-family;
 }
+
+@font-face {
+  font-family: icoMoon;
+  font-weight: normal;
+  src: url('fonts/icoMoon.woff') format('woff');
+}
+
+/* Overrides definitions in fonts.css > .font-icon
+* Use iconId 'font:icoMoon [character]' in Scout model.
+* See icons.js and usage of this class to see how iconId is used.
+*/
+.font-icoMoon {
+  font-family: icoMoon, @font-default-family;
+}
