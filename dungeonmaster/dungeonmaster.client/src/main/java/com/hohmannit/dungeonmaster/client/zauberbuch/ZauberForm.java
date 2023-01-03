@@ -58,6 +58,7 @@ import com.hohmannit.dungeonmaster.shared.zauberbuch.IZauberService;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.UpdateZauberPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.ZauberFormData;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.grad.ZaubergradCodeType;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.material.MaterialLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.reichweite.ReichweiteLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.typ.ZaubertypLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.wirkungsdauer.WirkungsdauerLookupCall;
@@ -643,6 +644,11 @@ public class ZauberForm extends AbstractForm {
 							@Override
 							protected int getConfiguredWidth() {
 								return 100;
+							}
+
+							@Override
+							protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+								return MaterialLookupCall.class;
 							}
 						}
 

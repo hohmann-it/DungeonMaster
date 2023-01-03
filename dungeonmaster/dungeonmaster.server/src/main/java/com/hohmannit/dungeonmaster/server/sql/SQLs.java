@@ -39,6 +39,11 @@ public interface SQLs {
 			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
 
+	String ZAUBERMATERIAL_LOOKUP = "SELECT gegenstand_id, name FROM dd.gegenstand WHERE 1 = 1 "
+			+ "<key>    AND gegenstand_id = :key </key> " //
+			+ "<text>   AND UPPER(name) LIKE UPPER(:text||'%') </text> " //
+			+ "<all></all>";
+
 	String ZAUBER_INSERT = "INSERT INTO dd.zauber ("//
 			+ "name, " //
 			+ "zeitaufwand, " //
@@ -92,8 +97,8 @@ public interface SQLs {
 	String ZAUBERMATERIAL_SELECT = "" //
 			+ "SELECT" //
 			+ "				zaubermaterial_id, " //
-			+ "				name " //
-			+ "FROM         dd.zaubermaterial" //
+			+ "				fk_gegenstand " //
+			+ "FROM         dd.zaubermaterial WHERE fk_zauber = :zauberId" //
 			+ "INTO         :{ZaubkomponentenTable.id}," //
 			+ "				:{ZaubkomponentenTable.name}";
 
