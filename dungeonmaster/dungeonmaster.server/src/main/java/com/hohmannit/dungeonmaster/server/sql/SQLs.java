@@ -11,35 +11,35 @@
 package com.hohmannit.dungeonmaster.server.sql;
 
 public interface SQLs {
-	String CHARAKTERE_PAGE_SELECT = "SELECT charakter_id, klasse, name" + "	FROM public.charaktere;";
+	String CHARAKTERE_PAGE_SELECT = "SELECT charakter_id, klasse, name" + "	FROM od.charaktere;";
 	String CHARAKTERE_PAGE_DATA_SELECT_INTO = " INTO :{page.charakterId}, :{page.klasse}, :{page.name}";
 
-	String ZAUBERBUCH_PAGE_SELECT = "SELECT zauber_id, name, zeitaufwand, fk_zeitaufwand_typ, reichweite, fk_reichweite_typ, wirkungsdauer, fk_wirkungsdauer_typ, beschreibung, hoehere_grade, grad, fk_zauber_typ"
-			+ "	FROM public.zauber;";
+	String ZAUBER_PAGE_SELECT = "SELECT zauber_id, name, zeitaufwand, fk_zeitaufwand_typ, reichweite, fk_reichweite_typ, wirkungsdauer, fk_wirkungsdauer_typ, beschreibung, hoehere_grade, grad, fk_zauber_typ"
+			+ "	FROM dd.zauber;";
 
-	String ZAUBERBUCH_PAGE_DATA_SELECT_INTO = " INTO :{page.zauberId}, :{page.name}, :{page.zeitaufwand}, :{page.zeitaufwandtyp}, :{page.reichweite}, :{page.reichweitetyp}, :{page.wirkungsdauer}, :{page.wirkungsdauertyp}, :{page.beschreibung}, :{page.hoehereGrade}, :{page.grad}, :{page.zaubertyp}";
+	String ZAUBER_PAGE_DATA_SELECT_INTO = " INTO :{page.zauberId}, :{page.name}, :{page.zeitaufwand}, :{page.zeitaufwandtyp}, :{page.reichweite}, :{page.reichweitetyp}, :{page.wirkungsdauer}, :{page.wirkungsdauertyp}, :{page.beschreibung}, :{page.hoehereGrade}, :{page.grad}, :{page.zaubertyp}";
 
-	String ZAUBERTYP_LOOKUP = "SELECT zaubertyp_id, typ FROM public.zaubertyp WHERE 1 = 1 "
-			+ "<key>    AND zaubertyp_id = :key </key> " //
-			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
-			+ "<all></all>";
-
-	String ZEITAUFWAND_LOOKUP = "SELECT zeitaufwandtyp_id, typ FROM public.zeitaufwandtyp WHERE 1 = 1 "
+	String ZEITAUFWANDTYP_LOOKUP = "SELECT zeitaufwandtyp_id, typ FROM dd.zeitaufwandtyp WHERE 1 = 1 "
 			+ "<key>    AND zeitaufwandtyp_id = :key </key> " //
 			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
 
-	String REICHWEITE_LOOKUP = "SELECT reichweitetyp_id, typ_lang FROM public.reichweitetyp WHERE 1 = 1 "
+	String REICHWEITETYP_LOOKUP = "SELECT reichweitetyp_id, typ_lang FROM dd.reichweitetyp WHERE 1 = 1 "
 			+ "<key>    AND reichweitetyp_id = :key </key> " //
 			+ "<text>   AND UPPER(typ_lang) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
 
-	String WIRKUNGSDAUER_LOOKUP = "SELECT wirkungsdauertyp_id, typ FROM public.wirkungsdauertyp WHERE 1 = 1 "
+	String WIRKUNGSDAUERTYP_LOOKUP = "SELECT wirkungsdauertyp_id, typ FROM dd.wirkungsdauertyp WHERE 1 = 1 "
 			+ "<key>    AND wirkungsdauertyp_id = :key </key> " //
 			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
 
-	String ZAUBER_INSERT = "INSERT INTO public.zauber ("//
+	String ZAUBERTYP_LOOKUP = "SELECT zaubertyp_id, typ FROM dd.zaubertyp WHERE 1 = 1 "
+			+ "<key>    AND zaubertyp_id = :key </key> " //
+			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
+			+ "<all></all>";
+
+	String ZAUBER_INSERT = "INSERT INTO dd.zauber ("//
 			+ "name, " //
 			+ "zeitaufwand, " //
 			+ "fk_zeitaufwand_typ, " //
@@ -55,21 +55,23 @@ public interface SQLs {
 			+ ":name,:zeitaufwand,:zeitaufwandtyp,:reichweite,:reichweitetyp,:wirkungsdauer,:wirkungsdauertyp,:beschreibung,:hoeheregrade,:grad,:zaubertyp)";
 
 	String ZAUBER_SELECT = ""//
-			+ "SELECT   name, "//
-			+ "zeitaufwand, " //
-			+ "fk_zeitaufwand_typ, " //
-			+ "reichweite, " //
-			+ "fk_reichweite_typ, " //
-			+ "wirkungsdauer, " //
-			+ "fk_wirkungsdauer_typ, " //
-			+ "beschreibung, " //
-			+ "hoehere_grade, " //
-			+ "grad, " //
-			+ "(SELECT EXISTS(SELECT zauberkomponente_id FROM public.zauberkomponente where fk_zauberkomponente_typ = (SELECT zauberkomponentetyp_id FROM public.zauberkomponentetyp WHERE typ_kurz = 'V') AND fk_zauber = :zauberId)), " //
-			+ "(SELECT EXISTS(SELECT zauberkomponente_id FROM public.zauberkomponente where fk_zauberkomponente_typ = (SELECT zauberkomponentetyp_id FROM public.zauberkomponentetyp WHERE typ_kurz = 'G') AND fk_zauber = :zauberId)), " //
-			+ "(SELECT EXISTS(SELECT zauberkomponente_id FROM public.zauberkomponente where fk_zauberkomponente_typ = (SELECT zauberkomponentetyp_id FROM public.zauberkomponentetyp WHERE typ_kurz = 'M') AND fk_zauber = :zauberId)), " //
-			+ "fk_zauber_typ " //
-			+ "FROM     public.zauber "//
+			+ "SELECT " //
+			+ "name, "//
+			+ "zeitaufwand, "//
+			+ "fk_zeitaufwand_typ, "//
+			+ "reichweite, "//
+			+ "fk_reichweite_typ, "//
+			+ "wirkungsdauer, "//
+			+ "fk_wirkungsdauer_typ, "//
+			+ "beschreibung, "//
+			+ "hoehere_grade, "//
+			+ "grad, "//
+			+ "fk_zauber_typ, "//
+			+ "verbal, "//
+			+ "gestik, "//
+			+ "material, "//
+			+ "ritual"//
+			+ "	FROM dd.zauber "//
 			+ "WHERE    zauber_id = :zauberId "//
 			+ "INTO     :name, "//
 			+ "         :zeitaufwand, "//
@@ -81,16 +83,17 @@ public interface SQLs {
 			+ "         :beschreibung, "//
 			+ "         :hoeheregrade, "//
 			+ "         :grad, "//
+			+ "         :zaubertyp, "//
 			+ "         :verbal, "//
 			+ "         :gestik, "//
 			+ "         :material, "//
-			+ "         :zaubertyp";
+			+ "         :ritual";
 
-	String MATERIAL_FÜR_ZAUBER_SELECT = "" //
+	String ZAUBERMATERIAL_SELECT = "" //
 			+ "SELECT" //
-			+ "				material_id, " //
+			+ "				zaubermaterial_id, " //
 			+ "				name " //
-			+ "FROM         public.material" //
+			+ "FROM         dd.zaubermaterial" //
 			+ "INTO         :{ZaubkomponentenTable.id}," //
 			+ "				:{ZaubkomponentenTable.name}";
 

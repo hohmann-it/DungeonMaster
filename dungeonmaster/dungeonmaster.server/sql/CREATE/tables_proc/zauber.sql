@@ -3,7 +3,7 @@ SET SCHEMA 'dd';
 CREATE TABLE zauber
     (
         zauber_id            bigint NOT NULL
-      , name                 text NOT NULL
+      , name                 text UNIQUE NOT NULL
       , zeitaufwand          integer NOT NULL
       , fk_zeitaufwand_typ   bigint NOT NULL
       , reichweite           integer NOT NULL
@@ -17,7 +17,8 @@ CREATE TABLE zauber
       , verbal               boolean NOT NULL
       , gestik               boolean NOT NULL
       , material             boolean NOT NULL
-    )
+      , ritual               boolean NOT NULL DEFAULT FALSE
+     )
 ;
 
 ALTER TABLE zauber OWNER TO dungeonmaster
@@ -61,7 +62,8 @@ IN in_zaubertyp          text,
 IN in_verbal             boolean,
 IN in_gestik             boolean,
 IN in_material           boolean,
-IN in_grad               integer)
+IN in_grad               integer,
+IN in_ritual             boolean DEFAULT FALSE)
 LANGUAGE 'sql'
 AS $BODY$
 INSERT INTO dd.zauber
@@ -79,6 +81,7 @@ INSERT INTO dd.zauber
       , verbal
       , gestik
       , material
+      , ritual
     )
 SELECT
     in_name
@@ -123,8 +126,9 @@ SELECT
   , in_verbal
   , in_gestik
   , in_material
+  , in_ritual
 ;
 
 $BODY$;
-ALTER PROCEDURE dd.insert_zauber(text, integer, text, integer, text, integer, text, text, text, text, boolean, boolean, boolean, integer)
+ALTER PROCEDURE dd.insert_zauber(text, integer, text, integer, text, integer, text, text, text, text, boolean, boolean, boolean, integer, boolean)
 OWNER TO dungeonmaster;

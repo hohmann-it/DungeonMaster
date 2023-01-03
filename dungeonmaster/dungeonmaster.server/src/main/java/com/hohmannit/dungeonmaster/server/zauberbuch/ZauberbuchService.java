@@ -13,7 +13,7 @@ public class ZauberbuchService implements IZauberbuchService {
 	public ZauberbuchTablePageData getZauberbuchTableData(SearchFilter filter) {
 		ZauberbuchTablePageData pageData = new ZauberbuchTablePageData();
 
-		String sql = SQLs.ZAUBERBUCH_PAGE_SELECT + SQLs.ZAUBERBUCH_PAGE_DATA_SELECT_INTO;
+		String sql = SQLs.ZAUBER_PAGE_SELECT + SQLs.ZAUBER_PAGE_DATA_SELECT_INTO;
 		SQL.selectInto(sql, new NVPair("page", pageData));
 
 		return pageData;

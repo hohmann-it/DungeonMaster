@@ -2,6 +2,7 @@ package com.hohmannit.dungeonmaster.client.zauberbuch;
 
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -48,6 +49,7 @@ import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.Komponen
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox.GestikField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox.MaterialField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox.RitualField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox.VerbalField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.KomponentenBox.ZauberkomponentenBox.ZaubkomponentenTableField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm.MainBox.OkButton;
@@ -193,6 +195,10 @@ public class ZauberForm extends AbstractForm {
 
 	public MaterialField getMaterialField() {
 		return getFieldByClass(MaterialField.class);
+	}
+
+	public RitualField getRitualField() {
+		return getFieldByClass(RitualField.class);
 	}
 
 	public NameField getNameField() {
@@ -522,7 +528,7 @@ public class ZauberForm extends AbstractForm {
 
 				@Override
 				protected int getConfiguredGridColumnCount() {
-					return 3;
+					return 4;
 				}
 
 				@Order(-1000)
@@ -561,6 +567,14 @@ public class ZauberForm extends AbstractForm {
 						}
 					}
 
+					@Order(4000)
+					public class RitualField extends AbstractBooleanField {
+						@Override
+						protected String getConfiguredLabel() {
+							return TEXTS.get("Ritual");
+						}
+					}
+
 				}
 
 				@Order(1000)
@@ -568,7 +582,7 @@ public class ZauberForm extends AbstractForm {
 
 					@Override
 					protected int getConfiguredGridW() {
-						return 3;
+						return 4;
 					}
 
 					@Override
@@ -620,7 +634,7 @@ public class ZauberForm extends AbstractForm {
 						}
 
 						@Order(2000)
-						public class NameColumn extends AbstractStringColumn {
+						public class NameColumn extends AbstractSmartColumn<Long> {
 							@Override
 							protected String getConfiguredHeaderText() {
 								return TEXTS.get("Name");

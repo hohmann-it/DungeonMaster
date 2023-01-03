@@ -8,6 +8,6 @@ import com.hohmannit.dungeonmaster.shared.zauberbuch.wirkungsdauer.IWirkungsdaue
 public class WirkungsdauerLookupService extends AbstractSqlLookupService<Long> implements IWirkungsdauerLookupService {
 	@Override
 	protected String getConfiguredSqlSelect() {
-		return SQLs.WIRKUNGSDAUER_LOOKUP;
+		return SQLs.WIRKUNGSDAUERTYP_LOOKUP;
 	}
 }

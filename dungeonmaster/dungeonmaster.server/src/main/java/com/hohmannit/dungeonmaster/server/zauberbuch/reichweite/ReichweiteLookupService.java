@@ -8,6 +8,6 @@ import com.hohmannit.dungeonmaster.shared.zauberbuch.reichweite.IReichweiteLooku
 public class ReichweiteLookupService extends AbstractSqlLookupService<Long> implements IReichweiteLookupService {
 	@Override
 	protected String getConfiguredSqlSelect() {
-		return SQLs.REICHWEITE_LOOKUP;
+		return SQLs.REICHWEITETYP_LOOKUP;
 	}
 }

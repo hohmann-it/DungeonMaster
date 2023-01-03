@@ -8,6 +8,6 @@ import com.hohmannit.dungeonmaster.shared.zauberbuch.zeitaufwand.IZeitaufwandLoo
 public class ZeitaufwandLookupService extends AbstractSqlLookupService<Long> implements IZeitaufwandLookupService {
 	@Override
 	protected String getConfiguredSqlSelect() {
-		return SQLs.ZEITAUFWAND_LOOKUP;
+		return SQLs.ZEITAUFWANDTYP_LOOKUP;
 	}
 }

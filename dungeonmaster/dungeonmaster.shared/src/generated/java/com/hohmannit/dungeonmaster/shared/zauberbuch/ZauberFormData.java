@@ -49,6 +49,10 @@ public class ZauberFormData extends AbstractFormData {
 		return getFieldByClass(Reichweitetyp.class);
 	}
 
+	public Ritual getRitual() {
+		return getFieldByClass(Ritual.class);
+	}
+
 	public Verbal getVerbal() {
 		return getFieldByClass(Verbal.class);
 	}
@@ -127,6 +131,10 @@ public class ZauberFormData extends AbstractFormData {
 		private static final long serialVersionUID = 1L;
 	}
 
+	public static class Ritual extends AbstractValueFieldData<Boolean> {
+		private static final long serialVersionUID = 1L;
+	}
+
 	public static class Verbal extends AbstractValueFieldData<Boolean> {
 		private static final long serialVersionUID = 1L;
 	}
@@ -189,7 +197,7 @@ public class ZauberFormData extends AbstractFormData {
 			public static final String id = "id";
 			public static final String name = "name";
 			private String m_id;
-			private String m_name;
+			private Long m_name;
 
 			public String getId() {
 				return m_id;
@@ -199,11 +207,11 @@ public class ZauberFormData extends AbstractFormData {
 				m_id = newId;
 			}
 
-			public String getName() {
+			public Long getName() {
 				return m_name;
 			}
 
-			public void setName(String newName) {
+			public void setName(Long newName) {
 				m_name = newName;
 			}
 		}
