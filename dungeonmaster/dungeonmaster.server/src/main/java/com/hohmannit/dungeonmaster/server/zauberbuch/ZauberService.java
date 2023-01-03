@@ -36,7 +36,7 @@ public class ZauberService implements IZauberService {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
 		SQL.select(SQLs.ZAUBER_SELECT, formData);
-		SQL.select(SQLs.ZAUBERMATERIAL_SELECT, formData);
+		SQL.select(SQLs.MATERIAL_FÜR_ZAUBER_SELECT, formData);
 		return formData;
 	}
 

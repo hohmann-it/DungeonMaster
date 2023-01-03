@@ -86,14 +86,11 @@ public interface SQLs {
 			+ "         :material, "//
 			+ "         :zaubertyp";
 
-	String ZAUBERMATERIAL_SELECT = "" //
+	String MATERIAL_FÜR_ZAUBER_SELECT = "" //
 			+ "SELECT" //
 			+ "				material_id, " //
 			+ "				name " //
 			+ "FROM         public.material" //
-//			+ "LEFT JOIN    public.zaubermaterial zm " //
-//			+ "ON 		  	zm.fk_material = m.material_id " //
-//			+ "WHERE        m.material_id IN ((SELECT )) "//
 			+ "INTO         :{ZaubkomponentenTable.id}," //
 			+ "				:{ZaubkomponentenTable.name}";
 
