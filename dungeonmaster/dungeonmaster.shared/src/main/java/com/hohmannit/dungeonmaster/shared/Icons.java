@@ -20,4 +20,6 @@ public class Icons extends AbstractIcons {
 	public static final String Rank3 = "font:icoMoon \uea08";
 	public static final String Spell = "font:icoMoon \uf2ef";
 	public static final String SpellCategory = "font:icoMoon \ue979";
+	public static final String SpellDistance = "font:icoMoon \uf4a9";
+	public static final String SpellTime = "font:icoMoon \ueead";
 }

@@ -23,10 +23,11 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZaubertypTablePage.Table;
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZaubertypService;
-import com.hohmannit.dungeonmaster.shared.zauberbuch.ZaubertypTablePageData;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.IZeitaufwandtypService;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandtypTablePageData;
 
-@Data(ZaubertypTablePageData.class)
-public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
+@Data(ZeitaufwandtypTablePageData.class)
+public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 	@Override
 	protected boolean getConfiguredLeaf() {
 		return true;
@@ -34,22 +35,22 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 
 	@Override
 	protected void execLoadData(SearchFilter filter) {
-		importPageData(BEANS.get(IZaubertypService.class).getZaubertypTableData(filter));
+		importPageData(BEANS.get(IZeitaufwandtypService.class).getZeitaufwandtypTableData(filter));
 	}
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Zaubertypen");
+		return TEXTS.get("Zeitaufwandtypen");
 	}
 
 	@Override
 	protected String getConfiguredIconId() {
-		return Icons.SpellCategory;
+		return Icons.SpellTime;
 	}
 
 	@Override
 	protected String getConfiguredOverviewIconId() {
-		return Icons.SpellCategory;
+		return Icons.SpellTime;
 	}
 
 	public class Table extends AbstractTable {

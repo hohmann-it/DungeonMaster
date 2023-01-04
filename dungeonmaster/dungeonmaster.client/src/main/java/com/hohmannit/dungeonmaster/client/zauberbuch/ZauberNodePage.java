@@ -13,6 +13,7 @@ public class ZauberNodePage extends AbstractPageWithNodes {
 	protected void execCreateChildPages(List<IPage<?>> pageList) {
 		pageList.add(new ZauberbuchTablePage());
 		pageList.add(new ZaubertypTablePage());
+		pageList.add(new ZeitaufwandtypTablePage());
 	}
 
 	@Override
@@ -28,5 +29,10 @@ public class ZauberNodePage extends AbstractPageWithNodes {
 	@Override
 	protected String getConfiguredOverviewIconId() {
 		return Icons.Spell;
+	}
+
+	@Override
+	protected boolean getConfiguredShowTileOverview() {
+		return true;
 	}
 }

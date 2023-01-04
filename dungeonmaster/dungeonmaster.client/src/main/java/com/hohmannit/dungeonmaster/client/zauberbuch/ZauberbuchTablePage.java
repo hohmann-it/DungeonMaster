@@ -16,7 +16,6 @@ import org.eclipse.scout.rt.client.ui.form.FormEvent;
 import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
-import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
@@ -68,7 +67,6 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(10)
-		@ClassId("4a8f5e0e-6eb8-4296-8ad7-012151f572f2")
 		public class EditMenu extends AbstractMenu {
 			@Override
 			protected String getConfiguredText() {
@@ -86,7 +84,6 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(20)
-		@ClassId("8ac358f2-de17-4b2b-93f3-73e21a7415d8")
 		public class NewMenu extends AbstractMenu {
 
 			@Override
