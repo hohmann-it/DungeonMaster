@@ -5,6 +5,7 @@ CREATE TABLE zaubertyp
         zaubertyp_id bigint NOT NULL
       , typ          text NOT NULL
       , kategorie    text
+      , beschreibung text
     )
 ;
 
@@ -25,18 +26,21 @@ ALTER TABLE ONLY zaubertyp ADD CONSTRAINT zaubertyp_pkey PRIMARY KEY (zaubertyp_
 
 CREATE OR REPLACE PROCEDURE insert_zaubertyp
 (
-  IN in_typ       text
-, IN in_kategorie text DEFAULT NULL
+  IN in_typ          text
+, IN in_kategorie    text DEFAULT NULL
+, IN in_beschreibung text DEFAULT NULL
 ) LANGUAGE 'sql'
 AS
 $BODY$
 INSERT INTO dd.zaubertyp
     ( typ
       , kategorie
+      , beschreibung
     )
     VALUES
     ( in_typ
       , in_kategorie
+      , in_beschreibung
     )
 ;
 
@@ -45,5 +49,5 @@ ALTER
 PROCEDURE insert_zaubertyp
 (
   text
-, text
+, text, text
 ) OWNER TO dungeonmaster;

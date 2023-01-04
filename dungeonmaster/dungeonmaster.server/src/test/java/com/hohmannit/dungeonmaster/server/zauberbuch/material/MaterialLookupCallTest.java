@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.hohmannit.dungeonmaster.server.ServerSession;
-import com.hohmannit.dungeonmaster.shared.zauberbuch.material.MaterialLookupCall;
+import com.hohmannit.dungeonmaster.shared.datenbank.zauber.material.MaterialLookupCall;
 
 @RunWithSubject("anonymous")
 @RunWith(ServerTestRunner.class)

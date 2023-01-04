@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.hohmannit.dungeonmaster.server.ServerSession;
-import com.hohmannit.dungeonmaster.shared.zauberbuch.wirkungsdauer.WirkungsdauerLookupCall;
+import com.hohmannit.dungeonmaster.shared.datenbank.zauber.wirkungsdauer.WirkungsdauerLookupCall;
 
 @RunWithSubject("anonymous")
 @RunWith(ServerTestRunner.class)

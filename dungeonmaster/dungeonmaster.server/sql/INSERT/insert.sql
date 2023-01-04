@@ -4,8 +4,8 @@ CALL od.insert_charakter('Magier', 'Jens');
 CALL od.insert_charakter('Barde', 'Rittersporn');
 CALL od.insert_charakter('Namenloser Held', 'Namenlos');
 \echo ''\echo ''\echo '=========Populating dd.zaubertyp========='\echo ''\echo ''
-CALL dd.insert_zaubertyp('Verzauberungen');
-CALL dd.insert_zaubertyp('Bannzauber');
+CALL dd.insert_zaubertyp('Verzauberungen', NULL, 'Verzauberungen beeinflussen den Verstand einer Person und manipulieren oder kontrollieren ihr Verhalten. Sie können Feinde zwingen, den Zauberwirker als Freund zu betrachten, Kreaturen zu einer bestimmten Handlungsweise bewegen oder diese sogar in eine Marionette des Zaubernden verwandeln.');
+CALL dd.insert_zaubertyp('Bannzauber', NULL, 'Bannzauber sind schützender Natur, doch können manche von ihnen auch offensiv eingesetzt werden. Sie erschaffen magische Barrieren, heben schädigende Effekte auf oder verbannen Kreaturen auf andere Existenzebenen.');
 CALL dd.insert_zaubertyp('Hervorrufungszauber');
 CALL dd.insert_zaubertyp('Beschwörungszauber');
 CALL dd.insert_zaubertyp('Verwandlungszauber');

@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.hohmannit.dungeonmaster.server.ServerSession;
-import com.hohmannit.dungeonmaster.shared.zauberbuch.reichweite.ReichweiteLookupCall;
+import com.hohmannit.dungeonmaster.shared.datenbank.zauber.reichweite.ReichweiteLookupCall;
 
 @RunWithSubject("anonymous")
 @RunWith(ServerTestRunner.class)

@@ -16,9 +16,9 @@ import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 
-import com.hohmannit.dungeonmaster.client.database.DatenbankOutline;
+import com.hohmannit.dungeonmaster.client.datenbank.DatenbankOutline;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm;
 import com.hohmannit.dungeonmaster.client.search.SucheOutline;
-import com.hohmannit.dungeonmaster.client.zauberbuch.ZauberForm;
 import com.hohmannit.dungeonmaster.shared.Icons;
 
 /**
@@ -131,7 +131,7 @@ public class Desktop extends AbstractDesktop {
 
 			@Override
 			protected void execAction() {
-				new ZauberForm().startNew();
+				new ZauberbuchForm().startNew();
 			}
 		}
 	}
