@@ -26,33 +26,34 @@ import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.CancelButton;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.DetailsBox;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.KomponentenBox;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.OkButton;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.DetailsBox.BeschreibungField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.DetailsBox.HoeheregradeField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.NameField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ReichweiteSequenceBox;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.WirkungsdauerSequenceBox;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZauberImageField;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZaubergradSequenceBox;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZeitaufwandSequenceBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ReichweiteSequenceBox.ReichweiteField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ReichweiteSequenceBox.ReichweitetypField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.WirkungsdauerSequenceBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.WirkungsdauerSequenceBox.WirkungsdauerField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.WirkungsdauerSequenceBox.WirkungsdauertypField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZauberImageField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZaubergradSequenceBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZaubergradSequenceBox.GradField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZaubergradSequenceBox.ZaubertypField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZeitaufwandSequenceBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZeitaufwandSequenceBox.ZeitaufwandField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZeitaufwandSequenceBox.ZeitaufwandtypField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.KomponentenBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.KomponentenBox.CharaktereBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.KomponentenBox.ZauberkomponentenBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.KomponentenBox.ZauberkomponentenBox.ZaubkomponentenTableField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox.GestikField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox.MaterialField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox.RitualField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.KomponentenBox.ZauberkomponentenBox.KomponentenSequenceBox.VerbalField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.KomponentenBox.ZauberkomponentenBox.ZaubkomponentenTableField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.OkButton;
+import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.grad.ZaubergradCodeType;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.material.MaterialLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.material.ZaubermaterialErsatzLookupCall;
@@ -683,7 +684,7 @@ public class ZauberbuchForm extends AbstractForm {
 
 							@Override
 							protected int getConfiguredWidth() {
-								return 100;
+								return 782;
 							}
 
 							@Override
@@ -701,7 +702,12 @@ public class ZauberbuchForm extends AbstractForm {
 
 							@Override
 							protected int getConfiguredWidth() {
-								return 100;
+								return 184;
+							}
+
+							@Override
+							protected String getConfiguredHeaderIconId() {
+								return Icons.Cost;
 							}
 						}
 
@@ -714,7 +720,12 @@ public class ZauberbuchForm extends AbstractForm {
 
 							@Override
 							protected int getConfiguredWidth() {
-								return 100;
+								return 150;
+							}
+
+							@Override
+							protected String getConfiguredHeaderIconId() {
+								return Icons.Weight;
 							}
 						}
 
@@ -727,7 +738,7 @@ public class ZauberbuchForm extends AbstractForm {
 
 							@Override
 							protected int getConfiguredWidth() {
-								return 100;
+								return 152;
 							}
 
 							@Override

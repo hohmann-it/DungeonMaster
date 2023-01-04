@@ -22,4 +22,7 @@ public class Icons extends AbstractIcons {
 	public static final String SpellCategory = "font:icoMoon \ue979";
 	public static final String SpellDistance = "font:icoMoon \uf4a9";
 	public static final String SpellTime = "font:icoMoon \ueead";
+	public static final String Cost = "font:icoMoon \ueb92";
+	public static final String Weight = "font:icoMoon \uf816";
+	public static final String Duration = "font:icoMoon \uea01";
 }

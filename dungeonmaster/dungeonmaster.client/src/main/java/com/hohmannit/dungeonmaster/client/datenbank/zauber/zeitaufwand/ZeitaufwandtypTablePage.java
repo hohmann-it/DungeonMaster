@@ -94,6 +94,11 @@ public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 				form.addFormListener(new ZeitaufwandtypFormListener());
 				form.startNew();
 			}
+
+			@Override
+			protected String getConfiguredIconId() {
+				return super.getConfiguredIconId();
+			}
 		}
 
 		@Order(30)

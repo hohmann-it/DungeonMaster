@@ -227,7 +227,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected int getConfiguredWidth() {
-				return 100;
+				return 168;
 			}
 
 			@Override
@@ -235,18 +235,29 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 				return ZaubertypLookupCall.class;
 			}
 
+			@Override
+			protected String getConfiguredHeaderIconId() {
+				return Icons.SpellCategory;
+			}
+
 		}
 
 		@Order(3000)
 		public class ZeitaufwandColumn extends AbstractStringColumn {
+
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Zeitaufwand");
+				return null;
 			}
 
 			@Override
 			protected int getConfiguredWidth() {
-				return 100;
+				return 50;
+			}
+
+			@Override
+			protected String getConfiguredHeaderIconId() {
+				return Icons.SpellTime;
 			}
 		}
 
@@ -254,30 +265,36 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class ZeitaufwandtypColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Zauber_Zeitaufwandtyp_Label");
+				return TEXTS.get("Zeitaufwand");
 			}
 
 			@Override
 			protected int getConfiguredWidth() {
-				return 118;
+				return 96;
 			}
 
 			@Override
 			protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
 				return ZeitaufwandLookupCall.class;
 			}
+
 		}
 
 		@Order(5000)
 		public class ReichweiteColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Zauber_Reichweite_Label");
+				return null;
 			}
 
 			@Override
 			protected int getConfiguredWidth() {
-				return 100;
+				return 50;
+			}
+
+			@Override
+			protected String getConfiguredHeaderIconId() {
+				return Icons.SpellDistance;
 			}
 		}
 
@@ -285,7 +302,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class ReichweitetypColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Zauber_Reichweitetyp_Label");
+				return TEXTS.get("Zauber_Reichweite_Label");
 			}
 
 			@Override
@@ -297,18 +314,24 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 			protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
 				return ReichweiteLookupCall.class;
 			}
+
 		}
 
 		@Order(7000)
 		public class WirkungsdauerColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Wirkungsdauer");
+				return null;
 			}
 
 			@Override
 			protected int getConfiguredWidth() {
-				return 117;
+				return 50;
+			}
+
+			@Override
+			protected String getConfiguredHeaderIconId() {
+				return Icons.Duration;
 			}
 		}
 
@@ -316,7 +339,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class WirkungsdauertypColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("WirkungsdauerTyp");
+				return TEXTS.get("Wirkungsdauer");
 			}
 
 			@Override
@@ -328,6 +351,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 			protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
 				return WirkungsdauerLookupCall.class;
 			}
+
 		}
 
 		@Order(9000)
@@ -339,7 +363,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected int getConfiguredWidth() {
-				return 212;
+				return 322;
 			}
 		}
 
