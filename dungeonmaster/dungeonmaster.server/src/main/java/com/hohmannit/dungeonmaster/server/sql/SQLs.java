@@ -49,6 +49,18 @@ public interface SQLs {
 			+ "<text>   AND UPPER(name) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
 
+	String ZAUBERTYP_PAGE_SELECT = "SELECT zaubertyp_id, typ, kategorie" + "	FROM dd.zaubertyp;";
+
+	String ZAUBERTYP_PAGE_SELECT_INTO = " INTO :{page.id}, :{page.typ}, :{page.kategorie}";
+
+	String ZAUBERTYP_INSERT = "INSERT INTO dd.zaubertyp(typ, kategorie)	VALUES (:typ, :kategorie);";
+
+	String ZAUBERTYP_UPDATE = "UPDATE dd.zaubertyp SET typ=:typ, kategorie=:kategorie	WHERE zaubertyp_id = :zaubertypId;";
+
+	String ZAUBERTYP_SELECT = "SELECT typ, kategorie FROM dd.zaubertyp WHERE zaubertyp_id = :zaubertypId INTO :typ, :kategorie;";
+
+	String ZAUBERTYP_DELETE = "DELETE FROM dd.zaubertyp WHERE zaubertyp_id = :zaubertypId;";
+
 	String ZAUBER_INSERT = "INSERT INTO dd.zauber ("//
 			+ "name, " //
 			+ "zeitaufwand, " //
