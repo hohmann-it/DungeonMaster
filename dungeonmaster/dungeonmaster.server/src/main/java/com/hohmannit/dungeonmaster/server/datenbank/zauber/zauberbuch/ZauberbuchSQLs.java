@@ -1,7 +1,7 @@
 package com.hohmannit.dungeonmaster.server.datenbank.zauber.zauberbuch;
 
 public interface ZauberbuchSQLs {
-	String ZAUBER_PAGE_SELECT = "SELECT zauber_id, name, zeitaufwand, fk_zeitaufwand_typ, reichweite, fk_reichweite_typ, wirkungsdauer, fk_wirkungsdauer_typ, beschreibung, hoehere_grade, grad, fk_schule"
+	String ZAUBER_PAGE_SELECT = "SELECT zauber_id, name, zeitaufwand, fk_zeitaufwand_typ, reichweite, fk_reichweite, wirkungsdauer, fk_wirkungsdauer_typ, beschreibung, hoehere_grade, grad, fk_schule"
 			+ "	FROM dd.zauber;";
 
 	String ZAUBER_PAGE_DATA_SELECT_INTO = " INTO :{page.zauberId}, :{page.name}, :{page.zeitaufwand}, :{page.zeitaufwandtyp}, :{page.reichweite}, :{page.reichweitetyp}, :{page.wirkungsdauer}, :{page.wirkungsdauertyp}, :{page.beschreibung}, :{page.hoehereGrade}, :{page.grad}, :{page.schule}";
@@ -11,7 +11,7 @@ public interface ZauberbuchSQLs {
 			+ "zeitaufwand, " //
 			+ "fk_zeitaufwand_typ, " //
 			+ "reichweite, " //
-			+ "fk_reichweite_typ, " //
+			+ "fk_reichweite, " //
 			+ "wirkungsdauer, " //
 			+ "fk_wirkungsdauer_typ, " //
 			+ "beschreibung, " //
@@ -27,7 +27,7 @@ public interface ZauberbuchSQLs {
 			+ "zeitaufwand, "//
 			+ "fk_zeitaufwand_typ, "//
 			+ "reichweite, "//
-			+ "fk_reichweite_typ, "//
+			+ "fk_reichweite, "//
 			+ "wirkungsdauer, "//
 			+ "fk_wirkungsdauer_typ, "//
 			+ "beschreibung, "//

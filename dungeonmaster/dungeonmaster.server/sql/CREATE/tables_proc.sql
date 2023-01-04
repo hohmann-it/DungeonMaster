@@ -9,7 +9,7 @@
 \i CREATE/tables_proc/charakter.sql
 \i CREATE/tables_proc/schule.sql
 \i CREATE/tables_proc/zeitaufwandtyp.sql
-\i CREATE/tables_proc/reichweitetyp.sql
+\i CREATE/tables_proc/reichweite.sql
 \i CREATE/tables_proc/wirkungsdauertyp.sql
 \i CREATE/tables_proc/zauber.sql
 \i CREATE/tables_proc/gegenstandtyp.sql

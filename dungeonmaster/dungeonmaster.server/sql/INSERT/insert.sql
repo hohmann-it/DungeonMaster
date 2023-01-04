@@ -17,13 +17,13 @@ CALL dd.insert_zeitaufwandtyp('Aktion', 'Eine gewöhnliche Aktion');
 CALL dd.insert_zeitaufwandtyp('Bonusaktion', 'Ein Zauber, der mit einer Bonusaktion gewirkt wird, ist besonders schnell. Wende für einen solchen Spruch in deinem Zug eine Bonusaktion auf, vorausgesetzt dass du in diesem noch keine genutzt hast. Du kannst keinen anderen Zauber in diesem Zug wirken, außer einem Zaubertrick mit einem Zeitaufwand von einer Aktion.');
 CALL dd.insert_zeitaufwandtyp('Minuten', 'Bestimmte Zauber (auch Rituale) erfordern mehr Zeit, um sie zu wirken: Minuten oder sogar Stunden. Verwendest du einen Spruch mit einem längeren Zeitaufwand als eine Aktion oder Reaktion, musst du in jedem Zug, den du den Zauber wirkst, deine Aktion darauf verwenden und die ganze Zeit über deine Konzentration aufrechterhalten. Wird deine Konzentration unterbrochen, scheitert der Zauber, aber du verbrauchst keinen Zauberplatz. Wenn du den Spruch erneut wirken willst, musst du von vorn beginnen.');
 CALL dd.insert_zeitaufwandtyp('Reaktion', 'Einige Zauber können als Reaktion gewirkt werden. Sie erfordern nur einen Sekundenbruchteil der Konzentration und stellen die Antwort auf ein bestimmtes Ereignis dar. Wenn ein Zauber als Reaktion gewirkt werden kann, ist in seiner Beschreibung angegeben, zu welchem Zeitpunkt dies genau möglich ist.');
-\echo ''\echo ''\echo '=========Populating dd.reichweitetyp========='\echo ''\echo ''
-CALL dd.insert_reichweitetyp('Meter', 'm');
-CALL dd.insert_reichweitetyp('Selbst', 'Selbst');
-CALL dd.insert_reichweitetyp('Selbst (Würfel mit 4,5m Seitenlänge)', 'Selbst (Würfel)');
-CALL dd.insert_reichweitetyp('Selbst (Radius von 4,5m)', 'Selbst (Radius)');
-CALL dd.insert_reichweitetyp('Selbst (Kegel von 4,5m)','Selbst (Kegel)');
-CALL dd.insert_reichweitetyp('Berührung', 'Berührung');
+\echo ''\echo ''\echo '=========Populating dd.reichweite========='\echo ''\echo ''
+CALL dd.insert_reichweite('Meter', 'm', 'Die übliche Reichweitenangabe in Metern.');
+CALL dd.insert_reichweite('Selbst', 'Selbst', 'Nur auf dich selbst anwendbarer Zauber.');
+CALL dd.insert_reichweite('Selbst (Würfel mit 4,5m Seitenlänge)', 'Selbst (Würfel)', 'Flächeneffekt, wobei eine Seite des Würfels am Zauberurpsrungspunkt endet.');
+CALL dd.insert_reichweite('Selbst (Radius von 4,5m)', 'Selbst (Radius)', 'Flächeneffekt, wobei eine Sphäre um den Zauberursprungspunkt entsteht.');
+CALL dd.insert_reichweite('Selbst (Kegel von 4,5m)','Selbst (Kegel)', 'Flächeneffekt, wobei ein Kegel mit dem Zauberursprungspunkt am spitzen Ende entsteht.');
+CALL dd.insert_reichweite('Berührung', 'Berührung', 'Direkte Berührung einer Kreatur oder Oberfläche');
 \echo ''\echo ''\echo '=========Populating dd.wirkungsdauertyp========='\echo ''\echo ''
 CALL dd.insert_wirkungsdauertyp('Runden');
 CALL dd.insert_wirkungsdauertyp('Minuten');

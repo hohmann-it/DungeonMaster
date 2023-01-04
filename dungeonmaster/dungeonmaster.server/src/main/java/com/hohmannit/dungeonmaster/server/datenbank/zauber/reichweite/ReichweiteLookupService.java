@@ -7,6 +7,6 @@ import com.hohmannit.dungeonmaster.shared.datenbank.zauber.reichweite.IReichweit
 public class ReichweiteLookupService extends AbstractSqlLookupService<Long> implements IReichweiteLookupService {
 	@Override
 	protected String getConfiguredSqlSelect() {
-		return ReichweiteSQLs.REICHWEITETYP_LOOKUP;
+		return ReichweiteSQLs.REICHWEITE_LOOKUP;
 	}
 }

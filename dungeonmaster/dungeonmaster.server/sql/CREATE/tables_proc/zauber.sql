@@ -7,7 +7,7 @@ CREATE TABLE zauber
       , zeitaufwand          integer NOT NULL
       , fk_zeitaufwand_typ   bigint NOT NULL
       , reichweite           integer NOT NULL
-      , fk_reichweite_typ    bigint NOT NULL
+      , fk_reichweite    bigint NOT NULL
       , wirkungsdauer        integer NOT NULL
       , fk_wirkungsdauer_typ bigint NOT NULL
       , beschreibung         text NOT NULL
@@ -39,7 +39,7 @@ ALTER TABLE ONLY zauber ADD CONSTRAINT zauber_pkey PRIMARY KEY (zauber_id)
 ALTER TABLE ONLY zauber ADD CONSTRAINT fk_schule FOREIGN KEY (fk_schule) REFERENCES schule(schule_id) NOT VALID
 ;
 
-ALTER TABLE ONLY zauber ADD CONSTRAINT fk_reichweite_typ FOREIGN KEY (fk_reichweite_typ) REFERENCES reichweitetyp(reichweitetyp_id) NOT VALID
+ALTER TABLE ONLY zauber ADD CONSTRAINT fk_reichweite FOREIGN KEY (fk_reichweite) REFERENCES reichweite(reichweite_id) NOT VALID
 ;
 
 ALTER TABLE ONLY zauber ADD CONSTRAINT fk_wirkungsdauer_typ FOREIGN KEY (fk_wirkungsdauer_typ) REFERENCES wirkungsdauertyp(wirkungsdauertyp_id) NOT VALID
@@ -71,7 +71,7 @@ INSERT INTO dd.zauber
       , zeitaufwand
       , fk_zeitaufwand_typ
       , reichweite
-      , fk_reichweite_typ
+      , fk_reichweite
       , wirkungsdauer
       , fk_wirkungsdauer_typ
       , beschreibung
@@ -97,9 +97,9 @@ SELECT
   , in_reichweite
   , (
         SELECT
-            reichweitetyp_id
+            reichweite_id
         FROM
-            dd.reichweitetyp
+            dd.reichweite
         WHERE
             typ_kurz = in_reichweitetyp_kurz
     )
