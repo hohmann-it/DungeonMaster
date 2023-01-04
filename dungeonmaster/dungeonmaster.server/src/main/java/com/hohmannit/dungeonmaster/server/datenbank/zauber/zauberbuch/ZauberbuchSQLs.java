@@ -1,10 +1,10 @@
 package com.hohmannit.dungeonmaster.server.datenbank.zauber.zauberbuch;
 
 public interface ZauberbuchSQLs {
-	String ZAUBER_PAGE_SELECT = "SELECT zauber_id, name, zeitaufwand, fk_zeitaufwand_typ, reichweite, fk_reichweite_typ, wirkungsdauer, fk_wirkungsdauer_typ, beschreibung, hoehere_grade, grad, fk_zauber_typ"
+	String ZAUBER_PAGE_SELECT = "SELECT zauber_id, name, zeitaufwand, fk_zeitaufwand_typ, reichweite, fk_reichweite_typ, wirkungsdauer, fk_wirkungsdauer_typ, beschreibung, hoehere_grade, grad, fk_schule"
 			+ "	FROM dd.zauber;";
 
-	String ZAUBER_PAGE_DATA_SELECT_INTO = " INTO :{page.zauberId}, :{page.name}, :{page.zeitaufwand}, :{page.zeitaufwandtyp}, :{page.reichweite}, :{page.reichweitetyp}, :{page.wirkungsdauer}, :{page.wirkungsdauertyp}, :{page.beschreibung}, :{page.hoehereGrade}, :{page.grad}, :{page.zaubertyp}";
+	String ZAUBER_PAGE_DATA_SELECT_INTO = " INTO :{page.zauberId}, :{page.name}, :{page.zeitaufwand}, :{page.zeitaufwandtyp}, :{page.reichweite}, :{page.reichweitetyp}, :{page.wirkungsdauer}, :{page.wirkungsdauertyp}, :{page.beschreibung}, :{page.hoehereGrade}, :{page.grad}, :{page.schule}";
 
 	String ZAUBER_INSERT = "INSERT INTO dd.zauber ("//
 			+ "name, " //
@@ -17,9 +17,9 @@ public interface ZauberbuchSQLs {
 			+ "beschreibung, " //
 			+ "hoehere_grade, " //
 			+ "grad, " //
-			+ "fk_zauber_typ) " //
+			+ "fk_schule) " //
 			+ "VALUES (" //
-			+ ":name,:zeitaufwand,:zeitaufwandtyp,:reichweite,:reichweitetyp,:wirkungsdauer,:wirkungsdauertyp,:beschreibung,:hoeheregrade,:grad,:zaubertyp)";
+			+ ":name,:zeitaufwand,:zeitaufwandtyp,:reichweite,:reichweitetyp,:wirkungsdauer,:wirkungsdauertyp,:beschreibung,:hoeheregrade,:grad,:schule)";
 
 	String ZAUBER_SELECT = ""//
 			+ "SELECT " //
@@ -33,7 +33,7 @@ public interface ZauberbuchSQLs {
 			+ "beschreibung, "//
 			+ "hoehere_grade, "//
 			+ "grad, "//
-			+ "fk_zauber_typ, "//
+			+ "fk_schule, "//
 			+ "verbal, "//
 			+ "gestik, "//
 			+ "material, "//
@@ -50,7 +50,7 @@ public interface ZauberbuchSQLs {
 			+ "         :beschreibung, "//
 			+ "         :hoeheregrade, "//
 			+ "         :grad, "//
-			+ "         :zaubertyp, "//
+			+ "         :schule, "//
 			+ "         :verbal, "//
 			+ "         :gestik, "//
 			+ "         :material, "//

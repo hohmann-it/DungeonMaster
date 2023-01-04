@@ -13,12 +13,12 @@ CREATE TABLE zauber
       , beschreibung         text NOT NULL
       , hoehere_grade        text
       , grad                 integer NOT NULL
-      , fk_zauber_typ        bigint NOT NULL
+      , fk_schule            bigint NOT NULL
       , verbal               boolean NOT NULL
       , gestik               boolean NOT NULL
       , material             boolean NOT NULL
       , ritual               boolean NOT NULL DEFAULT FALSE
-     )
+    )
 ;
 
 ALTER TABLE zauber OWNER TO dungeonmaster
@@ -36,7 +36,7 @@ ALTER TABLE ONLY zauber ALTER COLUMN zauber_id SET DEFAULT nextval('zauber_id_se
 ALTER TABLE ONLY zauber ADD CONSTRAINT zauber_pkey PRIMARY KEY (zauber_id)
 ;
 
-ALTER TABLE ONLY zauber ADD CONSTRAINT fk_zauber_typ FOREIGN KEY (fk_zauber_typ) REFERENCES zaubertyp(zaubertyp_id) NOT VALID
+ALTER TABLE ONLY zauber ADD CONSTRAINT fk_schule FOREIGN KEY (fk_schule) REFERENCES schule(schule_id) NOT VALID
 ;
 
 ALTER TABLE ONLY zauber ADD CONSTRAINT fk_reichweite_typ FOREIGN KEY (fk_reichweite_typ) REFERENCES reichweitetyp(reichweitetyp_id) NOT VALID
@@ -58,7 +58,7 @@ IN in_wirkungsdauer      integer,
 IN in_wirkungsdauertyp   text,
 IN in_beschreibung       text,
 IN in_hoehere_grade      text,
-IN in_zaubertyp          text,
+IN in_schule             text,
 IN in_verbal             boolean,
 IN in_gestik             boolean,
 IN in_material           boolean,
@@ -77,7 +77,7 @@ INSERT INTO dd.zauber
       , beschreibung
       , hoehere_grade
       , grad
-      , fk_zauber_typ
+      , fk_schule
       , verbal
       , gestik
       , material
@@ -117,11 +117,11 @@ SELECT
   , in_grad
   , (
         SELECT
-            zaubertyp_id
+            schule_id
         FROM
-            dd.zaubertyp
+            dd.schule
         WHERE
-            typ = in_zaubertyp
+            typ = in_schule
     )
   , in_verbal
   , in_gestik

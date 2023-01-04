@@ -1,4 +1,4 @@
-package com.hohmannit.dungeonmaster.client.datenbank.zauber.zaubertyp;
+package com.hohmannit.dungeonmaster.client.datenbank.zauber.schule;
 
 import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
@@ -17,13 +17,13 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import com.hohmannit.dungeonmaster.client.common.QuickDeleteMenu;
 import com.hohmannit.dungeonmaster.client.common.QuickEditMenu;
 import com.hohmannit.dungeonmaster.client.common.QuickNewMenu;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zaubertyp.ZaubertypTablePage.Table;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleTablePage.Table;
 import com.hohmannit.dungeonmaster.shared.Icons;
-import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zaubertyp.IZaubertypService;
-import com.hohmannit.dungeonmaster.shared.zauberbuch.ZaubertypTablePageData;
+import com.hohmannit.dungeonmaster.shared.datenbank.zauber.schule.ISchuleService;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.SchuleTablePageData;
 
-@Data(ZaubertypTablePageData.class)
-public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
+@Data(SchuleTablePageData.class)
+public class SchuleTablePage extends AbstractPageWithTable<Table> {
 	@Override
 	protected boolean getConfiguredLeaf() {
 		return true;
@@ -31,12 +31,12 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 
 	@Override
 	protected void execLoadData(SearchFilter filter) {
-		importPageData(BEANS.get(IZaubertypService.class).getZaubertypTableData(filter));
+		importPageData(BEANS.get(ISchuleService.class).getSchuleTableData(filter));
 	}
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Zaubertypen");
+		return TEXTS.get("Schulen");
 	}
 
 	@Override
@@ -52,6 +52,11 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 	public class Table extends AbstractTable {
 
 		@Override
+		protected boolean getConfiguredAutoResizeColumns() {
+			return true;
+		}
+
+		@Override
 		protected Class<? extends IMenu> getConfiguredDefaultMenu() {
 			return EditMenu.class;
 		}
@@ -61,9 +66,9 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected void execAction() {
-				ZaubertypForm form = new ZaubertypForm();
-				form.setZaubertypId(getIdColumn().getSelectedValue());
-				form.addFormListener(new ZaubertypFormListener());
+				SchuleForm form = new SchuleForm();
+				form.setSchuleId(getIdColumn().getSelectedValue());
+				form.addFormListener(new SchuleFormListener());
 				form.startModify();
 			}
 
@@ -74,8 +79,8 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected void execAction() {
-				ZaubertypForm form = new ZaubertypForm();
-				form.addFormListener(new ZaubertypFormListener());
+				SchuleForm form = new SchuleForm();
+				form.addFormListener(new SchuleFormListener());
 				form.startNew();
 			}
 		}
@@ -85,12 +90,12 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected void execAction() throws ProcessingException {
-				BEANS.get(IZaubertypService.class).delete(getIdColumn().getSelectedValues());
+				BEANS.get(ISchuleService.class).delete(getIdColumn().getSelectedValues());
 				deleteRow(getSelectedRow());
 			}
 		}
 
-		private class ZaubertypFormListener implements FormListener {
+		private class SchuleFormListener implements FormListener {
 
 			@Override
 			public void formChanged(FormEvent e) {
@@ -103,6 +108,10 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 
 		public KategorieColumn getKategorieColumn() {
 			return getColumnSet().getColumnByClass(KategorieColumn.class);
+		}
+
+		public BeschreibungColumn getBeschreibungColumn() {
+			return getColumnSet().getColumnByClass(BeschreibungColumn.class);
 		}
 
 		public TypColumn getTypColumn() {
@@ -140,7 +149,7 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 		public class TypColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Zaubertyp");
+				return TEXTS.get("Schule");
 			}
 
 			@Override
@@ -150,6 +159,19 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(3000)
+		public class BeschreibungColumn extends AbstractStringColumn {
+			@Override
+			protected String getConfiguredHeaderText() {
+				return TEXTS.get("Beschreibung");
+			}
+
+			@Override
+			protected int getConfiguredWidth() {
+				return 971;
+			}
+		}
+
+		@Order(4000)
 		public class KategorieColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
@@ -159,6 +181,11 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 			@Override
 			protected int getConfiguredWidth() {
 				return 300;
+			}
+
+			@Override
+			protected boolean getConfiguredVisible() {
+				return false;
 			}
 		}
 

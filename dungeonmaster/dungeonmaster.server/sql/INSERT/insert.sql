@@ -3,15 +3,15 @@ CALL od.insert_charakter('Krieger', 'Roland');
 CALL od.insert_charakter('Magier', 'Jens');
 CALL od.insert_charakter('Barde', 'Rittersporn');
 CALL od.insert_charakter('Namenloser Held', 'Namenlos');
-\echo ''\echo ''\echo '=========Populating dd.zaubertyp========='\echo ''\echo ''
-CALL dd.insert_zaubertyp('Verzauberungen', NULL, 'Verzauberungen beeinflussen den Verstand einer Person und manipulieren oder kontrollieren ihr Verhalten. Sie können Feinde zwingen, den Zauberwirker als Freund zu betrachten, Kreaturen zu einer bestimmten Handlungsweise bewegen oder diese sogar in eine Marionette des Zaubernden verwandeln.');
-CALL dd.insert_zaubertyp('Bannzauber', NULL, 'Bannzauber sind schützender Natur, doch können manche von ihnen auch offensiv eingesetzt werden. Sie erschaffen magische Barrieren, heben schädigende Effekte auf oder verbannen Kreaturen auf andere Existenzebenen.');
-CALL dd.insert_zaubertyp('Hervorrufungszauber');
-CALL dd.insert_zaubertyp('Beschwörungszauber');
-CALL dd.insert_zaubertyp('Verwandlungszauber');
-CALL dd.insert_zaubertyp('Erkenntniszauberei');
-CALL dd.insert_zaubertyp('Illusionszauber');
-CALL dd.insert_zaubertyp('Nekromantiezauber');
+\echo ''\echo ''\echo '=========Populating dd.schule========='\echo ''\echo ''
+CALL dd.insert_schule('Verzauberungen', NULL, 'Verzauberungen beeinflussen den Verstand einer Person und manipulieren oder kontrollieren ihr Verhalten. Sie können Feinde zwingen, den Zauberwirker als Freund zu betrachten, Kreaturen zu einer bestimmten Handlungsweise bewegen oder diese sogar in eine Marionette des Zaubernden verwandeln.');
+CALL dd.insert_schule('Bannzauber', NULL, 'Bannzauber sind schützender Natur, doch können manche von ihnen auch offensiv eingesetzt werden. Sie erschaffen magische Barrieren, heben schädigende Effekte auf oder verbannen Kreaturen auf andere Existenzebenen.');
+CALL dd.insert_schule('Hervorrufungszauber', NULL, 'Hervorrufungszauber manipulieren magische Energie, um einen gewünschten Effekt zu erzeugen. Einige erschaffen Blitze oder Feuer. Andere kanalisieren Energie, um Wunden zu heilen.');
+CALL dd.insert_schule('Beschwörungszauber', NULL, 'Beschwörungszauber transportieren Gegenstände und Kreaturen von einem Ort an einen anderen. Einige rufen Kreaturen oder Gegenstände herbei, während andere es dem Zauberwirker erlauben, sich zu teleportieren. Manche Beschwörungszauber erschaffen Gegenstände oder Effekte aus dem Nichts.');
+CALL dd.insert_schule('Verwandlungszauber', NULL, 'Verwandlungszauber verändern die Eigenschaften von Kreaturen, Gegenständen oder einer ganzen Umgebung. Sie sind in der Lage, einen Gegner in eine harmlose Kreatur zu verwandeln, einen Verbündeten stärker zu machen, einen Gegenstand auf Befehl des Zauberwirkers zu bewegen oder die Heilungsfähigkeiten einer Kreatur so zu beschleunigen, dass sie sich schnell von ihren Wunden erholt.');
+CALL dd.insert_schule('Erkenntniszauberei', NULL, 'Erkenntniszauber offenbaren Informationen, sei es ein lange vergessenes Geheimnis, ein Blick in die Zukunft, die Position verborgener Gegenstände, die Wahrheit hinter einer Illusion oder die Vision weit entfernter Personen oder Orte.');
+CALL dd.insert_schule('Illusionszauber', NULL, 'Illusionszauber täuschen die Sinne und verwirren die Gedanken. Sie lassen eine Kreatur Dinge sehen, die gar nicht da sind, oder Dinge übersehen, die es wirklich gibt. Sie rufen Phantomlaute hervor oder Erinnerungen an Ereignisse, die nie passiert sind. Einige Illusionen erschaffen Trugbilder, die jeder sehen kann, aber die perfidesten pflanzen ein Bild direkt in den Verstand einer Kreatur.');
+CALL dd.insert_schule('Nekromantiezauber', NULL, 'Nekromantiezauber lenken die Energien von Leben und Tod. Sie vermögen einer anderen Kreatur die Lebenskraft zu entziehen und der eigenen hinzuzufügen., Untote zu erschaffen, oder sogar die Toten zum Leben zu erwecken. Es ist keine gute Tat, Untote mittels Nekromantie zu erschaffen, und nur böse Zauberer wenden solche Magie regelmäßig an.');
 \echo ''\echo ''\echo '=========Populating dd.zeitaufwandtyp========='\echo ''\echo ''
 CALL dd.insert_zeitaufwandtyp('Aktion', 'Eine gewöhnliche Aktion');
 CALL dd.insert_zeitaufwandtyp('Bonusaktion', 'Ein Zauber, der mit einer Bonusaktion gewirkt wird, ist besonders schnell. Wende für einen solchen Spruch in deinem Zug eine Bonusaktion auf, vorausgesetzt dass du in diesem noch keine genutzt hast. Du kannst keinen anderen Zauber in diesem Zug wirken, außer einem Zaubertrick mit einem Zeitaufwand von einer Aktion.');

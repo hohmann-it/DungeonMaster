@@ -10,7 +10,7 @@ import com.hohmannit.dungeonmaster.server.ServerSession;
 @RunWithSubject("anonymous")
 @RunWith(ServerTestRunner.class)
 @RunWithServerSession(ServerSession.class)
-public class ZaubertypServiceTest {
+public class SchuleServiceTest {
 	// TODO [Philipp Hohmann] add test cases
 
 }

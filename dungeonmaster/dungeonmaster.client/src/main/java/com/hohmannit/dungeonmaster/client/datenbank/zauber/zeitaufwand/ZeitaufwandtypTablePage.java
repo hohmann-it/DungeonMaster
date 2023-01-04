@@ -52,6 +52,11 @@ public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 	public class Table extends AbstractTable {
 
 		@Override
+		protected boolean getConfiguredAutoResizeColumns() {
+			return true;
+		}
+
+		@Override
 		protected Class<? extends IMenu> getConfiguredDefaultMenu() {
 			return EditMenu.class;
 		}

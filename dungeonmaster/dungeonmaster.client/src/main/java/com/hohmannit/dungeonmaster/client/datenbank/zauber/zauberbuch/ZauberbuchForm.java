@@ -39,7 +39,7 @@ import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.Zauberbuch
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZauberImageField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZaubergradSequenceBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZaubergradSequenceBox.GradField;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZaubergradSequenceBox.ZaubertypField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZaubergradSequenceBox.SchuleField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZeitaufwandSequenceBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZeitaufwandSequenceBox.ZeitaufwandField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZeitaufwandSequenceBox.ZeitaufwandtypField;
@@ -58,11 +58,11 @@ import com.hohmannit.dungeonmaster.shared.datenbank.zauber.grad.ZaubergradCodeTy
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.material.MaterialLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.material.ZaubermaterialErsatzLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.reichweite.ReichweiteLookupCall;
+import com.hohmannit.dungeonmaster.shared.datenbank.zauber.schule.SchuleLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.wirkungsdauer.WirkungsdauerLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zauberbuch.CreateZauberbuchPermission;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zauberbuch.IZauberbuchService;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zauberbuch.UpdateZauberbuchPermission;
-import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zaubertyp.ZaubertypLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.ZeitaufwandLookupCall;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.ZauberFormData;
 
@@ -120,8 +120,8 @@ public class ZauberbuchForm extends AbstractForm {
 		return getFieldByClass(GradField.class);
 	}
 
-	public ZaubertypField getZaubertypField() {
-		return getFieldByClass(ZaubertypField.class);
+	public SchuleField getSchuleField() {
+		return getFieldByClass(SchuleField.class);
 	}
 
 	public ReichweiteField getReichweiteField() {
@@ -314,15 +314,15 @@ public class ZauberbuchForm extends AbstractForm {
 				}
 
 				@Order(4000)
-				public class ZaubertypField extends AbstractSmartField<Long> {
+				public class SchuleField extends AbstractSmartField<Long> {
 					@Override
 					protected String getConfiguredLabel() {
-						return TEXTS.get("Zaubertyp");
+						return TEXTS.get("Schule");
 					}
 
 					@Override
 					protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
-						return ZaubertypLookupCall.class;
+						return SchuleLookupCall.class;
 					}
 
 					@Override
@@ -619,6 +619,10 @@ public class ZauberbuchForm extends AbstractForm {
 					}
 
 					public class Table extends AbstractTable {
+						@Override
+						protected boolean getConfiguredAutoResizeColumns() {
+							return true;
+						}
 
 						public ErsatzColumn getErsatzColumn() {
 							return getColumnSet().getColumnByClass(ErsatzColumn.class);
@@ -792,6 +796,8 @@ public class ZauberbuchForm extends AbstractForm {
 			importFormData(formData);
 
 			setEnabledPermission(new CreateZauberbuchPermission());
+
+			setTitle(TEXTS.get("NeuenZauberAnlegen"));
 		}
 
 		@Override

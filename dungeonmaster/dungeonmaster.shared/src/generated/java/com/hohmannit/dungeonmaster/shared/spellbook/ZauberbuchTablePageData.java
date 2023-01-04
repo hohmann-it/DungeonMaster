@@ -53,7 +53,7 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 		public static final String zauberId = "zauberId";
 		public static final String name = "name";
 		public static final String grad = "grad";
-		public static final String zaubertyp = "zaubertyp";
+		public static final String schule = "schule";
 		public static final String zeitaufwand = "zeitaufwand";
 		public static final String zeitaufwandtyp = "zeitaufwandtyp";
 		public static final String reichweite = "reichweite";
@@ -65,7 +65,7 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 		private Long m_zauberId;
 		private String m_name;
 		private Integer m_grad;
-		private Long m_zaubertyp;
+		private Long m_schule;
 		private String m_zeitaufwand;
 		private Long m_zeitaufwandtyp;
 		private String m_reichweite;
@@ -99,12 +99,12 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 			m_grad = newGrad;
 		}
 
-		public Long getZaubertyp() {
-			return m_zaubertyp;
+		public Long getSchule() {
+			return m_schule;
 		}
 
-		public void setZaubertyp(Long newZaubertyp) {
-			m_zaubertyp = newZaubertyp;
+		public void setSchule(Long newSchule) {
+			m_schule = newSchule;
 		}
 
 		public String getZeitaufwand() {

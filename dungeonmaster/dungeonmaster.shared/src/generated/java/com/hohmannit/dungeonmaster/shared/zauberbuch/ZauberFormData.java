@@ -53,6 +53,10 @@ public class ZauberFormData extends AbstractFormData {
 		return getFieldByClass(Ritual.class);
 	}
 
+	public Schule getSchule() {
+		return getFieldByClass(Schule.class);
+	}
+
 	public Verbal getVerbal() {
 		return getFieldByClass(Verbal.class);
 	}
@@ -81,10 +85,6 @@ public class ZauberFormData extends AbstractFormData {
 
 	public ZauberIdProperty getZauberIdProperty() {
 		return getPropertyByClass(ZauberIdProperty.class);
-	}
-
-	public Zaubertyp getZaubertyp() {
-		return getFieldByClass(Zaubertyp.class);
 	}
 
 	public ZaubkomponentenTable getZaubkomponentenTable() {
@@ -135,6 +135,10 @@ public class ZauberFormData extends AbstractFormData {
 		private static final long serialVersionUID = 1L;
 	}
 
+	public static class Schule extends AbstractValueFieldData<Long> {
+		private static final long serialVersionUID = 1L;
+	}
+
 	public static class Verbal extends AbstractValueFieldData<Boolean> {
 		private static final long serialVersionUID = 1L;
 	}
@@ -148,10 +152,6 @@ public class ZauberFormData extends AbstractFormData {
 	}
 
 	public static class ZauberIdProperty extends AbstractPropertyData<Long> {
-		private static final long serialVersionUID = 1L;
-	}
-
-	public static class Zaubertyp extends AbstractValueFieldData<Long> {
 		private static final long serialVersionUID = 1L;
 	}
 

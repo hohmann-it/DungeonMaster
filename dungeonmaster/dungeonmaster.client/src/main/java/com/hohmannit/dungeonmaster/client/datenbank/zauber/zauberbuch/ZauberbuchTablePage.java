@@ -22,9 +22,9 @@ import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.Zauberbuch
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.grad.ZaubergradCodeType;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.reichweite.ReichweiteLookupCall;
+import com.hohmannit.dungeonmaster.shared.datenbank.zauber.schule.SchuleLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.wirkungsdauer.WirkungsdauerLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zauberbuch.IZauberbuchService;
-import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zaubertyp.ZaubertypLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.ZeitaufwandLookupCall;
 import com.hohmannit.dungeonmaster.shared.spellbook.ZauberbuchTablePageData;
 
@@ -56,6 +56,10 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 	}
 
 	public class Table extends AbstractTable {
+		@Override
+		protected boolean getConfiguredAutoResizeColumns() {
+			return true;
+		}
 
 		@Override
 		protected Class<? extends IMenu> getConfiguredDefaultMenu() {
@@ -131,8 +135,8 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 			return getColumnSet().getColumnByClass(GradColumn.class);
 		}
 
-		public ZaubertypColumn getZaubertypColumn() {
-			return getColumnSet().getColumnByClass(ZaubertypColumn.class);
+		public SchuleColumn getSchuleColumn() {
+			return getColumnSet().getColumnByClass(SchuleColumn.class);
 		}
 
 		public HoehereGradeColumn getHoehereGradeColumn() {
@@ -202,10 +206,10 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(2750)
-		public class ZaubertypColumn extends AbstractSmartColumn<Long> {
+		public class SchuleColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Zaubertyp");
+				return TEXTS.get("Schule");
 			}
 
 			@Override
@@ -215,7 +219,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
-				return ZaubertypLookupCall.class;
+				return SchuleLookupCall.class;
 			}
 
 			@Override

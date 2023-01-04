@@ -10,21 +10,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.hohmannit.dungeonmaster.server.ServerSession;
-import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zaubertyp.ZaubertypLookupCall;
+import com.hohmannit.dungeonmaster.shared.datenbank.zauber.schule.SchuleLookupCall;
 
 @RunWithSubject("anonymous")
 @RunWith(ServerTestRunner.class)
 @RunWithServerSession(ServerSession.class)
-public class ZaubertypLookupCallTest {
+public class SchuleLookupCallTest {
 	// TODO [phohm] add test cases
 
-	protected ZaubertypLookupCall createLookupCall() {
-		return new ZaubertypLookupCall();
+	protected SchuleLookupCall createLookupCall() {
+		return new SchuleLookupCall();
 	}
 
 	@Test
 	public void testGetDataByAll() {
-		ZaubertypLookupCall call = createLookupCall();
+		SchuleLookupCall call = createLookupCall();
 		// TODO [phohm] fill call
 		List<? extends ILookupRow<Long>> data = call.getDataByAll();
 		// TODO [phohm] verify data
@@ -32,7 +32,7 @@ public class ZaubertypLookupCallTest {
 
 	@Test
 	public void testGetDataByKey() {
-		ZaubertypLookupCall call = createLookupCall();
+		SchuleLookupCall call = createLookupCall();
 		// TODO [phohm] fill call
 		List<? extends ILookupRow<Long>> data = call.getDataByKey();
 		// TODO [phohm] verify data
@@ -40,7 +40,7 @@ public class ZaubertypLookupCallTest {
 
 	@Test
 	public void testGetDataByText() {
-		ZaubertypLookupCall call = createLookupCall();
+		SchuleLookupCall call = createLookupCall();
 		// TODO [phohm] fill call
 		List<? extends ILookupRow<Long>> data = call.getDataByText();
 		// TODO [phohm] verify data
