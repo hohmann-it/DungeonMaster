@@ -1,12 +1,8 @@
 package com.hohmannit.dungeonmaster.client.datenbank.zauber.zaubertyp;
 
-import java.util.Set;
-
 import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
-import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
-import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
@@ -17,9 +13,10 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
-import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
+import com.hohmannit.dungeonmaster.client.common.QuickDeleteMenu;
+import com.hohmannit.dungeonmaster.client.common.QuickNewMenu;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zaubertyp.ZaubertypTablePage.Table;
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zaubertyp.IZaubertypService;
@@ -73,20 +70,15 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 				form.addFormListener(new ZaubertypFormListener());
 				form.startModify();
 			}
+
+			@Override
+			protected String getConfiguredIconId() {
+				return Icons.Gear;
+			}
 		}
 
 		@Order(20)
-		public class NewMenu extends AbstractMenu {
-
-			@Override
-			protected String getConfiguredText() {
-				return TEXTS.get("New");
-			}
-
-			@Override
-			protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-				return CollectionUtility.<IMenuType>hashSet(TableMenuType.EmptySpace, TableMenuType.SingleSelection);
-			}
+		public class NewMenu extends QuickNewMenu {
 
 			@Override
 			protected void execAction() {
@@ -97,18 +89,7 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(30)
-		public class DeleteMenu extends AbstractMenu {
-
-			@Override
-			protected String getConfiguredText() {
-				return TEXTS.get("DeleteMenu");
-			}
-
-			@Override
-			protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-				return CollectionUtility.<IMenuType>hashSet(TableMenuType.SingleSelection,
-						TableMenuType.MultiSelection);
-			}
+		public class DeleteMenu extends QuickDeleteMenu {
 
 			@Override
 			protected void execAction() throws ProcessingException {

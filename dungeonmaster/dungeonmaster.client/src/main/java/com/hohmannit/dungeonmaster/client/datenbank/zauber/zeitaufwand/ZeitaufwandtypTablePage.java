@@ -73,6 +73,11 @@ public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 				form.addFormListener(new ZeitaufwandtypFormListener());
 				form.startModify();
 			}
+
+			@Override
+			protected String getConfiguredIconId() {
+				return Icons.Gear;
+			}
 		}
 
 		@Order(20)
@@ -97,7 +102,7 @@ public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected String getConfiguredIconId() {
-				return super.getConfiguredIconId();
+				return Icons.Plus;
 			}
 		}
 
@@ -119,6 +124,11 @@ public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 			protected void execAction() throws ProcessingException {
 				BEANS.get(IZeitaufwandtypService.class).delete(getIdColumn().getSelectedValues());
 				deleteRow(getSelectedRow());
+			}
+
+			@Override
+			protected String getConfiguredIconId() {
+				return Icons.Remove;
 			}
 		}
 

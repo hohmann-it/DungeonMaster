@@ -81,6 +81,11 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 				// start the form using its modify handler
 				form.startModify();
 			}
+
+			@Override
+			protected String getConfiguredIconId() {
+				return Icons.Gear;
+			}
 		}
 
 		@Order(20)
@@ -102,6 +107,11 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 				form.addFormListener(new ZauberFormListener());
 				// start the form using its new handler
 				form.startNew();
+			}
+
+			@Override
+			protected String getConfiguredIconId() {
+				return Icons.Plus;
 			}
 		}
 

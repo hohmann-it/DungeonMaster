@@ -46,7 +46,7 @@ public class Desktop extends AbstractDesktop {
 
 	@Override
 	protected NativeNotificationDefaults getConfiguredNativeNotificationDefaults() {
-		return super.getConfiguredNativeNotificationDefaults().withIconId("application_logo.png");
+		return super.getConfiguredNativeNotificationDefaults().withIconId("application_logo.svg");
 	}
 
 	@Override
