@@ -4,6 +4,7 @@ CREATE TABLE zeitaufwandtyp
     (
         zeitaufwandtyp_id bigint NOT NULL
       , typ               text NOT NULL
+      , beschreibung      text DEFAULT NULL
     )
 ;
 
@@ -24,15 +25,18 @@ ALTER TABLE ONLY zeitaufwandtyp ADD CONSTRAINT zeitaufwandtyp_pkey PRIMARY KEY (
 
 CREATE OR REPLACE PROCEDURE insert_zeitaufwandtyp
 (
-  IN in_typ       text
+  IN in_typ          text
+, IN in_beschreibung text DEFAULT NULL
 ) LANGUAGE 'sql'
 AS
 $BODY$
 INSERT INTO dd.zeitaufwandtyp
     ( typ
+      , beschreibung
     )
     VALUES
     ( in_typ
+      , in_beschreibung
     )
 ;
 
@@ -40,5 +44,5 @@ $BODY$;
 ALTER
 PROCEDURE insert_zeitaufwandtyp
 (
-  text
+text, text
 ) OWNER TO dungeonmaster;

@@ -70,7 +70,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class EditMenu extends AbstractMenu {
 			@Override
 			protected String getConfiguredText() {
-				return TEXTS.get("Bearbeiten");
+				return TEXTS.get("Allgemein_Bearbeiten");
 			}
 
 			@Override
@@ -254,7 +254,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class ZeitaufwandtypColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("ZeitaufwandTyp");
+				return TEXTS.get("Zauber_Zeitaufwandtyp_Label");
 			}
 
 			@Override
@@ -272,7 +272,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class ReichweiteColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Reichweite");
+				return TEXTS.get("Zauber_Reichweite_Label");
 			}
 
 			@Override
@@ -285,7 +285,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class ReichweitetypColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("ReichweiteTyp");
+				return TEXTS.get("Zauber_Reichweitetyp_Label");
 			}
 
 			@Override
@@ -334,7 +334,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class BeschreibungColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Beschreibung");
+				return TEXTS.get("Allgemein_Beschreibung");
 			}
 
 			@Override

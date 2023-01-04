@@ -13,10 +13,10 @@ CALL dd.insert_zaubertyp('Erkenntniszauberei');
 CALL dd.insert_zaubertyp('Illusionszauber');
 CALL dd.insert_zaubertyp('Nekromantiezauber');
 \echo ''\echo ''\echo '=========Populating dd.zeitaufwandtyp========='\echo ''\echo ''
-CALL dd.insert_zeitaufwandtyp('Aktion');
-CALL dd.insert_zeitaufwandtyp('Bonusaktion');
-CALL dd.insert_zeitaufwandtyp('Minuten');
-CALL dd.insert_zeitaufwandtyp('Reaktionen');
+CALL dd.insert_zeitaufwandtyp('Aktion', 'Eine gewöhnliche Aktion');
+CALL dd.insert_zeitaufwandtyp('Bonusaktion', 'Ein Zauber, der mit einer Bonusaktion gewirkt wird, ist besonders schnell. Wende für einen solchen Spruch in deinem Zug eine Bonusaktion auf, vorausgesetzt dass du in diesem noch keine genutzt hast. Du kannst keinen anderen Zauber in diesem Zug wirken, außer einem Zaubertrick mit einem Zeitaufwand von einer Aktion.');
+CALL dd.insert_zeitaufwandtyp('Minuten', 'Bestimmte Zauber (auch Rituale) erfordern mehr Zeit, um sie zu wirken: Minuten oder sogar Stunden. Verwendest du einen Spruch mit einem längeren Zeitaufwand als eine Aktion oder Reaktion, musst du in jedem Zug, den du den Zauber wirkst, deine Aktion darauf verwenden und die ganze Zeit über deine Konzentration aufrechterhalten. Wird deine Konzentration unterbrochen, scheitert der Zauber, aber du verbrauchst keinen Zauberplatz. Wenn du den Spruch erneut wirken willst, musst du von vorn beginnen.');
+CALL dd.insert_zeitaufwandtyp('Reaktion', 'Einige Zauber können als Reaktion gewirkt werden. Sie erfordern nur einen Sekundenbruchteil der Konzentration und stellen die Antwort auf ein bestimmtes Ereignis dar. Wenn ein Zauber als Reaktion gewirkt werden kann, ist in seiner Beschreibung angegeben, zu welchem Zeitpunkt dies genau möglich ist.');
 \echo ''\echo ''\echo '=========Populating dd.reichweitetyp========='\echo ''\echo ''
 CALL dd.insert_reichweitetyp('Meter', 'm');
 CALL dd.insert_reichweitetyp('Selbst', 'Selbst');
@@ -218,7 +218,7 @@ CALL dd.insert_zauber('Resistenz',1,'Aktion',0,'Berührung',1,'Minuten, Konzentr
 ,'Bannzauber', TRUE
 , TRUE
 , TRUE, 0 );
-CALL dd.insert_zauber('Schild',1,'Reaktionen',0,'Selbst',1,'Runden'
+CALL dd.insert_zauber('Schild',1,'Reaktion',0,'Selbst',1,'Runden'
 , 'Eine unsichtbare Barriere aus magischer Energie erscheint und schützt dich. Bis zum Beginn deines nächsten Zugs hast du einen Bonus von +5 auf deine Rüstungsklasse, auch gegen den auslö- senden Angriff, und erleidest keinen Schaden durch den Zauber Magisches Geschoss.'
 ,NULL
 ,'Bannzauber', TRUE

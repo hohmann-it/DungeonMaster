@@ -371,7 +371,7 @@ public class ZauberForm extends AbstractForm {
 			public class ReichweiteSequenceBox extends AbstractSequenceBox {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Reichweite");
+					return TEXTS.get("Zauber_Reichweite_Label");
 				}
 
 				@Override
@@ -441,7 +441,7 @@ public class ZauberForm extends AbstractForm {
 		public class DetailsBox extends AbstractGroupBox {
 			@Override
 			protected String getConfiguredLabel() {
-				return TEXTS.get("Beschreibung");
+				return TEXTS.get("Allgemein_Beschreibung");
 			}
 
 			@Override
@@ -570,7 +570,7 @@ public class ZauberForm extends AbstractForm {
 					public class GestikField extends AbstractBooleanField {
 						@Override
 						protected String getConfiguredLabel() {
-							return TEXTS.get("Gestik");
+							return TEXTS.get("Page_Zauber_Zauberkomponenten_Gestik_Label");
 						}
 					}
 
@@ -665,7 +665,7 @@ public class ZauberForm extends AbstractForm {
 						public class AnzahlColumn extends AbstractStringColumn {
 							@Override
 							protected String getConfiguredHeaderText() {
-								return TEXTS.get("Anzahl");
+								return TEXTS.get("Allgemein_Anzahl");
 							}
 
 							@Override
@@ -722,7 +722,7 @@ public class ZauberForm extends AbstractForm {
 						public class ErsatzColumn extends AbstractSmartColumn<Long> {
 							@Override
 							protected String getConfiguredHeaderText() {
-								return TEXTS.get("Ersatzmaterial");
+								return TEXTS.get("Page_Zauber_Zaubermaterial_Ersatz_Label");
 							}
 
 							@Override
@@ -746,7 +746,7 @@ public class ZauberForm extends AbstractForm {
 			public class CharaktereBox extends AbstractGroupBox {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Charaktere");
+					return TEXTS.get("Page_Charaktere_Titel");
 				}
 			}
 

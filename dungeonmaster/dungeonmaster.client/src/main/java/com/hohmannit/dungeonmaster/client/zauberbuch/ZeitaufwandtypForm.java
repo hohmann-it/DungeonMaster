@@ -6,13 +6,19 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
+import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZeitaufwandtypForm.MainBox.CancelButton;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZeitaufwandtypForm.MainBox.GroupBox;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZeitaufwandtypForm.MainBox.GroupBox.BeschreibungField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZeitaufwandtypForm.MainBox.GroupBox.DescriptionField;
+import com.hohmannit.dungeonmaster.client.zauberbuch.ZeitaufwandtypForm.MainBox.GroupBox.TypField;
 import com.hohmannit.dungeonmaster.client.zauberbuch.ZeitaufwandtypForm.MainBox.OkButton;
+import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.CreateZeitaufwandtypPermission;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.IZeitaufwandtypService;
 import com.hohmannit.dungeonmaster.shared.zauberbuch.UpdateZeitaufwandtypPermission;
@@ -34,8 +40,13 @@ public class ZeitaufwandtypForm extends AbstractForm {
 	}
 
 	@Override
+	protected String getConfiguredIconId() {
+		return Icons.SpellTime;
+	}
+
+	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Zeitaufwandtyp");
+		return TEXTS.get("Type");
 	}
 
 	public MainBox getMainBox() {
@@ -44,6 +55,18 @@ public class ZeitaufwandtypForm extends AbstractForm {
 
 	public GroupBox getGroupBox() {
 		return getFieldByClass(GroupBox.class);
+	}
+
+	public TypField getTypField() {
+		return getFieldByClass(TypField.class);
+	}
+
+	public DescriptionField getDescriptionField() {
+		return getFieldByClass(DescriptionField.class);
+	}
+
+	public BeschreibungField getMyStringField() {
+		return getFieldByClass(BeschreibungField.class);
 	}
 
 	public OkButton getOkButton() {
@@ -58,6 +81,85 @@ public class ZeitaufwandtypForm extends AbstractForm {
 	public class MainBox extends AbstractGroupBox {
 		@Order(1000)
 		public class GroupBox extends AbstractGroupBox {
+			@Override
+			protected int getConfiguredGridColumnCount() {
+				return 2;
+			}
+
+			@Order(0)
+			@FormData(sdkCommand = FormData.SdkCommand.IGNORE)
+			public class DescriptionField extends AbstractLabelField {
+				@Override
+				protected int getConfiguredGridW() {
+					return 2;
+				}
+
+				@Override
+				protected int getConfiguredGridH() {
+					return 2;
+				}
+
+				@Override
+				protected boolean getConfiguredWrapText() {
+					return true;
+				}
+
+				@Override
+				protected boolean getConfiguredLabelVisible() {
+					return false;
+				}
+
+				@Override
+				protected void execInitField() {
+					setValue(TEXTS.get("Zauber_Zeitaufwandtyp_Beschreibung"));
+				}
+			}
+
+			@Order(1000)
+			public class TypField extends AbstractStringField {
+				@Override
+				protected String getConfiguredLabel() {
+					return TEXTS.get("Zauber_Zeitaufwandtyp_Label");
+				}
+
+				@Override
+				protected int getConfiguredMaxLength() {
+					return 128;
+				}
+			}
+
+			@Order(2000)
+			public class BeschreibungField extends AbstractStringField {
+				@Override
+				protected String getConfiguredLabel() {
+					return TEXTS.get("Beschreibung");
+				}
+
+				@Override
+				protected int getConfiguredGridW() {
+					return 2;
+				}
+
+				@Override
+				protected int getConfiguredGridH() {
+					return 3;
+				}
+
+				@Override
+				protected boolean getConfiguredMultilineText() {
+					return true;
+				}
+
+				@Override
+				protected boolean getConfiguredWrapText() {
+					return true;
+				}
+
+				@Override
+				protected int getConfiguredMaxLength() {
+					return 1500;
+				}
+			}
 
 		}
 
@@ -89,6 +191,8 @@ public class ZeitaufwandtypForm extends AbstractForm {
 			importFormData(formData);
 
 			setEnabledPermission(new CreateZeitaufwandtypPermission());
+			setTitle(TEXTS.get("NeuenZeitaufwandtypAnlegen"));
+			getDescriptionField().setValue(TEXTS.get("Zauber_Zeitaufwandtyp_Beschreibung"));
 		}
 
 		@Override
@@ -109,6 +213,9 @@ public class ZeitaufwandtypForm extends AbstractForm {
 			importFormData(formData);
 
 			setEnabledPermission(new UpdateZeitaufwandtypPermission());
+			setTitle(TEXTS.get("ZeitaufwandtypBearbeiten"));
+			setSubTitle(getTypField().getValue());
+			getDescriptionField().setValue(TEXTS.get("Zauber_Zeitaufwandtyp_Beschreibung"));
 		}
 
 		@Override

@@ -16,7 +16,7 @@ public class ZauberService implements IZauberService {
 	@Override
 	public ZauberFormData prepareCreate(ZauberFormData formData) {
 		if (!ACCESS.check(new CreateZauberPermission())) {
-			throw new VetoException(TEXTS.get("AuthorizationFailed"));
+			throw new VetoException(TEXTS.get("Allgemein_ZugriffVerweigert"));
 		}
 		return formData;
 	}
@@ -24,7 +24,7 @@ public class ZauberService implements IZauberService {
 	@Override
 	public ZauberFormData create(ZauberFormData formData) {
 		if (!ACCESS.check(new CreateZauberPermission())) {
-			throw new VetoException(TEXTS.get("AuthorizationFailed"));
+			throw new VetoException(TEXTS.get("Allgemein_ZugriffVerweigert"));
 		}
 		SQL.insert(SQLs.ZAUBER_INSERT, formData);
 		return formData;
@@ -33,7 +33,7 @@ public class ZauberService implements IZauberService {
 	@Override
 	public ZauberFormData load(ZauberFormData formData) {
 		if (!ACCESS.check(new ReadZauberPermission())) {
-			throw new VetoException(TEXTS.get("AuthorizationFailed"));
+			throw new VetoException(TEXTS.get("Allgemein_ZugriffVerweigert"));
 		}
 		SQL.select(SQLs.ZAUBER_SELECT, formData);
 		SQL.select(SQLs.ZAUBERMATERIAL_SELECT, formData);
@@ -43,7 +43,7 @@ public class ZauberService implements IZauberService {
 	@Override
 	public ZauberFormData store(ZauberFormData formData) {
 		if (!ACCESS.check(new UpdateZauberPermission())) {
-			throw new VetoException(TEXTS.get("AuthorizationFailed"));
+			throw new VetoException(TEXTS.get("Allgemein_ZugriffVerweigert"));
 		}
 		return formData;
 	}

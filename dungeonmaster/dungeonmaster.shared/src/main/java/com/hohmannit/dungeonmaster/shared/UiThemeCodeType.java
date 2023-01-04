@@ -41,7 +41,7 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
 
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Dunkel");
+			return TEXTS.get("Optionen_Theme_Dunkel");
 		}
 
 		@Override

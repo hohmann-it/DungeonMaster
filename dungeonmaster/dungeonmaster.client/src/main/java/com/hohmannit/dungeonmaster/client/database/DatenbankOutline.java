@@ -23,7 +23,7 @@ public class DatenbankOutline extends AbstractOutline {
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Database");
+		return TEXTS.get("Outline_Datenbank_Titel");
 	}
 
 	@Override

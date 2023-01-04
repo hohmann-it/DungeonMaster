@@ -52,10 +52,10 @@ public class ZeitaufwandtypTablePageData extends AbstractTablePageData {
 		private static final long serialVersionUID = 1L;
 		public static final String id = "id";
 		public static final String typ = "typ";
-		public static final String kategorie = "kategorie";
+		public static final String beschreibung = "beschreibung";
 		private Long m_id;
 		private String m_typ;
-		private String m_kategorie;
+		private String m_beschreibung;
 
 		public Long getId() {
 			return m_id;
@@ -73,12 +73,12 @@ public class ZeitaufwandtypTablePageData extends AbstractTablePageData {
 			m_typ = newTyp;
 		}
 
-		public String getKategorie() {
-			return m_kategorie;
+		public String getBeschreibung() {
+			return m_beschreibung;
 		}
 
-		public void setKategorie(String newKategorie) {
-			m_kategorie = newKategorie;
+		public void setBeschreibung(String newBeschreibung) {
+			m_beschreibung = newBeschreibung;
 		}
 	}
 }

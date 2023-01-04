@@ -81,7 +81,7 @@ public class OptionsForm extends AbstractForm {
 				.put(ClientSession.PREF_USER_LOCALE, locale.toLanguageTag());
 		if (localeChanged) {
 			ClientUIPreferences.getClientPreferences(ClientSession.get()).flush();
-			MessageBoxes.createOk().withBody(TEXTS.get("DieNderungDerSpracheWirdBeiDerNchstenAnmeldungAktiv")).show();
+			MessageBoxes.createOk().withBody(TEXTS.get("Optionen_SpracheAendern_Nachricht")).show();
 		}
 	}
 
@@ -200,7 +200,7 @@ public class OptionsForm extends AbstractForm {
 
 			@Override
 			protected String getConfiguredLabel() {
-				return TEXTS.get("bernehmen");
+				return TEXTS.get("Allgemein_Uebernehmen");
 			}
 
 			@Override

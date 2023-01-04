@@ -36,7 +36,7 @@ public class Desktop extends AbstractDesktop {
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("ApplicationTitle");
+		return TEXTS.get("Allgemein_ApplicationTitle");
 	}
 
 	@Override

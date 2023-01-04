@@ -63,7 +63,7 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 		public class EditMenu extends AbstractMenu {
 			@Override
 			protected String getConfiguredText() {
-				return TEXTS.get("Bearbeiten");
+				return TEXTS.get("Allgemein_Bearbeiten");
 			}
 
 			@Override
