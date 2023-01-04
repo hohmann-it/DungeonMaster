@@ -1,7 +1,6 @@
 package com.hohmannit.dungeonmaster.client.datenbank.zauber.zaubertyp;
 
 import org.eclipse.scout.rt.client.dto.Data;
-import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
@@ -16,6 +15,7 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
 import com.hohmannit.dungeonmaster.client.common.QuickDeleteMenu;
+import com.hohmannit.dungeonmaster.client.common.QuickEditMenu;
 import com.hohmannit.dungeonmaster.client.common.QuickNewMenu;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zaubertyp.ZaubertypTablePage.Table;
 import com.hohmannit.dungeonmaster.shared.Icons;
@@ -57,11 +57,7 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(10)
-		public class EditMenu extends AbstractMenu {
-			@Override
-			protected String getConfiguredText() {
-				return TEXTS.get("Allgemein_Bearbeiten");
-			}
+		public class EditMenu extends QuickEditMenu {
 
 			@Override
 			protected void execAction() {
@@ -71,10 +67,6 @@ public class ZaubertypTablePage extends AbstractPageWithTable<Table> {
 				form.startModify();
 			}
 
-			@Override
-			protected String getConfiguredIconId() {
-				return Icons.Gear;
-			}
 		}
 
 		@Order(20)

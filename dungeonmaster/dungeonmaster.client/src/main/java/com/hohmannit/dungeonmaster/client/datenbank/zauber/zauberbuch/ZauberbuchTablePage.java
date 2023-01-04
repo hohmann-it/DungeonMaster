@@ -1,12 +1,7 @@
 package com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch;
 
-import java.util.Set;
-
 import org.eclipse.scout.rt.client.dto.Data;
-import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
-import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
-import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
@@ -17,11 +12,12 @@ import org.eclipse.scout.rt.client.ui.form.FormListener;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
-import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
+import com.hohmannit.dungeonmaster.client.common.QuickEditMenu;
+import com.hohmannit.dungeonmaster.client.common.QuickNewMenu;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchTablePage.Table;
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.grad.ZaubergradCodeType;
@@ -67,11 +63,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(10)
-		public class EditMenu extends AbstractMenu {
-			@Override
-			protected String getConfiguredText() {
-				return TEXTS.get("Allgemein_Bearbeiten");
-			}
+		public class EditMenu extends QuickEditMenu {
 
 			@Override
 			protected void execAction() {
@@ -81,25 +73,10 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 				// start the form using its modify handler
 				form.startModify();
 			}
-
-			@Override
-			protected String getConfiguredIconId() {
-				return Icons.Gear;
-			}
 		}
 
 		@Order(20)
-		public class NewMenu extends AbstractMenu {
-
-			@Override
-			protected String getConfiguredText() {
-				return TEXTS.get("New");
-			}
-
-			@Override
-			protected Set<? extends IMenuType> getConfiguredMenuTypes() {
-				return CollectionUtility.<IMenuType>hashSet(TableMenuType.EmptySpace, TableMenuType.SingleSelection);
-			}
+		public class NewMenu extends QuickNewMenu {
 
 			@Override
 			protected void execAction() {
@@ -109,10 +86,6 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 				form.startNew();
 			}
 
-			@Override
-			protected String getConfiguredIconId() {
-				return Icons.Plus;
-			}
 		}
 
 		private class ZauberFormListener implements FormListener {
