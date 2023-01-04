@@ -25,4 +25,5 @@ public class Icons extends AbstractIcons {
 	public static final String Cost = "font:icoMoon \ueb92";
 	public static final String Weight = "font:icoMoon \uf816";
 	public static final String Duration = "font:icoMoon \uea01";
+	public static final String ReichweiteDescription = "ReichweiteDescription.png";
 }
