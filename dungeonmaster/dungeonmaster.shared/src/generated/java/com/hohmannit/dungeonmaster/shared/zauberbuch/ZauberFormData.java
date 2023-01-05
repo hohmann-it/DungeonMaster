@@ -131,7 +131,7 @@ public class ZauberFormData extends AbstractFormData {
 		private static final long serialVersionUID = 1L;
 	}
 
-	public static class Reichweite extends AbstractValueFieldData<Integer> {
+	public static class Reichweite extends AbstractValueFieldData<Double> {
 		private static final long serialVersionUID = 1L;
 	}
 

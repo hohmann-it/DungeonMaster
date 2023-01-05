@@ -8,6 +8,7 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteTablePage;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleTablePage;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.wirkungsdauer.WirkungsdauerTablePage;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchTablePage;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandtypTablePage;
 import com.hohmannit.dungeonmaster.shared.Icons;
@@ -19,6 +20,7 @@ public class ZauberNodePage extends AbstractPageWithNodes {
 		pageList.add(new SchuleTablePage());
 		pageList.add(new ZeitaufwandtypTablePage());
 		pageList.add(new ReichweiteTablePage());
+		pageList.add(new WirkungsdauerTablePage());
 	}
 
 	@Override

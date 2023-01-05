@@ -24,6 +24,7 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
+import com.hohmannit.dungeonmaster.client.common.DoubleField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.CancelButton;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.DetailsBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.DetailsBox.BeschreibungField;
@@ -386,11 +387,8 @@ public class ZauberbuchForm extends AbstractForm {
 				}
 
 				@Order(1000)
-				public class ReichweiteField extends AbstractIntegerField {
-					@Override
-					protected boolean getConfiguredLabelVisible() {
-						return false;
-					}
+				public class ReichweiteField extends DoubleField {
+
 				}
 
 				@Order(2000)
