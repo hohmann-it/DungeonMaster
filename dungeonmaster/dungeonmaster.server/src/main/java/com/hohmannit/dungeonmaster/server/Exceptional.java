@@ -14,6 +14,9 @@ public class Exceptional {
 			case "23503": {
 				throw new VetoException(TEXTS.get("Fehler_Constraint"));
 			}
+			case "23505": {
+				throw new VetoException(TEXTS.get("Fehler_Constraint_Unique"));
+			}
 			default:
 				throw new IllegalArgumentException(TEXTS.get("Datenbankfehler"));
 			}

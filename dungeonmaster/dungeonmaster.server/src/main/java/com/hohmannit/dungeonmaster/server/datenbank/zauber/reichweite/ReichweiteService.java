@@ -40,7 +40,11 @@ public class ReichweiteService implements IReichweiteService {
 		if (!ACCESS.check(new CreateReichweitePermission())) {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
-		SQL.insert(ReichweiteSQLs.REICHWEITE_INSERT, formData);
+		try {
+			SQL.insert(ReichweiteSQLs.REICHWEITE_INSERT, formData);
+		} catch (PlatformException e) {
+			Exceptional.handle(e);
+		}
 		return formData;
 	}
 

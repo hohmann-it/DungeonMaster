@@ -13,6 +13,7 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
+import com.hohmannit.dungeonmaster.client.common.NonNullStringField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.CancelButton;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.GroupBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.GroupBox.BeschreibungField;
@@ -154,7 +155,7 @@ public class ReichweiteForm extends AbstractForm {
 			}
 
 			@Order(3000)
-			public class TypLangField extends AbstractStringField {
+			public class TypLangField extends NonNullStringField {
 				@Override
 				protected String getConfiguredLabel() {
 					return TEXTS.get("EinheitLang");
@@ -167,7 +168,7 @@ public class ReichweiteForm extends AbstractForm {
 			}
 
 			@Order(4000)
-			public class TypKurzField extends AbstractStringField {
+			public class TypKurzField extends NonNullStringField {
 				@Override
 				protected String getConfiguredLabel() {
 					return TEXTS.get("EinheitKurz");

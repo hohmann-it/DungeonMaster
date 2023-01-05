@@ -37,7 +37,8 @@ public interface ZauberbuchSQLs {
 			+ "verbal, "//
 			+ "gestik, "//
 			+ "material, "//
-			+ "ritual"//
+			+ "ritual,"//
+			+ "konzentration"//
 			+ "	FROM dd.zauber "//
 			+ "WHERE    zauber_id = :zauberId "//
 			+ "INTO     :name, "//
@@ -54,5 +55,6 @@ public interface ZauberbuchSQLs {
 			+ "         :verbal, "//
 			+ "         :gestik, "//
 			+ "         :material, "//
-			+ "         :ritual";
+			+ "         :ritual," //
+			+ "         :konzentration";
 }

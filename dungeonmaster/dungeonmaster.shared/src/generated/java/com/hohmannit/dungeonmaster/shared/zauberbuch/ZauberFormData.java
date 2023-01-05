@@ -33,6 +33,10 @@ public class ZauberFormData extends AbstractFormData {
 		return getFieldByClass(Hoeheregrade.class);
 	}
 
+	public Konzentration getKonzentration() {
+		return getFieldByClass(Konzentration.class);
+	}
+
 	public Material getMaterial() {
 		return getFieldByClass(Material.class);
 	}
@@ -112,6 +116,10 @@ public class ZauberFormData extends AbstractFormData {
 	}
 
 	public static class Hoeheregrade extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Konzentration extends AbstractValueFieldData<Boolean> {
 		private static final long serialVersionUID = 1L;
 	}
 

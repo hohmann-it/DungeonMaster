@@ -34,6 +34,7 @@ import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.Zauberbuch
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ReichweiteSequenceBox.ReichweiteField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ReichweiteSequenceBox.ReichweitetypField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.WirkungsdauerSequenceBox;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.WirkungsdauerSequenceBox.KonzentrationField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.WirkungsdauerSequenceBox.WirkungsdauerField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.WirkungsdauerSequenceBox.WirkungsdauertypField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZauberImageField;
@@ -202,6 +203,10 @@ public class ZauberbuchForm extends AbstractForm {
 
 	public RitualField getRitualField() {
 		return getFieldByClass(RitualField.class);
+	}
+
+	public KonzentrationField getKonzentrationField() {
+		return getFieldByClass(KonzentrationField.class);
 	}
 
 	public NameField getNameField() {
@@ -434,6 +439,15 @@ public class ZauberbuchForm extends AbstractForm {
 						return WirkungsdauerLookupCall.class;
 					}
 				}
+
+				@Order(3000)
+				public class KonzentrationField extends AbstractBooleanField {
+					@Override
+					protected String getConfiguredLabel() {
+						return TEXTS.get("Konzentration");
+					}
+				}
+
 			}
 
 		}

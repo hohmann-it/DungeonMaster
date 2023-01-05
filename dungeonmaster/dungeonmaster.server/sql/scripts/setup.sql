@@ -70,30 +70,30 @@ ALTER SCHEMA od OWNER TO dungeonmaster;
 
 CREATE PROCEDURE dd.insert_gegenstand(IN in_name text, IN in_beschreibung text, IN in_wert numeric, IN in_gewicht numeric, IN in_typ text)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.gegenstand
-    ( name
-      , beschreibung
-      , wert
-      , gewicht
-      , fk_gegenstand_typ
-    )
-    VALUES
-    ( in_name
-      , in_beschreibung
-      , in_wert
-      , in_gewicht
-      , (
-            SELECT
-                gegenstandtyp_id
-            FROM
-                dd.gegenstandtyp
-            WHERE
-                typ = in_typ
-        )
-    )
-;
-
+    AS $$
+INSERT INTO dd.gegenstand
+    ( name
+      , beschreibung
+      , wert
+      , gewicht
+      , fk_gegenstand_typ
+    )
+    VALUES
+    ( in_name
+      , in_beschreibung
+      , in_wert
+      , in_gewicht
+      , (
+            SELECT
+                gegenstandtyp_id
+            FROM
+                dd.gegenstandtyp
+            WHERE
+                typ = in_typ
+        )
+    )
+;
+
 $$;
 
 
@@ -105,15 +105,15 @@ ALTER PROCEDURE dd.insert_gegenstand(IN in_name text, IN in_beschreibung text, I
 
 CREATE PROCEDURE dd.insert_gegenstandtyp(IN in_typ text)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.gegenstandtyp
-    ( typ
-    )
-    VALUES
-    ( in_typ
-    )
-;
-
+    AS $$
+INSERT INTO dd.gegenstandtyp
+    ( typ
+    )
+    VALUES
+    ( in_typ
+    )
+;
+
 $$;
 
 
@@ -125,17 +125,17 @@ ALTER PROCEDURE dd.insert_gegenstandtyp(IN in_typ text) OWNER TO dungeonmaster;
 
 CREATE PROCEDURE dd.insert_reichweite(IN in_typ_lang text, IN in_typ_kurz text, IN in_beschreibung text DEFAULT NULL::text)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.reichweite
-    ( typ_lang
-      , typ_kurz, beschreibung
-    )
-    VALUES
-    ( in_typ_lang
-      , in_typ_kurz, in_beschreibung
-    )
-;
-
+    AS $$
+INSERT INTO dd.reichweite
+    ( typ_lang
+      , typ_kurz, beschreibung
+    )
+    VALUES
+    ( in_typ_lang
+      , in_typ_kurz, in_beschreibung
+    )
+;
+
 $$;
 
 
@@ -147,19 +147,19 @@ ALTER PROCEDURE dd.insert_reichweite(IN in_typ_lang text, IN in_typ_kurz text, I
 
 CREATE PROCEDURE dd.insert_schule(IN in_typ text, IN in_kategorie text DEFAULT NULL::text, IN in_beschreibung text DEFAULT NULL::text)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.schule
-    ( typ
-      , kategorie
-      , beschreibung
-    )
-    VALUES
-    ( in_typ
-      , in_kategorie
-      , in_beschreibung
-    )
-;
-
+    AS $$
+INSERT INTO dd.schule
+    ( typ
+      , kategorie
+      , beschreibung
+    )
+    VALUES
+    ( in_typ
+      , in_kategorie
+      , in_beschreibung
+    )
+;
+
 $$;
 
 
@@ -171,17 +171,17 @@ ALTER PROCEDURE dd.insert_schule(IN in_typ text, IN in_kategorie text, IN in_bes
 
 CREATE PROCEDURE dd.insert_wirkungsdauer(IN in_typ text, IN in_beschreibung text DEFAULT NULL::text)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.wirkungsdauer
-    ( typ
-      , beschreibung
-    )
-    VALUES
-    ( in_typ
-      , in_beschreibung
-    )
-;
-
+    AS $$
+INSERT INTO dd.wirkungsdauer
+    ( typ
+      , beschreibung
+    )
+    VALUES
+    ( in_typ
+      , in_beschreibung
+    )
+;
+
 $$;
 
 
@@ -193,72 +193,72 @@ ALTER PROCEDURE dd.insert_wirkungsdauer(IN in_typ text, IN in_beschreibung text)
 
 CREATE PROCEDURE dd.insert_zauber(IN in_name text, IN in_zeitaufwand integer, IN in_zeitaufwandtyp text, IN in_reichweite integer, IN in_reichweitetyp_kurz text, IN in_wirkungsdauer integer, IN in_wirkungsdauertyp text, IN in_beschreibung text, IN in_hoehere_grade text, IN in_schule text, IN in_verbal boolean, IN in_gestik boolean, IN in_material boolean, IN in_grad integer, IN in_ritual boolean DEFAULT false, IN in_konzentration boolean DEFAULT false)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.zauber
-    ( name
-      , zeitaufwand
-      , fk_zeitaufwand_typ
-      , reichweite
-      , fk_reichweite
-      , wirkungsdauer
-      , fk_wirkungsdauer
-      , beschreibung
-      , hoehere_grade
-      , grad
-      , fk_schule
-      , verbal
-      , gestik
-      , material
-      , ritual
-	  , konzentration
-    )
-SELECT
-    in_name
-  , in_zeitaufwand
-  , (
-        SELECT
-            zeitaufwandtyp_id
-        FROM
-            dd.zeitaufwandtyp
-        WHERE
-            typ = in_zeitaufwandtyp
-    )
-  , in_reichweite
-  , (
-        SELECT
-            reichweite_id
-        FROM
-            dd.reichweite
-        WHERE
-            typ_kurz = in_reichweitetyp_kurz
-    )
-  , in_wirkungsdauer
-  , (
-        SELECT
-            wirkungsdauer_id
-        FROM
-            dd.wirkungsdauer
-        WHERE
-            typ = in_wirkungsdauertyp
-    )
-  , in_beschreibung
-  , in_hoehere_grade
-  , in_grad
-  , (
-        SELECT
-            schule_id
-        FROM
-            dd.schule
-        WHERE
-            typ = in_schule
-    )
-  , in_verbal
-  , in_gestik
-  , in_material
-  , in_ritual
-  , in_konzentration
-;
-
+    AS $$
+INSERT INTO dd.zauber
+    ( name
+      , zeitaufwand
+      , fk_zeitaufwand_typ
+      , reichweite
+      , fk_reichweite
+      , wirkungsdauer
+      , fk_wirkungsdauer
+      , beschreibung
+      , hoehere_grade
+      , grad
+      , fk_schule
+      , verbal
+      , gestik
+      , material
+      , ritual
+	  , konzentration
+    )
+SELECT
+    in_name
+  , in_zeitaufwand
+  , (
+        SELECT
+            zeitaufwandtyp_id
+        FROM
+            dd.zeitaufwandtyp
+        WHERE
+            typ = in_zeitaufwandtyp
+    )
+  , in_reichweite
+  , (
+        SELECT
+            reichweite_id
+        FROM
+            dd.reichweite
+        WHERE
+            typ_kurz = in_reichweitetyp_kurz
+    )
+  , in_wirkungsdauer
+  , (
+        SELECT
+            wirkungsdauer_id
+        FROM
+            dd.wirkungsdauer
+        WHERE
+            typ = in_wirkungsdauertyp
+    )
+  , in_beschreibung
+  , in_hoehere_grade
+  , in_grad
+  , (
+        SELECT
+            schule_id
+        FROM
+            dd.schule
+        WHERE
+            typ = in_schule
+    )
+  , in_verbal
+  , in_gestik
+  , in_material
+  , in_ritual
+  , in_konzentration
+;
+
 $$;
 
 
@@ -270,47 +270,47 @@ ALTER PROCEDURE dd.insert_zauber(IN in_name text, IN in_zeitaufwand integer, IN 
 
 CREATE PROCEDURE dd.insert_zaubermaterial(IN in_zauber text, IN in_gegenstand text, IN in_fk_ersatz_id numeric DEFAULT NULL::numeric, IN in_anzahl numeric DEFAULT 1, IN in_wird_verbraucht boolean DEFAULT false)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.zaubermaterial
-    ( fk_zauber
-      , fk_ersatz
-      , fk_gegenstand
-      , anzahl
-      , wird_verbraucht
-    )
-    VALUES
-    (
-    (
-        SELECT
-            zauber_id
-        from
-            dd.zauber
-        WHERE
-            name = in_zauber
-    )
-  , in_fk_ersatz_id
-  , (
-        SELECT
-            gegenstand_id
-        from
-            dd.gegenstand
-        WHERE
-            name               LIKE (in_gegenstand)
-            AND fk_gegenstand_typ =
-            (
-                SELECT
-                    gegenstandtyp_id
-                FROM
-                    dd.gegenstandtyp
-                WHERE
-                    typ = 'Zaubermaterial'
-            )
-    )
-  , in_anzahl
-  , in_wird_verbraucht
-    )
-;
-
+    AS $$
+INSERT INTO dd.zaubermaterial
+    ( fk_zauber
+      , fk_ersatz
+      , fk_gegenstand
+      , anzahl
+      , wird_verbraucht
+    )
+    VALUES
+    (
+    (
+        SELECT
+            zauber_id
+        from
+            dd.zauber
+        WHERE
+            name = in_zauber
+    )
+  , in_fk_ersatz_id
+  , (
+        SELECT
+            gegenstand_id
+        from
+            dd.gegenstand
+        WHERE
+            name               LIKE (in_gegenstand)
+            AND fk_gegenstand_typ =
+            (
+                SELECT
+                    gegenstandtyp_id
+                FROM
+                    dd.gegenstandtyp
+                WHERE
+                    typ = 'Zaubermaterial'
+            )
+    )
+  , in_anzahl
+  , in_wird_verbraucht
+    )
+;
+
 $$;
 
 
@@ -322,17 +322,17 @@ ALTER PROCEDURE dd.insert_zaubermaterial(IN in_zauber text, IN in_gegenstand tex
 
 CREATE PROCEDURE dd.insert_zeitaufwandtyp(IN in_typ text, IN in_beschreibung text DEFAULT NULL::text)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.zeitaufwandtyp
-    ( typ
-      , beschreibung
-    )
-    VALUES
-    ( in_typ
-      , in_beschreibung
-    )
-;
-
+    AS $$
+INSERT INTO dd.zeitaufwandtyp
+    ( typ
+      , beschreibung
+    )
+    VALUES
+    ( in_typ
+      , in_beschreibung
+    )
+;
+
 $$;
 
 
@@ -344,48 +344,48 @@ ALTER PROCEDURE dd.insert_zeitaufwandtyp(IN in_typ text, IN in_beschreibung text
 
 CREATE PROCEDURE dd.update_zaubermaterial_ersatz(IN in_zaubername text, IN in_gegenstand text, IN in_ersatz_gegenstand text)
     LANGUAGE sql
-    AS $$
-UPDATE
-    dd.zaubermaterial
-SET fk_ersatz=
-    (
-        SELECT
-            zaubermaterial_id
-        FROM
-            dd.zaubermaterial
-        WHERE
-            fk_gegenstand =
-            (
-                SELECT
-                    gegenstand_id
-                from
-                    dd.gegenstand
-                WHERE
-                    name =in_ersatz_gegenstand
-            )
-    )
-WHERE
-    fk_gegenstand =
-    (
-        SELECT
-            gegenstand_id
-        from
-            dd.gegenstand
-        WHERE
-            name =in_gegenstand
-    )
-    AND fk_zauber=
-    (
-        SELECT
-            zauber_id
-        FROM
-            dd.zauber
-        WHERE
-            name = in_zaubername
-    )
-	AND fk_ersatz IS NULL
-;
-
+    AS $$
+UPDATE
+    dd.zaubermaterial
+SET fk_ersatz=
+    (
+        SELECT
+            zaubermaterial_id
+        FROM
+            dd.zaubermaterial
+        WHERE
+            fk_gegenstand =
+            (
+                SELECT
+                    gegenstand_id
+                from
+                    dd.gegenstand
+                WHERE
+                    name =in_ersatz_gegenstand
+            )
+    )
+WHERE
+    fk_gegenstand =
+    (
+        SELECT
+            gegenstand_id
+        from
+            dd.gegenstand
+        WHERE
+            name =in_gegenstand
+    )
+    AND fk_zauber=
+    (
+        SELECT
+            zauber_id
+        FROM
+            dd.zauber
+        WHERE
+            name = in_zaubername
+    )
+	AND fk_ersatz IS NULL
+;
+
 $$;
 
 
@@ -397,17 +397,17 @@ ALTER PROCEDURE dd.update_zaubermaterial_ersatz(IN in_zaubername text, IN in_geg
 
 CREATE PROCEDURE od.insert_charakter(IN in_klasse text, IN in_name text)
     LANGUAGE sql
-    AS $$
-INSERT INTO od.charaktere
-    ( klasse
-      , name
-    )
-    VALUES
-    ( in_klasse
-      , in_name
-    )
-;
-
+    AS $$
+INSERT INTO od.charaktere
+    ( klasse
+      , name
+    )
+    VALUES
+    ( in_klasse
+      , in_name
+    )
+;
+
 $$;
 
 
@@ -1009,8 +1009,6 @@ INSERT INTO dd.wirkungsdauer VALUES (1, 'Runden', NULL);
 INSERT INTO dd.wirkungsdauer VALUES (2, 'Minuten', NULL);
 INSERT INTO dd.wirkungsdauer VALUES (3, 'Stunden', NULL);
 INSERT INTO dd.wirkungsdauer VALUES (4, 'Unmittelbar', 'Viele Zauber sind unmittelbar. Sie verletzen, heilen, erschaffen oder verändern eine Kreatur oder einen Gegenstand auf eine Weise, die nicht gebannt werden kann, weil ihre Magie nur für einen Augenblick existiert.');
-INSERT INTO dd.wirkungsdauer VALUES (5, 'Minuten, Konzentration', NULL);
-INSERT INTO dd.wirkungsdauer VALUES (6, 'Stunden, Konzentration', NULL);
 
 
 --
