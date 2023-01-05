@@ -10,4 +10,19 @@ public interface ZaubermaterialSQLs {
 			+ "<key>    AND zaubermaterial_id = :key </key> " //
 			+ "<text>   AND UPPER(name) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
+	String ZAUBERMATERIAL_SELECT = "" //
+			+ "SELECT" //
+			+ "				zm.zaubermaterial_id, " //
+			+ "				zm.fk_gegenstand, " //
+			+ "				zm.fk_ersatz, " //
+			+ "				g.wert, " //
+			+ "				zm.anzahl, " //
+			+ "				g.gewicht " //
+			+ "FROM         dd.zaubermaterial zm INNER JOIN dd.gegenstand g ON zm.fk_gegenstand = g.gegenstand_id WHERE fk_zauber = :zauberId " //
+			+ "INTO         :{ZaubkomponentenTable.id}," //
+			+ "				:{ZaubkomponentenTable.name}," //
+			+ "				:{ZaubkomponentenTable.ersatz}," //
+			+ "				:{ZaubkomponentenTable.wert},"//
+			+ "				:{ZaubkomponentenTable.anzahl},"//
+			+ "				:{ZaubkomponentenTable.gewicht}";
 }

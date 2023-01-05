@@ -7,6 +7,7 @@ import org.eclipse.scout.rt.security.ACCESS;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
+import com.hohmannit.dungeonmaster.server.datenbank.zauber.zaubermaterial.ZaubermaterialSQLs;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zauberbuch.CreateZauberbuchPermission;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zauberbuch.IZauberbuchService;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zauberbuch.ReadZauberbuchPermission;
@@ -48,7 +49,7 @@ public class ZauberbuchService implements IZauberbuchService {
 			throw new VetoException(TEXTS.get("Allgemein_ZugriffVerweigert"));
 		}
 		SQL.select(ZauberbuchSQLs.ZAUBER_SELECT, formData);
-		SQL.select(ZauberbuchSQLs.ZAUBERMATERIAL_SELECT, formData);
+		SQL.select(ZaubermaterialSQLs.ZAUBERMATERIAL_SELECT, formData);
 		return formData;
 	}
 
