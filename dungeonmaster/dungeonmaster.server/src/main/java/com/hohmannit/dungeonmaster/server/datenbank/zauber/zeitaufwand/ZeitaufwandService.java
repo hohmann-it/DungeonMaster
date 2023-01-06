@@ -2,7 +2,6 @@ package com.hohmannit.dungeonmaster.server.datenbank.zauber.zeitaufwand;
 
 import java.util.List;
 
-import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -10,7 +9,6 @@ import org.eclipse.scout.rt.security.ACCESS;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
-import com.hohmannit.dungeonmaster.server.Exceptional;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.CreateZeitaufwandtypPermission;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.IZeitaufwandtypService;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.ReadZeitaufwandtypPermission;
@@ -68,11 +66,7 @@ public class ZeitaufwandService implements IZeitaufwandtypService {
 		for (Long key : list) {
 			ZeitaufwandtypFormData formData = new ZeitaufwandtypFormData();
 			formData.setZeitaufwandtypId(key);
-			try {
-				SQL.delete(ZeitaufwandSQLs.ZEITAUFWANDTYP_DELETE, formData);
-			} catch (PlatformException e) {
-				Exceptional.handle(e);
-			}
+			SQL.delete(ZeitaufwandSQLs.ZEITAUFWANDTYP_DELETE, formData);
 		}
 	}
 }

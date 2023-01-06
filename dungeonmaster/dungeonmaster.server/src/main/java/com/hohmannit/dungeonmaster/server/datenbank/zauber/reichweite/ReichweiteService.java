@@ -2,7 +2,6 @@ package com.hohmannit.dungeonmaster.server.datenbank.zauber.reichweite;
 
 import java.util.List;
 
-import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -10,7 +9,6 @@ import org.eclipse.scout.rt.security.ACCESS;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
-import com.hohmannit.dungeonmaster.server.Exceptional;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.reichweite.CreateReichweitePermission;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.reichweite.IReichweiteService;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.reichweite.ReadReichweitePermission;
@@ -40,11 +38,7 @@ public class ReichweiteService implements IReichweiteService {
 		if (!ACCESS.check(new CreateReichweitePermission())) {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
-		try {
-			SQL.insert(ReichweiteSQLs.REICHWEITE_INSERT, formData);
-		} catch (PlatformException e) {
-			Exceptional.handle(e);
-		}
+		SQL.insert(ReichweiteSQLs.REICHWEITE_INSERT, formData);
 		return formData;
 	}
 
@@ -71,11 +65,7 @@ public class ReichweiteService implements IReichweiteService {
 		for (Long key : list) {
 			ReichweiteFormData formData = new ReichweiteFormData();
 			formData.setReichweiteId(key);
-			try {
-				SQL.delete(ReichweiteSQLs.REICHWEITE_DELETE, formData);
-			} catch (PlatformException e) {
-				Exceptional.handle(e);
-			}
+			SQL.delete(ReichweiteSQLs.REICHWEITE_DELETE, formData);
 		}
 	}
 }

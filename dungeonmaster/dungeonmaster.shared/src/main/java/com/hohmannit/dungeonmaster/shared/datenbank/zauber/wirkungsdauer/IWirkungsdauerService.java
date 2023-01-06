@@ -1,5 +1,7 @@
 package com.hohmannit.dungeonmaster.shared.datenbank.zauber.wirkungsdauer;
 
+import java.util.List;
+
 import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.shared.TunnelToServer;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
@@ -15,4 +17,6 @@ public interface IWirkungsdauerService extends IService {
 	WirkungsdauerFormData load(WirkungsdauerFormData formData);
 
 	WirkungsdauerFormData store(WirkungsdauerFormData formData);
+
+	void delete(List<Long> list);
 }

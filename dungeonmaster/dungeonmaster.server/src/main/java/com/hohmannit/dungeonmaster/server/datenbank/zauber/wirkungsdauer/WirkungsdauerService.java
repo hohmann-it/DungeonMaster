@@ -1,8 +1,12 @@
 package com.hohmannit.dungeonmaster.server.datenbank.zauber.wirkungsdauer;
 
+import java.util.List;
+
 import org.eclipse.scout.rt.platform.exception.VetoException;
+import org.eclipse.scout.rt.platform.holders.NVPair;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.security.ACCESS;
+import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.wirkungsdauer.CreateWirkungsdauerPermission;
@@ -16,7 +20,9 @@ public class WirkungsdauerService implements IWirkungsdauerService {
 	@Override
 	public WirkungsdauerTablePageData getWirkungsdauerTableData(SearchFilter filter) {
 		WirkungsdauerTablePageData pageData = new WirkungsdauerTablePageData();
-		// TODO [phohmann] fill pageData.
+
+		String sql = WirkungsdauerSQLs.WIRKUNGSDAUER_PAGE_SELECT + WirkungsdauerSQLs.WIRKUNGSDAUER_PAGE_SELECT_INTO;
+		SQL.selectInto(sql, new NVPair("page", pageData));
 		return pageData;
 	}
 
@@ -25,7 +31,6 @@ public class WirkungsdauerService implements IWirkungsdauerService {
 		if (!ACCESS.check(new CreateWirkungsdauerPermission())) {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
-		// TODO [phohmann] add business logic here.
 		return formData;
 	}
 
@@ -34,7 +39,7 @@ public class WirkungsdauerService implements IWirkungsdauerService {
 		if (!ACCESS.check(new CreateWirkungsdauerPermission())) {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
-		// TODO [phohmann] add business logic here.
+		SQL.insert(WirkungsdauerSQLs.WIRKUNGSDAUER_INSERT, formData);
 		return formData;
 	}
 
@@ -43,7 +48,7 @@ public class WirkungsdauerService implements IWirkungsdauerService {
 		if (!ACCESS.check(new ReadWirkungsdauerPermission())) {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
-		// TODO [phohmann] add business logic here.
+		SQL.select(WirkungsdauerSQLs.WIRKUNGSDAUER_SELECT, formData);
 		return formData;
 	}
 
@@ -52,7 +57,16 @@ public class WirkungsdauerService implements IWirkungsdauerService {
 		if (!ACCESS.check(new UpdateWirkungsdauerPermission())) {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
-		// TODO [phohmann] add business logic here.
+		SQL.update(WirkungsdauerSQLs.WIRKUNGSDAUER_UPDATE, formData);
 		return formData;
+	}
+
+	@Override
+	public void delete(List<Long> list) {
+		for (Long key : list) {
+			WirkungsdauerFormData formData = new WirkungsdauerFormData();
+			formData.setWirkungsdauerId(key);
+			SQL.delete(WirkungsdauerSQLs.WIRKUNGSDAUER_DELETE, formData);
+		}
 	}
 }

@@ -2,7 +2,6 @@ package com.hohmannit.dungeonmaster.server.datenbank.zauber.schule;
 
 import java.util.List;
 
-import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.holders.NVPair;
 import org.eclipse.scout.rt.platform.text.TEXTS;
@@ -10,7 +9,6 @@ import org.eclipse.scout.rt.security.ACCESS;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
-import com.hohmannit.dungeonmaster.server.Exceptional;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.schule.CreateSchulePermission;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.schule.ISchuleService;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.schule.ReadSchulePermission;
@@ -65,15 +63,11 @@ public class SchuleService implements ISchuleService {
 	}
 
 	@Override
-	public void delete(List<Long> keys) {
-		for (Long key : keys) {
+	public void delete(List<Long> list) {
+		for (Long key : list) {
 			SchuleFormData formData = new SchuleFormData();
 			formData.setSchuleId(key);
-			try {
-				SQL.delete(SchuleSQLs.SCHULE_DELETE, formData);
-			} catch (PlatformException e) {
-				Exceptional.handle(e);
-			}
+			SQL.delete(SchuleSQLs.SCHULE_DELETE, formData);
 		}
 	}
 }

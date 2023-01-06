@@ -70,30 +70,30 @@ ALTER SCHEMA od OWNER TO dungeonmaster;
 
 CREATE PROCEDURE dd.insert_gegenstand(IN in_name text, IN in_beschreibung text, IN in_wert numeric, IN in_gewicht numeric, IN in_typ text)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.gegenstand
-    ( name
-      , beschreibung
-      , wert
-      , gewicht
-      , fk_gegenstand_typ
-    )
-    VALUES
-    ( in_name
-      , in_beschreibung
-      , in_wert
-      , in_gewicht
-      , (
-            SELECT
-                gegenstandtyp_id
-            FROM
-                dd.gegenstandtyp
-            WHERE
-                typ = in_typ
-        )
-    )
-;
-
+    AS $$
+INSERT INTO dd.gegenstand
+    ( name
+      , beschreibung
+      , wert
+      , gewicht
+      , fk_gegenstand_typ
+    )
+    VALUES
+    ( in_name
+      , in_beschreibung
+      , in_wert
+      , in_gewicht
+      , (
+            SELECT
+                gegenstandtyp_id
+            FROM
+                dd.gegenstandtyp
+            WHERE
+                typ = in_typ
+        )
+    )
+;
+
 $$;
 
 
@@ -105,15 +105,15 @@ ALTER PROCEDURE dd.insert_gegenstand(IN in_name text, IN in_beschreibung text, I
 
 CREATE PROCEDURE dd.insert_gegenstandtyp(IN in_typ text)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.gegenstandtyp
-    ( typ
-    )
-    VALUES
-    ( in_typ
-    )
-;
-
+    AS $$
+INSERT INTO dd.gegenstandtyp
+    ( typ
+    )
+    VALUES
+    ( in_typ
+    )
+;
+
 $$;
 
 
@@ -125,17 +125,17 @@ ALTER PROCEDURE dd.insert_gegenstandtyp(IN in_typ text) OWNER TO dungeonmaster;
 
 CREATE PROCEDURE dd.insert_reichweite(IN in_typ_lang text, IN in_typ_kurz text, IN in_beschreibung text DEFAULT NULL::text)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.reichweite
-    ( typ_lang
-      , typ_kurz, beschreibung
-    )
-    VALUES
-    ( in_typ_lang
-      , in_typ_kurz, in_beschreibung
-    )
-;
-
+    AS $$
+INSERT INTO dd.reichweite
+    ( typ_lang
+      , typ_kurz, beschreibung
+    )
+    VALUES
+    ( in_typ_lang
+      , in_typ_kurz, in_beschreibung
+    )
+;
+
 $$;
 
 
@@ -147,19 +147,19 @@ ALTER PROCEDURE dd.insert_reichweite(IN in_typ_lang text, IN in_typ_kurz text, I
 
 CREATE PROCEDURE dd.insert_schule(IN in_typ text, IN in_kategorie text DEFAULT NULL::text, IN in_beschreibung text DEFAULT NULL::text)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.schule
-    ( typ
-      , kategorie
-      , beschreibung
-    )
-    VALUES
-    ( in_typ
-      , in_kategorie
-      , in_beschreibung
-    )
-;
-
+    AS $$
+INSERT INTO dd.schule
+    ( typ
+      , kategorie
+      , beschreibung
+    )
+    VALUES
+    ( in_typ
+      , in_kategorie
+      , in_beschreibung
+    )
+;
+
 $$;
 
 
@@ -171,17 +171,17 @@ ALTER PROCEDURE dd.insert_schule(IN in_typ text, IN in_kategorie text, IN in_bes
 
 CREATE PROCEDURE dd.insert_wirkungsdauer(IN in_typ text, IN in_beschreibung text DEFAULT NULL::text)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.wirkungsdauer
-    ( typ
-      , beschreibung
-    )
-    VALUES
-    ( in_typ
-      , in_beschreibung
-    )
-;
-
+    AS $$
+INSERT INTO dd.wirkungsdauer
+    ( typ
+      , beschreibung
+    )
+    VALUES
+    ( in_typ
+      , in_beschreibung
+    )
+;
+
 $$;
 
 
@@ -193,72 +193,72 @@ ALTER PROCEDURE dd.insert_wirkungsdauer(IN in_typ text, IN in_beschreibung text)
 
 CREATE PROCEDURE dd.insert_zauber(IN in_name text, IN in_zeitaufwand integer, IN in_zeitaufwandtyp text, IN in_reichweite integer, IN in_reichweitetyp_kurz text, IN in_wirkungsdauer integer, IN in_wirkungsdauertyp text, IN in_beschreibung text, IN in_hoehere_grade text, IN in_schule text, IN in_verbal boolean, IN in_gestik boolean, IN in_material boolean, IN in_grad integer, IN in_ritual boolean DEFAULT false, IN in_konzentration boolean DEFAULT false)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.zauber
-    ( name
-      , zeitaufwand
-      , fk_zeitaufwand_typ
-      , reichweite
-      , fk_reichweite
-      , wirkungsdauer
-      , fk_wirkungsdauer
-      , beschreibung
-      , hoehere_grade
-      , grad
-      , fk_schule
-      , verbal
-      , gestik
-      , material
-      , ritual
-	  , konzentration
-    )
-SELECT
-    in_name
-  , in_zeitaufwand
-  , (
-        SELECT
-            zeitaufwandtyp_id
-        FROM
-            dd.zeitaufwandtyp
-        WHERE
-            typ = in_zeitaufwandtyp
-    )
-  , in_reichweite
-  , (
-        SELECT
-            reichweite_id
-        FROM
-            dd.reichweite
-        WHERE
-            typ_kurz = in_reichweitetyp_kurz
-    )
-  , in_wirkungsdauer
-  , (
-        SELECT
-            wirkungsdauer_id
-        FROM
-            dd.wirkungsdauer
-        WHERE
-            typ = in_wirkungsdauertyp
-    )
-  , in_beschreibung
-  , in_hoehere_grade
-  , in_grad
-  , (
-        SELECT
-            schule_id
-        FROM
-            dd.schule
-        WHERE
-            typ = in_schule
-    )
-  , in_verbal
-  , in_gestik
-  , in_material
-  , in_ritual
-  , in_konzentration
-;
-
+    AS $$
+INSERT INTO dd.zauber
+    ( name
+      , zeitaufwand
+      , fk_zeitaufwand_typ
+      , reichweite
+      , fk_reichweite
+      , wirkungsdauer
+      , fk_wirkungsdauer
+      , beschreibung
+      , hoehere_grade
+      , grad
+      , fk_schule
+      , verbal
+      , gestik
+      , material
+      , ritual
+	  , konzentration
+    )
+SELECT
+    in_name
+  , in_zeitaufwand
+  , (
+        SELECT
+            zeitaufwandtyp_id
+        FROM
+            dd.zeitaufwandtyp
+        WHERE
+            typ = in_zeitaufwandtyp
+    )
+  , in_reichweite
+  , (
+        SELECT
+            reichweite_id
+        FROM
+            dd.reichweite
+        WHERE
+            typ_kurz = in_reichweitetyp_kurz
+    )
+  , in_wirkungsdauer
+  , (
+        SELECT
+            wirkungsdauer_id
+        FROM
+            dd.wirkungsdauer
+        WHERE
+            typ = in_wirkungsdauertyp
+    )
+  , in_beschreibung
+  , in_hoehere_grade
+  , in_grad
+  , (
+        SELECT
+            schule_id
+        FROM
+            dd.schule
+        WHERE
+            typ = in_schule
+    )
+  , in_verbal
+  , in_gestik
+  , in_material
+  , in_ritual
+  , in_konzentration
+;
+
 $$;
 
 
@@ -270,47 +270,47 @@ ALTER PROCEDURE dd.insert_zauber(IN in_name text, IN in_zeitaufwand integer, IN 
 
 CREATE PROCEDURE dd.insert_zaubermaterial(IN in_zauber text, IN in_gegenstand text, IN in_fk_ersatz_id numeric DEFAULT NULL::numeric, IN in_anzahl numeric DEFAULT 1, IN in_wird_verbraucht boolean DEFAULT false)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.zaubermaterial
-    ( fk_zauber
-      , fk_ersatz
-      , fk_gegenstand
-      , anzahl
-      , wird_verbraucht
-    )
-    VALUES
-    (
-    (
-        SELECT
-            zauber_id
-        from
-            dd.zauber
-        WHERE
-            name = in_zauber
-    )
-  , in_fk_ersatz_id
-  , (
-        SELECT
-            gegenstand_id
-        from
-            dd.gegenstand
-        WHERE
-            name               LIKE (in_gegenstand)
-            AND fk_gegenstand_typ =
-            (
-                SELECT
-                    gegenstandtyp_id
-                FROM
-                    dd.gegenstandtyp
-                WHERE
-                    typ = 'Zaubermaterial'
-            )
-    )
-  , in_anzahl
-  , in_wird_verbraucht
-    )
-;
-
+    AS $$
+INSERT INTO dd.zaubermaterial
+    ( fk_zauber
+      , fk_ersatz
+      , fk_gegenstand
+      , anzahl
+      , wird_verbraucht
+    )
+    VALUES
+    (
+    (
+        SELECT
+            zauber_id
+        from
+            dd.zauber
+        WHERE
+            name = in_zauber
+    )
+  , in_fk_ersatz_id
+  , (
+        SELECT
+            gegenstand_id
+        from
+            dd.gegenstand
+        WHERE
+            name               LIKE (in_gegenstand)
+            AND fk_gegenstand_typ =
+            (
+                SELECT
+                    gegenstandtyp_id
+                FROM
+                    dd.gegenstandtyp
+                WHERE
+                    typ = 'Zaubermaterial'
+            )
+    )
+  , in_anzahl
+  , in_wird_verbraucht
+    )
+;
+
 $$;
 
 
@@ -322,17 +322,17 @@ ALTER PROCEDURE dd.insert_zaubermaterial(IN in_zauber text, IN in_gegenstand tex
 
 CREATE PROCEDURE dd.insert_zeitaufwandtyp(IN in_typ text, IN in_beschreibung text DEFAULT NULL::text)
     LANGUAGE sql
-    AS $$
-INSERT INTO dd.zeitaufwandtyp
-    ( typ
-      , beschreibung
-    )
-    VALUES
-    ( in_typ
-      , in_beschreibung
-    )
-;
-
+    AS $$
+INSERT INTO dd.zeitaufwandtyp
+    ( typ
+      , beschreibung
+    )
+    VALUES
+    ( in_typ
+      , in_beschreibung
+    )
+;
+
 $$;
 
 
@@ -344,48 +344,48 @@ ALTER PROCEDURE dd.insert_zeitaufwandtyp(IN in_typ text, IN in_beschreibung text
 
 CREATE PROCEDURE dd.update_zaubermaterial_ersatz(IN in_zaubername text, IN in_gegenstand text, IN in_ersatz_gegenstand text)
     LANGUAGE sql
-    AS $$
-UPDATE
-    dd.zaubermaterial
-SET fk_ersatz=
-    (
-        SELECT
-            zaubermaterial_id
-        FROM
-            dd.zaubermaterial
-        WHERE
-            fk_gegenstand =
-            (
-                SELECT
-                    gegenstand_id
-                from
-                    dd.gegenstand
-                WHERE
-                    name =in_ersatz_gegenstand
-            )
-    )
-WHERE
-    fk_gegenstand =
-    (
-        SELECT
-            gegenstand_id
-        from
-            dd.gegenstand
-        WHERE
-            name =in_gegenstand
-    )
-    AND fk_zauber=
-    (
-        SELECT
-            zauber_id
-        FROM
-            dd.zauber
-        WHERE
-            name = in_zaubername
-    )
-	AND fk_ersatz IS NULL
-;
-
+    AS $$
+UPDATE
+    dd.zaubermaterial
+SET fk_ersatz=
+    (
+        SELECT
+            zaubermaterial_id
+        FROM
+            dd.zaubermaterial
+        WHERE
+            fk_gegenstand =
+            (
+                SELECT
+                    gegenstand_id
+                from
+                    dd.gegenstand
+                WHERE
+                    name =in_ersatz_gegenstand
+            )
+    )
+WHERE
+    fk_gegenstand =
+    (
+        SELECT
+            gegenstand_id
+        from
+            dd.gegenstand
+        WHERE
+            name =in_gegenstand
+    )
+    AND fk_zauber=
+    (
+        SELECT
+            zauber_id
+        FROM
+            dd.zauber
+        WHERE
+            name = in_zaubername
+    )
+	AND fk_ersatz IS NULL
+;
+
 $$;
 
 
@@ -397,17 +397,17 @@ ALTER PROCEDURE dd.update_zaubermaterial_ersatz(IN in_zaubername text, IN in_geg
 
 CREATE PROCEDURE od.insert_charakter(IN in_klasse text, IN in_name text)
     LANGUAGE sql
-    AS $$
-INSERT INTO od.charaktere
-    ( klasse
-      , name
-    )
-    VALUES
-    ( in_klasse
-      , in_name
-    )
-;
-
+    AS $$
+INSERT INTO od.charaktere
+    ( klasse
+      , name
+    )
+    VALUES
+    ( in_klasse
+      , in_name
+    )
+;
+
 $$;
 
 
@@ -1022,6 +1022,7 @@ INSERT INTO dd.zauber VALUES (6, 'Dunkelheit', 1, 1, 18, 1, 10, 2, 'Magische Dun
 INSERT INTO dd.zauber VALUES (7, 'Einflüsterung', 1, 1, 9, 1, 8, 3, 'Du schlägst eine Vorgehensweise vor (in maximal ein oder zwei Sätzen) und beeinflusst auf magische Weise eine Kreatur deiner Wahl in Reichweite, die du sehen kannst und die dich hören und verstehen kann. Kreaturen, die nicht bezaubert werden können, sind immun gegen diesen Effekt. Diese Einflüsterung muss auf eine Weise for- muliert werden, die die Vorgehensweise sinnvoll erscheinen lässt. Wenn du die Kreatur aufforderst, sich zu erstechen, sich in einen Speer zu werfen, sich anzuzünden oder etwas anderes zu tun, das ihm schadet, negiert das den Effekt des Zaubers automatisch. Das Ziel muss einen Weisheitsrettungswurf ablegen. Bei einem misslungenen Rettungswurf folgt es der Verhaltensweise, die du beschrieben hast, nach seinen Möglichkeiten. Die vorge- schlagene Vorgehensweise kann für die gesamte Wirkungsdauer anhalten. Wenn die Vorgehensweise in kürzerer Zeit abgeschlos- sen werden kann, endet der Zauber, wenn das Ziel das getan hat, was es tun sollte. Du kannst auch bestimmte Bedingungen bestimmen, die eine besondere Aktivität während der Wirkungs- dauer auslösen. Beispielsweise könntest du vorschlagen, dass eine Ritterin dem ersten Bettler, den sie trifft, ihr Schlachtross schenkt. Wenn die Bedingung nicht erfüllt wird, ehe der Zauber endet, dann wird die Handlung nicht ausgeführt. Wenn du oder einer deiner Gefährten das Ziel verletzt, endet der Zauber.', NULL, 2, 3, true, false, true, false, true);
 INSERT INTO dd.zauber VALUES (8, 'Feenfeuer', 1, 1, 18, 1, 1, 2, 'Jeder Gegenstand in einem Würfel mit 6 Metern Kantenlänge in Reichweite wird von blauem, grünen oder violettem Licht umgeben (deine Wahl). Alle Kreaturen, die sich in dem Bereich aufhalten, wenn der Zauber gewirkt wird, werden ebenfalls von Licht umge- ben, wenn sie einen Geschicklichkeitsrettungswurf nicht schaffen. Für die Wirkungsdauer geben Gegenstände und betroffene Krea- turen dämmriges Licht in einem Radius von 3 Metern ab. Angriffswürfe gegen betroffene Kreaturen oder Gegenstände haben Vorteil, wenn der Angreifer sie sehen kann, und die betrof- fenen Kreaturen oder Gegenstände können keinen Nutzen aus Unsichtbarkeit ziehen.', NULL, 1, 3, true, false, false, false, true);
 INSERT INTO dd.zauber VALUES (9, 'Feuerball', 1, 1, 45, 1, 0, 4, 'Ein heller Lichtblitz fährt aus deinem deutenden Finger zu einem Punkt in Reichweite deiner Wahl und erblüht mit einem lauten Brüllen zu einer Explosion aus Flammen. Alle Kreatu- ren in einem Radius von 6 Metern, der um den Punkt zentriert ist, müssen einen Geschicklichkeitswurf ablegen. Bei einem misslungenen Rettungswurf erleidet ein Ziel 8W6 Feuerschaden, halb so viel Schaden bei einem erfolgreichen Rettungswurf. Das Feuer kann sich um Ecken ausbreiten. Das Feuer entzün- det alle brennbaren Gegenstände im Bereich, die nicht getragen oder in der Hand gehalten werden.', 'Wenn du diesen Zauber mit einem Zauberplatz des 4. Grades oder höher wirkst, dann steigt der Schaden für jeden Zauberplatz-Grad über dem dritten um 1W6.', 3, 3, true, true, true, false, false);
+INSERT INTO dd.zauber VALUES (22, 'Magie bannen', 1, 1, 36, 1, 0, 4, 'Wähle eine Kreatur, einen Gegenstand oder einen magischen Effekt in Reichweite. Jeder Zauber des 3. Grades oder darunter, der auf dem Ziel liegt, endet. Für jeden Zauber des 4. Grades oder höher, der auf dem Ziel liegt, mache einen Attributswurf mit deinem Attribut zum Zauberwirken. Der SG ist 10 + die Stufe des Zaubers. Bei einem erfolgreichen Wurf endet der Zauber.', 'Wenn du diesen Zauber mit einem Zau- berplatz des 4. Ranges oder höher wirkst, wird der Effekt von Zaubern auf dem Ziel beendet, wenn ihr Grad gleich oder niedri- ger als der Grad des Zauberplatzes ist, den du verwendet hast.', 3, 2, true, true, false, false, false);
 INSERT INTO dd.zauber VALUES (10, 'Flammenkugel', 1, 1, 18, 1, 1, 2, 'Eine Sphäre aus Feuer mit einem Durchmesser von 1,5 Metern erscheint in einem nicht besetzten Bereich deiner Wahl in Reich- weite und hält für die Wirkungsdauer an. Jede Kreatur, die ihren Zug innerhalb von 1,5 Metern um die Sphäre beendet, muss einen Geschicklichkeitsrettungswurf ablegen. Bei einem miss- lungenen Rettungswurf erleidet die Kreatur 2W6 Feuerschaden, halb so viel Schaden bei einem erfolgreichen Rettungswurf. Als Aktion kannst du die Sphäre bis zu 9 Meter bewegen. Wenn du eine Kreatur mit der Sphäre rammst, muss sie einen Rettungswurf gegen den Schaden der Sphäre ablegen, und die Bewegung der Sphäre endet in diesem Zug. Wenn du die Sphäre bewegst, kannst du sie über Hindernisse lenken, die bis zu 1,5 Meter hoch sind und sie über Gräben von bis zu 3 Metern Breite springen lassen. Die Sphäre entzündet brennbare Gegenstände, die nicht getragen oder in der Hand gehalten werden, und gibt in einem Radius von 6 Metern helles Licht und in einem Radius von weiteren 6 Metern dämmriges Licht ab.', 'Wenn du diesen Zauber mit einem Zauberplatz des 3. Grades oder höher wirkst, dann steigt der Schaden für jeden Zauberplatz-Grad über dem zweiten um 1W6.', 2, 4, true, true, true, false, true);
 INSERT INTO dd.zauber VALUES (11, 'Fliegen', 1, 1, 0, 6, 10, 2, 'Du berührst eine bereitwillige Kreatur. Das Ziel erhält für die Wirkungsdauer eine Flug-Bewegungsrate von 18 Metern. Wenn der Zauber endet fällt das Ziel zu Boden, wenn es noch in der Luft ist, es sei denn, es kann den Sturz abfangen.', 'Wenn du diesen Zauber mit einem Zau- berplatz des 4. Grades oder höher wirkst, dann kannst du den Zauber für jeden Zauberplatz-Grad über dem dritten auf eine zusätzliche Kreatur wirken.', 3, 3, true, true, true, false, true);
 INSERT INTO dd.zauber VALUES (12, 'Gebet der Heilung', 10, 3, 9, 1, 0, 4, 'Bis zu sechs Kreaturen deiner Wahl in Reichweite, die du sehen kannst, erhalten jeweils 2W8 + deinen Zaubermodifikator Trefferpunkte zurück. Der Zauber hat keine Auswirkungen auf Untote oder Konstrukte.', 'Wenn du diesen Zauber mit einem Zau- berplatz des 3. Grades oder höher wirkst, dann steigt die Heilung für jeden Zauberplatz-Grad über dem zweiten um 1W8.', 2, 3, true, false, false, false, false);
@@ -1034,7 +1035,7 @@ INSERT INTO dd.zauber VALUES (18, 'Kältestrahl', 1, 1, 18, 1, 0, 4, 'Ein eisige
 INSERT INTO dd.zauber VALUES (19, 'Lenkendes Geschoss', 1, 1, 36, 1, 1, 1, 'Ein Lichtblitz schießt auf eine Kreatur deiner Wahl in Reichweite zu. Lege einen Fernkampf-Zauberangriff gegen das Ziel ab. Bei einem Treffer erleidet das Ziel 4W6 gleißenden Schaden, und der nächste Angriffswurf, der vor Ende deines nächsten Zuges gegen das Ziel durchgeführt wird, hat einen Vorteil, weil mystisches Licht das Ziel zum Schimmern bringt.', 'Wenn du diesen Zauber mit einem Zauberplatz des 2. Grades oder höher wirkst, dann steigt der Schaden für jeden Zauberplatz-Grad über dem ersten um 1W6.', 1, 3, true, true, false, false, false);
 INSERT INTO dd.zauber VALUES (20, 'Leuchtfeuer der Hoffnung', 1, 1, 9, 1, 1, 2, 'Zauber schenkt Hoffnung und Lebenskraft. Wähle eine beliebige Anzahl von Kreaturen in Reichweite. Für die Wirkungsdauer haben sie alle einen Vorteil auf Weisheitsrettungswürfe und Rettungswürfe gegen Tod, und erhalten durch jede Heilung die maximale Anzahl von Trefferpunkten.', NULL, 3, 2, true, true, false, false, true);
 INSERT INTO dd.zauber VALUES (21, 'Licht', 1, 1, 0, 6, 1, 3, 'Du berührst einen Gegenstand, der in keiner Dimension größer als 3 Meter ist. Bis der Zauber endet, strahlt dieser Gegenstand in einem Radius von 6 Metern helles Licht und in einem zusätz- lichen Radius von 6 Metern dämmriges Licht ab. Das Licht kann jede Farbe haben, die du willst. Wenn der Gegenstand mit etwas bedeckt wird, das vollkommen undurchsichtig ist, wird das Licht blockiert. Der Zauber endet wenn du ihn erneut wirkst oder als Aktion beendest. Wenn du einen Gegenstand als Ziel auswählst, den eine feindliche Kreatur trägt oder in der Hand hält, muss die Kreatur einen Geschicklichkeitsrettungswurf schaffen, um dem Zauber auszuweichen.', NULL, 0, 3, true, false, true, false, false);
-INSERT INTO dd.zauber VALUES (22, 'Magie bannen', 1, 1, 36, 1, 0, 4, 'Wähle eine Kreatur, einen Gegenstand oder einen magischen Effekt in Reichweite. Jeder Zauber des 3. Grades oder darunter, der auf dem Ziel liegt, endet. Für jeden Zauber des 4. Grades oder höher, der auf dem Ziel liegt, mache einen Attributswurf mit deinem Attribut zum Zauberwirken. Der SG ist 10 + die Stufe des Zaubers. Bei einem erfolgreichen Wurf endet der Zauber.', 'Wenn du diesen Zauber mit einem Zau- berplatz des 4. Ranges oder höher wirkst, wird der Effekt von Zaubern auf dem Ziel beendet, wenn ihr Grad gleich oder niedri- ger als der Grad des Zauberplatzes ist, den du verwendet hast.', 3, 2, true, true, false, false, false);
+INSERT INTO dd.zauber VALUES (52, 'Wiederbeleben', 1, 1, 0, 6, 0, 4, 'Du berührst eine Kreatur, die innerhalb der letzten Minute gestorben ist. Die Kreatur kehrt mit 1 Trefferpunkt zum Leben zurück. Dieser Zauber kann keine Kreaturen zum Leben erwecken, die an Altersschwäche gestorben sind oder denen Kör- perteile fehlen.', NULL, 3, 8, true, true, true, false, false);
 INSERT INTO dd.zauber VALUES (23, 'Magie entdecken', 1, 1, 0, 2, 10, 2, 'Für die Wirkungsdauer spürst du die Anwesenheit von Magie im Umkreis von 9 Metern um dich. Wenn du Magie auf diese Weise spürst, kannst du deine Aktion verwenden, um eine schwache Aura um eine sichtbare beliebige Kreatur oder einen Gegenstand im Wirkungsbereich zu sehen, der magisch ist, und die Schule der Magie in Erfahrung zu bringen, wenn es eine gibt. Der Zauber kann die meisten Barrieren durchdringen, wird aber von 30 Zenti- metern Stein, 2,5 Zentimetern gewöhnlicher Metalle, einer dünnen Schicht Blei oder 90 Zentimetern Holz oder Erde blockiert.', NULL, 1, 6, true, true, false, false, true);
 INSERT INTO dd.zauber VALUES (24, 'Magierhand', 1, 1, 9, 1, 1, 2, 'Eine gespenstische, schwebende Hand erscheint an einem Punkt deiner Wahl in Reichweite. Die Hand bleibt für die Wirkungs- dauer bestehen oder bis du sie mit einer Aktion wegschickst. Die Hand verschwindet, wenn sie sich weiter als 9 Meter von dir ent- fernt oder du den Zauber noch einmal wirkst. Du kannst eine Aktion verwenden, um die Hand zu kontrollieren. Du kannst die Hand verwenden, um Gegenstände zu manipulieren, verschlossene Türen oder Behälter zu öffnen, einen Gegenstand aus einem geöffneten Behälter zu holen oder ihn zu verstauen, oder den Inhalt einer Phiole auszugießen. Du kannst die Hand immer wenn du sie verwendest bis zu 9 Meter weit bewegen. Die Hand kann nicht angreifen, keine magischen Gegenstände aktivieren oder mehr als 10 Pfund tragen.', NULL, 0, 4, true, true, false, false, false);
 INSERT INTO dd.zauber VALUES (25, 'Magierrüstung', 1, 1, 0, 6, 8, 3, 'Du berührst eine bereitwillige Kreatur, die keine Rüstung trägt. Eine schützende magische Energie umgibt sie bis der Zauber endet. Die Basis-Rüstungsklasse des Ziels entspricht 13 + Geschicklichkeitsmodifikator. Der Zauber endet, wenn das Ziel Rüstung anlegt oder du den Zauber mit einer Aktion aufhebst.', NULL, 1, 2, true, true, true, false, false);
@@ -1047,6 +1048,7 @@ INSERT INTO dd.zauber VALUES (31, 'Resistenz', 1, 1, 0, 6, 1, 2, 'Du berührst e
 INSERT INTO dd.zauber VALUES (32, 'Schild', 1, 4, 0, 2, 1, 1, 'Eine unsichtbare Barriere aus magischer Energie erscheint und schützt dich. Bis zum Beginn deines nächsten Zugs hast du einen Bonus von +5 auf deine Rüstungsklasse, auch gegen den auslö- senden Angriff, und erleidest keinen Schaden durch den Zauber Magisches Geschoss.', NULL, 1, 2, true, true, false, false, false);
 INSERT INTO dd.zauber VALUES (33, 'Schild des Glaubens', 1, 2, 18, 1, 10, 2, 'Ein schimmerndes Feld erscheint und umhüllt eine Kreatur dei- ner Wahl in Reichweite. Es gewährt ihr für die Wirkungsdauer einen Bonus von +2 auf RK.', NULL, 1, 2, true, true, true, false, true);
 INSERT INTO dd.zauber VALUES (34, 'Schlaf', 1, 1, 27, 1, 1, 2, 'Dieser Zauber versetzt Kreaturen in magischen Schlaf. Wirf 5W8, das Ergebnis ist die Gesamtzahl von Trefferpunkten an Kreatu- ren, die dieser Zauber beeinflussen kann. Kreaturen innerhalb von 6 Metern um einen Punkt deiner Wahl in Reichweite werden betroffen, in aufsteigender Reihenfolge nach ihren aktuellen Tref- ferpunkten (bewusstlose Kreaturen werden ignoriert). Beginnend mit der Kreatur mit den niedrigsten aktuellen Trefferpunkten werden alle Kreaturen, die von diesem Zauber betroffen werden, bewusstlos bis der Zauber endet, der Schla- fende Schaden erleidet oder jemand eine Aktion verwendet, um den Schlafenden zu schütteln oder zu ohrfeigen. Ziehe die Trefferpunkte der Kreatur von der Gesamtsumme ab, ehe du mit der nächsten Kreatur mit den niedrigsten Trefferpunkten wei- termachst. Die Trefferpunkte einer Kreatur müssen gleich oder niedriger als die verbleibenden Gesamttrefferpunkte sein, damit sie betroffen wird. Untote und Kreaturen, die nicht bezaubert werden können, sind von diesem Zauber nicht betroffen.', 'Wenn du diesen Zauber mit einem Zauberplatz des 2. Grades oder höher wirkst, dann würfelst du zusätzliche 2W8 für jeden Zauberplatz-Grad über dem ersten.', 1, 1, true, true, true, false, false);
+INSERT INTO dd.zauber VALUES (53, 'Wunden heilen', 1, 1, 0, 6, 0, 4, 'Eine Kreatur, die du berührst, erhält eine Anzahl von Treffer- punkten gleich 1W8 + deinem Zaubermodifikator zurück. Der Zauber hat keine Auswirkungen auf Untote oder Konstrukte.', 'Wenn du diesen Zauber mit einem Zau- berplatz des 2. Grades oder höher wirkst, dann steigt die Heilung für jeden Zauberplatz-Grad über dem ersten um 1W8.', 1, 3, true, true, false, false, false);
 INSERT INTO dd.zauber VALUES (35, 'Schockgriff', 1, 1, 0, 6, 0, 4, 'Blitze springen aus deinen Händen und verpassen einer Kreatur, die du zu berühren versuchst, einen Schock. Führe einen Nah- kampf-Zauberangriff gegen das Ziel durch. Du hast einen Vorteil beim Angriffswurf, wenn das Ziel Rüstung trägt, die aus Metall besteht. Bei einem Treffer erleidet die Kreatur 1W8 Blitzschaden und kann bis zum Beginn deines nächsten Zuges keine Reaktionen durchführen. Der Schaden dieses Zaubers steigt um 1W8, wenn du die 5. Stufe (2W8), die 11. Stufe (3W8) und die 17. Stufe (4W8) erreichst.', NULL, 0, 3, true, true, true, false, false);
 INSERT INTO dd.zauber VALUES (36, 'Schützendes Band', 1, 1, 0, 6, 1, 3, 'Dieser Zauber schützt eine bereitwillige Kreatur, die du berührst und erschafft eine magische Verbindung zwischen dir und dem Ziel bis der Zauber endet. Solange sich das Ziel innerhalb von 18 Metern um dich befindet, erhält es einen Bonus von +1 auf RK und Rettungswürfe und hat Resistenz gegen alle Schadensarten. Außerdem erleidest du jedes Mal, wenn das Ziel Schaden erleidet die gleiche Menge an Schaden. Der Zauber endet, wenn du auf 0 Trefferpunkte fällst oder wenn du und das Ziel weiter als 18 Meter auseinander sind. Er endet auch, wenn der Zauber erneut auf einen der beiden Beteiligten gewirkt wird. Du kannst den Zauber als Aktion aufheben.', NULL, 2, 3, true, true, true, false, false);
 INSERT INTO dd.zauber VALUES (38, 'Schutz vor Energie', 1, 1, 0, 6, 1, 3, 'Du rufst Geister, die dich beschützen. Sie huschen für die Wir- kungsdauer in einer Entfernung von 4,5 Metern um dich herum. Wenn du guter oder neutraler Gesinnung bist, erscheint ihre gespenstische Form engelsgleisch oder feenartig (deine Wahl). Wenn du böser Gesinnung bist, erscheinen sie unholder Natur. Wenn du diesen Zauber wirkst, kannst du eine beliebige Anzahl von Kreaturen, die du sehen kannst, festlegen, die nicht von dem Zauber betroffen sind. Die Bewegungsrate von Kreaturen ist im Bereich des Zaubers halbiert, und wenn die Kreatur das erste Mal in einem Zug den Bereich betritt oder ihren Zug dort beginnt, muss sie einen Weisheitsrettungswurf ablegen. Bei einem misslungenen Rettungswurf erleidet die Kreatur 3W8 Gleißenden Schaden (wenn du guter oder neutraler Gesinnung bist) oder 3W8 Nekrotischen Schaden (wenn du böser Gesinnung bist). Bei einem erfolgreichen Rettungswurf erleidet die Kreatur den halben Schaden.', 'Wenn du diesen Zauber mit einem Zauberplatz des 4. Grades oder höher wirkst, dann steigt der Schaden für jeden Zauberplatz-Grad über dem dritten um 1W8.', 3, 2, true, true, false, false, false);
@@ -1056,8 +1058,6 @@ INSERT INTO dd.zauber VALUES (46, 'Taschenspielerei', 1, 1, 3, 1, 1, 3, 'Dieser 
 INSERT INTO dd.zauber VALUES (47, 'Thaumaturgie', 1, 1, 9, 1, 1, 2, 'Du manifestierst ein kleines Wunder, ein Zeichen übernatür- licher Macht, in Reichweite. Du kannst einen der folgenden magischen Effekte in Reichweite erschaffen: 1. Deine Stimme dröhnt für 1 Minute dreimal so laut wie normal. 2. Du lässt Flammen flackern, heller oder dunkler werden oder die Farbe wechseln. All dies hält 1 Minute an. 3. Du erzeugst für 1 Minute harmlose Erschütterungen im Boden. 4. Du erschaffst ein kurzes Geräusch, das von einem Punkt deiner Wahl in Reichweite ertönt, wie das Grollen von Donner, den Ruf eines Raben oder ein unheilvolles Flüstern. 5. Du lässt eine nicht verriegelte Tür oder ein Fenster auffliegen oder zuschlagen. 6. Du änderst für 1 Minute das Aussehen deiner Augen. Wenn du diesen Zauber mehrmals wirkst, kannst du bis zu drei der nicht sofortigen Effekte gleichzeitig aktiviert haben, und du kannst solche Effekte als Aktion aufheben.', NULL, 0, 5, true, false, false, false, false);
 INSERT INTO dd.zauber VALUES (50, 'Vorahnung', 1, 3, 0, 2, 0, 4, 'Indem du Stöckchen mit Juwelenintarsien wirfst, mit Drachenwürfeln würfelst, reich verzierte Karten auslegst oder ein anderes Weissagungswerkzeug verwendest, erhältst du ein Omen von einer außerweltlichen Wesenheit über die Folgen einer bestimmten Handlungsweise, die du für die nächsten 30 Minuten planst. Der SL wählt eines der folgenden möglichen Omen: 1. Wohl, für gute Folgen. 2. Weh, für schlechte Folgen. 3. Wohl und Weh, für sowohl gute als auch schlechte Folgen. 4. Nichts, bei Folgen, die weder besonders gut noch schlecht sind. Der Zauber nimmt keine Rücksicht auf mögliche Umstände, die das Ergebnis verändern könnten, wie das Wirken zusätzlicher Zauber oder den Verlust eines Gefährten. Wenn du den Zauber zweimal oder öfter wirkst, ehe du deine nächste Lange Rast abschließt, besteht eine kumulative Chance von 25 Prozent für jeden Zauber nach dem ersten, dass du ein zufälliges Ergebnis bekommst. Der SL macht diesen Wurf verdeckt.', NULL, 2, 6, true, true, true, false, false);
 INSERT INTO dd.zauber VALUES (51, 'Waffe des Glaubens', 1, 2, 18, 1, 1, 2, 'Du erschaffst eine schwebende, gespenstische Waffe in Reich- weite, die für die Wirkungsdauer anhält oder bis du den Zauber erneut wirkst. Wenn du den Zauber wirkst, kannst du einen Nahkampfangriff gegen eine Kreatur innerhalb von 1,5 Metern zur Waffe durchführen. Bei einem Treffer erleidet das Ziel 1W8 + deinen Zaubermodifikator als Energieschaden. Als Bonusaktion in deinem Zug kannst du die Waffe bis zu 4 Meter weit bewegen und den Angriff gegen eine Kreatur inner- halb von 1,5 Metern um sie wiederholen. Diese Waffe kann jede Form annehmen, die du willst. Kleriker von Gottheiten, die mit einer bestimmten Waffe assoziiert sind (wie St. Cuthbert, der für seinen Streitkolben bekannt ist, und Thor für seinen Hammer) lassen den Effekt des Zaubers wie diese Waffe aussehen.', 'Wenn du diesen Zauber mit einem Zauberplatz des 3. Grades oder höher wirkst, dann steigt der Schaden für jeden Zauberplatz-Grad über dem zweiten um 1W8.', 2, 3, true, true, false, false, false);
-INSERT INTO dd.zauber VALUES (52, 'Wiederbeleben', 1, 1, 0, 6, 0, 4, 'Du berührst eine Kreatur, die innerhalb der letzten Minute gestorben ist. Die Kreatur kehrt mit 1 Trefferpunkt zum Leben zurück. Dieser Zauber kann keine Kreaturen zum Leben erwecken, die an Altersschwäche gestorben sind oder denen Kör- perteile fehlen.', NULL, 3, 8, true, true, true, false, false);
-INSERT INTO dd.zauber VALUES (53, 'Wunden heilen', 1, 1, 0, 6, 0, 4, 'Eine Kreatur, die du berührst, erhält eine Anzahl von Treffer- punkten gleich 1W8 + deinem Zaubermodifikator zurück. Der Zauber hat keine Auswirkungen auf Untote oder Konstrukte.', 'Wenn du diesen Zauber mit einem Zau- berplatz des 2. Grades oder höher wirkst, dann steigt die Heilung für jeden Zauberplatz-Grad über dem ersten um 1W8.', 1, 3, true, true, false, false, false);
 INSERT INTO dd.zauber VALUES (54, 'Wunden verursachen', 1, 1, 0, 6, 0, 4, 'Mache einen Nahkampfangriff gegen eine Kreatur innerhalb deiner Reichweite. Bei einem Treffer erleidet das Ziel 3W10 Nek- rotischen Schaden.', 'Wenn du diesen Zauber mit einem Zauberplatz des 2. Grades oder höher wirkst, dann steigt der Schaden für jeden Zauberplatz-Grad über dem ersten um 1W10.', 1, 8, true, true, false, false, false);
 INSERT INTO dd.zauber VALUES (40, 'Segnen', 1, 1, 9, 1, 1, 2, 'Du segnest bis zu drei Kreaturen deiner Wahl in Reichweite. Immer wenn ein Ziel einen Angriffs- oder Rettungswurf macht, bis der Zauber endet, kann es einen W4 werfen und das Ergebnis auf den Angriffswurf oder Rettungswurf addieren.', 'Wenn du diesen Zauber mit einem Zauberplatz des 2. Grades oder höher wirkst, dann kannst du den Zauber für jeden Zauberplatz-Grad über dem ersten auf eine zusätzliche Kreatur wirken.', 1, 1, true, true, true, false, true);
 INSERT INTO dd.zauber VALUES (44, 'Stille', 1, 1, 36, 1, 10, 2, 'Für die Wirkungsdauer kann kein Geräusch in einer Sphäre mit 6 Metern Radius entstehen oder sie durchdringen. Die Sphäre ist um einen Punkt in Reichweite zentriert, den du auswählst. Jede Kreatur und jeder Gegenstand, der sich vollständig in der Sphäre aufhält, ist immun gegen Schallschaden, und Kreaturen sind Taub, solange sie sich in ihrem Inneren befinden. Einen Zauber zu wirken, der eine verbale Komponente hat, ist in der Sphäre nicht möglich.', NULL, 2, 7, true, true, false, false, true);
@@ -1156,7 +1156,7 @@ SELECT pg_catalog.setval('dd.gegenstandtyp_id', 13, true);
 -- Name: reichweite_id_seq; Type: SEQUENCE SET; Schema: dd; Owner: dungeonmaster
 --
 
-SELECT pg_catalog.setval('dd.reichweite_id_seq', 11, true);
+SELECT pg_catalog.setval('dd.reichweite_id_seq', 12, true);
 
 
 --
@@ -1239,6 +1239,14 @@ ALTER TABLE ONLY dd.schule
 
 ALTER TABLE ONLY dd.reichweite
     ADD CONSTRAINT "unique" UNIQUE (typ_lang, typ_kurz);
+
+
+--
+-- Name: wirkungsdauer unique_wirkungsdauer; Type: CONSTRAINT; Schema: dd; Owner: dungeonmaster
+--
+
+ALTER TABLE ONLY dd.wirkungsdauer
+    ADD CONSTRAINT unique_wirkungsdauer UNIQUE (typ);
 
 
 --

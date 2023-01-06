@@ -50,5 +50,35 @@ public class WirkungsdauerTablePageData extends AbstractTablePageData {
 
 	public static class WirkungsdauerTableRowData extends AbstractTableRowData {
 		private static final long serialVersionUID = 1L;
+		public static final String id = "id";
+		public static final String typ = "typ";
+		public static final String beschreibung = "beschreibung";
+		private Long m_id;
+		private String m_typ;
+		private String m_beschreibung;
+
+		public Long getId() {
+			return m_id;
+		}
+
+		public void setId(Long newId) {
+			m_id = newId;
+		}
+
+		public String getTyp() {
+			return m_typ;
+		}
+
+		public void setTyp(String newTyp) {
+			m_typ = newTyp;
+		}
+
+		public String getBeschreibung() {
+			return m_beschreibung;
+		}
+
+		public void setBeschreibung(String newBeschreibung) {
+			m_beschreibung = newBeschreibung;
+		}
 	}
 }
