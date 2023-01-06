@@ -407,6 +407,7 @@ public class ZauberbuchForm extends AbstractForm {
 
 			@Order(9000)
 			public class WirkungsdauerSequenceBox extends AbstractSequenceBox {
+
 				@Override
 				protected String getConfiguredLabel() {
 					return TEXTS.get("Wirkungsdauer");
@@ -423,6 +424,7 @@ public class ZauberbuchForm extends AbstractForm {
 					protected boolean getConfiguredLabelVisible() {
 						return false;
 					}
+
 				}
 
 				@Order(2000)
@@ -436,6 +438,11 @@ public class ZauberbuchForm extends AbstractForm {
 					protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
 						return WirkungsdauerLookupCall.class;
 					}
+
+					@Override
+					protected int getConfiguredGridW() {
+						return 2;
+					}
 				}
 
 				@Order(3000)
@@ -443,6 +450,11 @@ public class ZauberbuchForm extends AbstractForm {
 					@Override
 					protected String getConfiguredLabel() {
 						return TEXTS.get("Konzentration");
+					}
+
+					@Override
+					protected int getConfiguredGridW() {
+						return 2;
 					}
 				}
 
