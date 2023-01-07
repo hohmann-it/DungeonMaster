@@ -12,6 +12,7 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
+import com.hohmannit.dungeonmaster.client.common.NonNullStringField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.wirkungsdauer.WirkungsdauerForm.MainBox.CancelButton;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.wirkungsdauer.WirkungsdauerForm.MainBox.GroupBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.wirkungsdauer.WirkungsdauerForm.MainBox.GroupBox.BeschreibungField;
@@ -111,7 +112,7 @@ public class WirkungsdauerForm extends AbstractForm {
 			}
 
 			@Order(1000)
-			public class NameField extends AbstractStringField {
+			public class NameField extends NonNullStringField {
 				@Override
 				protected String getConfiguredLabel() {
 					return TEXTS.get("Allgemein_Name");

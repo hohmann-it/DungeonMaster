@@ -12,6 +12,7 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
+import com.hohmannit.dungeonmaster.client.common.NonNullStringField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleForm.MainBox.CancelButton;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleForm.MainBox.GroupBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleForm.MainBox.GroupBox.BeschreibungField;
@@ -117,7 +118,7 @@ public class SchuleForm extends AbstractForm {
 			}
 
 			@Order(1000)
-			public class NameField extends AbstractStringField {
+			public class NameField extends NonNullStringField {
 				@Override
 				protected String getConfiguredLabel() {
 					return TEXTS.get("Allgemein_Name");
