@@ -207,13 +207,11 @@ public class ZauberFormData extends AbstractFormData {
 			public static final String name = "name";
 			public static final String wert = "wert";
 			public static final String gewicht = "gewicht";
-			public static final String ersatz = "ersatz";
 			private String m_id;
 			private String m_anzahl;
 			private Long m_name;
 			private String m_wert;
 			private String m_gewicht;
-			private Long m_ersatz;
 
 			public String getId() {
 				return m_id;
@@ -253,14 +251,6 @@ public class ZauberFormData extends AbstractFormData {
 
 			public void setGewicht(String newGewicht) {
 				m_gewicht = newGewicht;
-			}
-
-			public Long getErsatz() {
-				return m_ersatz;
-			}
-
-			public void setErsatz(Long newErsatz) {
-				m_ersatz = newErsatz;
 			}
 		}
 	}

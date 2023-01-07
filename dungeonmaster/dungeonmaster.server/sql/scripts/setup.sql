@@ -319,7 +319,6 @@ ALTER SEQUENCE dd.zauber_id_seq OWNED BY dd.zauber.id;
 CREATE TABLE dd.zaubermaterial (
     zaubermaterial_id bigint NOT NULL,
     fk_zauber bigint,
-    fk_ersatz bigint,
     fk_gegenstand bigint NOT NULL,
     anzahl numeric NOT NULL,
     wird_verbraucht boolean DEFAULT false NOT NULL
@@ -748,47 +747,47 @@ INSERT INTO dd.zauber VALUES (37, 'Schutzgeister', 1, 1, 4.5, 4, 10, 2, 'Du rufs
 -- Data for Name: zaubermaterial; Type: TABLE DATA; Schema: dd; Owner: dungeonmaster
 --
 
-INSERT INTO dd.zaubermaterial VALUES (1, 2, NULL, 101, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (2, 6, NULL, 106, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (4, NULL, NULL, 108, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (3, 6, 4, 107, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (5, 7, NULL, 109, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (7, NULL, NULL, 111, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (6, 7, 7, 110, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (8, 9, NULL, 112, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (9, 9, NULL, 113, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (10, 10, NULL, 114, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (11, 10, NULL, 113, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (12, 10, NULL, 115, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (13, 11, NULL, 116, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (14, 16, NULL, 117, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (15, 17, NULL, 118, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (16, 17, NULL, 119, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (18, NULL, NULL, 120, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (17, 21, 18, 121, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (19, 25, NULL, 122, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (20, 30, NULL, 123, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (21, 31, NULL, 124, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (22, 33, NULL, 125, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (23, 34, NULL, 126, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (25, NULL, NULL, 127, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (24, 34, 25, 128, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (26, 36, NULL, 129, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (27, 37, NULL, 130, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (28, 40, NULL, 131, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (29, 41, NULL, 132, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (30, 41, NULL, 133, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (31, 42, NULL, 134, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (32, 43, NULL, 135, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (33, 43, NULL, 136, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (34, 45, NULL, 120, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (35, NULL, NULL, 138, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (36, NULL, NULL, 137, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (37, 48, NULL, 139, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (39, NULL, NULL, 142, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (40, NULL, NULL, 140, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (38, 50, 39, 141, 1, false);
-INSERT INTO dd.zaubermaterial VALUES (41, 52, NULL, 143, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (1, 2, 101, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (2, 6, 106, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (4, NULL, 108, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (3, 6, 107, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (5, 7, 109, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (7, NULL, 111, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (6, 7, 110, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (8, 9, 112, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (9, 9, 113, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (10, 10, 114, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (11, 10, 113, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (12, 10, 115, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (13, 11, 116, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (14, 16, 117, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (15, 17, 118, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (16, 17, 119, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (18, NULL, 120, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (17, 21, 121, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (19, 25, 122, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (20, 30, 123, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (21, 31, 124, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (22, 33, 125, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (23, 34, 126, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (25, NULL, 127, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (24, 34, 128, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (26, 36, 129, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (27, 37, 130, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (28, 40, 131, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (29, 41, 132, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (30, 41, 133, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (31, 42, 134, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (32, 43, 135, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (33, 43, 136, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (34, 45, 120, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (35, NULL, 138, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (36, NULL, 137, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (37, 48, 139, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (39, NULL, 142, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (40, NULL, 140, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (38, 50, 141, 1, false);
+INSERT INTO dd.zaubermaterial VALUES (41, 52, 143, 1, false);
 
 
 --
@@ -976,14 +975,6 @@ ALTER TABLE ONLY dd.zeitaufwand
 
 ALTER TABLE ONLY od.charaktere
     ADD CONSTRAINT charaktere_pkey PRIMARY KEY (charakter_id);
-
-
---
--- Name: zaubermaterial fk_ersatz; Type: FK CONSTRAINT; Schema: dd; Owner: dungeonmaster
---
-
-ALTER TABLE ONLY dd.zaubermaterial
-    ADD CONSTRAINT fk_ersatz FOREIGN KEY (fk_ersatz) REFERENCES dd.zaubermaterial(zaubermaterial_id) NOT VALID;
 
 
 --

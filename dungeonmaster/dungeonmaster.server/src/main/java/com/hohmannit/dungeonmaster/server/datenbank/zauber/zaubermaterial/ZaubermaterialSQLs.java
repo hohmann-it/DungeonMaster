@@ -14,14 +14,12 @@ public interface ZaubermaterialSQLs {
 			+ "SELECT" //
 			+ "				zm.zaubermaterial_id, " //
 			+ "				zm.fk_gegenstand, " //
-			+ "				zm.fk_ersatz, " //
 			+ "				g.wert, " //
 			+ "				zm.anzahl, " //
 			+ "				g.gewicht " //
 			+ "FROM         dd.zaubermaterial zm INNER JOIN dd.gegenstand g ON zm.fk_gegenstand = g.gegenstand_id WHERE fk_zauber = :id " //
 			+ "INTO         :{ZaubkomponentenTable.id}," //
 			+ "				:{ZaubkomponentenTable.name}," //
-			+ "				:{ZaubkomponentenTable.ersatz}," //
 			+ "				:{ZaubkomponentenTable.wert},"//
 			+ "				:{ZaubkomponentenTable.anzahl},"//
 			+ "				:{ZaubkomponentenTable.gewicht}";

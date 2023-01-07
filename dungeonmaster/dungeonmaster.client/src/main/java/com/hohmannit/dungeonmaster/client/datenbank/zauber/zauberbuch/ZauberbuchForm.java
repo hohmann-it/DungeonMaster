@@ -58,7 +58,6 @@ import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.Zauberbuch
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.grad.ZaubergradCodeType;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.material.MaterialLookupCall;
-import com.hohmannit.dungeonmaster.shared.datenbank.zauber.material.ZaubermaterialErsatzLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.reichweite.ReichweiteLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.schule.SchuleLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.wirkungsdauer.WirkungsdauerLookupCall;
@@ -649,10 +648,6 @@ public class ZauberbuchForm extends AbstractForm {
 							return true;
 						}
 
-						public ErsatzColumn getErsatzColumn() {
-							return getColumnSet().getColumnByClass(ErsatzColumn.class);
-						}
-
 						public WertColumn getWertColumn() {
 							return getColumnSet().getColumnByClass(WertColumn.class);
 						}
@@ -755,24 +750,6 @@ public class ZauberbuchForm extends AbstractForm {
 							@Override
 							protected String getConfiguredHeaderIconId() {
 								return Icons.Weight;
-							}
-						}
-
-						@Order(4000)
-						public class ErsatzColumn extends AbstractSmartColumn<Long> {
-							@Override
-							protected String getConfiguredHeaderText() {
-								return TEXTS.get("Page_Zauber_Zaubermaterial_Ersatz_Label");
-							}
-
-							@Override
-							protected int getConfiguredWidth() {
-								return 152;
-							}
-
-							@Override
-							protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
-								return ZaubermaterialErsatzLookupCall.class;
 							}
 						}
 
