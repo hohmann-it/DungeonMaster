@@ -17,13 +17,13 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import com.hohmannit.dungeonmaster.client.common.QuickDeleteMenu;
 import com.hohmannit.dungeonmaster.client.common.QuickEditMenu;
 import com.hohmannit.dungeonmaster.client.common.QuickNewMenu;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandtypTablePage.Table;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandTablePage.Table;
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.IZeitaufwandtypService;
-import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandtypTablePageData;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandTablePageData;
 
-@Data(ZeitaufwandtypTablePageData.class)
-public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
+@Data(ZeitaufwandTablePageData.class)
+public class ZeitaufwandTablePage extends AbstractPageWithTable<Table> {
 	@Override
 	protected boolean getConfiguredLeaf() {
 		return true;
@@ -36,7 +36,7 @@ public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Zeitaufwandtypen");
+		return TEXTS.get("Zauber_Zeitaufwand_Label_Titel");
 	}
 
 	@Override
@@ -66,8 +66,8 @@ public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected void execAction() {
-				ZeitaufwandtypForm form = new ZeitaufwandtypForm();
-				form.setZeitaufwandtypId(getIdColumn().getSelectedValue());
+				ZeitaufwandForm form = new ZeitaufwandForm();
+				form.setId(getIdColumn().getSelectedValue());
 				form.addFormListener(new ZeitaufwandtypFormListener());
 				form.startModify();
 			}
@@ -78,7 +78,7 @@ public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 
 			@Override
 			protected void execAction() {
-				ZeitaufwandtypForm form = new ZeitaufwandtypForm();
+				ZeitaufwandForm form = new ZeitaufwandForm();
 				form.addFormListener(new ZeitaufwandtypFormListener());
 				form.startNew();
 			}
@@ -109,8 +109,8 @@ public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 			return getColumnSet().getColumnByClass(BeschreibungColumn.class);
 		}
 
-		public TypColumn getTypColumn() {
-			return getColumnSet().getColumnByClass(TypColumn.class);
+		public NameColumn getNameColumn() {
+			return getColumnSet().getColumnByClass(NameColumn.class);
 		}
 
 		public IdColumn getIdColumn() {
@@ -121,7 +121,7 @@ public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 		public class IdColumn extends AbstractLongColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("ID");
+				return TEXTS.get("Allgemein_ID");
 			}
 
 			@Override
@@ -141,10 +141,10 @@ public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(2000)
-		public class TypColumn extends AbstractStringColumn {
+		public class NameColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Type");
+				return TEXTS.get("Allgemein_Name");
 			}
 
 			@Override
@@ -157,7 +157,7 @@ public class ZeitaufwandtypTablePage extends AbstractPageWithTable<Table> {
 		public class BeschreibungColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Beschreibung");
+				return TEXTS.get("Allgemein_Beschreibung");
 			}
 
 			@Override

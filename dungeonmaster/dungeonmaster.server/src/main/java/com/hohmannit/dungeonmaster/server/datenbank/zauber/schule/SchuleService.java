@@ -66,7 +66,7 @@ public class SchuleService implements ISchuleService {
 	public void delete(List<Long> list) {
 		for (Long key : list) {
 			SchuleFormData formData = new SchuleFormData();
-			formData.setSchuleId(key);
+			formData.setId(key);
 			SQL.delete(SchuleSQLs.SCHULE_DELETE, formData);
 		}
 	}

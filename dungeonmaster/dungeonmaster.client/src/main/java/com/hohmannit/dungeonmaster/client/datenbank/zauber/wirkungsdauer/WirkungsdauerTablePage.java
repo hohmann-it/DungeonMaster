@@ -36,7 +36,7 @@ public class WirkungsdauerTablePage extends AbstractPageWithTable<Table> {
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Wirkungsdauer");
+		return TEXTS.get("Zauber_Wirkungsdauer_Label_Titel");
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class WirkungsdauerTablePage extends AbstractPageWithTable<Table> {
 			@Override
 			protected void execAction() {
 				WirkungsdauerForm form = new WirkungsdauerForm();
-				form.setWirkungsdauerId(getIdColumn().getSelectedValue());
+				form.setId(getIdColumn().getSelectedValue());
 				form.addFormListener(new WirkungsdauerFormListener());
 				form.startModify();
 			}
@@ -110,8 +110,8 @@ public class WirkungsdauerTablePage extends AbstractPageWithTable<Table> {
 			return getColumnSet().getColumnByClass(BeschreibungColumn.class);
 		}
 
-		public TypColumn getTypColumn() {
-			return getColumnSet().getColumnByClass(TypColumn.class);
+		public NameColumn getNameColumn() {
+			return getColumnSet().getColumnByClass(NameColumn.class);
 		}
 
 		public IdColumn getIdColumn() {
@@ -122,7 +122,7 @@ public class WirkungsdauerTablePage extends AbstractPageWithTable<Table> {
 		public class IdColumn extends AbstractLongColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("ID");
+				return TEXTS.get("Allgemein_ID");
 			}
 
 			@Override
@@ -137,10 +137,10 @@ public class WirkungsdauerTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(2000)
-		public class TypColumn extends AbstractStringColumn {
+		public class NameColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Wirkungsdauer");
+				return TEXTS.get("Zauber_Wirkungsdauer_Label_Titel");
 			}
 
 		}
@@ -149,7 +149,7 @@ public class WirkungsdauerTablePage extends AbstractPageWithTable<Table> {
 		public class BeschreibungColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Beschreibung");
+				return TEXTS.get("Allgemein_Beschreibung");
 			}
 
 		}

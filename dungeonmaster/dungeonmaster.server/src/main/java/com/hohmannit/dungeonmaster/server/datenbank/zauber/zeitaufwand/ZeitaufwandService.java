@@ -13,21 +13,21 @@ import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.CreateZei
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.IZeitaufwandtypService;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.ReadZeitaufwandtypPermission;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.UpdateZeitaufwandtypPermission;
-import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandtypFormData;
-import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandtypTablePageData;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandFormData;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandTablePageData;
 
 public class ZeitaufwandService implements IZeitaufwandtypService {
 	@Override
-	public ZeitaufwandtypTablePageData getZeitaufwandtypTableData(SearchFilter filter) {
-		ZeitaufwandtypTablePageData pageData = new ZeitaufwandtypTablePageData();
-		String sql = ZeitaufwandSQLs.ZEITAUFWANDTYP_PAGE_SELECT + ZeitaufwandSQLs.ZEITAUFWANDTYP_PAGE_SELECT_INTO;
+	public ZeitaufwandTablePageData getZeitaufwandtypTableData(SearchFilter filter) {
+		ZeitaufwandTablePageData pageData = new ZeitaufwandTablePageData();
+		String sql = ZeitaufwandSQLs.ZEITAUFWAND_PAGE_SELECT + ZeitaufwandSQLs.ZEITAUFWAND_PAGE_SELECT_INTO;
 		SQL.selectInto(sql, new NVPair("page", pageData));
 
 		return pageData;
 	}
 
 	@Override
-	public ZeitaufwandtypFormData prepareCreate(ZeitaufwandtypFormData formData) {
+	public ZeitaufwandFormData prepareCreate(ZeitaufwandFormData formData) {
 		if (!ACCESS.check(new CreateZeitaufwandtypPermission())) {
 			throw new VetoException(TEXTS.get("Allgemein_ZugriffVerweigert"));
 		}
@@ -35,38 +35,38 @@ public class ZeitaufwandService implements IZeitaufwandtypService {
 	}
 
 	@Override
-	public ZeitaufwandtypFormData create(ZeitaufwandtypFormData formData) {
+	public ZeitaufwandFormData create(ZeitaufwandFormData formData) {
 		if (!ACCESS.check(new CreateZeitaufwandtypPermission())) {
 			throw new VetoException(TEXTS.get("Allgemein_ZugriffVerweigert"));
 		}
-		SQL.insert(ZeitaufwandSQLs.ZEITAUFWANDTYP_INSERT, formData);
+		SQL.insert(ZeitaufwandSQLs.ZEITAUFWAND_INSERT, formData);
 		return formData;
 	}
 
 	@Override
-	public ZeitaufwandtypFormData load(ZeitaufwandtypFormData formData) {
+	public ZeitaufwandFormData load(ZeitaufwandFormData formData) {
 		if (!ACCESS.check(new ReadZeitaufwandtypPermission())) {
 			throw new VetoException(TEXTS.get("Allgemein_ZugriffVerweigert"));
 		}
-		SQL.select(ZeitaufwandSQLs.ZEITAUFWANDTYP_SELECT, formData);
+		SQL.select(ZeitaufwandSQLs.ZEITAUFWAND_SELECT, formData);
 		return formData;
 	}
 
 	@Override
-	public ZeitaufwandtypFormData store(ZeitaufwandtypFormData formData) {
+	public ZeitaufwandFormData store(ZeitaufwandFormData formData) {
 		if (!ACCESS.check(new UpdateZeitaufwandtypPermission())) {
 			throw new VetoException(TEXTS.get("Allgemein_ZugriffVerweigert"));
 		}
-		SQL.update(ZeitaufwandSQLs.ZEITAUFWANDTYP_UPDATE, formData);
+		SQL.update(ZeitaufwandSQLs.ZEITAUFWAND_UPDATE, formData);
 		return formData;
 	}
 
 	@Override
 	public void delete(List<Long> list) {
 		for (Long key : list) {
-			ZeitaufwandtypFormData formData = new ZeitaufwandtypFormData();
-			formData.setZeitaufwandtypId(key);
-			SQL.delete(ZeitaufwandSQLs.ZEITAUFWANDTYP_DELETE, formData);
+			ZeitaufwandFormData formData = new ZeitaufwandFormData();
+			formData.setId(key);
+			SQL.delete(ZeitaufwandSQLs.ZEITAUFWAND_DELETE, formData);
 		}
 	}
 }

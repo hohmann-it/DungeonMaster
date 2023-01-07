@@ -9,7 +9,7 @@ public class NonNullStringField extends AbstractStringField {
 	@Override
 	protected String execValidateValue(String rawValue) {
 		if (StringUtility.isNullOrEmpty(rawValue)) {
-			throw new VetoException(TEXTS.get("DarfNichtLeerSein", getConfiguredLabel()));
+			throw new VetoException(TEXTS.get("Fehler_Client_Leer", getConfiguredLabel()));
 		}
 		return rawValue;
 	}

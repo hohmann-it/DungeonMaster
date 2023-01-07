@@ -16,7 +16,8 @@ import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleForm.Mai
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleForm.MainBox.GroupBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleForm.MainBox.GroupBox.BeschreibungField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleForm.MainBox.GroupBox.KategorieField;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleForm.MainBox.GroupBox.TypField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleForm.MainBox.GroupBox.NameField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleForm.MainBox.GroupBox.TooltipField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleForm.MainBox.OkButton;
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.schule.CreateSchulePermission;
@@ -27,21 +28,21 @@ import com.hohmannit.dungeonmaster.shared.zauberbuch.SchuleFormData;
 @FormData(value = SchuleFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class SchuleForm extends AbstractForm {
 
-	private Long schuleId;
+	private Long id;
 
 	@FormData
-	public Long getSchuleId() {
-		return schuleId;
+	public Long getId() {
+		return id;
 	}
 
 	@FormData
-	public void setSchuleId(Long schuleId) {
-		this.schuleId = schuleId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Schule");
+		return TEXTS.get("Zauber_Schulen_Label_Schule");
 	}
 
 	@Override
@@ -57,8 +58,12 @@ public class SchuleForm extends AbstractForm {
 		return getFieldByClass(GroupBox.class);
 	}
 
-	public TypField getTypField() {
-		return getFieldByClass(TypField.class);
+	public TooltipField getTooltipField() {
+		return getFieldByClass(TooltipField.class);
+	}
+
+	public NameField getNameField() {
+		return getFieldByClass(NameField.class);
 	}
 
 	public KategorieField getKategorieField() {
@@ -84,7 +89,7 @@ public class SchuleForm extends AbstractForm {
 
 			@Order(0)
 			@FormData(sdkCommand = FormData.SdkCommand.IGNORE)
-			public class DescriptionField extends AbstractLabelField {
+			public class TooltipField extends AbstractLabelField {
 				@Override
 				protected int getConfiguredGridW() {
 					return 2;
@@ -112,10 +117,10 @@ public class SchuleForm extends AbstractForm {
 			}
 
 			@Order(1000)
-			public class TypField extends AbstractStringField {
+			public class NameField extends AbstractStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Name");
+					return TEXTS.get("Allgemein_Name");
 				}
 
 				@Override
@@ -128,7 +133,7 @@ public class SchuleForm extends AbstractForm {
 			public class KategorieField extends AbstractStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Kategorie");
+					return TEXTS.get("Zauber_Schulen_Label_Kategorie");
 				}
 
 				@Override
@@ -141,7 +146,7 @@ public class SchuleForm extends AbstractForm {
 			public class BeschreibungField extends AbstractStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Beschreibung");
+					return TEXTS.get("Allgemein_Beschreibung");
 				}
 
 				@Override
@@ -200,8 +205,6 @@ public class SchuleForm extends AbstractForm {
 			importFormData(formData);
 
 			setEnabledPermission(new CreateSchulePermission());
-
-			setTitle(TEXTS.get("NeueSchuleAnlegen"));
 		}
 
 		@Override
@@ -235,6 +238,6 @@ public class SchuleForm extends AbstractForm {
 	}
 
 	protected String calculateSubTitle() {
-		return getTypField().getValue();
+		return getNameField().getValue();
 	}
 }

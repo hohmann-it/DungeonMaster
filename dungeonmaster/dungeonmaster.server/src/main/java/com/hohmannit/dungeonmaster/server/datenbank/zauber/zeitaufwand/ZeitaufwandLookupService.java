@@ -7,6 +7,6 @@ import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.IZeitaufw
 public class ZeitaufwandLookupService extends AbstractSqlLookupService<Long> implements IZeitaufwandLookupService {
 	@Override
 	protected String getConfiguredSqlSelect() {
-		return ZeitaufwandSQLs.ZEITAUFWANDTYP_LOOKUP;
+		return ZeitaufwandSQLs.ZEITAUFWAND_LOOKUP;
 	}
 }

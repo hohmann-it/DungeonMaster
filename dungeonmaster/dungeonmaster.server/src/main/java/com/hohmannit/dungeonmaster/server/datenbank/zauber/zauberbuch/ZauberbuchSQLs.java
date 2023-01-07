@@ -1,21 +1,21 @@
 package com.hohmannit.dungeonmaster.server.datenbank.zauber.zauberbuch;
 
 public interface ZauberbuchSQLs {
-	String ZAUBER_PAGE_SELECT = "SELECT zauber_id, name, zeitaufwand, fk_zeitaufwand_typ, reichweite, fk_reichweite, wirkungsdauer, fk_wirkungsdauer, beschreibung, hoehere_grade, grad, fk_schule"
+	String ZAUBER_PAGE_SELECT = "SELECT id, name, zeitaufwand, fk_zeitaufwand, reichweite, fk_reichweite, wirkungsdauer, fk_wirkungsdauer, beschreibung, hoeheregrade, grad, fk_schule"
 			+ "	FROM dd.zauber;";
 
-	String ZAUBER_PAGE_DATA_SELECT_INTO = " INTO :{page.zauberId}, :{page.name}, :{page.zeitaufwand}, :{page.zeitaufwandtyp}, :{page.reichweite}, :{page.reichweitetyp}, :{page.wirkungsdauer}, :{page.wirkungsdauertyp}, :{page.beschreibung}, :{page.hoehereGrade}, :{page.grad}, :{page.schule}";
+	String ZAUBER_PAGE_DATA_SELECT_INTO = " INTO :{page.id}, :{page.name}, :{page.zeitaufwand}, :{page.zeitaufwandtyp}, :{page.reichweite}, :{page.reichweitetyp}, :{page.wirkungsdauer}, :{page.wirkungsdauertyp}, :{page.beschreibung}, :{page.hoehereGrade}, :{page.grad}, :{page.schule}";
 
 	String ZAUBER_INSERT = "INSERT INTO dd.zauber ("//
 			+ "name, " //
 			+ "zeitaufwand, " //
-			+ "fk_zeitaufwand_typ, " //
+			+ "fk_zeitaufwand, " //
 			+ "reichweite, " //
 			+ "fk_reichweite, " //
 			+ "wirkungsdauer, " //
 			+ "fk_wirkungsdauer, " //
 			+ "beschreibung, " //
-			+ "hoehere_grade, " //
+			+ "hoeheregrade, " //
 			+ "grad, " //
 			+ "fk_schule) " //
 			+ "VALUES (" //
@@ -25,13 +25,13 @@ public interface ZauberbuchSQLs {
 			+ "SELECT " //
 			+ "name, "//
 			+ "zeitaufwand, "//
-			+ "fk_zeitaufwand_typ, "//
+			+ "fk_zeitaufwand, "//
 			+ "reichweite, "//
 			+ "fk_reichweite, "//
 			+ "wirkungsdauer, "//
 			+ "fk_wirkungsdauer, "//
 			+ "beschreibung, "//
-			+ "hoehere_grade, "//
+			+ "hoeheregrade, "//
 			+ "grad, "//
 			+ "fk_schule, "//
 			+ "verbal, "//
@@ -40,7 +40,7 @@ public interface ZauberbuchSQLs {
 			+ "ritual,"//
 			+ "konzentration"//
 			+ "	FROM dd.zauber "//
-			+ "WHERE    zauber_id = :zauberId "//
+			+ "WHERE    id = :id "//
 			+ "INTO     :name, "//
 			+ "         :zeitaufwand, "//
 			+ "         :zeitaufwandtyp, "//

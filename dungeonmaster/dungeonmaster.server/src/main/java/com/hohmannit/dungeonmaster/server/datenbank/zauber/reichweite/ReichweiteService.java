@@ -64,7 +64,7 @@ public class ReichweiteService implements IReichweiteService {
 	public void delete(List<Long> list) {
 		for (Long key : list) {
 			ReichweiteFormData formData = new ReichweiteFormData();
-			formData.setReichweiteId(key);
+			formData.setId(key);
 			SQL.delete(ReichweiteSQLs.REICHWEITE_DELETE, formData);
 		}
 	}

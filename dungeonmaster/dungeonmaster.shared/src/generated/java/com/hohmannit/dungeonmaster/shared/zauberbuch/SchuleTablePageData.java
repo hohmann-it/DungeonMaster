@@ -51,11 +51,11 @@ public class SchuleTablePageData extends AbstractTablePageData {
 	public static class SchuleTableRowData extends AbstractTableRowData {
 		private static final long serialVersionUID = 1L;
 		public static final String id = "id";
-		public static final String typ = "typ";
+		public static final String name = "name";
 		public static final String beschreibung = "beschreibung";
 		public static final String kategorie = "kategorie";
 		private Long m_id;
-		private String m_typ;
+		private String m_name;
 		private String m_beschreibung;
 		private String m_kategorie;
 
@@ -67,12 +67,12 @@ public class SchuleTablePageData extends AbstractTablePageData {
 			m_id = newId;
 		}
 
-		public String getTyp() {
-			return m_typ;
+		public String getName() {
+			return m_name;
 		}
 
-		public void setTyp(String newTyp) {
-			m_typ = newTyp;
+		public void setName(String newName) {
+			m_name = newName;
 		}
 
 		public String getBeschreibung() {

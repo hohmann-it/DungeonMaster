@@ -112,7 +112,7 @@ public class Desktop extends AbstractDesktop {
 	public class SchnellzugriffMenu extends AbstractMenu {
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("QuickAccess");
+			return TEXTS.get("MasterBar_QuickAccess_Titel");
 		}
 
 		@Override
@@ -140,7 +140,7 @@ public class Desktop extends AbstractDesktop {
 	public class OptionenMenu extends AbstractFormMenu<OptionsForm> {
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Optionen");
+			return TEXTS.get("MasterBar_Optionen_Titel");
 		}
 
 		@Override
@@ -167,7 +167,7 @@ public class Desktop extends AbstractDesktop {
 	public class BenutzerMenu extends AbstractMenu {
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("UserMenu");
+			return TEXTS.get("MasterBar_UserMenu");
 		}
 
 		@Override

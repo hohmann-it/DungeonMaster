@@ -12,13 +12,13 @@ public class Exceptional {
 			String sqlState = exception.getSQLState();
 			switch (sqlState) {
 			case "23503": {
-				throw new VetoException(TEXTS.get("Fehler_Constraint"));
+				throw new VetoException(TEXTS.get("Fehler_Server_Sql_FKDelete"));
 			}
 			case "23505": {
-				throw new VetoException(TEXTS.get("Fehler_Constraint_Unique"));
+				throw new VetoException(TEXTS.get("Fehler_Server_Sql_Unique"));
 			}
 			default:
-				throw new IllegalArgumentException(TEXTS.get("Datenbankfehler"));
+				throw new IllegalArgumentException(TEXTS.get("Fehler_Server_Sql_Undefined"));
 			}
 		}
 	}

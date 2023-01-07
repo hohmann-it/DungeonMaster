@@ -38,7 +38,7 @@ public class CharakterTablePage extends AbstractPageWithTable<Table> {
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Page_Charaktere_Titel");
+		return TEXTS.get("Charaktere_Titel");
 	}
 
 	public class Table extends AbstractTable {
@@ -78,7 +78,7 @@ public class CharakterTablePage extends AbstractPageWithTable<Table> {
 		public class KlasseColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Page_Charaktere_Klasse_Label");
+				return TEXTS.get("Charaktere_Klasse_Label");
 			}
 
 			@Override

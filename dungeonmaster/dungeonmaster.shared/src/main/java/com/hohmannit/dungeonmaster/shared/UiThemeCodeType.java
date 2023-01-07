@@ -41,7 +41,7 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
 
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Optionen_Theme_Dunkel");
+			return TEXTS.get("MasterBar_Optionen_Theme_Dunkel");
 		}
 
 		@Override
@@ -59,7 +59,7 @@ public class UiThemeCodeType extends AbstractCodeType<Long, String> {
 
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Hell");
+			return TEXTS.get("MasterBar_Optionen_Theme_Hell");
 		}
 
 		@Override

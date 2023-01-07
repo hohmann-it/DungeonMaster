@@ -19,37 +19,37 @@ public class WirkungsdauerFormData extends AbstractFormData {
 		return getFieldByClass(Beschreibung.class);
 	}
 
-	public Typ getTyp() {
-		return getFieldByClass(Typ.class);
+	/**
+	 * access method for property Id.
+	 */
+	public Long getId() {
+		return getIdProperty().getValue();
 	}
 
 	/**
-	 * access method for property WirkungsdauerId.
+	 * access method for property Id.
 	 */
-	public Long getWirkungsdauerId() {
-		return getWirkungsdauerIdProperty().getValue();
+	public void setId(Long id) {
+		getIdProperty().setValue(id);
 	}
 
-	/**
-	 * access method for property WirkungsdauerId.
-	 */
-	public void setWirkungsdauerId(Long wirkungsdauerId) {
-		getWirkungsdauerIdProperty().setValue(wirkungsdauerId);
+	public IdProperty getIdProperty() {
+		return getPropertyByClass(IdProperty.class);
 	}
 
-	public WirkungsdauerIdProperty getWirkungsdauerIdProperty() {
-		return getPropertyByClass(WirkungsdauerIdProperty.class);
+	public Name getName() {
+		return getFieldByClass(Name.class);
 	}
 
 	public static class Beschreibung extends AbstractValueFieldData<String> {
 		private static final long serialVersionUID = 1L;
 	}
 
-	public static class Typ extends AbstractValueFieldData<String> {
+	public static class IdProperty extends AbstractPropertyData<Long> {
 		private static final long serialVersionUID = 1L;
 	}
 
-	public static class WirkungsdauerIdProperty extends AbstractPropertyData<Long> {
+	public static class Name extends AbstractValueFieldData<String> {
 		private static final long serialVersionUID = 1L;
 	}
 }

@@ -10,7 +10,7 @@ import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.Reichweite
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.schule.SchuleTablePage;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.wirkungsdauer.WirkungsdauerTablePage;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchTablePage;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandtypTablePage;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandTablePage;
 import com.hohmannit.dungeonmaster.shared.Icons;
 
 public class ZauberNodePage extends AbstractPageWithNodes {
@@ -18,7 +18,7 @@ public class ZauberNodePage extends AbstractPageWithNodes {
 	protected void execCreateChildPages(List<IPage<?>> pageList) {
 		pageList.add(new ZauberbuchTablePage());
 		pageList.add(new SchuleTablePage());
-		pageList.add(new ZeitaufwandtypTablePage());
+		pageList.add(new ZeitaufwandTablePage());
 		pageList.add(new ReichweiteTablePage());
 		pageList.add(new WirkungsdauerTablePage());
 	}

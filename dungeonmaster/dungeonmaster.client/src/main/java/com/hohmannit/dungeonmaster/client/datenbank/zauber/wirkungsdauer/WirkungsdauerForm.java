@@ -15,8 +15,9 @@ import org.eclipse.scout.rt.platform.text.TEXTS;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.wirkungsdauer.WirkungsdauerForm.MainBox.CancelButton;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.wirkungsdauer.WirkungsdauerForm.MainBox.GroupBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.wirkungsdauer.WirkungsdauerForm.MainBox.GroupBox.BeschreibungField;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.wirkungsdauer.WirkungsdauerForm.MainBox.GroupBox.TypField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.wirkungsdauer.WirkungsdauerForm.MainBox.GroupBox.NameField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.wirkungsdauer.WirkungsdauerForm.MainBox.OkButton;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandForm.MainBox.GroupBox.TooltipField;
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.wirkungsdauer.CreateWirkungsdauerPermission;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.wirkungsdauer.IWirkungsdauerService;
@@ -26,16 +27,16 @@ import com.hohmannit.dungeonmaster.shared.datenbank.zauber.wirkungsdauer.Wirkung
 @FormData(value = WirkungsdauerFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class WirkungsdauerForm extends AbstractForm {
 
-	private Long wirkungsdauerId;
+	private Long id;
 
 	@FormData
-	public Long getWirkungsdauerId() {
-		return wirkungsdauerId;
+	public Long getId() {
+		return id;
 	}
 
 	@FormData
-	public void setWirkungsdauerId(Long wirkungsdauerId) {
-		this.wirkungsdauerId = wirkungsdauerId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class WirkungsdauerForm extends AbstractForm {
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Wirkungsdauer");
+		return TEXTS.get("Zauber_Wirkungsdauer_Label_Titel");
 	}
 
 	public MainBox getMainBox() {
@@ -56,8 +57,12 @@ public class WirkungsdauerForm extends AbstractForm {
 		return getFieldByClass(GroupBox.class);
 	}
 
-	public TypField getTypField() {
-		return getFieldByClass(TypField.class);
+	public TooltipField getTooltipField() {
+		return getFieldByClass(TooltipField.class);
+	}
+
+	public NameField getNameField() {
+		return getFieldByClass(NameField.class);
 	}
 
 	public BeschreibungField getBeschreibungField() {
@@ -78,7 +83,7 @@ public class WirkungsdauerForm extends AbstractForm {
 		public class GroupBox extends AbstractGroupBox {
 			@Order(0)
 			@FormData(sdkCommand = FormData.SdkCommand.IGNORE)
-			public class DescriptionField extends AbstractLabelField {
+			public class TooltipField extends AbstractLabelField {
 				@Override
 				protected int getConfiguredGridW() {
 					return 2;
@@ -86,7 +91,7 @@ public class WirkungsdauerForm extends AbstractForm {
 
 				@Override
 				protected int getConfiguredGridH() {
-					return 3;
+					return 2;
 				}
 
 				@Override
@@ -101,15 +106,15 @@ public class WirkungsdauerForm extends AbstractForm {
 
 				@Override
 				protected void execInitField() {
-					setValue(TEXTS.get("Wirkungsdauer_Beschreibung"));
+					setValue(TEXTS.get("Zauber_Wirkungsdauer_Label_Tooltip"));
 				}
 			}
 
 			@Order(1000)
-			public class TypField extends AbstractStringField {
+			public class NameField extends AbstractStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Wirkungsdauer");
+					return TEXTS.get("Allgemein_Name");
 				}
 
 				@Override
@@ -122,7 +127,7 @@ public class WirkungsdauerForm extends AbstractForm {
 			public class BeschreibungField extends AbstractStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Beschreibung");
+					return TEXTS.get("Allgemein_Beschreibung");
 				}
 
 				@Override

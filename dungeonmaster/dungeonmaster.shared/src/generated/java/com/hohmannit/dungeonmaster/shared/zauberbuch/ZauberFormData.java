@@ -33,6 +33,24 @@ public class ZauberFormData extends AbstractFormData {
 		return getFieldByClass(Hoeheregrade.class);
 	}
 
+	/**
+	 * access method for property Id.
+	 */
+	public Long getId() {
+		return getIdProperty().getValue();
+	}
+
+	/**
+	 * access method for property Id.
+	 */
+	public void setId(Long id) {
+		getIdProperty().setValue(id);
+	}
+
+	public IdProperty getIdProperty() {
+		return getPropertyByClass(IdProperty.class);
+	}
+
 	public Konzentration getKonzentration() {
 		return getFieldByClass(Konzentration.class);
 	}
@@ -73,24 +91,6 @@ public class ZauberFormData extends AbstractFormData {
 		return getFieldByClass(Wirkungsdauertyp.class);
 	}
 
-	/**
-	 * access method for property ZauberId.
-	 */
-	public Long getZauberId() {
-		return getZauberIdProperty().getValue();
-	}
-
-	/**
-	 * access method for property ZauberId.
-	 */
-	public void setZauberId(Long zauberId) {
-		getZauberIdProperty().setValue(zauberId);
-	}
-
-	public ZauberIdProperty getZauberIdProperty() {
-		return getPropertyByClass(ZauberIdProperty.class);
-	}
-
 	public ZaubkomponentenTable getZaubkomponentenTable() {
 		return getFieldByClass(ZaubkomponentenTable.class);
 	}
@@ -116,6 +116,10 @@ public class ZauberFormData extends AbstractFormData {
 	}
 
 	public static class Hoeheregrade extends AbstractValueFieldData<String> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class IdProperty extends AbstractPropertyData<Long> {
 		private static final long serialVersionUID = 1L;
 	}
 
@@ -156,10 +160,6 @@ public class ZauberFormData extends AbstractFormData {
 	}
 
 	public static class Wirkungsdauertyp extends AbstractValueFieldData<Long> {
-		private static final long serialVersionUID = 1L;
-	}
-
-	public static class ZauberIdProperty extends AbstractPropertyData<Long> {
 		private static final long serialVersionUID = 1L;
 	}
 

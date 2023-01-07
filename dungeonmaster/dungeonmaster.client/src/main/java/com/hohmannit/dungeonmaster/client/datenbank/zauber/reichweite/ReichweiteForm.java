@@ -17,10 +17,10 @@ import com.hohmannit.dungeonmaster.client.common.NonNullStringField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.CancelButton;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.GroupBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.GroupBox.BeschreibungField;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.GroupBox.DescriptionField;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.GroupBox.DescriptionImageField;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.GroupBox.TypKurzField;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.GroupBox.TypLangField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.GroupBox.KurzField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.GroupBox.LangField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.GroupBox.TooltipField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.GroupBox.TooltipImageField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.reichweite.ReichweiteForm.MainBox.OkButton;
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.reichweite.CreateReichweitePermission;
@@ -31,16 +31,16 @@ import com.hohmannit.dungeonmaster.shared.datenbank.zauber.reichweite.UpdateReic
 @FormData(value = ReichweiteFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class ReichweiteForm extends AbstractForm {
 
-	private Long reichweiteId;
+	private Long id;
 
 	@FormData
-	public Long getReichweiteId() {
-		return reichweiteId;
+	public Long getId() {
+		return id;
 	}
 
 	@FormData
-	public void setReichweiteId(Long reichweiteId) {
-		this.reichweiteId = reichweiteId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class ReichweiteForm extends AbstractForm {
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Reichweite");
+		return TEXTS.get("Zauber_Reichweite_Label_Titel");
 	}
 
 	public MainBox getMainBox() {
@@ -61,20 +61,20 @@ public class ReichweiteForm extends AbstractForm {
 		return getFieldByClass(GroupBox.class);
 	}
 
-	public DescriptionField getDescriptionField() {
-		return getFieldByClass(DescriptionField.class);
+	public TooltipField getTooltipField() {
+		return getFieldByClass(TooltipField.class);
 	}
 
-	public DescriptionImageField getDescriptionImageField() {
-		return getFieldByClass(DescriptionImageField.class);
+	public TooltipImageField getTooltipImageField() {
+		return getFieldByClass(TooltipImageField.class);
 	}
 
-	public TypLangField getTypLangField() {
-		return getFieldByClass(TypLangField.class);
+	public LangField getLangField() {
+		return getFieldByClass(LangField.class);
 	}
 
-	public TypKurzField getTypKurzField() {
-		return getFieldByClass(TypKurzField.class);
+	public KurzField getKurzField() {
+		return getFieldByClass(KurzField.class);
 	}
 
 	public BeschreibungField getBeschreibungField() {
@@ -96,7 +96,7 @@ public class ReichweiteForm extends AbstractForm {
 
 			@Order(1000)
 			@FormData(sdkCommand = FormData.SdkCommand.IGNORE)
-			public class DescriptionField extends AbstractLabelField {
+			public class TooltipField extends AbstractLabelField {
 				@Override
 				protected int getConfiguredGridW() {
 					return 2;
@@ -104,7 +104,7 @@ public class ReichweiteForm extends AbstractForm {
 
 				@Override
 				protected int getConfiguredGridH() {
-					return 3;
+					return 4;
 				}
 
 				@Override
@@ -119,14 +119,19 @@ public class ReichweiteForm extends AbstractForm {
 
 				@Override
 				protected void execInitField() {
-					setValue(TEXTS.get("Zauber_Reichweite_Beschreibung"));
+					setValue(TEXTS.get("Zauber_Reichweite_Label_Tooltip"));
+				}
+
+				@Override
+				protected boolean getConfiguredHtmlEnabled() {
+					return true;
 				}
 
 			}
 
 			@Order(2000)
 			@FormData(sdkCommand = FormData.SdkCommand.IGNORE)
-			public class DescriptionImageField extends AbstractImageField {
+			public class TooltipImageField extends AbstractImageField {
 				@Override
 				protected boolean getConfiguredLabelVisible() {
 					return false;
@@ -155,10 +160,10 @@ public class ReichweiteForm extends AbstractForm {
 			}
 
 			@Order(3000)
-			public class TypLangField extends NonNullStringField {
+			public class LangField extends NonNullStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("EinheitLang");
+					return TEXTS.get("Zauber_Reichweite_Label_EinheitLang");
 				}
 
 				@Override
@@ -168,10 +173,10 @@ public class ReichweiteForm extends AbstractForm {
 			}
 
 			@Order(4000)
-			public class TypKurzField extends NonNullStringField {
+			public class KurzField extends NonNullStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("EinheitKurz");
+					return TEXTS.get("Zauber_Reichweite_Label_EinheitKurz");
 				}
 
 				@Override
@@ -184,7 +189,7 @@ public class ReichweiteForm extends AbstractForm {
 			public class BeschreibungField extends AbstractStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Beschreibung");
+					return TEXTS.get("Zauber_Reichweite_Label_EinheitLang");
 				}
 
 				@Override

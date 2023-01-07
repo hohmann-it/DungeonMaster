@@ -50,7 +50,7 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 
 	public static class ZauberbuchTableRowData extends AbstractTableRowData {
 		private static final long serialVersionUID = 1L;
-		public static final String zauberId = "zauberId";
+		public static final String id = "id";
 		public static final String name = "name";
 		public static final String grad = "grad";
 		public static final String schule = "schule";
@@ -62,7 +62,7 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 		public static final String wirkungsdauertyp = "wirkungsdauertyp";
 		public static final String beschreibung = "beschreibung";
 		public static final String hoehereGrade = "hoehereGrade";
-		private Long m_zauberId;
+		private Long m_id;
 		private String m_name;
 		private Integer m_grad;
 		private Long m_schule;
@@ -75,12 +75,12 @@ public class ZauberbuchTablePageData extends AbstractTablePageData {
 		private String m_beschreibung;
 		private String m_hoehereGrade;
 
-		public Long getZauberId() {
-			return m_zauberId;
+		public Long getId() {
+			return m_id;
 		}
 
-		public void setZauberId(Long newZauberId) {
-			m_zauberId = newZauberId;
+		public void setId(Long newId) {
+			m_id = newId;
 		}
 
 		public String getName() {

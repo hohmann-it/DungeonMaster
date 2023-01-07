@@ -20,44 +20,44 @@ public class ReichweiteFormData extends AbstractFormData {
 	}
 
 	/**
-	 * access method for property ReichweiteId.
+	 * access method for property Id.
 	 */
-	public Long getReichweiteId() {
-		return getReichweiteIdProperty().getValue();
+	public Long getId() {
+		return getIdProperty().getValue();
 	}
 
 	/**
-	 * access method for property ReichweiteId.
+	 * access method for property Id.
 	 */
-	public void setReichweiteId(Long reichweiteId) {
-		getReichweiteIdProperty().setValue(reichweiteId);
+	public void setId(Long id) {
+		getIdProperty().setValue(id);
 	}
 
-	public ReichweiteIdProperty getReichweiteIdProperty() {
-		return getPropertyByClass(ReichweiteIdProperty.class);
+	public IdProperty getIdProperty() {
+		return getPropertyByClass(IdProperty.class);
 	}
 
-	public TypKurz getTypKurz() {
-		return getFieldByClass(TypKurz.class);
+	public Kurz getKurz() {
+		return getFieldByClass(Kurz.class);
 	}
 
-	public TypLang getTypLang() {
-		return getFieldByClass(TypLang.class);
+	public Lang getLang() {
+		return getFieldByClass(Lang.class);
 	}
 
 	public static class Beschreibung extends AbstractValueFieldData<String> {
 		private static final long serialVersionUID = 1L;
 	}
 
-	public static class ReichweiteIdProperty extends AbstractPropertyData<Long> {
+	public static class IdProperty extends AbstractPropertyData<Long> {
 		private static final long serialVersionUID = 1L;
 	}
 
-	public static class TypKurz extends AbstractValueFieldData<String> {
+	public static class Kurz extends AbstractValueFieldData<String> {
 		private static final long serialVersionUID = 1L;
 	}
 
-	public static class TypLang extends AbstractValueFieldData<String> {
+	public static class Lang extends AbstractValueFieldData<String> {
 		private static final long serialVersionUID = 1L;
 	}
 }

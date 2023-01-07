@@ -22,7 +22,7 @@ public class ZaubergradCodeType extends AbstractCodeType<Integer, Integer> {
 
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Zaubertrick");
+			return TEXTS.get("CodeType_Zaubergrad_Zaubertrick");
 		}
 
 		@Override
@@ -39,7 +39,7 @@ public class ZaubergradCodeType extends AbstractCodeType<Integer, Integer> {
 
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Grad1");
+			return TEXTS.get("CodeType_Zaubergrad_1");
 		}
 
 		@Override
@@ -56,7 +56,7 @@ public class ZaubergradCodeType extends AbstractCodeType<Integer, Integer> {
 
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Grad2");
+			return TEXTS.get("CodeType_Zaubergrad_2");
 		}
 
 		@Override
@@ -73,7 +73,7 @@ public class ZaubergradCodeType extends AbstractCodeType<Integer, Integer> {
 
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Grad3");
+			return TEXTS.get("CodeType_Zaubergrad_3");
 		}
 
 		@Override
@@ -90,7 +90,7 @@ public class ZaubergradCodeType extends AbstractCodeType<Integer, Integer> {
 
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Grad4");
+			return TEXTS.get("CodeType_Zaubergrad_4");
 		}
 
 		@Override
@@ -100,18 +100,18 @@ public class ZaubergradCodeType extends AbstractCodeType<Integer, Integer> {
 	}
 
 	@Order(6000)
-	public static class FiveCode extends AbstractCode<String> {
+	public static class FiveCode extends AbstractCode<Integer> {
 
 		private static final long serialVersionUID = 1L;
-		public static final String ID = "5";
+		public static final Integer ID = 5;
 
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Grad5");
+			return TEXTS.get("CodeType_Zaubergrad_5");
 		}
 
 		@Override
-		public String getId() {
+		public Integer getId() {
 			return ID;
 		}
 	}
@@ -124,7 +124,7 @@ public class ZaubergradCodeType extends AbstractCodeType<Integer, Integer> {
 
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Grad6");
+			return TEXTS.get("CodeType_Zaubergrad_6");
 		}
 
 		@Override
@@ -141,7 +141,7 @@ public class ZaubergradCodeType extends AbstractCodeType<Integer, Integer> {
 
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Grad7");
+			return TEXTS.get("CodeType_Zaubergrad_7");
 		}
 
 		@Override
@@ -158,7 +158,7 @@ public class ZaubergradCodeType extends AbstractCodeType<Integer, Integer> {
 
 		@Override
 		protected String getConfiguredText() {
-			return TEXTS.get("Grad8");
+			return TEXTS.get("CodeType_Zaubergrad_8");
 		}
 
 		@Override
@@ -166,4 +166,21 @@ public class ZaubergradCodeType extends AbstractCodeType<Integer, Integer> {
 			return ID;
 		}
 	}
+
+	@Order(10000)
+	public static class NineCode extends AbstractCode<Integer> {
+		private static final long serialVersionUID = 1L;
+		public static final int ID = 9;
+
+		@Override
+		protected String getConfiguredText() {
+			return TEXTS.get("CodeType_Zaubergrad_9");
+		}
+
+		@Override
+		public Integer getId() {
+			return ID;
+		}
+	}
+
 }

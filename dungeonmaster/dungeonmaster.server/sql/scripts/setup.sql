@@ -65,349 +65,22 @@ CREATE SCHEMA od;
 ALTER SCHEMA od OWNER TO dungeonmaster;
 
 --
--- Name: insert_gegenstand(text, text, numeric, numeric, text); Type: PROCEDURE; Schema: dd; Owner: dungeonmaster
---
-
-CREATE PROCEDURE dd.insert_gegenstand(IN in_name text, IN in_beschreibung text, IN in_wert numeric, IN in_gewicht numeric, IN in_typ text)
-    LANGUAGE sql
-    AS $$
-INSERT INTO dd.gegenstand
-    ( name
-      , beschreibung
-      , wert
-      , gewicht
-      , fk_gegenstand_typ
-    )
-    VALUES
-    ( in_name
-      , in_beschreibung
-      , in_wert
-      , in_gewicht
-      , (
-            SELECT
-                gegenstandtyp_id
-            FROM
-                dd.gegenstandtyp
-            WHERE
-                typ = in_typ
-        )
-    )
-;
-
-$$;
-
-
-ALTER PROCEDURE dd.insert_gegenstand(IN in_name text, IN in_beschreibung text, IN in_wert numeric, IN in_gewicht numeric, IN in_typ text) OWNER TO dungeonmaster;
-
---
--- Name: insert_gegenstandtyp(text); Type: PROCEDURE; Schema: dd; Owner: dungeonmaster
---
-
-CREATE PROCEDURE dd.insert_gegenstandtyp(IN in_typ text)
-    LANGUAGE sql
-    AS $$
-INSERT INTO dd.gegenstandtyp
-    ( typ
-    )
-    VALUES
-    ( in_typ
-    )
-;
-
-$$;
-
-
-ALTER PROCEDURE dd.insert_gegenstandtyp(IN in_typ text) OWNER TO dungeonmaster;
-
---
--- Name: insert_reichweite(text, text, text); Type: PROCEDURE; Schema: dd; Owner: dungeonmaster
---
-
-CREATE PROCEDURE dd.insert_reichweite(IN in_typ_lang text, IN in_typ_kurz text, IN in_beschreibung text DEFAULT NULL::text)
-    LANGUAGE sql
-    AS $$
-INSERT INTO dd.reichweite
-    ( typ_lang
-      , typ_kurz, beschreibung
-    )
-    VALUES
-    ( in_typ_lang
-      , in_typ_kurz, in_beschreibung
-    )
-;
-
-$$;
-
-
-ALTER PROCEDURE dd.insert_reichweite(IN in_typ_lang text, IN in_typ_kurz text, IN in_beschreibung text) OWNER TO dungeonmaster;
-
---
--- Name: insert_schule(text, text, text); Type: PROCEDURE; Schema: dd; Owner: dungeonmaster
---
-
-CREATE PROCEDURE dd.insert_schule(IN in_typ text, IN in_kategorie text DEFAULT NULL::text, IN in_beschreibung text DEFAULT NULL::text)
-    LANGUAGE sql
-    AS $$
-INSERT INTO dd.schule
-    ( typ
-      , kategorie
-      , beschreibung
-    )
-    VALUES
-    ( in_typ
-      , in_kategorie
-      , in_beschreibung
-    )
-;
-
-$$;
-
-
-ALTER PROCEDURE dd.insert_schule(IN in_typ text, IN in_kategorie text, IN in_beschreibung text) OWNER TO dungeonmaster;
-
---
--- Name: insert_wirkungsdauer(text, text); Type: PROCEDURE; Schema: dd; Owner: dungeonmaster
---
-
-CREATE PROCEDURE dd.insert_wirkungsdauer(IN in_typ text, IN in_beschreibung text DEFAULT NULL::text)
-    LANGUAGE sql
-    AS $$
-INSERT INTO dd.wirkungsdauer
-    ( typ
-      , beschreibung
-    )
-    VALUES
-    ( in_typ
-      , in_beschreibung
-    )
-;
-
-$$;
-
-
-ALTER PROCEDURE dd.insert_wirkungsdauer(IN in_typ text, IN in_beschreibung text) OWNER TO dungeonmaster;
-
---
--- Name: insert_zauber(text, integer, text, integer, text, integer, text, text, text, text, boolean, boolean, boolean, integer, boolean, boolean); Type: PROCEDURE; Schema: dd; Owner: dungeonmaster
---
-
-CREATE PROCEDURE dd.insert_zauber(IN in_name text, IN in_zeitaufwand integer, IN in_zeitaufwandtyp text, IN in_reichweite integer, IN in_reichweitetyp_kurz text, IN in_wirkungsdauer integer, IN in_wirkungsdauertyp text, IN in_beschreibung text, IN in_hoehere_grade text, IN in_schule text, IN in_verbal boolean, IN in_gestik boolean, IN in_material boolean, IN in_grad integer, IN in_ritual boolean DEFAULT false, IN in_konzentration boolean DEFAULT false)
-    LANGUAGE sql
-    AS $$
-INSERT INTO dd.zauber
-    ( name
-      , zeitaufwand
-      , fk_zeitaufwand_typ
-      , reichweite
-      , fk_reichweite
-      , wirkungsdauer
-      , fk_wirkungsdauer
-      , beschreibung
-      , hoehere_grade
-      , grad
-      , fk_schule
-      , verbal
-      , gestik
-      , material
-      , ritual
-	  , konzentration
-    )
-SELECT
-    in_name
-  , in_zeitaufwand
-  , (
-        SELECT
-            zeitaufwandtyp_id
-        FROM
-            dd.zeitaufwandtyp
-        WHERE
-            typ = in_zeitaufwandtyp
-    )
-  , in_reichweite
-  , (
-        SELECT
-            reichweite_id
-        FROM
-            dd.reichweite
-        WHERE
-            typ_kurz = in_reichweitetyp_kurz
-    )
-  , in_wirkungsdauer
-  , (
-        SELECT
-            wirkungsdauer_id
-        FROM
-            dd.wirkungsdauer
-        WHERE
-            typ = in_wirkungsdauertyp
-    )
-  , in_beschreibung
-  , in_hoehere_grade
-  , in_grad
-  , (
-        SELECT
-            schule_id
-        FROM
-            dd.schule
-        WHERE
-            typ = in_schule
-    )
-  , in_verbal
-  , in_gestik
-  , in_material
-  , in_ritual
-  , in_konzentration
-;
-
-$$;
-
-
-ALTER PROCEDURE dd.insert_zauber(IN in_name text, IN in_zeitaufwand integer, IN in_zeitaufwandtyp text, IN in_reichweite integer, IN in_reichweitetyp_kurz text, IN in_wirkungsdauer integer, IN in_wirkungsdauertyp text, IN in_beschreibung text, IN in_hoehere_grade text, IN in_schule text, IN in_verbal boolean, IN in_gestik boolean, IN in_material boolean, IN in_grad integer, IN in_ritual boolean, IN in_konzentration boolean) OWNER TO dungeonmaster;
-
---
--- Name: insert_zaubermaterial(text, text, numeric, numeric, boolean); Type: PROCEDURE; Schema: dd; Owner: dungeonmaster
---
-
-CREATE PROCEDURE dd.insert_zaubermaterial(IN in_zauber text, IN in_gegenstand text, IN in_fk_ersatz_id numeric DEFAULT NULL::numeric, IN in_anzahl numeric DEFAULT 1, IN in_wird_verbraucht boolean DEFAULT false)
-    LANGUAGE sql
-    AS $$
-INSERT INTO dd.zaubermaterial
-    ( fk_zauber
-      , fk_ersatz
-      , fk_gegenstand
-      , anzahl
-      , wird_verbraucht
-    )
-    VALUES
-    (
-    (
-        SELECT
-            zauber_id
-        from
-            dd.zauber
-        WHERE
-            name = in_zauber
-    )
-  , in_fk_ersatz_id
-  , (
-        SELECT
-            gegenstand_id
-        from
-            dd.gegenstand
-        WHERE
-            name               LIKE (in_gegenstand)
-            AND fk_gegenstand_typ =
-            (
-                SELECT
-                    gegenstandtyp_id
-                FROM
-                    dd.gegenstandtyp
-                WHERE
-                    typ = 'Zaubermaterial'
-            )
-    )
-  , in_anzahl
-  , in_wird_verbraucht
-    )
-;
-
-$$;
-
-
-ALTER PROCEDURE dd.insert_zaubermaterial(IN in_zauber text, IN in_gegenstand text, IN in_fk_ersatz_id numeric, IN in_anzahl numeric, IN in_wird_verbraucht boolean) OWNER TO dungeonmaster;
-
---
--- Name: insert_zeitaufwandtyp(text, text); Type: PROCEDURE; Schema: dd; Owner: dungeonmaster
---
-
-CREATE PROCEDURE dd.insert_zeitaufwandtyp(IN in_typ text, IN in_beschreibung text DEFAULT NULL::text)
-    LANGUAGE sql
-    AS $$
-INSERT INTO dd.zeitaufwandtyp
-    ( typ
-      , beschreibung
-    )
-    VALUES
-    ( in_typ
-      , in_beschreibung
-    )
-;
-
-$$;
-
-
-ALTER PROCEDURE dd.insert_zeitaufwandtyp(IN in_typ text, IN in_beschreibung text) OWNER TO dungeonmaster;
-
---
--- Name: update_zaubermaterial_ersatz(text, text, text); Type: PROCEDURE; Schema: dd; Owner: dungeonmaster
---
-
-CREATE PROCEDURE dd.update_zaubermaterial_ersatz(IN in_zaubername text, IN in_gegenstand text, IN in_ersatz_gegenstand text)
-    LANGUAGE sql
-    AS $$
-UPDATE
-    dd.zaubermaterial
-SET fk_ersatz=
-    (
-        SELECT
-            zaubermaterial_id
-        FROM
-            dd.zaubermaterial
-        WHERE
-            fk_gegenstand =
-            (
-                SELECT
-                    gegenstand_id
-                from
-                    dd.gegenstand
-                WHERE
-                    name =in_ersatz_gegenstand
-            )
-    )
-WHERE
-    fk_gegenstand =
-    (
-        SELECT
-            gegenstand_id
-        from
-            dd.gegenstand
-        WHERE
-            name =in_gegenstand
-    )
-    AND fk_zauber=
-    (
-        SELECT
-            zauber_id
-        FROM
-            dd.zauber
-        WHERE
-            name = in_zaubername
-    )
-	AND fk_ersatz IS NULL
-;
-
-$$;
-
-
-ALTER PROCEDURE dd.update_zaubermaterial_ersatz(IN in_zaubername text, IN in_gegenstand text, IN in_ersatz_gegenstand text) OWNER TO dungeonmaster;
-
---
 -- Name: insert_charakter(text, text); Type: PROCEDURE; Schema: od; Owner: dungeonmaster
 --
 
 CREATE PROCEDURE od.insert_charakter(IN in_klasse text, IN in_name text)
     LANGUAGE sql
-    AS $$
-INSERT INTO od.charaktere
-    ( klasse
-      , name
-    )
-    VALUES
-    ( in_klasse
-      , in_name
-    )
-;
-
+    AS $$
+INSERT INTO od.charaktere
+    ( klasse
+      , name
+    )
+    VALUES
+    ( in_klasse
+      , in_name
+    )
+;
+
 $$;
 
 
@@ -492,9 +165,9 @@ ALTER SEQUENCE dd.gegenstandtyp_id OWNED BY dd.gegenstandtyp.gegenstandtyp_id;
 --
 
 CREATE TABLE dd.reichweite (
-    reichweite_id bigint NOT NULL,
-    typ_lang text NOT NULL,
-    typ_kurz text NOT NULL,
+    id bigint NOT NULL,
+    lang text NOT NULL,
+    kurz text NOT NULL,
     beschreibung text
 );
 
@@ -519,7 +192,7 @@ ALTER TABLE dd.reichweite_id_seq OWNER TO dungeonmaster;
 -- Name: reichweite_id_seq; Type: SEQUENCE OWNED BY; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER SEQUENCE dd.reichweite_id_seq OWNED BY dd.reichweite.reichweite_id;
+ALTER SEQUENCE dd.reichweite_id_seq OWNED BY dd.reichweite.id;
 
 
 --
@@ -527,8 +200,8 @@ ALTER SEQUENCE dd.reichweite_id_seq OWNED BY dd.reichweite.reichweite_id;
 --
 
 CREATE TABLE dd.schule (
-    schule_id bigint NOT NULL,
-    typ text NOT NULL,
+    id bigint NOT NULL,
+    name text NOT NULL,
     kategorie text,
     beschreibung text
 );
@@ -554,7 +227,7 @@ ALTER TABLE dd.schule_id_seq OWNER TO dungeonmaster;
 -- Name: schule_id_seq; Type: SEQUENCE OWNED BY; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER SEQUENCE dd.schule_id_seq OWNED BY dd.schule.schule_id;
+ALTER SEQUENCE dd.schule_id_seq OWNED BY dd.schule.id;
 
 
 --
@@ -562,8 +235,8 @@ ALTER SEQUENCE dd.schule_id_seq OWNED BY dd.schule.schule_id;
 --
 
 CREATE TABLE dd.wirkungsdauer (
-    wirkungsdauer_id bigint NOT NULL,
-    typ text NOT NULL,
+    id bigint NOT NULL,
+    name text NOT NULL,
     beschreibung text
 );
 
@@ -588,7 +261,7 @@ ALTER TABLE dd.wirkungsdauer_id OWNER TO dungeonmaster;
 -- Name: wirkungsdauer_id; Type: SEQUENCE OWNED BY; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER SEQUENCE dd.wirkungsdauer_id OWNED BY dd.wirkungsdauer.wirkungsdauer_id;
+ALTER SEQUENCE dd.wirkungsdauer_id OWNED BY dd.wirkungsdauer.id;
 
 
 --
@@ -596,16 +269,16 @@ ALTER SEQUENCE dd.wirkungsdauer_id OWNED BY dd.wirkungsdauer.wirkungsdauer_id;
 --
 
 CREATE TABLE dd.zauber (
-    zauber_id bigint NOT NULL,
+    id bigint NOT NULL,
     name text NOT NULL,
     zeitaufwand integer NOT NULL,
-    fk_zeitaufwand_typ bigint NOT NULL,
+    fk_zeitaufwand bigint NOT NULL,
     reichweite numeric NOT NULL,
     fk_reichweite bigint NOT NULL,
     wirkungsdauer integer NOT NULL,
     fk_wirkungsdauer bigint NOT NULL,
     beschreibung text NOT NULL,
-    hoehere_grade text,
+    hoeheregrade text,
     grad integer NOT NULL,
     fk_schule bigint NOT NULL,
     verbal boolean NOT NULL,
@@ -636,7 +309,7 @@ ALTER TABLE dd.zauber_id_seq OWNER TO dungeonmaster;
 -- Name: zauber_id_seq; Type: SEQUENCE OWNED BY; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER SEQUENCE dd.zauber_id_seq OWNED BY dd.zauber.zauber_id;
+ALTER SEQUENCE dd.zauber_id_seq OWNED BY dd.zauber.id;
 
 
 --
@@ -677,17 +350,17 @@ ALTER SEQUENCE dd.zaubermaterial_id_seq OWNED BY dd.zaubermaterial.zaubermateria
 
 
 --
--- Name: zeitaufwandtyp; Type: TABLE; Schema: dd; Owner: dungeonmaster
+-- Name: zeitaufwand; Type: TABLE; Schema: dd; Owner: dungeonmaster
 --
 
-CREATE TABLE dd.zeitaufwandtyp (
-    zeitaufwandtyp_id bigint NOT NULL,
-    typ text NOT NULL,
+CREATE TABLE dd.zeitaufwand (
+    id bigint NOT NULL,
+    name text NOT NULL,
     beschreibung text
 );
 
 
-ALTER TABLE dd.zeitaufwandtyp OWNER TO dungeonmaster;
+ALTER TABLE dd.zeitaufwand OWNER TO dungeonmaster;
 
 --
 -- Name: zeitaufwandtyp_id_seq; Type: SEQUENCE; Schema: dd; Owner: dungeonmaster
@@ -707,7 +380,7 @@ ALTER TABLE dd.zeitaufwandtyp_id_seq OWNER TO dungeonmaster;
 -- Name: zeitaufwandtyp_id_seq; Type: SEQUENCE OWNED BY; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER SEQUENCE dd.zeitaufwandtyp_id_seq OWNED BY dd.zeitaufwandtyp.zeitaufwandtyp_id;
+ALTER SEQUENCE dd.zeitaufwandtyp_id_seq OWNED BY dd.zeitaufwand.id;
 
 
 --
@@ -759,31 +432,31 @@ ALTER TABLE ONLY dd.gegenstandtyp ALTER COLUMN gegenstandtyp_id SET DEFAULT next
 
 
 --
--- Name: reichweite reichweite_id; Type: DEFAULT; Schema: dd; Owner: dungeonmaster
+-- Name: reichweite id; Type: DEFAULT; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER TABLE ONLY dd.reichweite ALTER COLUMN reichweite_id SET DEFAULT nextval('dd.reichweite_id_seq'::regclass);
-
-
---
--- Name: schule schule_id; Type: DEFAULT; Schema: dd; Owner: dungeonmaster
---
-
-ALTER TABLE ONLY dd.schule ALTER COLUMN schule_id SET DEFAULT nextval('dd.schule_id_seq'::regclass);
+ALTER TABLE ONLY dd.reichweite ALTER COLUMN id SET DEFAULT nextval('dd.reichweite_id_seq'::regclass);
 
 
 --
--- Name: wirkungsdauer wirkungsdauer_id; Type: DEFAULT; Schema: dd; Owner: dungeonmaster
+-- Name: schule id; Type: DEFAULT; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER TABLE ONLY dd.wirkungsdauer ALTER COLUMN wirkungsdauer_id SET DEFAULT nextval('dd.wirkungsdauer_id'::regclass);
+ALTER TABLE ONLY dd.schule ALTER COLUMN id SET DEFAULT nextval('dd.schule_id_seq'::regclass);
 
 
 --
--- Name: zauber zauber_id; Type: DEFAULT; Schema: dd; Owner: dungeonmaster
+-- Name: wirkungsdauer id; Type: DEFAULT; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER TABLE ONLY dd.zauber ALTER COLUMN zauber_id SET DEFAULT nextval('dd.zauber_id_seq'::regclass);
+ALTER TABLE ONLY dd.wirkungsdauer ALTER COLUMN id SET DEFAULT nextval('dd.wirkungsdauer_id'::regclass);
+
+
+--
+-- Name: zauber id; Type: DEFAULT; Schema: dd; Owner: dungeonmaster
+--
+
+ALTER TABLE ONLY dd.zauber ALTER COLUMN id SET DEFAULT nextval('dd.zauber_id_seq'::regclass);
 
 
 --
@@ -794,10 +467,10 @@ ALTER TABLE ONLY dd.zaubermaterial ALTER COLUMN zaubermaterial_id SET DEFAULT ne
 
 
 --
--- Name: zeitaufwandtyp zeitaufwandtyp_id; Type: DEFAULT; Schema: dd; Owner: dungeonmaster
+-- Name: zeitaufwand id; Type: DEFAULT; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER TABLE ONLY dd.zeitaufwandtyp ALTER COLUMN zeitaufwandtyp_id SET DEFAULT nextval('dd.zeitaufwandtyp_id_seq'::regclass);
+ALTER TABLE ONLY dd.zeitaufwand ALTER COLUMN id SET DEFAULT nextval('dd.zeitaufwandtyp_id_seq'::regclass);
 
 
 --
@@ -1119,13 +792,13 @@ INSERT INTO dd.zaubermaterial VALUES (41, 52, NULL, 143, 1, false);
 
 
 --
--- Data for Name: zeitaufwandtyp; Type: TABLE DATA; Schema: dd; Owner: dungeonmaster
+-- Data for Name: zeitaufwand; Type: TABLE DATA; Schema: dd; Owner: dungeonmaster
 --
 
-INSERT INTO dd.zeitaufwandtyp VALUES (1, 'Aktion', 'Eine gewöhnliche Aktion');
-INSERT INTO dd.zeitaufwandtyp VALUES (2, 'Bonusaktion', 'Ein Zauber, der mit einer Bonusaktion gewirkt wird, ist besonders schnell. Wende für einen solchen Spruch in deinem Zug eine Bonusaktion auf, vorausgesetzt dass du in diesem noch keine genutzt hast. Du kannst keinen anderen Zauber in diesem Zug wirken, außer einem Zaubertrick mit einem Zeitaufwand von einer Aktion.');
-INSERT INTO dd.zeitaufwandtyp VALUES (3, 'Minuten', 'Bestimmte Zauber (auch Rituale) erfordern mehr Zeit, um sie zu wirken: Minuten oder sogar Stunden. Verwendest du einen Spruch mit einem längeren Zeitaufwand als eine Aktion oder Reaktion, musst du in jedem Zug, den du den Zauber wirkst, deine Aktion darauf verwenden und die ganze Zeit über deine Konzentration aufrechterhalten. Wird deine Konzentration unterbrochen, scheitert der Zauber, aber du verbrauchst keinen Zauberplatz. Wenn du den Spruch erneut wirken willst, musst du von vorn beginnen.');
-INSERT INTO dd.zeitaufwandtyp VALUES (4, 'Reaktion', 'Einige Zauber können als Reaktion gewirkt werden. Sie erfordern nur einen Sekundenbruchteil der Konzentration und stellen die Antwort auf ein bestimmtes Ereignis dar. Wenn ein Zauber als Reaktion gewirkt werden kann, ist in seiner Beschreibung angegeben, zu welchem Zeitpunkt dies genau möglich ist.');
+INSERT INTO dd.zeitaufwand VALUES (1, 'Aktion', 'Eine gewöhnliche Aktion');
+INSERT INTO dd.zeitaufwand VALUES (2, 'Bonusaktion', 'Ein Zauber, der mit einer Bonusaktion gewirkt wird, ist besonders schnell. Wende für einen solchen Spruch in deinem Zug eine Bonusaktion auf, vorausgesetzt dass du in diesem noch keine genutzt hast. Du kannst keinen anderen Zauber in diesem Zug wirken, außer einem Zaubertrick mit einem Zeitaufwand von einer Aktion.');
+INSERT INTO dd.zeitaufwand VALUES (3, 'Minuten', 'Bestimmte Zauber (auch Rituale) erfordern mehr Zeit, um sie zu wirken: Minuten oder sogar Stunden. Verwendest du einen Spruch mit einem längeren Zeitaufwand als eine Aktion oder Reaktion, musst du in jedem Zug, den du den Zauber wirkst, deine Aktion darauf verwenden und die ganze Zeit über deine Konzentration aufrechterhalten. Wird deine Konzentration unterbrochen, scheitert der Zauber, aber du verbrauchst keinen Zauberplatz. Wenn du den Spruch erneut wirken willst, musst du von vorn beginnen.');
+INSERT INTO dd.zeitaufwand VALUES (4, 'Reaktion', 'Einige Zauber können als Reaktion gewirkt werden. Sie erfordern nur einen Sekundenbruchteil der Konzentration und stellen die Antwort auf ein bestimmtes Ereignis dar. Wenn ein Zauber als Reaktion gewirkt werden kann, ist in seiner Beschreibung angegeben, zu welchem Zeitpunkt dies genau möglich ist.');
 
 
 --
@@ -1163,14 +836,14 @@ SELECT pg_catalog.setval('dd.reichweite_id_seq', 12, true);
 -- Name: schule_id_seq; Type: SEQUENCE SET; Schema: dd; Owner: dungeonmaster
 --
 
-SELECT pg_catalog.setval('dd.schule_id_seq', 8, true);
+SELECT pg_catalog.setval('dd.schule_id_seq', 9, true);
 
 
 --
 -- Name: wirkungsdauer_id; Type: SEQUENCE SET; Schema: dd; Owner: dungeonmaster
 --
 
-SELECT pg_catalog.setval('dd.wirkungsdauer_id', 6, true);
+SELECT pg_catalog.setval('dd.wirkungsdauer_id', 10, true);
 
 
 --
@@ -1222,7 +895,7 @@ ALTER TABLE ONLY dd.gegenstandtyp
 --
 
 ALTER TABLE ONLY dd.reichweite
-    ADD CONSTRAINT reichweite_pkey PRIMARY KEY (reichweite_id);
+    ADD CONSTRAINT reichweite_pkey PRIMARY KEY (id);
 
 
 --
@@ -1230,7 +903,7 @@ ALTER TABLE ONLY dd.reichweite
 --
 
 ALTER TABLE ONLY dd.schule
-    ADD CONSTRAINT schule_pkey PRIMARY KEY (schule_id);
+    ADD CONSTRAINT schule_pkey PRIMARY KEY (id);
 
 
 --
@@ -1238,7 +911,7 @@ ALTER TABLE ONLY dd.schule
 --
 
 ALTER TABLE ONLY dd.reichweite
-    ADD CONSTRAINT "unique" UNIQUE (typ_lang, typ_kurz);
+    ADD CONSTRAINT "unique" UNIQUE (lang, kurz);
 
 
 --
@@ -1246,15 +919,15 @@ ALTER TABLE ONLY dd.reichweite
 --
 
 ALTER TABLE ONLY dd.wirkungsdauer
-    ADD CONSTRAINT unique_wirkungsdauer UNIQUE (typ);
+    ADD CONSTRAINT unique_wirkungsdauer UNIQUE (name);
 
 
 --
--- Name: zeitaufwandtyp unique_zeitaufwandtyp; Type: CONSTRAINT; Schema: dd; Owner: dungeonmaster
+-- Name: zeitaufwand unique_zeitaufwandtyp; Type: CONSTRAINT; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER TABLE ONLY dd.zeitaufwandtyp
-    ADD CONSTRAINT unique_zeitaufwandtyp UNIQUE (typ);
+ALTER TABLE ONLY dd.zeitaufwand
+    ADD CONSTRAINT unique_zeitaufwandtyp UNIQUE (name);
 
 
 --
@@ -1262,7 +935,7 @@ ALTER TABLE ONLY dd.zeitaufwandtyp
 --
 
 ALTER TABLE ONLY dd.wirkungsdauer
-    ADD CONSTRAINT wirkungsdauer_pkey PRIMARY KEY (wirkungsdauer_id);
+    ADD CONSTRAINT wirkungsdauer_pkey PRIMARY KEY (id);
 
 
 --
@@ -1278,7 +951,7 @@ ALTER TABLE ONLY dd.zauber
 --
 
 ALTER TABLE ONLY dd.zauber
-    ADD CONSTRAINT zauber_pkey PRIMARY KEY (zauber_id);
+    ADD CONSTRAINT zauber_pkey PRIMARY KEY (id);
 
 
 --
@@ -1290,11 +963,11 @@ ALTER TABLE ONLY dd.zaubermaterial
 
 
 --
--- Name: zeitaufwandtyp zeitaufwandtyp_pkey; Type: CONSTRAINT; Schema: dd; Owner: dungeonmaster
+-- Name: zeitaufwand zeitaufwandtyp_pkey; Type: CONSTRAINT; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER TABLE ONLY dd.zeitaufwandtyp
-    ADD CONSTRAINT zeitaufwandtyp_pkey PRIMARY KEY (zeitaufwandtyp_id);
+ALTER TABLE ONLY dd.zeitaufwand
+    ADD CONSTRAINT zeitaufwandtyp_pkey PRIMARY KEY (id);
 
 
 --
@@ -1326,7 +999,7 @@ ALTER TABLE ONLY dd.gegenstand
 --
 
 ALTER TABLE ONLY dd.zauber
-    ADD CONSTRAINT fk_reichweite FOREIGN KEY (fk_reichweite) REFERENCES dd.reichweite(reichweite_id) NOT VALID;
+    ADD CONSTRAINT fk_reichweite FOREIGN KEY (fk_reichweite) REFERENCES dd.reichweite(id) NOT VALID;
 
 
 --
@@ -1334,7 +1007,7 @@ ALTER TABLE ONLY dd.zauber
 --
 
 ALTER TABLE ONLY dd.zauber
-    ADD CONSTRAINT fk_schule FOREIGN KEY (fk_schule) REFERENCES dd.schule(schule_id) NOT VALID;
+    ADD CONSTRAINT fk_schule FOREIGN KEY (fk_schule) REFERENCES dd.schule(id) NOT VALID;
 
 
 --
@@ -1342,7 +1015,7 @@ ALTER TABLE ONLY dd.zauber
 --
 
 ALTER TABLE ONLY dd.zauber
-    ADD CONSTRAINT fk_wirkungsdauer FOREIGN KEY (fk_wirkungsdauer) REFERENCES dd.wirkungsdauer(wirkungsdauer_id) NOT VALID;
+    ADD CONSTRAINT fk_wirkungsdauer FOREIGN KEY (fk_wirkungsdauer) REFERENCES dd.wirkungsdauer(id) NOT VALID;
 
 
 --
@@ -1350,7 +1023,7 @@ ALTER TABLE ONLY dd.zauber
 --
 
 ALTER TABLE ONLY dd.zaubermaterial
-    ADD CONSTRAINT fk_zauber FOREIGN KEY (fk_zauber) REFERENCES dd.zauber(zauber_id) NOT VALID;
+    ADD CONSTRAINT fk_zauber FOREIGN KEY (fk_zauber) REFERENCES dd.zauber(id) NOT VALID;
 
 
 --
@@ -1358,7 +1031,7 @@ ALTER TABLE ONLY dd.zaubermaterial
 --
 
 ALTER TABLE ONLY dd.zauber
-    ADD CONSTRAINT fk_zeitaufwand_typ FOREIGN KEY (fk_zeitaufwand_typ) REFERENCES dd.zeitaufwandtyp(zeitaufwandtyp_id) NOT VALID;
+    ADD CONSTRAINT fk_zeitaufwand_typ FOREIGN KEY (fk_zeitaufwand) REFERENCES dd.zeitaufwand(id) NOT VALID;
 
 
 --

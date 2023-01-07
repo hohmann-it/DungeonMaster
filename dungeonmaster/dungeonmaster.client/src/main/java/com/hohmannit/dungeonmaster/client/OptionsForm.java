@@ -81,7 +81,7 @@ public class OptionsForm extends AbstractForm {
 				.put(ClientSession.PREF_USER_LOCALE, locale.toLanguageTag());
 		if (localeChanged) {
 			ClientUIPreferences.getClientPreferences(ClientSession.get()).flush();
-			MessageBoxes.createOk().withBody(TEXTS.get("Optionen_SpracheAendern_Nachricht")).show();
+			MessageBoxes.createOk().withBody(TEXTS.get("MasterBar_Optionen_Sprache_Nachricht")).show();
 		}
 	}
 
@@ -114,7 +114,7 @@ public class OptionsForm extends AbstractForm {
 
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Theme");
+					return TEXTS.get("MasterBar_Optionen_Theme");
 				}
 
 				@Override
@@ -139,7 +139,7 @@ public class OptionsForm extends AbstractForm {
 
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Layout");
+					return TEXTS.get("MasterBar_Optionen_Layout");
 				}
 
 				@Order(10)
@@ -148,7 +148,7 @@ public class OptionsForm extends AbstractForm {
 
 					@Override
 					protected String getConfiguredLabel() {
-						return TEXTS.get("Kompakt");
+						return TEXTS.get("MasterBar_Optionen_Kompakt");
 					}
 
 					@Override
@@ -179,7 +179,7 @@ public class OptionsForm extends AbstractForm {
 
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Sprache");
+					return TEXTS.get("MasterBar_Optionen_Sprache");
 				}
 
 				@Override

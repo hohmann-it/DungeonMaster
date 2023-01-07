@@ -52,7 +52,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Spellbook");
+		return TEXTS.get("Zauber_Zauberbuch_Label_Titel");
 	}
 
 	public class Table extends AbstractTable {
@@ -72,7 +72,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 			@Override
 			protected void execAction() {
 				ZauberbuchForm form = new ZauberbuchForm();
-				form.setZauberId(getZauberIdColumn().getSelectedValue());
+				form.setId(getIdColumn().getSelectedValue());
 				form.addFormListener(new ZauberFormListener());
 				// start the form using its modify handler
 				form.startModify();
@@ -147,16 +147,12 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 			return getColumnSet().getColumnByClass(NameColumn.class);
 		}
 
-		public ZauberIdColumn getZauberIdColumn() {
-			return getColumnSet().getColumnByClass(ZauberIdColumn.class);
+		public IdColumn getIdColumn() {
+			return getColumnSet().getColumnByClass(IdColumn.class);
 		}
 
 		@Order(1000)
-		public class ZauberIdColumn extends AbstractLongColumn {
-			@Override
-			protected String getConfiguredHeaderText() {
-				return TEXTS.get("ZauberID");
-			}
+		public class IdColumn extends AbstractLongColumn {
 
 			@Override
 			protected boolean getConfiguredPrimaryKey() {
@@ -178,7 +174,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class NameColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Name");
+				return TEXTS.get("Allgemein_Name");
 			}
 
 			@Override
@@ -191,7 +187,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class GradColumn extends AbstractSmartColumn<Integer> {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Zaubergrad");
+				return TEXTS.get("Zauber_Zauberbuch_Label_Grad");
 			}
 
 			@Override
@@ -209,7 +205,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class SchuleColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Schule");
+				return TEXTS.get("Zauber_Schulen_Label_Schule");
 			}
 
 			@Override
@@ -252,7 +248,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class ZeitaufwandtypColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Zeitaufwand");
+				return TEXTS.get("Zauber_Zeitaufwand_Label_Titel");
 			}
 
 			@Override
@@ -289,7 +285,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class ReichweitetypColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Zauber_Reichweite_Label");
+				return TEXTS.get("Zauber_Reichweite_Label_Titel");
 			}
 
 			@Override
@@ -326,7 +322,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class WirkungsdauertypColumn extends AbstractSmartColumn<Long> {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Wirkungsdauer");
+				return TEXTS.get("Zauber_Wirkungsdauer_Label_Titel");
 			}
 
 			@Override
@@ -358,7 +354,7 @@ public class ZauberbuchTablePage extends AbstractPageWithTable<Table> {
 		public class HoehereGradeColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("HoehereGrade");
+				return TEXTS.get("Zauber_Zauberbuch_Label_HoehereGrade");
 			}
 
 			@Override

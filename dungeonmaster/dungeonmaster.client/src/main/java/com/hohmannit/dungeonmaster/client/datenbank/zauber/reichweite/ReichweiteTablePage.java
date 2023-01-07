@@ -36,7 +36,7 @@ public class ReichweiteTablePage extends AbstractPageWithTable<Table> {
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Reichweite");
+		return TEXTS.get("Zauber_Reichweite_Label_Titel");
 	}
 
 	@Override
@@ -64,12 +64,12 @@ public class ReichweiteTablePage extends AbstractPageWithTable<Table> {
 			return getColumnSet().getColumnByClass(BeschreibungColumn.class);
 		}
 
-		public TypKurzColumn getTypKurzColumn() {
-			return getColumnSet().getColumnByClass(TypKurzColumn.class);
+		public KurzColumn getKurzColumn() {
+			return getColumnSet().getColumnByClass(KurzColumn.class);
 		}
 
-		public TypLangColumn getTypLangColumn() {
-			return getColumnSet().getColumnByClass(TypLangColumn.class);
+		public LangColumn getLangColumn() {
+			return getColumnSet().getColumnByClass(LangColumn.class);
 		}
 
 		public IdColumn getIdColumn() {
@@ -82,7 +82,7 @@ public class ReichweiteTablePage extends AbstractPageWithTable<Table> {
 			@Override
 			protected void execAction() {
 				ReichweiteForm form = new ReichweiteForm();
-				form.setReichweiteId(getIdColumn().getSelectedValue());
+				form.setId(getIdColumn().getSelectedValue());
 				form.addFormListener(new ReichweiteFormListener());
 				form.startModify();
 			}
@@ -140,10 +140,10 @@ public class ReichweiteTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(2000)
-		public class TypLangColumn extends AbstractStringColumn {
+		public class LangColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("BezeichungLang");
+				return TEXTS.get("Zauber_Reichweite_Label_EinheitLang");
 			}
 
 			@Override
@@ -153,10 +153,10 @@ public class ReichweiteTablePage extends AbstractPageWithTable<Table> {
 		}
 
 		@Order(3000)
-		public class TypKurzColumn extends AbstractStringColumn {
+		public class KurzColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("BezeichnugKurz");
+				return TEXTS.get("Zauber_Reichweite_Label_EinheitKurz");
 			}
 
 			@Override
@@ -169,7 +169,7 @@ public class ReichweiteTablePage extends AbstractPageWithTable<Table> {
 		public class BeschreibungColumn extends AbstractStringColumn {
 			@Override
 			protected String getConfiguredHeaderText() {
-				return TEXTS.get("Beschreibung");
+				return TEXTS.get("Allgemein_Beschreibung");
 			}
 
 			@Override

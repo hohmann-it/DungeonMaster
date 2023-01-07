@@ -71,21 +71,21 @@ import com.hohmannit.dungeonmaster.shared.zauberbuch.ZauberFormData;
 @FormData(value = ZauberFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class ZauberbuchForm extends AbstractForm {
 
-	private Long zauberId;
+	private Long id;
 
 	@FormData
-	public Long getZauberId() {
-		return zauberId;
+	public Long getId() {
+		return id;
 	}
 
 	@FormData
-	public void setZauberId(Long zauberId) {
-		this.zauberId = zauberId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override
 	public Object computeExclusiveKey() {
-		return getZauberId();
+		return getId();
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class ZauberbuchForm extends AbstractForm {
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Zauber");
+		return TEXTS.get("Zauber_Zauberbuch_Label_Zauber");
 	}
 
 	public MainBox getMainBox() {
@@ -229,7 +229,7 @@ public class ZauberbuchForm extends AbstractForm {
 		public class GeneralBox extends AbstractGroupBox {
 			@Override
 			protected String getConfiguredLabel() {
-				return TEXTS.get("Grundinformationen");
+				return TEXTS.get("Zauber_Zauberbuch_Label_Grundinformationen");
 			}
 
 			@Override
@@ -239,10 +239,6 @@ public class ZauberbuchForm extends AbstractForm {
 
 			@Order(1000)
 			public class ZauberImageField extends AbstractImageField {
-				@Override
-				protected String getConfiguredLabel() {
-					return TEXTS.get("ZauberBild");
-				}
 
 				@Override // <2>
 				protected Class<NameField> getConfiguredMasterField() {
@@ -284,7 +280,7 @@ public class ZauberbuchForm extends AbstractForm {
 			public class NameField extends AbstractStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Name");
+					return TEXTS.get("Allgemein_Name");
 				}
 
 				@Override
@@ -297,14 +293,14 @@ public class ZauberbuchForm extends AbstractForm {
 			public class ZaubergradSequenceBox extends AbstractSequenceBox {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("ZaubergradTyp");
+					return TEXTS.get("Zauber_Zauberbuch_Label_ZaubergradTyp");
 				}
 
 				@Order(3000)
 				public class GradField extends AbstractSmartField<Integer> {
 					@Override
 					protected String getConfiguredLabel() {
-						return TEXTS.get("Zaubergrad");
+						return TEXTS.get("Zauber_Zauberbuch_Label_Grad");
 					}
 
 					@Override
@@ -323,7 +319,7 @@ public class ZauberbuchForm extends AbstractForm {
 				public class SchuleField extends AbstractSmartField<Long> {
 					@Override
 					protected String getConfiguredLabel() {
-						return TEXTS.get("Schule");
+						return TEXTS.get("Zauber_Schulen_Label_Schule");
 					}
 
 					@Override
@@ -342,7 +338,7 @@ public class ZauberbuchForm extends AbstractForm {
 			public class ZeitaufwandSequenceBox extends AbstractSequenceBox {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Zeitaufwand");
+					return TEXTS.get("Zauber_Zeitaufwand_Label_Titel");
 				}
 
 				@Override
@@ -378,7 +374,7 @@ public class ZauberbuchForm extends AbstractForm {
 			public class ReichweiteSequenceBox extends AbstractSequenceBox {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Zauber_Reichweite_Label");
+					return TEXTS.get("Zauber_Reichweite_Label_Titel");
 				}
 
 				@Override
@@ -410,7 +406,7 @@ public class ZauberbuchForm extends AbstractForm {
 
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Wirkungsdauer");
+					return TEXTS.get("Zauber_Wirkungsdauer_Label_Titel");
 				}
 
 				@Override
@@ -449,12 +445,17 @@ public class ZauberbuchForm extends AbstractForm {
 				public class KonzentrationField extends AbstractBooleanField {
 					@Override
 					protected String getConfiguredLabel() {
-						return TEXTS.get("Konzentration");
+						return TEXTS.get("Zauber_Zauberbuch_Label_Konzentration");
 					}
 
 					@Override
 					protected int getConfiguredGridW() {
 						return 2;
+					}
+
+					@Override
+					protected String getConfiguredTooltipText() {
+						return TEXTS.get("Zauber_Zauberbuch_Label_Konzentration_Tooltip");
 					}
 				}
 
@@ -483,7 +484,7 @@ public class ZauberbuchForm extends AbstractForm {
 			public class BeschreibungField extends AbstractStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Zauberbeschreibung");
+					return TEXTS.get("Zauber_Zauberbuch_Label_Zauber");
 				}
 
 				@Override
@@ -512,7 +513,7 @@ public class ZauberbuchForm extends AbstractForm {
 			public class HoeheregradeField extends AbstractStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("HoehereGrade");
+					return TEXTS.get("Zauber_Zauberbuch_Label_HoehereGrade");
 				}
 
 				@Override
@@ -543,14 +544,14 @@ public class ZauberbuchForm extends AbstractForm {
 		public class KomponentenBox extends AbstractTabBox {
 			@Override
 			protected String getConfiguredLabel() {
-				return TEXTS.get("KomponentenCharaktere");
+				return TEXTS.get("Zauber_Zauberbuch_Label_HoehereGrade");
 			}
 
 			@Order(1000)
 			public class ZauberkomponentenBox extends AbstractGroupBox {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Zauberkomponenten");
+					return TEXTS.get("Zauber_Zauberbuch_Label_Zauberkomponenten");
 				}
 
 				@Override
@@ -579,7 +580,7 @@ public class ZauberbuchForm extends AbstractForm {
 					public class MaterialField extends AbstractBooleanField {
 						@Override
 						protected String getConfiguredLabel() {
-							return TEXTS.get("Material");
+							return TEXTS.get("Zauber_Zauberbuch_Label_Material");
 						}
 					}
 
@@ -587,7 +588,7 @@ public class ZauberbuchForm extends AbstractForm {
 					public class VerbalField extends AbstractBooleanField {
 						@Override
 						protected String getConfiguredLabel() {
-							return TEXTS.get("Verbal");
+							return TEXTS.get("Zauber_Zauberbuch_Label_Verbal");
 						}
 					}
 
@@ -595,7 +596,7 @@ public class ZauberbuchForm extends AbstractForm {
 					public class GestikField extends AbstractBooleanField {
 						@Override
 						protected String getConfiguredLabel() {
-							return TEXTS.get("Page_Zauber_Zauberkomponenten_Gestik_Label");
+							return TEXTS.get("Zauber_Zauberbuch_Label_Geste");
 						}
 					}
 
@@ -603,7 +604,7 @@ public class ZauberbuchForm extends AbstractForm {
 					public class RitualField extends AbstractBooleanField {
 						@Override
 						protected String getConfiguredLabel() {
-							return TEXTS.get("Ritual");
+							return TEXTS.get("Zauber_Zauberbuch_Label_Ritual");
 						}
 					}
 
@@ -619,7 +620,7 @@ public class ZauberbuchForm extends AbstractForm {
 
 					@Override
 					protected String getConfiguredLabel() {
-						return TEXTS.get("Material");
+						return TEXTS.get("Zauber_Zauberbuch_Label_Material");
 					}
 
 					@Override
@@ -676,7 +677,7 @@ public class ZauberbuchForm extends AbstractForm {
 						public class idColumn extends AbstractStringColumn {
 							@Override
 							protected String getConfiguredHeaderText() {
-								return TEXTS.get("ID");
+								return TEXTS.get("Allgemein_ID");
 							}
 
 							@Override
@@ -707,7 +708,7 @@ public class ZauberbuchForm extends AbstractForm {
 						public class NameColumn extends AbstractSmartColumn<Long> {
 							@Override
 							protected String getConfiguredHeaderText() {
-								return TEXTS.get("Name");
+								return TEXTS.get("Allgemein_Name");
 							}
 
 							@Override
@@ -725,7 +726,7 @@ public class ZauberbuchForm extends AbstractForm {
 						public class WertColumn extends AbstractStringColumn {
 							@Override
 							protected String getConfiguredHeaderText() {
-								return TEXTS.get("Wert");
+								return TEXTS.get("Allgemein_Wert");
 							}
 
 							@Override
@@ -743,7 +744,7 @@ public class ZauberbuchForm extends AbstractForm {
 						public class GewichtColumn extends AbstractStringColumn {
 							@Override
 							protected String getConfiguredHeaderText() {
-								return TEXTS.get("Gewicht");
+								return TEXTS.get("Allgemein_Gewicht");
 							}
 
 							@Override
@@ -785,7 +786,7 @@ public class ZauberbuchForm extends AbstractForm {
 			public class CharaktereBox extends AbstractGroupBox {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Page_Charaktere_Titel");
+					return TEXTS.get("Charaktere_Titel");
 				}
 			}
 
@@ -820,8 +821,6 @@ public class ZauberbuchForm extends AbstractForm {
 			importFormData(formData);
 
 			setEnabledPermission(new CreateZauberbuchPermission());
-
-			setTitle(TEXTS.get("NeuenZauberAnlegen"));
 		}
 
 		@Override

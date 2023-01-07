@@ -12,31 +12,31 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandtypForm.MainBox.CancelButton;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandtypForm.MainBox.GroupBox;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandtypForm.MainBox.OkButton;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandtypForm.MainBox.GroupBox.BeschreibungField;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandtypForm.MainBox.GroupBox.DescriptionField;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandtypForm.MainBox.GroupBox.TypField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandForm.MainBox.CancelButton;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandForm.MainBox.GroupBox;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandForm.MainBox.GroupBox.BeschreibungField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandForm.MainBox.GroupBox.NameField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandForm.MainBox.GroupBox.TooltipField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zeitaufwand.ZeitaufwandForm.MainBox.OkButton;
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.CreateZeitaufwandtypPermission;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.IZeitaufwandtypService;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zeitaufwand.UpdateZeitaufwandtypPermission;
-import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandtypFormData;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandFormData;
 
-@FormData(value = ZeitaufwandtypFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
-public class ZeitaufwandtypForm extends AbstractForm {
+@FormData(value = ZeitaufwandFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
+public class ZeitaufwandForm extends AbstractForm {
 
-	private Long zeitaufwandtypId;
+	private Long id;
 
 	@FormData
-	public Long getZeitaufwandtypId() {
-		return zeitaufwandtypId;
+	public Long getId() {
+		return id;
 	}
 
 	@FormData
-	public void setZeitaufwandtypId(Long zeitaufwandtypId) {
-		this.zeitaufwandtypId = zeitaufwandtypId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class ZeitaufwandtypForm extends AbstractForm {
 
 	@Override
 	protected String getConfiguredTitle() {
-		return TEXTS.get("Type");
+		return TEXTS.get("Zauber_Zeitaufwand_Label_Titel");
 	}
 
 	public MainBox getMainBox() {
@@ -57,15 +57,15 @@ public class ZeitaufwandtypForm extends AbstractForm {
 		return getFieldByClass(GroupBox.class);
 	}
 
-	public TypField getTypField() {
-		return getFieldByClass(TypField.class);
+	public NameField getNameField() {
+		return getFieldByClass(NameField.class);
 	}
 
-	public DescriptionField getDescriptionField() {
-		return getFieldByClass(DescriptionField.class);
+	public TooltipField getTooltipField() {
+		return getFieldByClass(TooltipField.class);
 	}
 
-	public BeschreibungField getMyStringField() {
+	public BeschreibungField getBeschreibungField() {
 		return getFieldByClass(BeschreibungField.class);
 	}
 
@@ -88,7 +88,7 @@ public class ZeitaufwandtypForm extends AbstractForm {
 
 			@Order(0)
 			@FormData(sdkCommand = FormData.SdkCommand.IGNORE)
-			public class DescriptionField extends AbstractLabelField {
+			public class TooltipField extends AbstractLabelField {
 				@Override
 				protected int getConfiguredGridW() {
 					return 2;
@@ -111,15 +111,15 @@ public class ZeitaufwandtypForm extends AbstractForm {
 
 				@Override
 				protected void execInitField() {
-					setValue(TEXTS.get("Zauber_Zeitaufwandtyp_Beschreibung"));
+					setValue(TEXTS.get("Zauber_Zeitaufwand_Label_Tooltip"));
 				}
 			}
 
 			@Order(1000)
-			public class TypField extends AbstractStringField {
+			public class NameField extends AbstractStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Zauber_Zeitaufwandtyp_Label");
+					return TEXTS.get("Allgemein_Name");
 				}
 
 				@Override
@@ -132,7 +132,7 @@ public class ZeitaufwandtypForm extends AbstractForm {
 			public class BeschreibungField extends AbstractStringField {
 				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Beschreibung");
+					return TEXTS.get("Allgemein_Beschreibung");
 				}
 
 				@Override
@@ -185,19 +185,17 @@ public class ZeitaufwandtypForm extends AbstractForm {
 	public class NewHandler extends AbstractFormHandler {
 		@Override
 		protected void execLoad() {
-			ZeitaufwandtypFormData formData = new ZeitaufwandtypFormData();
+			ZeitaufwandFormData formData = new ZeitaufwandFormData();
 			exportFormData(formData);
 			formData = BEANS.get(IZeitaufwandtypService.class).prepareCreate(formData);
 			importFormData(formData);
 
 			setEnabledPermission(new CreateZeitaufwandtypPermission());
-			setTitle(TEXTS.get("NeuenZeitaufwandtypAnlegen"));
-			getDescriptionField().setValue(TEXTS.get("Zauber_Zeitaufwandtyp_Beschreibung"));
 		}
 
 		@Override
 		protected void execStore() {
-			ZeitaufwandtypFormData formData = new ZeitaufwandtypFormData();
+			ZeitaufwandFormData formData = new ZeitaufwandFormData();
 			exportFormData(formData);
 			formData = BEANS.get(IZeitaufwandtypService.class).create(formData);
 			importFormData(formData);
@@ -207,20 +205,18 @@ public class ZeitaufwandtypForm extends AbstractForm {
 	public class ModifyHandler extends AbstractFormHandler {
 		@Override
 		protected void execLoad() {
-			ZeitaufwandtypFormData formData = new ZeitaufwandtypFormData();
+			ZeitaufwandFormData formData = new ZeitaufwandFormData();
 			exportFormData(formData);
 			formData = BEANS.get(IZeitaufwandtypService.class).load(formData);
 			importFormData(formData);
 
 			setEnabledPermission(new UpdateZeitaufwandtypPermission());
-			setTitle(TEXTS.get("ZeitaufwandtypBearbeiten"));
-			setSubTitle(getTypField().getValue());
-			getDescriptionField().setValue(TEXTS.get("Zauber_Zeitaufwandtyp_Beschreibung"));
+			setSubTitle(getNameField().getValue());
 		}
 
 		@Override
 		protected void execStore() {
-			ZeitaufwandtypFormData formData = new ZeitaufwandtypFormData();
+			ZeitaufwandFormData formData = new ZeitaufwandFormData();
 			exportFormData(formData);
 			formData = BEANS.get(IZeitaufwandtypService.class).store(formData);
 			importFormData(formData);

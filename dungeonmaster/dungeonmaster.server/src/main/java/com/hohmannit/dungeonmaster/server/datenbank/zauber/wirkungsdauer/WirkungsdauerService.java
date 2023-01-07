@@ -65,7 +65,7 @@ public class WirkungsdauerService implements IWirkungsdauerService {
 	public void delete(List<Long> list) {
 		for (Long key : list) {
 			WirkungsdauerFormData formData = new WirkungsdauerFormData();
-			formData.setWirkungsdauerId(key);
+			formData.setId(key);
 			SQL.delete(WirkungsdauerSQLs.WIRKUNGSDAUER_DELETE, formData);
 		}
 	}

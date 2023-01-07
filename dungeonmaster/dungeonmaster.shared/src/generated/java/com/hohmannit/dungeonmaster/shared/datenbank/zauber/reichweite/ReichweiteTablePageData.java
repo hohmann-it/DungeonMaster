@@ -50,13 +50,13 @@ public class ReichweiteTablePageData extends AbstractTablePageData {
 
 	public static class ReichweiteTableRowData extends AbstractTableRowData {
 		private static final long serialVersionUID = 1L;
-		public static final String id = "id";
-		public static final String typLang = "typLang";
-		public static final String typKurz = "typKurz";
+		public static final String id = "Allgemein_ID";
+		public static final String lang = "lang";
+		public static final String kurz = "kurz";
 		public static final String beschreibung = "beschreibung";
 		private Long m_id;
-		private String m_typLang;
-		private String m_typKurz;
+		private String m_lang;
+		private String m_kurz;
 		private String m_beschreibung;
 
 		public Long getId() {
@@ -67,20 +67,20 @@ public class ReichweiteTablePageData extends AbstractTablePageData {
 			m_id = newId;
 		}
 
-		public String getTypLang() {
-			return m_typLang;
+		public String getLang() {
+			return m_lang;
 		}
 
-		public void setTypLang(String newTypLang) {
-			m_typLang = newTypLang;
+		public void setLang(String newLang) {
+			m_lang = newLang;
 		}
 
-		public String getTypKurz() {
-			return m_typKurz;
+		public String getKurz() {
+			return m_kurz;
 		}
 
-		public void setTypKurz(String newTypKurz) {
-			m_typKurz = newTypKurz;
+		public void setKurz(String newKurz) {
+			m_kurz = newKurz;
 		}
 
 		public String getBeschreibung() {

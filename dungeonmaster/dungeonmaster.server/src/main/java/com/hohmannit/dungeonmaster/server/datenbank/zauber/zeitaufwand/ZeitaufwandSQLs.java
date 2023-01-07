@@ -2,20 +2,20 @@ package com.hohmannit.dungeonmaster.server.datenbank.zauber.zeitaufwand;
 
 public interface ZeitaufwandSQLs {
 
-	String ZEITAUFWANDTYP_LOOKUP = "SELECT zeitaufwandtyp_id, typ FROM dd.zeitaufwandtyp WHERE 1 = 1 "
-			+ "<key>    AND zeitaufwandtyp_id = :key </key> " //
-			+ "<text>   AND UPPER(typ) LIKE UPPER(:text||'%') </text> " //
+	String ZEITAUFWAND_LOOKUP = "SELECT id, name FROM dd.zeitaufwand WHERE 1 = 1 " //
+			+ "<key>    AND id = :key </key> " //
+			+ "<text>   AND UPPER(name) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
 
-	String ZEITAUFWANDTYP_PAGE_SELECT = "SELECT zeitaufwandtyp_id, typ, beschreibung" + "	FROM dd.zeitaufwandtyp;";
+	String ZEITAUFWAND_PAGE_SELECT = "SELECT id, name, beschreibung" + "	FROM dd.zeitaufwand;";
 
-	String ZEITAUFWANDTYP_PAGE_SELECT_INTO = " INTO :{page.id}, :{page.typ}, :{page.beschreibung}";
+	String ZEITAUFWAND_PAGE_SELECT_INTO = " INTO :{page.id}, :{page.name}, :{page.beschreibung}";
 
-	String ZEITAUFWANDTYP_INSERT = "CALL dd.insert_zeitaufwandtyp(:typ, :beschreibung);";
+	String ZEITAUFWAND_INSERT = "INSERT INTO dd.zeitaufwand(name, beschreibung)	VALUES (:name, :beschreibung);";
 
-	String ZEITAUFWANDTYP_UPDATE = "UPDATE dd.zeitaufwandtyp SET typ=:typ, beschreibung=:beschreibung WHERE zeitaufwandtyp_id = :zeitaufwandtypId;";
+	String ZEITAUFWAND_UPDATE = "UPDATE dd.zeitaufwand SET name=:name, beschreibung=:beschreibung WHERE id = :zeitaufwandId;";
 
-	String ZEITAUFWANDTYP_SELECT = "SELECT typ, beschreibung FROM dd.zeitaufwandtyp WHERE zeitaufwandtyp_id = :zeitaufwandtypId INTO :typ, :beschreibung;";
+	String ZEITAUFWAND_SELECT = "SELECT name, beschreibung FROM dd.zeitaufwand WHERE id = :id INTO :name, :beschreibung;";
 
-	String ZEITAUFWANDTYP_DELETE = "DELETE FROM dd.zeitaufwandtyp WHERE zeitaufwandtyp_id = :zeitaufwandtypId";
+	String ZEITAUFWAND_DELETE = "DELETE FROM dd.zeitaufwand WHERE id = :id";
 }

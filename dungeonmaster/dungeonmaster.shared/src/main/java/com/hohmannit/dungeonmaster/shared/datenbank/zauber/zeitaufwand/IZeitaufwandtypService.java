@@ -6,20 +6,20 @@ import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.shared.TunnelToServer;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
-import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandtypFormData;
-import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandtypTablePageData;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandFormData;
+import com.hohmannit.dungeonmaster.shared.zauberbuch.ZeitaufwandTablePageData;
 
 @TunnelToServer
 public interface IZeitaufwandtypService extends IService {
-	ZeitaufwandtypTablePageData getZeitaufwandtypTableData(SearchFilter filter);
+	ZeitaufwandTablePageData getZeitaufwandtypTableData(SearchFilter filter);
 
-	ZeitaufwandtypFormData prepareCreate(ZeitaufwandtypFormData formData);
+	ZeitaufwandFormData prepareCreate(ZeitaufwandFormData formData);
 
-	ZeitaufwandtypFormData create(ZeitaufwandtypFormData formData);
+	ZeitaufwandFormData create(ZeitaufwandFormData formData);
 
-	ZeitaufwandtypFormData load(ZeitaufwandtypFormData formData);
+	ZeitaufwandFormData load(ZeitaufwandFormData formData);
 
-	ZeitaufwandtypFormData store(ZeitaufwandtypFormData formData);
+	ZeitaufwandFormData store(ZeitaufwandFormData formData);
 
 	void delete(List<Long> list);
 }
