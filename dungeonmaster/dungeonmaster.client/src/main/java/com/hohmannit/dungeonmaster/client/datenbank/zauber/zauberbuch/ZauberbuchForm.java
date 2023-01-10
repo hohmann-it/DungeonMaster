@@ -65,7 +65,7 @@ import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.Zauberbuch
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.OkButton;
 import com.hohmannit.dungeonmaster.shared.Icons;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.grad.ZaubergradCodeType;
-import com.hohmannit.dungeonmaster.shared.datenbank.zauber.material.MaterialLookupCall;
+import com.hohmannit.dungeonmaster.shared.datenbank.zauber.material.GegenstandLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.reichweite.ReichweiteLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.schule.SchuleLookupCall;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.wirkungsdauer.WirkungsdauerLookupCall;
@@ -651,6 +651,14 @@ public class ZauberbuchForm extends AbstractForm {
 						return false;
 					}
 
+					@Override
+					protected void execReloadTableData() {
+						ZauberFormData formData = new ZauberFormData();
+						exportFormData(formData);
+						formData = BEANS.get(IZauberbuchService.class).loadZaubermaterial(formData);
+						importFormData(formData);
+					}
+
 					public class Table extends AbstractTable {
 						@Override
 						protected boolean getConfiguredAutoResizeColumns() {
@@ -701,6 +709,7 @@ public class ZauberbuchForm extends AbstractForm {
 							@Override
 							protected void execAction() {
 								ZaubermaterialForm form = new ZaubermaterialForm();
+								form.setZauberId(getId());
 								form.addFormListener(new ZaubermaterialFormListener());
 								form.startNew();
 							}
@@ -772,7 +781,7 @@ public class ZauberbuchForm extends AbstractForm {
 
 							@Override
 							protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
-								return MaterialLookupCall.class;
+								return GegenstandLookupCall.class;
 							}
 						}
 

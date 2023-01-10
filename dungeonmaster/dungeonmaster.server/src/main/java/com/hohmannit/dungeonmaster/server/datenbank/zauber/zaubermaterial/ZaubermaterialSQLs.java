@@ -10,17 +10,12 @@ public interface ZaubermaterialSQLs {
 			+ "<key>    AND id = :key </key> " //
 			+ "<text>   AND UPPER(name) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
-	String ZAUBERMATERIAL_SELECT = "" //
-			+ "SELECT" //
-			+ "				zm.id, " //
-			+ "				zm.fk_gegenstand, " //
-			+ "				g.wert, " //
-			+ "				zm.anzahl, " //
-			+ "				g.gewicht " //
-			+ "FROM         dd.zaubermaterial zm INNER JOIN dd.gegenstand g ON zm.fk_gegenstand = g.gegenstand_id WHERE fk_zauber = :id " //
-			+ "INTO         :{ZaubkomponentenTable.id}," //
-			+ "				:{ZaubkomponentenTable.name}," //
-			+ "				:{ZaubkomponentenTable.wert},"//
-			+ "				:{ZaubkomponentenTable.anzahl},"//
-			+ "				:{ZaubkomponentenTable.gewicht}";
+	String ZAUBERMATERIAL_INSERT = "INSERT INTO dd.zaubermaterial(fk_zauber, fk_gegenstand, anzahl, wird_verbraucht	)" //
+			+ "	VALUES (:zauberId, :gegenstand, :anzahl, :wirdVerbraucht);";
+	String ZAUBERMATERIAL_DELETE = "DELETE FROM dd.zaubermaterial WHERE id=:id";
+	String ZAUBERMATERIAL_SELECT = "SELECT fk_gegenstand, anzahl, wird_verbraucht"
+			+ "	FROM dd.zaubermaterial WHERE id=:id INTO :gegenstand, :anzahl, :wirdVerbraucht;";
+	String ZAUBERMATERIAL_UPDATE = "UPDATE dd.zaubermaterial SET" //
+			+ "	fk_gegenstand = :gegenstand, anzahl = :anzahl, wird_verbraucht = :wirdVerbraucht" //
+			+ "	WHERE id = :id;";
 }

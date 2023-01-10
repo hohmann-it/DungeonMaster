@@ -17,5 +17,7 @@ public interface IZauberbuchService extends IService {
 
 	ZauberFormData load(ZauberFormData formData);
 
+	ZauberFormData loadZaubermaterial(ZauberFormData formData);
+
 	ZauberFormData store(ZauberFormData formData);
 }

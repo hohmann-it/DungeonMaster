@@ -3,11 +3,11 @@ package com.hohmannit.dungeonmaster.shared.datenbank.zauber.material;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupService;
 import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 
-public class ZaubermaterialErsatzLookupCall extends LookupCall<Long> {
+public class GegenstandLookupCall extends LookupCall<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected Class<? extends ILookupService<Long>> getConfiguredService() {
-		return IZaubermaterialErsatzLookupService.class;
+		return IGegenstandLookupService.class;
 	}
 }

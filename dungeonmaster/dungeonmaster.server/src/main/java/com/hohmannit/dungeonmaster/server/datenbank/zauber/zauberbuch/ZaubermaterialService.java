@@ -5,7 +5,9 @@ import java.util.List;
 import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.security.ACCESS;
+import org.eclipse.scout.rt.server.jdbc.SQL;
 
+import com.hohmannit.dungeonmaster.server.datenbank.zauber.zaubermaterial.ZaubermaterialSQLs;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zauberbuch.CreateZaubermaterialPermission;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zauberbuch.IZaubermaterialService;
 import com.hohmannit.dungeonmaster.shared.datenbank.zauber.zauberbuch.ReadZaubermaterialPermission;
@@ -18,7 +20,6 @@ public class ZaubermaterialService implements IZaubermaterialService {
 		if (!ACCESS.check(new CreateZaubermaterialPermission())) {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
-		// TODO [phohmann] add business logic here.
 		return formData;
 	}
 
@@ -27,7 +28,7 @@ public class ZaubermaterialService implements IZaubermaterialService {
 		if (!ACCESS.check(new CreateZaubermaterialPermission())) {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
-		// TODO [phohmann] add business logic here.
+		SQL.insert(ZaubermaterialSQLs.ZAUBERMATERIAL_INSERT, formData);
 		return formData;
 	}
 
@@ -36,7 +37,7 @@ public class ZaubermaterialService implements IZaubermaterialService {
 		if (!ACCESS.check(new ReadZaubermaterialPermission())) {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
-		// TODO [phohmann] add business logic here.
+		SQL.select(ZaubermaterialSQLs.ZAUBERMATERIAL_SELECT, formData);
 		return formData;
 	}
 
@@ -45,13 +46,16 @@ public class ZaubermaterialService implements IZaubermaterialService {
 		if (!ACCESS.check(new UpdateZaubermaterialPermission())) {
 			throw new VetoException(TEXTS.get("AuthorizationFailed"));
 		}
-		// TODO [phohmann] add business logic here.
+		SQL.update(ZaubermaterialSQLs.ZAUBERMATERIAL_UPDATE, formData);
 		return formData;
 	}
 
 	@Override
 	public void delete(List<Long> list) {
-		// TODO Auto-generated method stub
-
+		for (Long key : list) {
+			ZaubermaterialFormData formData = new ZaubermaterialFormData();
+			formData.setId(key);
+			SQL.delete(ZaubermaterialSQLs.ZAUBERMATERIAL_DELETE, formData);
+		}
 	}
 }

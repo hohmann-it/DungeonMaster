@@ -10,21 +10,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.hohmannit.dungeonmaster.server.ServerSession;
-import com.hohmannit.dungeonmaster.shared.datenbank.zauber.material.ZaubermaterialErsatzLookupCall;
+import com.hohmannit.dungeonmaster.shared.datenbank.zauber.material.GegenstandLookupCall;
 
 @RunWithSubject("anonymous")
 @RunWith(ServerTestRunner.class)
 @RunWithServerSession(ServerSession.class)
-public class ZaubermaterialErsatzLookupCallTest {
+public class GegenstandLookupCallTest {
 	// TODO [Philipp Hohmann] add test cases
 
-	protected ZaubermaterialErsatzLookupCall createLookupCall() {
-		return new ZaubermaterialErsatzLookupCall();
+	protected GegenstandLookupCall createLookupCall() {
+		return new GegenstandLookupCall();
 	}
 
 	@Test
 	public void testGetDataByAll() {
-		ZaubermaterialErsatzLookupCall call = createLookupCall();
+		GegenstandLookupCall call = createLookupCall();
 		// TODO [Philipp Hohmann] fill call
 		List<? extends ILookupRow<Long>> data = call.getDataByAll();
 		// TODO [Philipp Hohmann] verify data
@@ -32,7 +32,7 @@ public class ZaubermaterialErsatzLookupCallTest {
 
 	@Test
 	public void testGetDataByKey() {
-		ZaubermaterialErsatzLookupCall call = createLookupCall();
+		GegenstandLookupCall call = createLookupCall();
 		// TODO [Philipp Hohmann] fill call
 		List<? extends ILookupRow<Long>> data = call.getDataByKey();
 		// TODO [Philipp Hohmann] verify data
@@ -40,7 +40,7 @@ public class ZaubermaterialErsatzLookupCallTest {
 
 	@Test
 	public void testGetDataByText() {
-		ZaubermaterialErsatzLookupCall call = createLookupCall();
+		GegenstandLookupCall call = createLookupCall();
 		// TODO [Philipp Hohmann] fill call
 		List<? extends ILookupRow<Long>> data = call.getDataByText();
 		// TODO [Philipp Hohmann] verify data

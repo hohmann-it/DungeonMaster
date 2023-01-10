@@ -57,4 +57,18 @@ public interface ZauberbuchSQLs {
 			+ "         :material, "//
 			+ "         :ritual," //
 			+ "         :konzentration";
+
+	String ZAUBERMATERIAL_SELECT = "" //
+	+ "SELECT" //
+	+ "				zm.id, " //
+	+ "				zm.fk_gegenstand, " //
+	+ "				g.wert, " //
+	+ "				zm.anzahl, " //
+	+ "				g.gewicht " //
+	+ "FROM         dd.zaubermaterial zm INNER JOIN dd.gegenstand g ON zm.fk_gegenstand = g.gegenstand_id WHERE fk_zauber = :id " //
+	+ "INTO         :{ZaubkomponentenTable.id}," //
+	+ "				:{ZaubkomponentenTable.name}," //
+	+ "				:{ZaubkomponentenTable.wert},"//
+	+ "				:{ZaubkomponentenTable.anzahl},"//
+	+ "				:{ZaubkomponentenTable.gewicht}";
 }

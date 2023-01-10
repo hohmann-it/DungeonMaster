@@ -18,7 +18,7 @@ public class Exceptional {
 				throw new VetoException(TEXTS.get("Fehler_Server_Sql_Unique"));
 			}
 			default:
-				throw new IllegalArgumentException(TEXTS.get("Fehler_Server_Sql_Undefined"));
+				throw new VetoException(TEXTS.get("Fehler_Server_Sql_Undefined", exception.getMessage()));
 			}
 		}
 	}
