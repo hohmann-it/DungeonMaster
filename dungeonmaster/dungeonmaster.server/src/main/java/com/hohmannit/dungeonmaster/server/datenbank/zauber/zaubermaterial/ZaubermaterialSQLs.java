@@ -6,13 +6,13 @@ public interface ZaubermaterialSQLs {
 			+ "<text>   AND UPPER(name) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
 
-	String ZAUBERMATERIAL_ERSATZ_LOOKUP = "SELECT zaubermaterial_id, (SELECT name FROM dd.gegenstand WHERE gegenstand_id = fk_gegenstand) as name FROM dd.zaubermaterial WHERE 1 = 1 "
-			+ "<key>    AND zaubermaterial_id = :key </key> " //
+	String ZAUBERMATERIAL_ERSATZ_LOOKUP = "SELECT id, (SELECT name FROM dd.gegenstand WHERE gegenstand_id = fk_gegenstand) as name FROM dd.zaubermaterial WHERE 1 = 1 "
+			+ "<key>    AND id = :key </key> " //
 			+ "<text>   AND UPPER(name) LIKE UPPER(:text||'%') </text> " //
 			+ "<all></all>";
 	String ZAUBERMATERIAL_SELECT = "" //
 			+ "SELECT" //
-			+ "				zm.zaubermaterial_id, " //
+			+ "				zm.id, " //
 			+ "				zm.fk_gegenstand, " //
 			+ "				g.wert, " //
 			+ "				zm.anzahl, " //

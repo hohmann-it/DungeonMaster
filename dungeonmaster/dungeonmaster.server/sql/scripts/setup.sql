@@ -70,17 +70,17 @@ ALTER SCHEMA od OWNER TO dungeonmaster;
 
 CREATE PROCEDURE od.insert_charakter(IN in_klasse text, IN in_name text)
     LANGUAGE sql
-    AS $$
-INSERT INTO od.charaktere
-    ( klasse
-      , name
-    )
-    VALUES
-    ( in_klasse
-      , in_name
-    )
-;
-
+    AS $$
+INSERT INTO od.charaktere
+    ( klasse
+      , name
+    )
+    VALUES
+    ( in_klasse
+      , in_name
+    )
+;
+
 $$;
 
 
@@ -317,7 +317,7 @@ ALTER SEQUENCE dd.zauber_id_seq OWNED BY dd.zauber.id;
 --
 
 CREATE TABLE dd.zaubermaterial (
-    zaubermaterial_id bigint NOT NULL,
+    id bigint NOT NULL,
     fk_zauber bigint,
     fk_gegenstand bigint NOT NULL,
     anzahl numeric NOT NULL,
@@ -345,7 +345,7 @@ ALTER TABLE dd.zaubermaterial_id_seq OWNER TO dungeonmaster;
 -- Name: zaubermaterial_id_seq; Type: SEQUENCE OWNED BY; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER SEQUENCE dd.zaubermaterial_id_seq OWNED BY dd.zaubermaterial.zaubermaterial_id;
+ALTER SEQUENCE dd.zaubermaterial_id_seq OWNED BY dd.zaubermaterial.id;
 
 
 --
@@ -459,10 +459,10 @@ ALTER TABLE ONLY dd.zauber ALTER COLUMN id SET DEFAULT nextval('dd.zauber_id_seq
 
 
 --
--- Name: zaubermaterial zaubermaterial_id; Type: DEFAULT; Schema: dd; Owner: dungeonmaster
+-- Name: zaubermaterial id; Type: DEFAULT; Schema: dd; Owner: dungeonmaster
 --
 
-ALTER TABLE ONLY dd.zaubermaterial ALTER COLUMN zaubermaterial_id SET DEFAULT nextval('dd.zaubermaterial_id_seq'::regclass);
+ALTER TABLE ONLY dd.zaubermaterial ALTER COLUMN id SET DEFAULT nextval('dd.zaubermaterial_id_seq'::regclass);
 
 
 --
@@ -958,7 +958,7 @@ ALTER TABLE ONLY dd.zauber
 --
 
 ALTER TABLE ONLY dd.zaubermaterial
-    ADD CONSTRAINT zaubermaterial_pkey PRIMARY KEY (zaubermaterial_id);
+    ADD CONSTRAINT zaubermaterial_pkey PRIMARY KEY (id);
 
 
 --

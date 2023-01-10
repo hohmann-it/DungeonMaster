@@ -207,17 +207,17 @@ public class ZauberFormData extends AbstractFormData {
 			public static final String name = "name";
 			public static final String wert = "wert";
 			public static final String gewicht = "gewicht";
-			private String m_id;
+			private Long m_id;
 			private String m_anzahl;
 			private Long m_name;
 			private String m_wert;
 			private String m_gewicht;
 
-			public String getId() {
+			public Long getId() {
 				return m_id;
 			}
 
-			public void setId(String newId) {
+			public void setId(Long newId) {
 				m_id = newId;
 			}
 
