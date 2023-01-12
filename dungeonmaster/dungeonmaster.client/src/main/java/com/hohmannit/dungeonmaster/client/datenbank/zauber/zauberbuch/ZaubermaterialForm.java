@@ -11,6 +11,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBo
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.exception.VetoException;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
@@ -120,6 +121,14 @@ public class ZaubermaterialForm extends AbstractForm {
 					protected String getConfiguredLabel() {
 						return TEXTS.get("Allgemein_Anzahl");
 					}
+
+					@Override
+					protected Double execValidateValue(Double rawValue) {
+						if (rawValue == null) {
+							throw new VetoException(TEXTS.get("Fehler_Client_Leer", getConfiguredLabel()));
+						}
+						return rawValue;
+					}
 				}
 
 				@Order(2000)
@@ -132,6 +141,14 @@ public class ZaubermaterialForm extends AbstractForm {
 					@Override
 					protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
 						return GegenstandLookupCall.class;
+					}
+
+					@Override
+					protected Long execValidateValue(Long rawValue) {
+						if (rawValue == null) {
+							throw new VetoException(TEXTS.get("Fehler_Client_Leer", getConfiguredLabel()));
+						}
+						return rawValue;
 					}
 				}
 

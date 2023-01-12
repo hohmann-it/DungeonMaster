@@ -856,7 +856,7 @@ SELECT pg_catalog.setval('dd.zauber_id_seq', 1, false);
 -- Name: zaubermaterial_id_seq; Type: SEQUENCE SET; Schema: dd; Owner: dungeonmaster
 --
 
-SELECT pg_catalog.setval('dd.zaubermaterial_id_seq', 41, true);
+SELECT pg_catalog.setval('dd.zaubermaterial_id_seq', 49, true);
 
 
 --
