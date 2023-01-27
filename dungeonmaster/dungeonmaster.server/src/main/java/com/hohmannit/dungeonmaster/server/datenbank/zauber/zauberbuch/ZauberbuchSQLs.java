@@ -17,9 +17,16 @@ public interface ZauberbuchSQLs {
 			+ "beschreibung, " //
 			+ "hoeheregrade, " //
 			+ "grad, " //
-			+ "fk_schule) " //
+			+ "fk_schule, " //
+			+ "verbal, " //
+			+ "gestik, " //
+			+ "material, " //
+			+ "ritual, " //
+			+ "konzentration, " //
+			+ "fk_effekt, " //
+			+ "fk_rettung) " //
 			+ "VALUES (" //
-			+ ":name,:zeitaufwand,:zeitaufwandtyp,:reichweite,:reichweitetyp,:wirkungsdauer,:wirkungsdauertyp,:beschreibung,:hoeheregrade,:grad,:schule)";
+			+ ":name,:zeitaufwand,:zeitaufwandtyp,:reichweite,:reichweitetyp,:wirkungsdauer,:wirkungsdauertyp,:beschreibung,:hoeheregrade,:grad,:schule, :verbal, :gestik, :material, :ritual, :konzentration)";
 
 	String ZAUBER_SELECT = ""//
 			+ "SELECT " //
@@ -59,16 +66,16 @@ public interface ZauberbuchSQLs {
 			+ "         :konzentration";
 
 	String ZAUBERMATERIAL_SELECT = "" //
-	+ "SELECT" //
-	+ "				zm.id, " //
-	+ "				zm.fk_gegenstand, " //
-	+ "				g.wert, " //
-	+ "				zm.anzahl, " //
-	+ "				g.gewicht " //
-	+ "FROM         dd.zaubermaterial zm INNER JOIN dd.gegenstand g ON zm.fk_gegenstand = g.gegenstand_id WHERE fk_zauber = :id " //
-	+ "INTO         :{ZaubkomponentenTable.id}," //
-	+ "				:{ZaubkomponentenTable.name}," //
-	+ "				:{ZaubkomponentenTable.wert},"//
-	+ "				:{ZaubkomponentenTable.anzahl},"//
-	+ "				:{ZaubkomponentenTable.gewicht}";
+			+ "SELECT" //
+			+ "				zm.id, " //
+			+ "				zm.fk_gegenstand, " //
+			+ "				g.wert, " //
+			+ "				zm.anzahl, " //
+			+ "				g.gewicht " //
+			+ "FROM         dd.zaubermaterial zm INNER JOIN dd.gegenstand g ON zm.fk_gegenstand = g.gegenstand_id WHERE fk_zauber = :id " //
+			+ "INTO         :{ZaubkomponentenTable.id}," //
+			+ "				:{ZaubkomponentenTable.name}," //
+			+ "				:{ZaubkomponentenTable.wert},"//
+			+ "				:{ZaubkomponentenTable.anzahl},"//
+			+ "				:{ZaubkomponentenTable.gewicht}";
 }

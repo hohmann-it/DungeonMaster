@@ -21,6 +21,10 @@ public class ZauberFormData extends AbstractFormData {
 		return getFieldByClass(Beschreibung.class);
 	}
 
+	public Effekt getEffekt() {
+		return getFieldByClass(Effekt.class);
+	}
+
 	public Gestik getGestik() {
 		return getFieldByClass(Gestik.class);
 	}
@@ -71,6 +75,10 @@ public class ZauberFormData extends AbstractFormData {
 		return getFieldByClass(Reichweitetyp.class);
 	}
 
+	public Rettungswurf getRettungswurf() {
+		return getFieldByClass(Rettungswurf.class);
+	}
+
 	public Ritual getRitual() {
 		return getFieldByClass(Ritual.class);
 	}
@@ -107,6 +115,10 @@ public class ZauberFormData extends AbstractFormData {
 		private static final long serialVersionUID = 1L;
 	}
 
+	public static class Effekt extends AbstractValueFieldData<Long> {
+		private static final long serialVersionUID = 1L;
+	}
+
 	public static class Gestik extends AbstractValueFieldData<Boolean> {
 		private static final long serialVersionUID = 1L;
 	}
@@ -140,6 +152,10 @@ public class ZauberFormData extends AbstractFormData {
 	}
 
 	public static class Reichweitetyp extends AbstractValueFieldData<Long> {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class Rettungswurf extends AbstractValueFieldData<Long> {
 		private static final long serialVersionUID = 1L;
 	}
 

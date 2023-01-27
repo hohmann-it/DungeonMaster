@@ -38,7 +38,13 @@ import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.Zauberbuch
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.DetailsBox.BeschreibungField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.DetailsBox.HoeheregradeField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.NameField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.EffektSequenceBox;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.EffektSequenceBox.EffektField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.EffektSequenceBox.RettungswurfField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.MyGroupBox;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.MyGroupBox.GradField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.MyGroupBox.NameField;
+import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.MyGroupBox.SchuleField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ReichweiteSequenceBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ReichweiteSequenceBox.ReichweiteField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ReichweiteSequenceBox.ReichweitetypField;
@@ -47,9 +53,6 @@ import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.Zauberbuch
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.WirkungsdauerSequenceBox.WirkungsdauerField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.WirkungsdauerSequenceBox.WirkungsdauertypField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZauberImageField;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZaubergradSequenceBox;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZaubergradSequenceBox.GradField;
-import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZaubergradSequenceBox.SchuleField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZeitaufwandSequenceBox;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZeitaufwandSequenceBox.ZeitaufwandField;
 import com.hohmannit.dungeonmaster.client.datenbank.zauber.zauberbuch.ZauberbuchForm.MainBox.GeneralBox.ZeitaufwandSequenceBox.ZeitaufwandtypField;
@@ -162,10 +165,6 @@ public class ZauberbuchForm extends AbstractForm {
 		return getFieldByClass(WirkungsdauerSequenceBox.class);
 	}
 
-	public ZaubergradSequenceBox getZaubergradBox() {
-		return getFieldByClass(ZaubergradSequenceBox.class);
-	}
-
 	public DetailsBox getDetailsBox() {
 		return getFieldByClass(DetailsBox.class);
 	}
@@ -218,6 +217,22 @@ public class ZauberbuchForm extends AbstractForm {
 		return getFieldByClass(KonzentrationField.class);
 	}
 
+	public EffektSequenceBox getEffektSequenceBox() {
+		return getFieldByClass(EffektSequenceBox.class);
+	}
+
+	public EffektField getEffektField() {
+		return getFieldByClass(EffektField.class);
+	}
+
+	public RettungswurfField getRettungswurfField() {
+		return getFieldByClass(RettungswurfField.class);
+	}
+
+	public MyGroupBox getMyGroupBox() {
+		return getFieldByClass(MyGroupBox.class);
+	}
+
 	public NameField getNameField() {
 		return getFieldByClass(NameField.class);
 	}
@@ -235,14 +250,10 @@ public class ZauberbuchForm extends AbstractForm {
 
 		@Order(0)
 		public class GeneralBox extends AbstractGroupBox {
-			@Override
-			protected String getConfiguredLabel() {
-				return TEXTS.get("Zauber_Zauberbuch_Label_Grundinformationen");
-			}
 
 			@Override
 			protected int getConfiguredGridColumnCount() {
-				return 3;
+				return 4;
 			}
 
 			@Order(1000)
@@ -270,7 +281,7 @@ public class ZauberbuchForm extends AbstractForm {
 
 				@Override
 				protected int getConfiguredGridH() {
-					return 3;
+					return 4;
 				}
 
 				@Override
@@ -284,24 +295,21 @@ public class ZauberbuchForm extends AbstractForm {
 
 			}
 
-			@Order(2000)
-			public class NameField extends AbstractStringField {
-				@Override
-				protected String getConfiguredLabel() {
-					return TEXTS.get("Allgemein_Name");
-				}
+			@Order(1500)
+			public class MyGroupBox extends AbstractGroupBox {
 
 				@Override
-				protected int getConfiguredGridW() {
-					return 2;
-				}
-			}
-
-			@Order(2500)
-			public class ZaubergradSequenceBox extends AbstractSequenceBox {
-				@Override
 				protected String getConfiguredLabel() {
-					return TEXTS.get("Zauber_Zauberbuch_Label_ZaubergradTyp");
+					return TEXTS.get("Zauber_Zauberbuch_Label_Grundinformationen");
+				}
+
+				@Order(2000)
+				public class NameField extends AbstractStringField {
+					@Override
+					protected String getConfiguredLabel() {
+						return TEXTS.get("Allgemein_Name");
+					}
+
 				}
 
 				@Order(3000)
@@ -464,6 +472,41 @@ public class ZauberbuchForm extends AbstractForm {
 					@Override
 					protected String getConfiguredTooltipText() {
 						return TEXTS.get("Zauber_Zauberbuch_Label_Konzentration_Tooltip");
+					}
+				}
+
+			}
+
+			@Order(10000)
+			public class EffektSequenceBox extends AbstractSequenceBox {
+				@Override
+				protected boolean getConfiguredLabelVisible() {
+					return false;
+				}
+
+				@Override
+				protected boolean getConfiguredAutoCheckFromTo() {
+					return false;
+				}
+
+				@Override
+				protected int getConfiguredGridW() {
+					return 2;
+				}
+
+				@Order(1000)
+				public class EffektField extends AbstractSmartField<Long> {
+					@Override
+					protected String getConfiguredLabel() {
+						return TEXTS.get("Zauber_Zauberbuch_Label_Effekt");
+					}
+				}
+
+				@Order(2000)
+				public class RettungswurfField extends AbstractSmartField<Long> {
+					@Override
+					protected String getConfiguredLabel() {
+						return TEXTS.get("Zauber_Zauberbuch_Label_Rettungswurf");
 					}
 				}
 
